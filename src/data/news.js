@@ -1,0 +1,8 @@
+export const news = [
+  { tag: "Investment", title: "Mahagun Group Raises ₹225 Crore to Fast-Track Noida Projects", excerpt: "Mahagun Group secures funding from CSL Finance to speed construction and ensure timely delivery of key Noida residential projects.", emoji: "🏗️", date: "Apr 2026" },
+  { tag: "Infrastructure", title: "Noida International Airport Phase-I: ₹11,282 Cr Hub Inaugurated", excerpt: "Phase I of Noida International Airport at Jewar opened with a cargo terminal, boosting the entire Yamuna Expressway corridor values.", emoji: "✈️", date: "Mar 2026" },
+  { tag: "Policy", title: "UP-RERA Amendments 2026: Relief for Buyers of Unregistered Projects", excerpt: "UP-RERA lets buyers of unregistered projects file complaints, caps transfer fees, and strengthens buyer protections across UP.", emoji: "⚖️", date: "Mar 2026" },
+  { tag: "Market", title: "ASK Fund Exits ₹650Cr Mahagun Noida Project at 21% IRR", excerpt: "ASK Property Fund exits ₹650 crore in Mahagun's Noida residential project, delivering a strong 21% IRR to investors.", emoji: "📈", date: "Mar 2026" },
+  { tag: "Retail", title: "DMart Opens 50,000+ sq ft Store in Greater Noida", excerpt: "DMart opens its first Greater Noida store — over 50,000 sq ft at Omaxe Connaught Place, boosting retail real estate demand.", emoji: "🛒", date: "Apr 2026" },
+  { tag: "Expressway", title: "Aqua Metro Extension Approved — Connectivity Boost for Noida Sectors", excerpt: "Metro Aqua Line extension approved to connect with Delhi Metro Blue and Magenta lines, dramatically cutting commute times.", emoji: "🚇", date: "Feb 2026" },
+];

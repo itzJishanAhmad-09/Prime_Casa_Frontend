@@ -1,0 +1,18 @@
+export const sectors = [
+  { name: "Sector 18", tier: "commercial", price: "₹18,000–22,000", growth: "+12%", type: "Commercial Hub", badge: "hot", badgeLabel: "Commercial" },
+  { name: "Sector 44", tier: "premium", price: "₹11,000–14,000", growth: "+15%", type: "Residential · IT Proximity", badge: "hot", badgeLabel: "Hot" },
+  { name: "Sector 62", tier: "mid", price: "₹10,000–13,000", growth: "+16%", type: "IT & Residential", badge: "up", badgeLabel: "Rising" },
+  { name: "Sector 75–77", tier: "mid", price: "₹9,000–11,500", growth: "+14.5%", type: "Residential · Metro", badge: "up", badgeLabel: "Rising" },
+  { name: "Sector 94", tier: "premium", price: "₹12,000–14,500", growth: "+20%", type: "Expressway Premium", badge: "hot", badgeLabel: "Hot" },
+  { name: "Sector 107", tier: "mid", price: "₹8,000–10,500", growth: "+11%", type: "Upcoming Metro", badge: "up", badgeLabel: "Rising" },
+  { name: "Sector 128", tier: "premium", price: "₹11,500–14,000", growth: "+18%", type: "Green Luxury Belt", badge: "hot", badgeLabel: "Hot" },
+  { name: "Sector 137", tier: "mid", price: "₹9,000–11,500", growth: "+15%", type: "Expressway Mid", badge: "up", badgeLabel: "Rising" },
+  { name: "Sector 150", tier: "premium", price: "₹13,000–15,000", growth: "+24%", type: "Ultra-Premium Green", badge: "hot", badgeLabel: "Top Pick" },
+  { name: "Sector 152", tier: "premium", price: "₹11,000–13,500", growth: "+19%", type: "Green Township", badge: "up", badgeLabel: "Rising" },
+  { name: "Noida Extension", tier: "affordable", price: "₹7,950–9,500", growth: "+24%", type: "Fastest Growing", badge: "hot", badgeLabel: "Hot" },
+  { name: "Greater Noida West", tier: "affordable", price: "₹6,600–8,450", growth: "+98%★", type: "5-yr Appreciation Star", badge: "hot", badgeLabel: "Best Value" },
+  { name: "Sector 168", tier: "affordable", price: "₹7,200–9,000", growth: "+10%", type: "Expressway End", badge: "mid", badgeLabel: "Affordable" },
+  { name: "Sector 50", tier: "mid", price: "₹9,000–11,000", growth: "+12%", type: "Central Noida", badge: "mid", badgeLabel: "Stable" },
+  { name: "Sector 117", tier: "affordable", price: "₹7,000–9,000", growth: "+10%", type: "Residential", badge: "mid", badgeLabel: "Affordable" },
+  { name: "Sector 93", tier: "mid", price: "₹9,500–12,000", growth: "+13%", type: "Near Expressway", badge: "mid", badgeLabel: "Stable" },
+];
