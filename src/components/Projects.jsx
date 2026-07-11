@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// Use the API URL from environment variables
+// Get API base URL from environment (default to localhost for dev)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Projects = () => {
@@ -8,51 +8,48 @@ const Projects = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Filter state
   const [filter, setFilter] = useState('all');
+  const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, pages: 0 });
 
-  // Fetch projects from backend
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`${API_URL}/properties`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch properties');
-        }
-        const data = await response.json();
-        // The API returns an object with `properties` and `pagination`
-        setProjects(data.properties || []);
-        setFilteredProjects(data.properties || []);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-        // Fallback to static data if API fails
-        // (you can import your static data as backup)
+  // Fetch projects from backend with filters
+  const fetchProjects = async (filterType = filter, page = 1) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Build query params
+      const params = new URLSearchParams({
+        page,
+        limit: 10,
+        ...(filterType !== 'all' && { type: filterType }),
+      });
+
+      const response = await fetch(`${API_URL}/properties?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch: ${response.statusText}`);
       }
-    };
 
-    fetchProjects();
-  }, []);
-
-  // Apply filter whenever filter state changes
-  useEffect(() => {
-    if (projects.length === 0) return;
-
-    let result = projects;
-    if (filter === 'all') {
-      // show all
-    } else if (filter === 'new') {
-      result = projects.filter(p => p.status === 'New Launch' || p.isPopular === false);
-    } else {
-      result = projects.filter(p => p.type === filter);
+      const data = await response.json();
+      // Data structure from backend: { properties: [...], pagination: {...} }
+      setProjects(data.properties || []);
+      setFilteredProjects(data.properties || []);
+      if (data.pagination) {
+        setPagination(data.pagination);
+      }
+    } catch (err) {
+      console.error('Error fetching projects:', err);
+      setError(err.message || 'Could not load properties.');
+    } finally {
+      setLoading(false);
     }
-    setFilteredProjects(result);
-  }, [filter, projects]);
+  };
 
-  // Handle filter button click
+  // Initial load and when filter changes
+  useEffect(() => {
+    fetchProjects(filter);
+  }, [filter]); // Re-fetch when filter changes
+
+  // Handler for filter button clicks
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
   };
@@ -64,8 +61,8 @@ const Projects = () => {
           <div className="section-label">✦ Trending Now</div>
           <div className="section-title">Trending Projects in Noida</div>
         </div>
-        <div style={{ textAlign: 'center', padding: '40px' }}>
-          Loading projects...
+        <div style={{ textAlign: 'center', padding: '40px', color: '#475569' }}>
+          <i className="ti ti-loader" style={{ fontSize: '24px', marginRight: '8px' }}></i> Loading projects...
         </div>
       </section>
     );
@@ -78,8 +75,16 @@ const Projects = () => {
           <div className="section-label">✦ Trending Now</div>
           <div className="section-title">Trending Projects in Noida</div>
         </div>
-        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--red)' }}>
-          Error loading projects: {error}
+        <div style={{ textAlign: 'center', padding: '40px', color: '#C0392B' }}>
+          <i className="ti ti-alert-circle" style={{ fontSize: '24px', marginRight: '8px' }}></i> 
+          {error}
+          <br />
+          <button 
+            onClick={() => fetchProjects(filter)} 
+            style={{ marginTop: '16px', padding: '8px 20px', background: '#C0392B', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer' }}
+          >
+            Retry
+          </button>
         </div>
       </section>
     );
@@ -109,13 +114,13 @@ const Projects = () => {
       </div>
 
       {/* Project Grid */}
-      <div className="proj-grid">
-        {filteredProjects.length === 0 ? (
-          <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'var(--txt3)' }}>
-            No projects found.
-          </p>
-        ) : (
-          filteredProjects.map((project) => (
+      {filteredProjects.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>
+          No projects found for this category.
+        </div>
+      ) : (
+        <div className="proj-grid">
+          {filteredProjects.map((project) => (
             <div className="proj-card" key={project._id || project.id}>
               <div className="proj-img">
                 <div className="proj-img-bg">{project.emoji || '🏠'}</div>
@@ -135,13 +140,15 @@ const Projects = () => {
                 </div>
               </div>
               <div className="proj-body">
-                <div className="proj-builder">{project.builder}</div>
+                <div className="proj-builder">{project.builder || 'Builder'}</div>
                 <div className="proj-title">{project.title}</div>
                 <div className="proj-loc">
-                  <i className="ti ti-map-pin" style={{ fontSize: '12px' }}></i> {project.location || project.loc}
+                  <i className="ti ti-map-pin" style={{ fontSize: '12px' }}></i> 
+                  {project.location || project.loc || 'Location'}
                 </div>
                 <div className="proj-price">
-                  {project.price?.display || project.price} <span>· {project.pricePerSqFt ? `₹${project.pricePerSqFt.toLocaleString()}/sq ft` : ''}</span>
+                  {project.price?.display || project.price || 'Contact for price'} 
+                  <span> {project.pricePerSqFt ? `· ₹${project.pricePerSqFt.toLocaleString()}/sq ft` : ''}</span>
                 </div>
                 <div className="proj-meta">
                   <div className="proj-meta-item">
@@ -152,7 +159,7 @@ const Projects = () => {
                   </div>
                 </div>
                 <div style={{ fontSize: '12px', color: 'var(--txt3)', marginTop: '8px' }}>
-                  {project.amenities?.join(' · ') || ''}
+                  {project.amenities?.length ? project.amenities.join(' · ') : ''}
                 </div>
                 <div className="proj-actions">
                   <button className="btn-sm btn-sm-red">Know More</button>
@@ -162,9 +169,17 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {/* Pagination Info */}
+      {pagination.total > 0 && (
+        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '14px', color: '#64748b' }}>
+          Showing {filteredProjects.length} of {pagination.total} projects
+          {pagination.pages > 1 && ` · Page ${pagination.page} of ${pagination.pages}`}
+        </div>
+      )}
 
       <div style={{ textAlign: 'center', marginTop: '32px' }}>
         <button className="btn-red" style={{ padding: '13px 36px', borderRadius: '9px', fontSize: '14px' }}>
