@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// src/App.jsx
+import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
@@ -18,46 +19,39 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
 
+// Import static data (these arrays are already defined)
+import { projects } from './data/projects';
+import { sectors } from './data/sectors';
+import { marketData } from './data/marketData';
+import { news } from './data/news';
+import { testimonials } from './data/testimonials';
+
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState('');
 
   const openModal = (type) => {
     setModalContent(type);
     setModalOpen(true);
   };
-
   const closeModal = () => setModalOpen(false);
-
-  // Listen for openTool events from Footer
-  useEffect(() => {
-    const handleOpenTool = (event) => {
-      openModal(event.detail);
-    };
-
-    window.addEventListener('openTool', handleOpenTool);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('openTool', handleOpenTool);
-    };
-  }, []);
 
   return (
     <>
       <Navbar />
       <Hero />
       <Stats />
-      <Projects />
-      <Sectors />
-      <MarketTable />
+      {/* Pass static data directly – no loading */}
+      <Projects projects={projects} />
+      <Sectors sectors={sectors} />
+      <MarketTable marketData={marketData} />
       <Services />
       <HowItWorks />
       <Toolkit openModal={openModal} />
       <DomainServices />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
       <Quote />
-      <Insights />
+      <Insights news={news} />
       <WhyUs />
       <Contact />
       <CTA />
