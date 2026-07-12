@@ -1,5 +1,4 @@
-// src/App.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';  // ← useState & useEffect
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
@@ -19,7 +18,7 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
 
-// Import static data (these arrays are already defined)
+// Import static data
 import { projects } from './data/projects';
 import { sectors } from './data/sectors';
 import { marketData } from './data/marketData';
@@ -27,27 +26,51 @@ import { news } from './data/news';
 import { testimonials } from './data/testimonials';
 
 function App() {
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [modalContent, setModalContent] = React.useState('');
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
 
+  // Scroll function (used by Navbar and other components)
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Open modal (used by Toolkit and other components)
   const openModal = (type) => {
     setModalContent(type);
     setModalOpen(true);
   };
+
   const closeModal = () => setModalOpen(false);
+
+  // 👇 Listen for custom event from Footer (and any other component)
+  useEffect(() => {
+    const handler = (e) => {
+      openModal(e.detail);  // e.detail = tool key (e.g. 'roi', 'emi', etc.)
+    };
+    window.addEventListener('openTool', handler);
+    return () => window.removeEventListener('openTool', handler);
+  }, []); // empty dependency array – runs only once
 
   return (
     <>
-      <Navbar />
+      {/* Pass scrollTo to Navbar */}
+      <Navbar scrollTo={scrollTo} />
+
       <Hero />
       <Stats />
-      {/* Pass static data directly – no loading */}
+
+      {/* Pass static data directly */}
       <Projects projects={projects} />
       <Sectors sectors={sectors} />
       <MarketTable marketData={marketData} />
       <Services />
       <HowItWorks />
+
+      {/* Pass openModal to Toolkit */}
       <Toolkit openModal={openModal} />
+
       <DomainServices />
       <Testimonials testimonials={testimonials} />
       <Quote />
@@ -55,7 +78,11 @@ function App() {
       <WhyUs />
       <Contact />
       <CTA />
+
+      {/* Footer uses scrollTo internally (already defined) */}
       <Footer />
+
+      {/* Modal */}
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </>
   );

@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 const DomainServices = () => {
   const [domain, setDomain] = useState('');
 
-  const checkDomain = () => {
-    alert(`🔍 Searching for "${domain}" ... (demo)`);
+  const handleDomainSearch = (e) => {
+    e.preventDefault();
+    alert(`Searching for domain: ${domain || 'primecasa.com'} (demo)`);
   };
 
-  const estimateDomain = () => {
-    alert(`📊 Estimating value for "${domain}" ... (demo)`);
+  const handleValuation = () => {
+    alert(`Valuating domain: ${domain || 'primecasa.com'} (demo)`);
   };
 
-  const backorderDomain = () => {
-    alert(`⏳ Backorder request placed for "${domain}" ... (demo)`);
+  const handleBackorder = () => {
+    alert(`Backordering domain: ${domain || 'primecasa.com'} (demo)`);
   };
 
   return (
@@ -27,17 +28,17 @@ const DomainServices = () => {
           <h2><span>Domain</span> Services</h2>
           <p>Find, estimate, and backorder premium domains that match your real estate ventures.</p>
         </div>
-        <div className="domain-input-group">
+        <form className="domain-input-group" onSubmit={handleDomainSearch}>
           <input
             type="text"
             placeholder="Enter domain, e.g. primecasa.com"
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
           />
-          <button className="btn" onClick={checkDomain}><i className="ti ti-search"></i> Search</button>
-          <button className="btn-outline-light" onClick={estimateDomain}>Valuation</button>
-          <button className="btn-outline-light" onClick={backorderDomain}>Backorder</button>
-        </div>
+          <button type="submit" className="btn"><i className="ti ti-search"></i> Search</button>
+          <button type="button" className="btn-outline-light" onClick={handleValuation}>Valuation</button>
+          <button type="button" className="btn-outline-light" onClick={handleBackorder}>Backorder</button>
+        </form>
       </div>
     </div>
   );

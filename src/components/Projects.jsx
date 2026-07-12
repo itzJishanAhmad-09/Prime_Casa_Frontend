@@ -2,19 +2,33 @@ import React, { useState } from 'react';
 
 const Projects = ({ projects }) => {
   const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filtered = filter === 'all'
-    ? projects
-    : projects.filter(p => p.type === filter || (filter === 'new' && p.tag === 'new'));
+  const filtered = projects.filter(p => {
+    if (filter !== 'all' && p.type !== filter && !(filter === 'new' && p.tag === 'new')) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      return p.title.toLowerCase().includes(q) || p.loc.toLowerCase().includes(q);
+    }
+    return true;
+  });
+
+  const handleKnowMore = (id) => {
+    alert(`Know more about project ${id}`);
+    // navigate to detail page or open modal
+  };
+
+  const handleScheduleVisit = (id) => {
+    alert(`Schedule visit for project ${id}`);
+    // open contact form or calendar
+  };
 
   return (
     <section className="section" id="projects">
       <div className="section-header">
         <div className="section-label">✦ Trending Now</div>
         <div className="section-title">Trending Projects in Noida</div>
-        <div className="section-sub">
-          Handpicked RERA-verified projects with the highest buyer interest &amp; market confidence — June 2026
-        </div>
+        <div className="section-sub">Handpicked RERA-verified projects with the highest buyer interest &amp; market confidence — June 2026</div>
       </div>
       <div className="filters" id="proj-filters">
         {['all', 'residential', 'commercial', 'luxury', 'new'].map(f => (
@@ -27,9 +41,25 @@ const Projects = ({ projects }) => {
           </button>
         ))}
       </div>
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+        <input
+          type="text"
+          placeholder="Search projects by name or location..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            padding: '10px 16px',
+            borderRadius: '30px',
+            border: '1px solid var(--border)',
+            width: '100%',
+            maxWidth: '400px',
+            outline: 'none'
+          }}
+        />
+      </div>
       <div className="proj-grid">
-        {filtered.map((p, idx) => (
-          <div className="proj-card" key={idx}>
+        {filtered.map((p) => (
+          <div className="proj-card" key={p.id}>
             <div className="proj-img">
               <div className="proj-img-bg">{p.emoji}</div>
               <div className="proj-badges">
@@ -48,17 +78,17 @@ const Projects = ({ projects }) => {
                 <div className="proj-meta-item"><i className="ti ti-home"></i> {p.beds}</div>
                 <div className="proj-meta-item"><i className="ti ti-clock"></i> {p.status}</div>
               </div>
-              <div style={{fontSize:'12px', color:'var(--txt3)', marginTop:'8px'}}>{p.amenities}</div>
+              <div style={{ fontSize: '12px', color: 'var(--txt3)', marginTop: '8px' }}>{p.amenities}</div>
               <div className="proj-actions">
-                <button className="btn-sm btn-sm-red">Know More</button>
-                <button className="btn-sm btn-sm-out">Schedule Visit</button>
+                <button className="btn-sm btn-sm-red" onClick={() => handleKnowMore(p.id)}>Know More</button>
+                <button className="btn-sm btn-sm-out" onClick={() => handleScheduleVisit(p.id)}>Schedule Visit</button>
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div style={{textAlign:'center', marginTop:'32px'}}>
-        <button className="btn-red" style={{padding:'13px 36px', borderRadius:'9px', fontSize:'14px'}}>
+      <div style={{ textAlign: 'center', marginTop: '32px' }}>
+        <button className="btn-red" style={{ padding: '13px 36px', borderRadius: '9px', fontSize: '14px' }}>
           View All Listings ↗
         </button>
       </div>
