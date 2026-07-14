@@ -37,7 +37,6 @@ const Projects = ({ projects }) => {
 
       <div className="proj-grid">
         {filtered.map((project, index) => {
-          // Use the actual index in the projects array for the link
           const projectIndex = projects.indexOf(project);
           return (
             <div className="proj-card" key={index}>
