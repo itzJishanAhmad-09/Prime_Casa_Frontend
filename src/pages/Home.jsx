@@ -15,20 +15,28 @@ import WhyUs from '../components/WhyUs';
 import Contact from '../components/Contact';
 import CTA from '../components/CTA';
 
-const Home = ({ openModal }) => {
+const Home = ({ 
+  projects, 
+  sectors, 
+  marketData, 
+  news, 
+  testimonials, 
+  openModal,
+  scrollTo 
+}) => {
   return (
     <>
       <Hero />
       <Stats />
-      <Projects />
-      <Sectors />
-      <MarketTable />
+      <Projects projects={projects} />
+      <Sectors sectors={sectors} />
+      <MarketTable marketData={marketData} />
       <Services />
       <HowItWorks />
       <Toolkit openModal={openModal} />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
       <Quote />
-      <Insights />
+      <Insights news={news} />
       <WhyUs />
       <Contact />
       <CTA />

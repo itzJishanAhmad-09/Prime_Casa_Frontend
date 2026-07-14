@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from 'react';  // ← useState & useEffect
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom'; // ← Remove BrowserRouter from here
+
+// Components
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import Projects from './components/Projects';
-import Sectors from './components/Sectors';
-import MarketTable from './components/MarketTable';
-import Services from './components/Services';
-import HowItWorks from './components/HowItWorks';
-import Toolkit from './components/Toolkit';
-import DomainServices from './components/DomainServices';
-import Testimonials from './components/Testimonials';
-import Quote from './components/Quote';
-import Insights from './components/Insights';
-import WhyUs from './components/WhyUs';
-import Contact from './components/Contact';
-import CTA from './components/CTA';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
 
-// Import static data
+// Pages
+import Home from './pages/Home';
+import ProjectDetail from './pages/ProjectDetail';
+import SectorDetail from './pages/SectorDetail';
+import BlogDetail from "./pages/BlogDetail.jsx";
+
+// Data
 import { projects } from './data/projects';
 import { sectors } from './data/sectors';
 import { marketData } from './data/marketData';
@@ -26,17 +21,14 @@ import { news } from './data/news';
 import { testimonials } from './data/testimonials';
 
 function App() {
-  // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
 
-  // Scroll function (used by Navbar and other components)
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Open modal (used by Toolkit and other components)
   const openModal = (type) => {
     setModalContent(type);
     setModalOpen(true);
@@ -44,45 +36,40 @@ function App() {
 
   const closeModal = () => setModalOpen(false);
 
-  // 👇 Listen for custom event from Footer (and any other component)
   useEffect(() => {
     const handler = (e) => {
-      openModal(e.detail);  // e.detail = tool key (e.g. 'roi', 'emi', etc.)
+      openModal(e.detail);
     };
     window.addEventListener('openTool', handler);
     return () => window.removeEventListener('openTool', handler);
-  }, []); // empty dependency array – runs only once
+  }, []);
 
   return (
+    // ✅ NO BrowserRouter here – it's already in main.jsx
     <>
-      {/* Pass scrollTo to Navbar */}
       <Navbar scrollTo={scrollTo} />
 
-      <Hero />
-      <Stats />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              projects={projects}
+              sectors={sectors}
+              marketData={marketData}
+              news={news}
+              testimonials={testimonials}
+              openModal={openModal}
+              scrollTo={scrollTo}
+            />
+          }
+        />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/sector/:name" element={<SectorDetail />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+      </Routes>
 
-      {/* Pass static data directly */}
-      <Projects projects={projects} />
-      <Sectors sectors={sectors} />
-      <MarketTable marketData={marketData} />
-      <Services />
-      <HowItWorks />
-
-      {/* Pass openModal to Toolkit */}
-      <Toolkit openModal={openModal} />
-
-      <DomainServices />
-      <Testimonials testimonials={testimonials} />
-      <Quote />
-      <Insights news={news} />
-      <WhyUs />
-      <Contact />
-      <CTA />
-
-      {/* Footer uses scrollTo internally (already defined) */}
       <Footer />
-
-      {/* Modal */}
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
     </>
   );
