@@ -1,5 +1,6 @@
 // src/pages/Home.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import Projects from '../components/Projects';
@@ -15,15 +16,27 @@ import WhyUs from '../components/WhyUs';
 import Contact from '../components/Contact';
 import CTA from '../components/CTA';
 
-const Home = ({ 
-  projects, 
-  sectors, 
-  marketData, 
-  news, 
-  testimonials, 
+const Home = ({
+  projects,
+  sectors,
+  marketData,
+  news,
+  testimonials,
   openModal,
-  scrollTo 
+  scrollTo
 }) => {
+  const location = useLocation();
+
+  // Handle navigation from detail pages (navbar clicks)
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      // Small delay to ensure DOM is fully rendered
+      setTimeout(() => {
+        scrollTo(location.state.scrollTo);
+      }, 150);
+    }
+  }, [location.state, scrollTo]);
+
   return (
     <>
       <Hero />
