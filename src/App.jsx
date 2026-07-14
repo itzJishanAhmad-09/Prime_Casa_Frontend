@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import SectorDetail from './pages/SectorDetail';
 import BlogDetail from "./pages/BlogDetail.jsx";
+import ScheduleVisit from './pages/ScheduleVisit';
 
 // Data
 import { projects } from './data/projects';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/project/:id" element={<ProjectDetail />} />
         <Route path="/sector/:name" element={<SectorDetail />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/schedule/:id" element={<ScheduleVisit />} />
       </Routes>
 
       <Footer />
