@@ -1346,11 +1346,13 @@ tr:hover td {
 }
 
 /* ---------- Footer ---------- */
+/* ===== FOOTER - WHITE BACKGROUND ===== */
 footer {
-  background: var(--bg1);
+  background: #ffffff !important;
   border-top: 1px solid var(--border);
   padding: 2rem 1rem 1.5rem;
 }
+
 .footer-inner {
   display: flex;
   flex-direction: column;
@@ -1358,6 +1360,7 @@ footer {
   max-width: 1120px;
   margin: 0 auto;
 }
+
 @media (min-width: 600px) {
   .footer-inner {
     flex-direction: row;
@@ -1365,68 +1368,88 @@ footer {
     justify-content: space-between;
   }
 }
+
 .footer-brand img {
   height: 38px;
   margin-bottom: 0.5rem;
 }
+
 .footer-brand p {
   font-size: 0.75rem;
-  color: var(--txt3);
+  color: var(--txt2); /* Dark text on white background */
   max-width: 220px;
   line-height: 1.7;
 }
+
 .footer-col h4 {
   font-size: 0.65rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--txt2);
+  color: var(--txt); /* Dark heading */
   margin-bottom: 0.6rem;
 }
+
 .footer-col a {
   display: block;
   font-size: 0.75rem;
-  color: var(--txt3);
+  color: var(--txt2); /* Dark text on white background */
   margin-bottom: 0.3rem;
   transition: color var(--transition);
   cursor: pointer;
+  text-decoration: none;
 }
+
 .footer-col a:hover {
   color: var(--red);
 }
+
 .footer-social {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.6rem;
 }
+
 .social-btn {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--txt3);
+  color: var(--txt2);
   font-size: 1rem;
   cursor: pointer;
   transition: all var(--transition);
   text-decoration: none;
 }
+
 .social-btn:hover {
   background: var(--red);
   border-color: var(--red);
-  color: #fff;
+  color: #ffffff;
 }
+
 .footer-bottom {
   text-align: center;
   font-size: 0.65rem;
-  color: var(--txt3);
+  color: var(--txt2); /* Dark text on white background */
   padding-top: 1.2rem;
   border-top: 1px solid var(--border);
   max-width: 1120px;
   margin: 1.2rem auto 0;
 }
+
+.footer-bottom a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
 .rera-tag {
   display: inline-block;
   background: #D1FAE5;
