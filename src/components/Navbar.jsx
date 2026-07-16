@@ -53,7 +53,7 @@ const Navbar = ({ scrollTo }) => {
       <div className="nav-right">
         <a
           className="nav-wa"
-          href="https://wa.me/918130504006"
+          href="https://wa.me/918130504183"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -4,7 +4,7 @@ const Hero = () => {
     <div className="hero">
       <div className="hero-tagline">Prime Casa - Turning Dreams into Addresses</div>
       <div className="hero-badge"><i className="ti ti-map-pin"></i> Noida &amp; Greater Noida, UP</div>
-      <h1>Trusted Properties.<br /><em>Simplified Search.</em></h1>
+      <h1>The prime casa Trusted Properties.<br /><em>Simplified Search.</em></h1>
       <p className="hero-sub">0% Brokerage. 100% Trust. Discover your perfect home or next big investment across Noida's best sectors.</p>
       <div className="hero-0brok">✦ 0% Brokerage &nbsp;·&nbsp; RERA Verified &nbsp;·&nbsp; End-to-End Support</div>
       <div className="search-wrap">

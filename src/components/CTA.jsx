@@ -12,7 +12,7 @@ const CTA = () => {
         <div className="cta-btns">
           <button className="btn-red" onClick={() => scrollTo('contact')}>Get Personalised Shortlist ↗</button>
           <button className="btn-outline-w" onClick={() => scrollTo('market')}>Explore Market Trends</button>
-          <a href="https://wa.me/8130504006" target="_blank" style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'#25D366', color:'#fff', border:'none', borderRadius:'9px', padding:'14px 28px', fontSize:'14px', fontWeight:'600', textDecoration:'none'}}><i className="ti ti-brand-whatsapp"></i> Chat on WhatsApp</a>
+          <a href="https://wa.me/8130504183" target="_blank" style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'#25D366', color:'#fff', border:'none', borderRadius:'9px', padding:'14px 28px', fontSize:'14px', fontWeight:'600', textDecoration:'none'}}><i className="ti ti-brand-whatsapp"></i> Chat on WhatsApp</a>
         </div>
       </div>
     </div>

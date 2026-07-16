@@ -24,12 +24,12 @@ const Contact = () => {
           </form>
         </div>
         <div className="contact-info">
-          <div className="info-item"><i className="ti ti-phone"></i> +91 8130504006</div>
-          <div className="info-item"><i className="ti ti-mail"></i> theprimecasa@gmail.com</div>
+          <div className="info-item"><i className="ti ti-phone"></i> +91 8130504183</div>
+          <div className="info-item"><i className="ti ti-mail"></i> hr@theprimecasa.in</div>
           <div className="info-item"><i className="ti ti-map-pin"></i> Noida, Uttar Pradesh</div>
-          <div className="info-item"><i className="ti ti-clock"></i> Mon–Sat · 9 AM – 7 PM</div>
+          <div className="info-item"><i className="ti ti-clock"></i> Tue–Sun · 11 AM – 7 PM</div>
           <div style={{marginTop:'16px'}}>
-            <a href="https://wa.me/918130504006" target="_blank" style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'#25D366', color:'#fff', border:'none', borderRadius:'9px', padding:'14px 28px', fontSize:'14px', fontWeight:'600', textDecoration:'none'}}><i className="ti ti-brand-whatsapp"></i> Chat on WhatsApp</a>
+            <a href="https://wa.me/918130504183" target="_blank" style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'#25D366', color:'#fff', border:'none', borderRadius:'9px', padding:'14px 28px', fontSize:'14px', fontWeight:'600', textDecoration:'none'}}><i className="ti ti-brand-whatsapp"></i> Chat on WhatsApp</a>
           </div>
         </div>
       </div>
