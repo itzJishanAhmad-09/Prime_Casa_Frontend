@@ -84,21 +84,21 @@ const Footer = () => {
 
         <div className="footer-col">
           <h4>Contact</h4>
-          <a href="tel:+918130504006">
-            <i className="ti ti-phone" style={{ fontSize: '13px' }}></i> +91 8130504006
+          <a href="tel:+918130504183">
+            <i className="ti ti-phone" style={{ fontSize: '13px' }}></i> +91 8130504183
           </a>
-          <a href="mailto:theprimecasa@gmail.com">
-            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> hr@primecasagmail.com
+          <a href="mailto:hr@theprimecasa.in">
+            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> hr@theprimecasa.in
           </a>
           <a href="#" onClick={() => scrollTo('contact')}>
             <i className="ti ti-map-pin" style={{ fontSize: '13px' }}></i> Noida, Uttar Pradesh
           </a>
-          <a>Mon–Sat · 9 AM – 7 PM</a>
+          <a>Tue–Sun · 11 AM – 7 PM</a>
         </div>
       </div>
 
       <div className="footer-bottom">
-        © 2026 The Prime Casa Reality pvt. Ltd. RERA Registered. All property rates are indicative as of June 2026. 
+        © 2026 The prime casa realty pvt. Ltd. RERA Registered. All property rates are indicative as of June 2026. 
         Always verify with the relevant authority before any purchase decision.
         &nbsp;|&nbsp; 
         <a href="#" style={{ color: 'var(--txt3)' }}>Terms</a> 
