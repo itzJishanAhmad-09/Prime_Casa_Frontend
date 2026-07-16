@@ -22,7 +22,7 @@ const Footer = () => {
           <img 
           src="/primecasa.jpg" 
           alt="The Prime Casa" 
-          style={{ height: '46px', width: 'auto' }}
+          style={{ height: '90px', width: 'auto' }}
         />
           <p>
             Trusted property dealer across all Noida sectors. RERA registered. 
@@ -88,7 +88,7 @@ const Footer = () => {
             <i className="ti ti-phone" style={{ fontSize: '13px' }}></i> +91 8130504006
           </a>
           <a href="mailto:theprimecasa@gmail.com">
-            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> theprimecasa@gmail.com
+            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> hr@primecasagmail.com
           </a>
           <a href="#" onClick={() => scrollTo('contact')}>
             <i className="ti ti-map-pin" style={{ fontSize: '13px' }}></i> Noida, Uttar Pradesh
@@ -98,7 +98,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        © 2026 The Prime Casa. RERA Registered. All property rates are indicative as of June 2026. 
+        © 2026 The Prime Casa Reality pvt. Ltd. RERA Registered. All property rates are indicative as of June 2026. 
         Always verify with the relevant authority before any purchase decision.
         &nbsp;|&nbsp; 
         <a href="#" style={{ color: 'var(--txt3)' }}>Terms</a> 

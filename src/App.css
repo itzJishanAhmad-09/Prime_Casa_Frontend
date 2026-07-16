@@ -113,33 +113,48 @@ ul {
 nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  height: 64px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  justify-content: space-between;  /* Changed from space-evenly */
+  padding: 0 2rem;                /* More side padding */
+  height: 90px;                   /* Reduced from 120px - more balanced */
+  background: #ffffff;            /* Solid white for maximum visibility */
+  border-bottom: 2px solid rgba(192, 57, 43, 0.15); /* Red tinted border */
   position: sticky;
   top: 0;
   z-index: 200;
-  box-shadow: 0 1px 14px rgba(192, 57, 43, 0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* LOGO - LEFT */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;  /* Prevents logo from shrinking */
 }
 
 .nav-logo img {
-  height: 38px;
+  height: 52px;     /* Increased from 38px - much more visible */
   width: auto;
+  display: block;
 }
 
+/* NAV LINKS - CENTER (optional) or LEFT */
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;         /* Increased from 1.5rem for breathing room */
+  align-items: center;
+  margin: 0 1rem;
 }
+
 .nav-links a {
-  font-size: 0.85rem;
+  font-size: 0.9rem;  /* Slightly larger */
   font-weight: 500;
   color: var(--txt2);
-  transition: color var(--transition);
+  text-decoration: none;
+  transition: color 0.2s;
   position: relative;
+  white-space: nowrap; /* Prevents text from wrapping */
 }
+
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -148,51 +163,67 @@ nav {
   width: 0;
   height: 2px;
   background: var(--red);
-  transition: width var(--transition);
+  transition: width 0.2s;
 }
+
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--red);
 }
+
 .nav-links a:hover::after,
 .nav-links a.active::after {
   width: 100%;
 }
 
+/* RIGHT SIDE - WhatsApp & CTA Buttons */
 .nav-right {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   align-items: center;
+  flex-shrink: 0;  /* Prevents buttons from wrapping */
 }
+
 .nav-wa {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   background: #25D366;
   color: #fff;
   border: none;
-  border-radius: 7px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.75rem;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.nav-wa:hover {
+  transform: scale(1.04);
+  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.4);
+}
+
 .nav-cta {
   background: var(--red);
   color: #fff;
   border: none;
-  border-radius: 7px;
-  padding: 0.45rem 1rem;
-  font-size: 0.75rem;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition);
-}
-.nav-cta:hover {
-  background: var(--red-d);
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
 }
 
+.nav-cta:hover {
+  background: var(--red-d);
+  transform: scale(1.04);
+}
+
+/* HAMBURGER MENU (Mobile) */
 .hamburger {
   display: none;
   background: none;
@@ -202,6 +233,7 @@ nav {
   cursor: pointer;
   padding: 0.25rem;
 }
+
 
 /* ---------- Hero ---------- */
 .hero {

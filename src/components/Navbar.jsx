@@ -26,7 +26,7 @@ const Navbar = ({ scrollTo }) => {
           <img 
           src="/primecasa.jpg" 
           alt="The Prime Casa" 
-          style={{ height: '46px', width: 'auto' }}
+          style={{ height: '90px', width: 'auto' }}
         />
         </Link>
       </div>
