@@ -12,7 +12,6 @@ const Toolkit = ({ openModal }) => (
         { key: 'emi', icon: 'ti-calculator', title: 'EMI Planner', desc: 'Calculate monthly EMIs and optimize loan tenure for better returns.' },
         { key: 'nri', icon: 'ti-world', title: 'NRI Realty Edge', desc: 'Navigate property laws, taxation & loans as an NRI investor.' },
         { key: 'iq', icon: 'ti-robot', title: 'AI Property Advisor', desc: 'Get instant answers for buying and investing in Noida real estate.' },
-        { key: 'valuation', icon: 'ti-coin', title: 'Property Valuation', desc: 'Get an instant estimated market value for any property in Noida.' }
       ].map((t, i) => (
         <div className="toolkit-card" key={i} onClick={() => openModal(t.key)}>
           <div className="toolkit-icon"><i className={`ti ${t.icon}`}></i></div>

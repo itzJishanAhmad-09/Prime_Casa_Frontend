@@ -43,7 +43,7 @@ const Footer = () => {
             </a>
             <a 
               className="social-btn" 
-              href="https://wa.me/918130504006" 
+              href="https://wa.me/918130504183" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -95,7 +95,7 @@ const Footer = () => {
           </a>
           <a>Tue–Sun · 11 AM – 7 PM</a>
         </div>
-      </div>
+      </div> 
 
       <div className="footer-bottom">
         © 2026 The prime casa realty pvt. Ltd. RERA Registered. All property rates are indicative as of June 2026. 

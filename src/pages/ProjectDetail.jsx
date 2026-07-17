@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
+import PriceChart from '../components/PriceChart';  // 👈 IMPORT THE CHART
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -21,16 +22,17 @@ const ProjectDetail = () => {
     );
   }
 
+  // Get price history (if available)
   const getPriceHistory = () => {
     const data = project.priceHistory || [];
-    const maxPrice = Math.max(...data.map(d => d.price));
+    const maxPrice = data.length ? Math.max(...data.map(d => d.price)) : 0;
     return { data, maxPrice };
   };
 
   const { data: priceData, maxPrice } = getPriceHistory();
 
-  // Get similar projects (same type or location)
-  const similarProjects = projects.filter(p => 
+  // Similar projects
+  const similarProjects = projects.filter(p =>
     p.id !== project.id && (p.type === project.type || p.loc.includes(project.loc.split(',')[0]))
   ).slice(0, 4);
 
@@ -50,7 +52,7 @@ const ProjectDetail = () => {
       </div>
 
       {/* Hero Section */}
-      <div style={{ 
+      <div style={{
         background: 'linear-gradient(135deg, #1A0A08 0%, #3D1710 55%, #1A0A08 100%)',
         borderRadius: '20px',
         padding: '40px 48px',
@@ -132,9 +134,9 @@ const ProjectDetail = () => {
                   {project.fullDescription || project.description}
                 </div>
 
-                <div style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
                   gap: '16px',
                   marginTop: '24px',
                   padding: '20px',
@@ -159,47 +161,21 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* Price Appreciation Chart in Overview */}
+                {/* Price Chart in Overview */}
                 {priceData.length > 0 && (
                   <div style={{ marginTop: '32px' }}>
                     <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
                       Price Appreciation in {project.loc.split(',')[0]}
                     </h3>
-                    <div style={{ 
-                      background: 'var(--bg1)', 
-                      padding: '20px', 
-                      borderRadius: '12px',
-                      overflowX: 'auto'
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: '200px', minWidth: '400px' }}>
-                        {priceData.map((item, idx) => (
-                          <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-                            <div style={{ 
-                              width: '100%', 
-                              maxWidth: '40px',
-                              height: `${(item.price / maxPrice) * 180}px`,
-                              background: `linear-gradient(to top, var(--red), ${idx === priceData.length - 1 ? '#F0C040' : 'var(--red-l)'})`,
-                              borderRadius: '4px 4px 0 0',
-                              transition: 'height 0.3s'
-                            }}></div>
-                            <div style={{ fontSize: '10px', color: 'var(--txt3)', marginTop: '4px', textAlign: 'center' }}>
-                              {item.year}
-                            </div>
-                            <div style={{ fontSize: '9px', color: 'var(--txt2)', fontWeight: '600' }}>
-                              ₹{(item.price / 1000).toFixed(1)}k
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <PriceChart data={priceData} label={`Price in ${project.loc.split(',')[0]}`} />
                   </div>
                 )}
 
                 {/* Price Statistics */}
                 {project.priceStats && (
-                  <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(3, 1fr)', 
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
                     gap: '16px',
                     marginTop: '24px',
                     padding: '20px',
@@ -208,15 +184,21 @@ const ProjectDetail = () => {
                     textAlign: 'center'
                   }}>
                     <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--red)' }}>{project.priceStats.startingPrice}</div>
+                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--txt2)' }}>
+                        {project.priceStats.startingPrice}
+                      </div>
                       <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Starting Price</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--red)' }}>{project.priceStats.currentPrice}</div>
+                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--txt2)' }}>
+                        {project.priceStats.currentPrice}
+                      </div>
                       <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Current Price</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: '#059669' }}>{project.priceStats.appreciation}</div>
+                      <div style={{ fontSize: '20px', fontWeight: '700', color: '#4ADE80' }}>
+                        {project.priceStats.appreciation}
+                      </div>
                       <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Total Appreciation</div>
                     </div>
                   </div>
@@ -247,9 +229,9 @@ const ProjectDetail = () => {
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   {(project.features || []).map((feature, idx) => (
-                    <div key={idx} style={{ 
-                      display: 'flex', 
-                      alignItems: 'center', 
+                    <div key={idx} style={{
+                      display: 'flex',
+                      alignItems: 'center',
                       gap: '10px',
                       padding: '10px 14px',
                       background: 'var(--bg1)',
@@ -270,9 +252,9 @@ const ProjectDetail = () => {
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
                   Location
                 </h2>
-                <div style={{ 
-                  height: '300px', 
-                  background: 'var(--bg1)', 
+                <div style={{
+                  height: '300px',
+                  background: 'var(--bg1)',
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
@@ -286,7 +268,7 @@ const ProjectDetail = () => {
                     <div style={{ fontSize: '12px' }}>📍 Google Maps integration coming soon</div>
                   </div>
                 </div>
-                <div style={{ 
+                <div style={{
                   padding: '16px',
                   background: 'var(--bg1)',
                   borderRadius: '8px',
@@ -307,69 +289,12 @@ const ProjectDetail = () => {
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
                   Price Trends
                 </h2>
-                {priceData.length > 0 && (
-                  <>
-                    <div style={{ 
-                      background: 'var(--bg1)', 
-                      padding: '20px', 
-                      borderRadius: '12px',
-                      overflowX: 'auto',
-                      marginBottom: '20px'
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '250px', minWidth: '500px' }}>
-                        {priceData.map((item, idx) => (
-                          <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-                            <div style={{ 
-                              width: '100%', 
-                              maxWidth: '50px',
-                              height: `${(item.price / maxPrice) * 200}px`,
-                              background: `linear-gradient(to top, var(--red), ${idx === priceData.length - 1 ? '#F0C040' : 'var(--red-l)'})`,
-                              borderRadius: '6px 6px 0 0',
-                              transition: 'height 0.3s',
-                              position: 'relative'
-                            }}>
-                              <div style={{ 
-                                position: 'absolute', 
-                                top: '-20px', 
-                                left: '50%', 
-                                transform: 'translateX(-50%)',
-                                fontSize: '11px',
-                                fontWeight: '600',
-                                color: 'var(--txt)'
-                              }}>
-                                ₹{(item.price / 1000).toFixed(0)}k
-                              </div>
-                            </div>
-                            <div style={{ fontSize: '11px', color: 'var(--txt3)', marginTop: '6px', fontWeight: '500' }}>
-                              {item.year}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div style={{ 
-                      display: 'grid', 
-                      gridTemplateColumns: 'repeat(3, 1fr)', 
-                      gap: '16px',
-                      textAlign: 'center'
-                    }}>
-                      <div style={{ background: 'var(--bg1)', padding: '16px', borderRadius: '8px' }}>
-                        <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Starting Price (2015)</div>
-                        <div style={{ fontSize: '18px', fontWeight: '700' }}>₹{(priceData[0]?.price / 1000).toFixed(0)}k</div>
-                      </div>
-                      <div style={{ background: 'var(--bg1)', padding: '16px', borderRadius: '8px' }}>
-                        <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Current Price (2025)</div>
-                        <div style={{ fontSize: '18px', fontWeight: '700', color: 'var(--red)' }}>₹{(priceData[priceData.length - 1]?.price / 1000).toFixed(0)}k</div>
-                      </div>
-                      <div style={{ background: 'var(--bg1)', padding: '16px', borderRadius: '8px' }}>
-                        <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Total Growth</div>
-                        <div style={{ fontSize: '18px', fontWeight: '700', color: '#059669' }}>
-                          {((priceData[priceData.length - 1]?.price - priceData[0]?.price) / priceData[0]?.price * 100).toFixed(1)}%
-                        </div>
-                      </div>
-                    </div>
-                  </>
+                {priceData.length > 0 ? (
+                  <PriceChart data={priceData} label={`${project.loc.split(',')[0]} Price`} />
+                ) : (
+                  <p style={{ color: 'var(--txt3)', textAlign: 'center', padding: '40px 0' }}>
+                    No price history available for this project.
+                  </p>
                 )}
               </div>
             )}
@@ -380,8 +305,8 @@ const ProjectDetail = () => {
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
                   RERA Details
                 </h2>
-                <div style={{ 
-                  display: 'grid', 
+                <div style={{
+                  display: 'grid',
                   gap: '16px',
                   padding: '20px',
                   background: 'var(--bg1)',
@@ -400,7 +325,7 @@ const ProjectDetail = () => {
                       </a>
                     </div>
                   )}
-                  <div style={{ 
+                  <div style={{
                     padding: '12px',
                     background: '#D1FAE5',
                     borderRadius: '8px',
@@ -421,10 +346,9 @@ const ProjectDetail = () => {
 
         {/* Right Column – Sidebar */}
         <div>
-          {/* Action Buttons */}
-          <div style={{ 
-            background: 'var(--bg)', 
-            borderRadius: '16px', 
+          <div style={{
+            background: 'var(--bg)',
+            borderRadius: '16px',
             padding: '24px',
             border: '1px solid var(--border)',
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
@@ -432,11 +356,11 @@ const ProjectDetail = () => {
             top: '80px'
           }}>
             <div style={{ fontSize: '14px', color: 'var(--txt3)', marginBottom: '8px' }}>Need advisory?</div>
-            <button 
+            <button
               onClick={handleScheduleVisit}
-              className="btn-red" 
-              style={{ 
-                width: '100%', 
+              className="btn-red"
+              style={{
+                width: '100%',
                 padding: '16px',
                 fontSize: '16px',
                 marginBottom: '12px',
@@ -449,11 +373,11 @@ const ProjectDetail = () => {
               <i className="ti ti-calendar-event"></i> Book Site Visit
             </button>
 
-            <a 
-              href="https://wa.me/918130504006" 
+            <a
+              href="https://wa.me/918130504183"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ 
+              style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -472,7 +396,7 @@ const ProjectDetail = () => {
               <i className="ti ti-brand-whatsapp"></i> Chat with us
             </a>
 
-            <div style={{ 
+            <div style={{
               marginTop: '16px',
               padding: '12px',
               background: 'var(--bg1)',
@@ -482,11 +406,11 @@ const ProjectDetail = () => {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                 <i className="ti ti-phone" style={{ color: 'var(--red)' }}></i>
-                <span>+91 8130504006</span>
+                <span>+91 8130504183</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className="ti ti-mail" style={{ color: 'var(--red)' }}></i>
-                <span>info@theprimecasa.in</span>
+                <span>hr@theprimecasa.in</span>
               </div>
             </div>
           </div>
@@ -503,11 +427,11 @@ const ProjectDetail = () => {
             {similarProjects.map((similar, idx) => {
               const similarIndex = projects.indexOf(similar);
               return (
-                <Link 
-                  key={idx} 
+                <Link
+                  key={idx}
                   to={`/project/${similarIndex}`}
-                  style={{ 
-                    textDecoration: 'none', 
+                  style={{
+                    textDecoration: 'none',
                     color: 'inherit',
                     background: 'var(--bg)',
                     border: '1px solid var(--border)',

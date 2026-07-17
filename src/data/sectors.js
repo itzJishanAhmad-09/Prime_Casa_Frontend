@@ -14,5 +14,4 @@ export const sectors = [
   { name: "Sector 168", tier: "affordable", price: "₹7,200–9,000", growth: "+10%", type: "Expressway End", badge: "mid", badgeLabel: "Affordable" },
   { name: "Sector 50", tier: "mid", price: "₹9,000–11,000", growth: "+12%", type: "Central Noida", badge: "mid", badgeLabel: "Stable" },
   { name: "Sector 117", tier: "affordable", price: "₹7,000–9,000", growth: "+10%", type: "Residential", badge: "mid", badgeLabel: "Affordable" },
-  { name: "Sector 93", tier: "mid", price: "₹9,500–12,000", growth: "+13%", type: "Near Expressway", badge: "mid", badgeLabel: "Stable" },
 ];

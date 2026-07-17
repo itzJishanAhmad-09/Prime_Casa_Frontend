@@ -2,9 +2,9 @@ import React from 'react';
 const Hero = () => {
   return (
     <div className="hero">
-      <div className="hero-tagline">Prime Casa - Turning Dreams into Addresses</div>
+      <div className="hero-tagline">The Prime Casa - <div className="hero-badge">✦ Turning Dreams into Addresses</div></div>
       <div className="hero-badge"><i className="ti ti-map-pin"></i> Noida &amp; Greater Noida, UP</div>
-      <h1>The prime casa Trusted Properties.<br /><em>Simplified Search.</em></h1>
+      <h1>The Prime Casa Trusted Properties.<br /><em>Simplified Search.</em></h1>
       <p className="hero-sub">0% Brokerage. 100% Trust. Discover your perfect home or next big investment across Noida's best sectors.</p>
       <div className="hero-0brok">✦ 0% Brokerage &nbsp;·&nbsp; RERA Verified &nbsp;·&nbsp; End-to-End Support</div>
       <div className="search-wrap">

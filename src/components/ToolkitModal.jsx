@@ -204,7 +204,6 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         {content === 'emi' && <EMIPlanner />}
         {content === 'iq' && <AIAdvisor />}
         {content === 'nri' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. Contact our NRI Investment Desk for detailed consultation.</p><p style={{marginTop:'12px', fontSize:'13px'}}>📞 <strong>WhatsApp +91 8130504006</strong> for NRI support</p></div>}
-        {content === 'valuation' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>Property Valuation</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Get instant estimated market value for any property in Noida. Our valuation experts analyze location, amenities, market trends, and comparable properties.</p><p style={{marginTop:'12px', fontSize:'13px'}}>💬 <strong>Chat with us on WhatsApp</strong> to get your property valued</p></div>}
       </div>
     </div>
   );

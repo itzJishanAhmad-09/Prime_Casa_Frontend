@@ -132,7 +132,7 @@ const SectorDetail = () => {
             </button>
           </Link>
           <a 
-            href="https://wa.me/918130504006" 
+            href="https://wa.me/918130504183" 
             target="_blank"
             rel="noopener noreferrer"
             style={{ 
