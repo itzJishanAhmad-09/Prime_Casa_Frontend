@@ -1,4 +1,6 @@
+// src/components/Footer.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';  // ← ADD THIS IMPORT
 
 const Footer = () => {
   const scrollTo = (id) => {
@@ -9,8 +11,6 @@ const Footer = () => {
   };
 
   const openTool = (tool) => {
-    // This will trigger the modal from App.jsx
-    // We need to use a global event or context
     const event = new CustomEvent('openTool', { detail: tool });
     window.dispatchEvent(event);
   };
@@ -20,10 +20,10 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <img 
-          src="/primecasa.jpg" 
-          alt="The Prime Casa" 
-          style={{ height: '90px', width: 'auto' }}
-        />
+            src="/primecasa.jpg" 
+            alt="The Prime Casa" 
+            style={{ height: '90px', width: 'auto' }}
+          />
           <p>
             Trusted property dealer across all Noida sectors. RERA registered. 
             <span className="rera-tag">RERA ✓</span>
@@ -32,7 +32,7 @@ const Footer = () => {
             <a className="social-btn" href="#" aria-label="Facebook">
               <i className="ti ti-brand-facebook"></i>
             </a>
-            <a className="social-btn" href="#" aria-label="Instagram">
+            <a className="social-btn" href="https://www.instagram.com/theprimecasa?igsh=b3dzNzViMGZjMGZw&utm_source=qr" aria-label="Instagram">
               <i className="ti ti-brand-instagram"></i>
             </a>
             <a className="social-btn" href="#" aria-label="YouTube">
@@ -55,31 +55,31 @@ const Footer = () => {
 
         <div className="footer-col">
           <h4>Popular Sectors</h4>
-          <a onClick={() => scrollTo('sectors')}>Sector 150 (Ultra-Premium)</a>
-          <a onClick={() => scrollTo('sectors')}>Sector 128 (Green Belt)</a>
-          <a onClick={() => scrollTo('sectors')}>Sector 107 (Mid-Premium)</a>
-          <a onClick={() => scrollTo('sectors')}>Noida Extension</a>
-          <a onClick={() => scrollTo('sectors')}>Greater Noida West</a>
-          <a onClick={() => scrollTo('sectors')}>Yamuna Expressway</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 150 (Ultra-Premium)</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 128 (Green Belt)</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 107 (Mid-Premium)</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Noida Extension</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Greater Noida West</a>
+          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Yamuna Expressway</a>
         </div>
 
         <div className="footer-col">
           <h4>Services</h4>
-          <a onClick={() => scrollTo('services')}>Buy Property</a>
-          <a onClick={() => scrollTo('services')}>Rent Property</a>
-          <a onClick={() => openTool('nri')}>NRI Investment</a>
-          <a onClick={() => scrollTo('services')}>Property Valuation</a>
-          <a onClick={() => scrollTo('services')}>RERA Consultation</a>
-          <a onClick={() => openTool('emi')}>Home Loans</a>
+          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Buy Property</a>
+          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Rent Property</a>
+          <a onClick={() => openTool('nri')} style={{ cursor: 'pointer' }}>NRI Investment</a>
+          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Property Valuation</a>
+          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>RERA Consultation</a>
+          <a onClick={() => openTool('emi')} style={{ cursor: 'pointer' }}>Home Loans</a>
         </div>
 
         <div className="footer-col">
           <h4>Toolkit</h4>
-          <a onClick={() => openTool('roi')}>ROI Calculator</a>
-          <a onClick={() => openTool('emi')}>EMI Planner</a>
-          <a onClick={() => openTool('nri')}>NRI Realty Edge</a>
-          <a onClick={() => openTool('iq')}>AI Property Advisor</a>
-          <a onClick={() => openTool('valuation')}>Property Valuation</a>
+          <a onClick={() => openTool('roi')} style={{ cursor: 'pointer' }}>ROI Calculator</a>
+          <a onClick={() => openTool('emi')} style={{ cursor: 'pointer' }}>EMI Planner</a>
+          <a onClick={() => openTool('nri')} style={{ cursor: 'pointer' }}>NRI Realty Edge</a>
+          <a onClick={() => openTool('iq')} style={{ cursor: 'pointer' }}>AI Property Advisor</a>
+          <a onClick={() => openTool('valuation')} style={{ cursor: 'pointer' }}>Property Valuation</a>
         </div>
 
         <div className="footer-col">
@@ -101,9 +101,9 @@ const Footer = () => {
         © 2026 The prime casa realty pvt. Ltd. RERA Registered. All property rates are indicative as of June 2026. 
         Always verify with the relevant authority before any purchase decision.
         &nbsp;|&nbsp; 
-        <a href="#" style={{ color: 'var(--txt3)' }}>Terms</a> 
+        <Link to="/terms" style={{ color: 'var(--txt3)', textDecoration: 'none' }}>Terms</Link>
         &nbsp;|&nbsp; 
-        <a href="#" style={{ color: 'var(--txt3)' }}>Privacy Policy</a>
+        <Link to="/privacy-policy" style={{ color: 'var(--txt3)', textDecoration: 'none' }}>Privacy Policy</Link>
       </div>
     </footer>
   );

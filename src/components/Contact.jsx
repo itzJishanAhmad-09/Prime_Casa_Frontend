@@ -12,6 +12,9 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
 
+  // Use environment variable or fallback to localhost
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,7 +25,10 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await fetch('http://localhost:5000/api/enquiries', {
+      // Use 127.0.0.1 instead of localhost if needed (bypass DNS issues)
+      // const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api';
+      
+      const response = await fetch(`${API_URL}/enquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,10 +55,11 @@ const Contact = () => {
           message: data.message || 'Something went wrong. Please try again.',
         });
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Failed to connect to server:', error);
       setStatus({
         type: 'error',
-        message: 'Network error. Please check your connection.',
+        message: '⚠️ Cannot connect to server. Please make sure the backend is running (port 5000) or try again later.',
       });
     } finally {
       setLoading(false);
