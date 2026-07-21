@@ -355,7 +355,7 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     psf: "₹22,000/sq ft",
     type: "luxury",
     tag: "popular",
-    emoji: "/assets/images/img6.jpg",
+    emoji: "/assets/images/img6.png",
     beds: "3–4 BHK",
     status: "Under Construction",
     amenities: "Eco · Clubhouse · Wellness",
