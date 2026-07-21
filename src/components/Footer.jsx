@@ -29,7 +29,7 @@ const Footer = () => {
             <span className="rera-tag">RERA ✓</span>
           </p>
           <div className="footer-social">
-            <a className="social-btn" href="#" aria-label="Facebook">
+            <a className="social-btn" href="https://www.facebook.com/theprimecasa?rdid=TQDk6DaFrXolxrfQ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CprxvKoxJ%2F#" aria-label="Facebook">
               <i className="ti ti-brand-facebook"></i>
             </a>
             <a className="social-btn" href="https://www.instagram.com/theprimecasa?igsh=b3dzNzViMGZjMGZw&utm_source=qr" aria-label="Instagram">

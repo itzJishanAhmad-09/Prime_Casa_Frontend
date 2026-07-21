@@ -5,6 +5,12 @@ import { Link } from 'react-router-dom';
 const Projects = ({ projects }) => {
   const [filter, setFilter] = useState('all');
 
+  // Helper to check if a string looks like an image path
+  const isImagePath = (str) => {
+    if (!str) return false;
+    return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
+  };
+
   if (!projects || projects.length === 0) {
     return <p style={{ textAlign: 'center', padding: '40px' }}>No projects available.</p>;
   }
@@ -41,7 +47,16 @@ const Projects = ({ projects }) => {
           return (
             <div className="proj-card" key={index}>
               <div className="proj-img">
-                <div className="proj-img-bg">{project.emoji}</div>
+                {/* Conditional rendering: image or emoji */}
+                {isImagePath(project.emoji) ? (
+                  <img 
+                    src={project.emoji} 
+                    alt={project.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <div className="proj-img-bg">{project.emoji || '🏠'}</div>
+                )}
                 <div className="proj-badges">
                   {project.tag === 'popular' && <span className="proj-badge badge-popular">Popular</span>}
                   {project.tag === 'new' && <span className="proj-badge badge-new">New Launch</span>}

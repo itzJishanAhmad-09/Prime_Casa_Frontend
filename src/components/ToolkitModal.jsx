@@ -203,7 +203,7 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         {content === 'roi' && <ROICalculator />}
         {content === 'emi' && <EMIPlanner />}
         {content === 'iq' && <AIAdvisor />}
-        {content === 'nri' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. Contact our NRI Investment Desk for detailed consultation.</p><p style={{marginTop:'12px', fontSize:'13px'}}>📞 <strong>WhatsApp +91 8130504006</strong> for NRI support</p></div>}
+        {content === 'nri' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. Contact our NRI Investment Desk for detailed consultation.</p><p style={{marginTop:'12px', fontSize:'13px'}}>📞 <strong>WhatsApp +91 8130504183</strong> for NRI support</p></div>}
       </div>
     </div>
   );
