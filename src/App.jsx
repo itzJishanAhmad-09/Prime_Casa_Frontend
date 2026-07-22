@@ -1,18 +1,18 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom'; // ← Remove BrowserRouter from here
+import { Routes, Route } from 'react-router-dom';
 
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
-import ChatBot from './components/ChatBot';
+import ChatBot from './components/ChatBot';   // ✅ your new chat component
 
 // Pages
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import SectorDetail from './pages/SectorDetail';
-import BlogDetail from "./pages/BlogDetail.jsx";
+import BlogDetail from './pages/BlogDetail.jsx';
 import ScheduleVisit from './pages/ScheduleVisit';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsPage from './pages/TermsPage';
@@ -49,7 +49,6 @@ function App() {
   }, []);
 
   return (
-    // ✅ NO BrowserRouter here – it's already in main.jsx
     <>
       <Navbar scrollTo={scrollTo} />
 
@@ -78,15 +77,7 @@ function App() {
 
       <Footer />
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-      return (
-      <>
-        <Navbar scrollTo={scrollTo} />
-        <Routes>...</Routes>
-        <Footer />
-        <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-        <ChatBot />
-      </>
-      );
+      <ChatBot />   {/* ✅ Floating chat button will appear on every page */}
     </>
   );
 }
