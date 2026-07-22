@@ -16,7 +16,7 @@ This successful exit demonstrates the strong growth potential of Noida's real es
 The Mahagun project continues to see strong demand from homebuyers, with remaining inventory being sold at premium prices. This successful exit also validates the growing institutional interest in Noida's residential real estate market.`,
     tag: 'MARKET',
     date: 'MAR 2026',
-    emoji: '📈',
+    emoji: '/assets/images/image1.png',
     author: 'Prime Casa Team'
   },
   {
@@ -35,7 +35,7 @@ This opening is expected to attract significant footfall to the area, benefiting
 The store has already created over 200 direct jobs for local residents, with many more indirect employment opportunities expected to follow. This development is part of DMart's strategic expansion plan to tap into the growing demand in Noida's satellite cities.`,
     tag: 'RETAIL',
     date: 'APR 2026',
-    emoji: '🛒',
+    emoji: '/assets/images/image2.jpg',
     author: 'Prime Casa Team'
   },
   {
@@ -54,7 +54,7 @@ Real estate experts predict that the property values in the sectors along the ne
 The Aqua Line already serves 21 stations across Noida and Greater Noida, and this extension will make it one of the most comprehensive metro networks in the National Capital Region. The project is part of the government's larger plan to enhance public transportation infrastructure in the region.`,
     tag: 'EXPRESSWAY',
     date: 'FEB 2026',
-    emoji: '🚇',
+    emoji: '/assets/images/image6.jpg',
     author: 'Prime Casa Team'
   },
   {
@@ -79,7 +79,7 @@ With this fresh capital infusion, buyers can expect faster possession dates and 
 The real estate market in Noida continues to show strong momentum with robust demand from both end-users and investors. The new funding is expected to further strengthen buyer confidence in Mahagun Group's projects.`,
     tag: 'INVESTMENT',
     date: 'APR 2026',
-    emoji: '🏗️',
+    emoji: '/assets/images/image5.jpg',
     author: 'Prime Casa Team'
   },
   {
@@ -105,7 +105,7 @@ The airport is part of the larger Jewar Aerotropolis project which will eventual
 The full Phase I operations are expected to be completed by December 2026, with Phase II already in the planning stages. The airport will create over 50,000 direct and indirect jobs in the region.`,
     tag: 'INFRASTRUCTURE',
     date: 'MAR 2026',
-    emoji: '✈️',
+    emoji: '/assets/images/image3.jpg',
     author: 'Prime Casa Team'
   },
   {
@@ -132,7 +132,7 @@ Homebuyers in Noida and Greater Noida will particularly benefit from these chang
 Real estate experts believe that these amendments will help restore buyer confidence in the UP real estate market, which has been impacted by project delays and developer defaults. The new rules will also encourage more developers to register their projects with RERA.`,
     tag: 'POLICY',
     date: 'MAR 2026',
-    emoji: '⚖️',
+    emoji: '/assets/images/image4.jpg',
     author: 'Prime Casa Team'
   }
 ];

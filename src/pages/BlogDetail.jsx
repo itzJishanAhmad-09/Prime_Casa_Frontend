@@ -3,6 +3,12 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { news } from '../data/news';
 
+// Helper to check if a string is an image path
+const isImagePath = (str) => {
+  if (!str) return false;
+  return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
+};
+
 const BlogDetail = () => {
   const { slug } = useParams();
   const blog = news.find(item => item.slug === slug);
@@ -35,7 +41,22 @@ const BlogDetail = () => {
         border: '1px solid var(--border)',
         boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
       }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>{blog.emoji}</div>
+        {/* Image or Emoji */}
+        {isImagePath(blog.emoji) ? (
+          <img 
+            src={blog.emoji} 
+            alt={blog.title}
+            style={{ 
+              width: '100%', 
+              height: '250px', 
+              objectFit: 'cover', 
+              borderRadius: '16px',
+              marginBottom: '20px'
+            }}
+          />
+        ) : (
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>{blog.emoji || '📰'}</div>
+        )}
         
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '12px' }}>
           <span style={{ 
