@@ -113,46 +113,44 @@ ul {
 nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;  /* Changed from space-evenly */
-  padding: 0 2rem;                /* More side padding */
-  height: 90px;                   /* Reduced from 120px - more balanced */
-  background: #ffffff;            /* Solid white for maximum visibility */
-  border-bottom: 2px solid rgba(192, 57, 43, 0.15); /* Red tinted border */
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 90px;
+  background: #ffffff;
+  border-bottom: 2px solid rgba(192, 57, 43, 0.15);
   position: sticky;
   top: 0;
   z-index: 200;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* LOGO - LEFT */
 .nav-logo {
   display: flex;
   align-items: center;
-  flex-shrink: 0;  /* Prevents logo from shrinking */
+  flex-shrink: 0;
 }
 
 .nav-logo img {
-  height: 52px;     /* Increased from 38px - much more visible */
+  height: 52px;
   width: auto;
   display: block;
 }
 
-/* NAV LINKS - CENTER (optional) or LEFT */
 .nav-links {
   display: flex;
-  gap: 2rem;         /* Increased from 1.5rem for breathing room */
+  gap: 2rem;
   align-items: center;
   margin: 0 1rem;
 }
 
 .nav-links a {
-  font-size: 0.9rem;  /* Slightly larger */
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--txt2);
   text-decoration: none;
   transition: color 0.2s;
   position: relative;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap;
 }
 
 .nav-links a::after {
@@ -176,12 +174,11 @@ nav {
   width: 100%;
 }
 
-/* RIGHT SIDE - WhatsApp & CTA Buttons */
 .nav-right {
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  flex-shrink: 0;  /* Prevents buttons from wrapping */
+  flex-shrink: 0;
 }
 
 .nav-wa {
@@ -223,7 +220,6 @@ nav {
   transform: scale(1.04);
 }
 
-/* HAMBURGER MENU (Mobile) */
 .hamburger {
   display: none;
   background: none;
@@ -234,184 +230,10 @@ nav {
   padding: 0.25rem;
 }
 
-
-/* ---------- Hero ---------- */
-.hero {
-  background: linear-gradient(135deg, #1A0A08 0%, #3D1710 55%, #1A0A08 100%);
-  padding: 3rem 1rem 4rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 700px;
-  height: 280px;
-  background: radial-gradient(ellipse at bottom, rgba(192, 57, 43, 0.2), transparent 70%);
-  pointer-events: none;
-}
-
-.hero-tagline {
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color:  #fff;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(192, 57, 43, 0.18);
-  border: 1px solid rgba(192, 57, 43, 0.35);
-  color: var(--gold-l);
-  font-size: 0.7rem;
-  font-weight: 500;
-  padding: 0.25rem 1rem;
-  border-radius: 30px;
-  margin-bottom: 1rem;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 8vw, 3.8rem);
-  color: #fff;
-  max-width: 780px;
-  margin: 0 auto 0.5rem;
-  line-height: 1.15;
-}
-.hero h1 em {
-  color: var(--gold-l);
-  font-style: normal;
-}
-
-.hero-sub {
-  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 540px;
-  margin: 0 auto 0.75rem;
-}
-
-.hero-0brok {
-  display: inline-block;
-  background: rgba(240, 192, 64, 0.12);
-  border: 1px solid rgba(240, 192, 64, 0.25);
-  color: var(--gold-l);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.3rem 1.2rem;
-  border-radius: 30px;
-  margin-bottom: 1.5rem;
-}
-
-.search-wrap {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(192, 57, 43, 0.25);
-  border-radius: 16px;
-  padding: 1rem;
-  max-width: 820px;
-  margin: 0 auto;
-  backdrop-filter: blur(6px);
-}
-
-.search-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.search-row select,
-.search-row input {
-  flex: 1 1 130px;
-  padding: 0.6rem 0.8rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  font-size: 0.85rem;
-  outline: none;
-  font-family: inherit;
-  min-width: 110px;
-}
-.search-row select option {
-  background: #2C1510;
-  color: #fff;
-}
-.search-row .search-btn {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.8rem;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: background var(--transition);
-}
-.search-row .search-btn:hover {
-  background: var(--red-d);
-}
-
-.search-more {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.7rem;
-  justify-content: center;
-}
-.tag-pill {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.7rem;
-  padding: 0.25rem 0.9rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.tag-pill:hover,
-.tag-pill.active {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-}
-
-.localities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1.25rem;
-}
-.loc-chip {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.75rem;
-  padding: 0.35rem 1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.loc-chip:hover {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-}
-
 /* ---------- Hero with Video ---------- */
 .hero {
   position: relative;
   overflow: hidden;
-  height: auto;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -448,7 +270,6 @@ nav {
   margin: 0 auto;
 }
 
-/* Keep your existing .hero-tagline, .hero-badge, etc. – they now inherit from .hero-content */
 .hero-tagline {
   font-size: 0.65rem;
   letter-spacing: 2px;
@@ -457,7 +278,212 @@ nav {
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
-/* ... and all other hero styles remain the same */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(192, 57, 43, 0.18);
+  border: 1px solid rgba(192, 57, 43, 0.35);
+  color: var(--gold-l);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.25rem 1rem;
+  border-radius: 30px;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  color: #fff;
+  max-width: 780px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.15;
+}
+
+.hero h1 em {
+  color: var(--gold-l);
+  font-style: normal;
+}
+
+.hero-sub {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 540px;
+  margin: 0 auto 0.75rem;
+}
+
+.hero-0brok {
+  display: inline-block;
+  background: rgba(240, 192, 64, 0.12);
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  color: var(--gold-l);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Improved Search Bar ---------- */
+.search-wrap {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: 16px;
+  padding: 1rem;
+  max-width: 820px;
+  margin: 0 auto;
+  backdrop-filter: blur(6px);
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-field {
+  flex: 1 1 130px;
+  min-width: 110px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.search-field:hover,
+.search-field:focus-within {
+  border-color: var(--gold-l);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.search-field i {
+  color: var(--gold-l);
+  font-size: 1.1rem;
+  padding: 0 0.6rem;
+  opacity: 0.7;
+}
+
+.search-field select,
+.search-field input {
+  flex: 1;
+  padding: 0.6rem 0.8rem 0.6rem 0.2rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.search-field select option {
+  background: #2C1510;
+  color: #fff;
+}
+
+.search-field input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-btn {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  flex: 1 1 100%;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.search-btn:hover {
+  background: var(--red-d);
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+}
+
+.search-btn i {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 601px) {
+  .search-btn {
+    flex: 0 1 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-field {
+    flex: 1 1 100%;
+  }
+  .search-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+.search-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  justify-content: center;
+}
+
+.tag-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.9rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.tag-pill:hover,
+.tag-pill.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.localities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.loc-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  padding: 0.35rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.loc-chip:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
 
 /* ---------- Stats ---------- */
 .stats-strip {
@@ -1430,7 +1456,6 @@ tr:hover td {
 }
 
 /* ---------- Footer ---------- */
-/* ===== FOOTER - WHITE BACKGROUND ===== */
 footer {
   background: #ffffff !important;
   border-top: 1px solid var(--border);
@@ -1460,7 +1485,7 @@ footer {
 
 .footer-brand p {
   font-size: 0.75rem;
-  color: var(--txt2); /* Dark text on white background */
+  color: var(--txt2);
   max-width: 220px;
   line-height: 1.7;
 }
@@ -1469,14 +1494,14 @@ footer {
   font-size: 0.65rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--txt); /* Dark heading */
+  color: var(--txt);
   margin-bottom: 0.6rem;
 }
 
 .footer-col a {
   display: block;
   font-size: 0.75rem;
-  color: var(--txt2); /* Dark text on white background */
+  color: var(--txt2);
   margin-bottom: 0.3rem;
   transition: color var(--transition);
   cursor: pointer;
@@ -1518,7 +1543,7 @@ footer {
 .footer-bottom {
   text-align: center;
   font-size: 0.65rem;
-  color: var(--txt2); /* Dark text on white background */
+  color: var(--txt2);
   padding-top: 1.2rem;
   border-top: 1px solid var(--border);
   max-width: 1120px;
@@ -1643,16 +1668,16 @@ footer {
 
   .hero {
     padding: 2rem 1rem 3rem;
+    min-height: auto;
   }
   .hero h1 {
     font-size: 1.8rem;
   }
-  .search-row select,
-  .search-row input {
+  .search-field {
     flex: 1 1 100%;
   }
-  .search-row .search-btn {
-    width: 100%;
+  .search-btn {
+    flex: 1 1 100%;
     justify-content: center;
   }
 }
@@ -1682,4 +1707,3 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-

@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom'; // ← Remove BrowserRouter fr
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
+import ChatBot from './components/ChatBot';
 
 // Pages
 import Home from './pages/Home';
@@ -77,6 +78,15 @@ function App() {
 
       <Footer />
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      return (
+      <>
+        <Navbar scrollTo={scrollTo} />
+        <Routes>...</Routes>
+        <Footer />
+        <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+        <ChatBot />
+      </>
+      );
     </>
   );
 }
