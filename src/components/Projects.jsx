@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Projects = ({ projects }) => {
   const [filter, setFilter] = useState('all');
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_DISPLAY = 6; // change this to control how many appear initially
 
   // Helper to check if a string looks like an image path
   const isImagePath = (str) => {
@@ -15,9 +18,16 @@ const Projects = ({ projects }) => {
     return <p style={{ textAlign: 'center', padding: '40px' }}>No projects available.</p>;
   }
 
+  // Apply filter
   const filtered = filter === 'all'
     ? projects
     : projects.filter(p => p.type === filter || (filter === 'new' && p.tag === 'new'));
+
+  // Decide which projects to display
+  const displayed = showAll ? filtered : filtered.slice(0, INITIAL_DISPLAY);
+
+  // Show toggle button only if there are more than INITIAL_DISPLAY items
+  const showToggle = filtered.length > INITIAL_DISPLAY;
 
   return (
     <section className="section" id="projects">
@@ -34,7 +44,11 @@ const Projects = ({ projects }) => {
           <button
             key={f}
             className={`filter-btn ${filter === f ? 'active' : ''}`}
-            onClick={() => setFilter(f)}
+            onClick={() => {
+              setFilter(f);
+              // Optionally reset showAll when filter changes
+              // setShowAll(false);
+            }}
           >
             {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
@@ -42,12 +56,11 @@ const Projects = ({ projects }) => {
       </div>
 
       <div className="proj-grid">
-        {filtered.map((project, index) => {
+        {displayed.map((project, index) => {
           const projectIndex = projects.indexOf(project);
           return (
             <div className="proj-card" key={index}>
               <div className="proj-img">
-                {/* Conditional rendering: image or emoji */}
                 {isImagePath(project.emoji) ? (
                   <img 
                     src={project.emoji} 
@@ -94,11 +107,17 @@ const Projects = ({ projects }) => {
         })}
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '32px' }}>
-        <button className="btn-red" style={{ padding: '13px 36px', borderRadius: '9px', fontSize: '14px' }}>
-          View All Listings ↗
-        </button>
-      </div>
+      {showToggle && (
+        <div style={{ textAlign: 'center', marginTop: '32px' }}>
+          <button
+            className="btn-red"
+            style={{ padding: '13px 36px', borderRadius: '9px', fontSize: '14px' }}
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? 'Show Less' : 'View All Listings ↗'}
+          </button>
+        </div>
+      )}
     </section>
   );
 };

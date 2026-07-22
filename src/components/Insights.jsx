@@ -1,5 +1,5 @@
 // src/components/Insights.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Helper to check if a string is an image path
@@ -9,6 +9,10 @@ const isImagePath = (str) => {
 };
 
 const Insights = ({ news }) => {
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_DISPLAY = 3; // change this to control how many appear initially
+
   if (!news || news.length === 0) {
     return (
       <section className="section" id="insights">
@@ -22,6 +26,9 @@ const Insights = ({ news }) => {
     );
   }
 
+  const displayed = showAll ? news : news.slice(0, INITIAL_DISPLAY);
+  const showToggle = news.length > INITIAL_DISPLAY;
+
   return (
     <section className="section" id="insights">
       <div className="section-header">
@@ -31,14 +38,14 @@ const Insights = ({ news }) => {
           Stay ahead with the latest market developments, launches, and policy updates
         </div>
       </div>
+
       <div className="news-grid">
-        {news.map((item, index) => (
+        {displayed.map((item, index) => (
           <div className="news-card" key={index}>
             <div className="news-img">
-              {/* Check for image path (image field or emoji) */}
               {isImagePath(item.image || item.emoji) ? (
-                <img 
-                  src={item.image || item.emoji} 
+                <img
+                  src={item.image || item.emoji}
                   alt={item.title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -57,23 +64,27 @@ const Insights = ({ news }) => {
           </div>
         ))}
       </div>
-      <div style={{ textAlign: 'center', marginTop: '30px' }}>
-        <Link to="/insights">
-          <button style={{
-            padding: '12px 34px',
-            borderRadius: '8px',
-            border: '1px solid var(--border-s)',
-            background: 'var(--bg1)',
-            fontSize: '14px',
-            cursor: 'pointer',
-            fontFamily: 'Inter, sans-serif',
-            color: 'var(--txt)',
-            fontWeight: '500'
-          }}>
-            Read All Insights ↗
+
+      {showToggle && (
+        <div style={{ textAlign: 'center', marginTop: '30px' }}>
+          <button
+            style={{
+              padding: '12px 34px',
+              borderRadius: '8px',
+              border: '1px solid var(--border-s)',
+              background: 'var(--bg1)',
+              fontSize: '14px',
+              cursor: 'pointer',
+              fontFamily: 'Inter, sans-serif',
+              color: 'var(--txt)',
+              fontWeight: '500',
+            }}
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? 'Show Less' : 'Read All Insights ↗'}
           </button>
-        </Link>
-      </div>
+        </div>
+      )}
     </section>
   );
 };
