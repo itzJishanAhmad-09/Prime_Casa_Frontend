@@ -8,13 +8,9 @@ const AIAdvisor = () => {
 
   const handleAsk = async () => {
     if (!question.trim()) return;
-    
-    // Add user message
     setMessages(prev => [...prev, { role: 'user', content: question }]);
     setLoading(true);
-    
     try {
-      // Simulate API response
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: 'Thanks for your question. Please contact our team on WhatsApp for real estate advice.' 
@@ -25,7 +21,6 @@ const AIAdvisor = () => {
         content: 'Unable to fetch response. Please contact our team on WhatsApp.' 
       }]);
     }
-    
     setLoading(false);
     setQuestion('');
   };
@@ -56,9 +51,7 @@ const AIAdvisor = () => {
             </span>
           </div>
         ))}
-        {loading && (
-          <div style={{color:'var(--txt3)', fontStyle:'italic'}}>Thinking…</div>
-        )}
+        {loading && <div style={{color:'var(--txt3)', fontStyle:'italic'}}>Thinking…</div>}
       </div>
       <div style={{display:'flex', gap:'8px'}}>
         <input 
@@ -160,6 +153,49 @@ const EMIPlanner = () => {
   );
 };
 
+// ✅ NEW: Property Valuation Component
+const Valuation = () => {
+  const [price, setPrice] = React.useState('10000000');
+  const [rate, setRate] = React.useState('8');
+  const [years, setYears] = React.useState('5');
+
+  const futureValue = (price * ((1 + rate/100) ** years)).toFixed(0);
+  const gain = (futureValue - price).toFixed(0);
+  const gainPercent = ((gain / price) * 100).toFixed(2);
+
+  return (
+    <div>
+      <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'16px'}}>Property Valuation Calculator</h3>
+      <div style={{marginBottom:'12px'}}>
+        <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Current Property Price (₹)</label>
+        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+      </div>
+      <div style={{marginBottom:'12px'}}>
+        <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Expected Annual Appreciation (%)</label>
+        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} step="0.1" style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+      </div>
+      <div style={{marginBottom:'16px'}}>
+        <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Holding Period (Years)</label>
+        <input type="number" value={years} onChange={(e) => setYears(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+      </div>
+      <div style={{background:'var(--accent-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px'}}>
+        <div style={{fontSize:'12px', color:'var(--text)'}}>Estimated Future Value</div>
+        <div style={{fontSize:'18px', fontWeight:'700', color:'var(--accent)'}}>₹{parseInt(futureValue).toLocaleString('en-IN')}</div>
+      </div>
+      <div style={{background:'var(--code-bg)', padding:'12px', borderRadius:'8px'}}>
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'4px'}}>
+          <span>Total Gain:</span>
+          <span>₹{parseInt(gain).toLocaleString('en-IN')}</span>
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+          <span>Gain Percentage:</span>
+          <span>{gainPercent}%</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ToolkitModal = ({ isOpen, onClose, content }) => {
   if (!isOpen) return null;
 
@@ -204,6 +240,7 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         {content === 'emi' && <EMIPlanner />}
         {content === 'iq' && <AIAdvisor />}
         {content === 'nri' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. Contact our NRI Investment Desk for detailed consultation.</p><p style={{marginTop:'12px', fontSize:'13px'}}>📞 <strong>WhatsApp +91 8130504183</strong> for NRI support</p></div>}
+        {content === 'valuation' && <Valuation />}
       </div>
     </div>
   );
