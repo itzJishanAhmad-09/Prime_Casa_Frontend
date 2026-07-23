@@ -1,7 +1,6 @@
 // src/services/api.js
-const API_URL = import.meta.env.VITE_API_URL || 'https://prime-casa-backend.onrender.com/';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// Helper to handle responses
 const handleResponse = async (response) => {
   const data = await response.json();
   if (!response.ok) {
@@ -20,25 +19,6 @@ export const register = async (userData) => {
   return handleResponse(res);
 };
 
-// src/services/api.js
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return token ? { 'Authorization': `Bearer ${token}` } : {};
-};
-
-// Example for a protected endpoint
-export const updateProfile = async (data) => {
-  const res = await fetch(`${API_URL}/auth/profile`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeaders(),
-    },
-    body: JSON.stringify(data),
-  });
-  return handleResponse(res);
-};
-
 export const login = async (email, password) => {
   const res = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
@@ -53,6 +33,18 @@ export const getCurrentUser = async (token) => {
     headers: {
       'Authorization': `Bearer ${token}`,
     },
+  });
+  return handleResponse(res);
+};
+
+export const updateProfile = async (data, token) => {
+  const res = await fetch(`${API_URL}/auth/profile`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
   });
   return handleResponse(res);
 };
