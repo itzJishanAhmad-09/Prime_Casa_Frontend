@@ -15,10 +15,14 @@ const ScheduleVisit = () => {
     phone: '',
     date: '',
     time: '',
+    people: '',
     message: ''
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false);
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   if (!project) {
     return (
@@ -35,50 +39,56 @@ const ScheduleVisit = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would send the data to your backend or email
-    console.log('Booking submitted:', { project: project.title, ...formData });
-    setSubmitted(true);
-    // Optionally redirect after 3 seconds
-    setTimeout(() => {
-      navigate('/');
-    }, 3000);
-  };
+    setLoading(true);
+    setStatus({ type: '', message: '' });
 
-  if (submitted) {
-    return (
-      <div style={{ padding: '60px 2rem', maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ 
-          background: '#D1FAE5', 
-          padding: '40px', 
-          borderRadius: '16px',
-          border: '2px solid #065F46'
-        }}>
-          <div style={{ fontSize: '64px', marginBottom: '16px' }}>✅</div>
-          <h2 style={{ color: '#065F46' }}>Booking Confirmed!</h2>
-          <p style={{ color: '#065F46', fontSize: '18px', marginTop: '12px' }}>
-            We have received your site visit request for <strong>{project.title}</strong>.
-          </p>
-          <p style={{ color: '#065F46', fontSize: '16px', marginTop: '8px' }}>
-            Our team will contact you shortly to confirm the visit details.
-          </p>
-          <Link to="/" style={{ 
-            display: 'inline-block', 
-            marginTop: '20px',
-            background: '#065F46',
-            color: '#fff',
-            padding: '12px 28px',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600'
-          }}>
-            ← Back to Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
+    try {
+      // Prepare data for backend
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        preferredSector: project.loc.split(',')[0] || 'Noida',
+        message: `Site visit request for ${project.title}\nPreferred Date: ${formData.date}\nPreferred Time: ${formData.time}\nNumber of People: ${formData.people || 1}\nAdditional Info: ${formData.message || ''}`,
+        enquiryType: 'site-visit',
+        property: project.id, // Optional: if your model supports it
+      };
+
+      const response = await fetch(`${API_URL}/enquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({
+          type: 'success',
+          message: '✅ Your site visit request has been sent! We will confirm within 24 hours.',
+        });
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      } else {
+        setStatus({
+          type: 'error',
+          message: data.message || 'Something went wrong. Please try again.',
+        });
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+      setStatus({
+        type: 'error',
+        message: '⚠️ Cannot connect to server. Please try again later.',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={{ padding: '60px 2rem', maxWidth: '800px', margin: '0 auto' }}>
@@ -86,17 +96,17 @@ const ScheduleVisit = () => {
         ← Back to Home
       </Link>
 
-      <div style={{ 
-        background: 'var(--bg)', 
-        borderRadius: '20px', 
+      <div style={{
+        background: 'var(--bg)',
+        borderRadius: '20px',
         padding: '40px',
         border: '1px solid var(--border)',
         boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
       }}>
-        <h1 style={{ 
-          fontFamily: "'Playfair Display', serif", 
-          fontSize: '32px', 
-          marginBottom: '8px' 
+        <h1 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '32px',
+          marginBottom: '8px'
         }}>
           Schedule a Site Visit
         </h1>
@@ -104,25 +114,35 @@ const ScheduleVisit = () => {
           Book a visit for <strong>{project.title}</strong> at {project.loc}
         </p>
 
-        <div style={{ 
-          background: 'var(--bg1)', 
-          padding: '16px', 
-          borderRadius: '12px', 
-          marginBottom: '24px' 
+        {/* Status messages */}
+        {status.message && (
+          <div style={{
+            padding: '12px 16px',
+            borderRadius: '8px',
+            marginBottom: '16px',
+            background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
+            color: status.type === 'success' ? '#065F46' : '#96281B',
+            fontWeight: '500',
+          }}>
+            {status.message}
+          </div>
+        )}
+
+        {/* Project summary */}
+        <div style={{
+          background: 'var(--bg1)',
+          padding: '16px',
+          borderRadius: '12px',
+          marginBottom: '24px'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-            <div>
-              <strong>Builder:</strong> {project.builder}
-            </div>
-            <div>
-              <strong>Price:</strong> {project.price}
-            </div>
-            <div>
-              <strong>Status:</strong> {project.status}
-            </div>
+            <div><strong>Builder:</strong> {project.builder}</div>
+            <div><strong>Price:</strong> {project.price}</div>
+            <div><strong>Status:</strong> {project.status}</div>
           </div>
         </div>
 
+        {/* Form */}
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div>
@@ -135,15 +155,9 @@ const ScheduleVisit = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none' }}
                 placeholder="Enter your full name"
+                disabled={loading}
               />
             </div>
             <div>
@@ -156,15 +170,9 @@ const ScheduleVisit = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none' }}
                 placeholder="your@email.com"
+                disabled={loading}
               />
             </div>
             <div>
@@ -177,15 +185,9 @@ const ScheduleVisit = () => {
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none' }}
                 placeholder="+91 98765 43210"
+                disabled={loading}
               />
             </div>
             <div>
@@ -198,14 +200,8 @@ const ScheduleVisit = () => {
                 required
                 value={formData.date}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none' }}
+                disabled={loading}
               />
             </div>
             <div>
@@ -216,15 +212,8 @@ const ScheduleVisit = () => {
                 name="time"
                 value={formData.time}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none',
-                  background: '#fff'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none', background: '#fff' }}
+                disabled={loading}
               >
                 <option value="">Select time slot</option>
                 <option value="9:00 AM">9:00 AM – 10:00 AM</option>
@@ -246,17 +235,11 @@ const ScheduleVisit = () => {
                 name="people"
                 min="1"
                 max="10"
-                value={formData.people || ''}
+                value={formData.people}
                 onChange={handleChange}
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  outline: 'none'
-                }}
+                style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none' }}
                 placeholder="e.g., 2"
+                disabled={loading}
               />
             </div>
           </div>
@@ -270,27 +253,23 @@ const ScheduleVisit = () => {
               value={formData.message}
               onChange={handleChange}
               rows="4"
-              style={{
-                width: '100%',
-                padding: '12px 16px',
-                border: '1px solid var(--border)',
-                borderRadius: '8px',
-                fontSize: '14px',
-                outline: 'none',
-                resize: 'vertical',
-                fontFamily: 'Inter, sans-serif'
-              }}
+              style={{ width: '100%', padding: '12px 16px', border: '1px solid var(--border)', borderRadius: '8px', fontSize: '14px', outline: 'none', resize: 'vertical', fontFamily: 'Inter, sans-serif' }}
               placeholder="Any special requests or additional information..."
+              disabled={loading}
             />
           </div>
 
           <div style={{ marginTop: '24px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <button type="submit" className="btn-red" style={{ padding: '14px 40px' }}>
-              <i className="ti ti-calendar-event"></i> Confirm Site Visit
+            <button type="submit" className="btn-red" style={{ padding: '14px 40px' }} disabled={loading}>
+              {loading ? 'Submitting...' : (
+                <>
+                  <i className="ti ti-calendar-event"></i> Confirm Site Visit
+                </>
+              )}
             </button>
-            <Link to={`/project/${projectIndex}`} style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
+            <Link to={`/project/${projectIndex}`} style={{
+              display: 'inline-flex',
+              alignItems: 'center',
               gap: '8px',
               padding: '14px 28px',
               border: '1px solid var(--border-s)',

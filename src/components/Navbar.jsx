@@ -23,11 +23,11 @@ const Navbar = ({ scrollTo }) => {
     <nav>
       <div className="nav-logo">
         <Link to="/">
-          <img 
-          src="/primecasa.jpg" 
-          alt="The Prime Casa" 
-          style={{ height: '90px', width: 'auto' }}
-        />
+          <img
+            src="/primecasa.jpg"
+            alt="The Prime Casa"
+            style={{ height: '90px', width: 'auto' }}
+          />
         </Link>
       </div>
       <div className="nav-links">
@@ -59,9 +59,9 @@ const Navbar = ({ scrollTo }) => {
         >
           <i className="ti ti-brand-whatsapp"></i> WhatsApp
         </a>
-        <button className="nav-cta" onClick={() => handleNavClick('contact-cta')}>
+        <Link to="/schedule" className="nav-cta">
           Book Site Visit
-        </button>
+        </Link>
       </div>
     </nav>
   );
