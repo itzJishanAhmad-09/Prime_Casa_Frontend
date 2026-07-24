@@ -73,7 +73,7 @@ const ProjectDetail = () => {
             <img 
               src={project.emoji} 
               alt={project.title}
-              style={{ width: '100%', height: '250px', objectFit: 'cover', borderRadius: '16px', marginBottom: '20px' }}
+              style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', marginBottom: '20px' }}
             />
           ) : (
             <div style={{ fontSize: '56px', marginBottom: '12px' }}>{project.emoji || '🏠'}</div>
