@@ -1,79 +1,6 @@
 // src/components/ToolkitModal.jsx
 import React, { useState } from 'react';
 
-const AIAdvisor = () => {
-  const [question, setQuestion] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleAsk = async () => {
-    if (!question.trim()) return;
-    setMessages(prev => [...prev, { role: 'user', content: question }]);
-    setLoading(true);
-    try {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Thanks for your question. Please contact our team on WhatsApp for real estate advice.' 
-      }]);
-    } catch (error) {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Unable to fetch response. Please contact our team on WhatsApp.' 
-      }]);
-    }
-    setLoading(false);
-    setQuestion('');
-  };
-
-  return (
-    <div>
-      <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'8px'}}>AI Property Advisor</h3>
-      <p style={{fontSize:'13px', color:'var(--txt2)', marginBottom:'16px'}}>
-        Ask anything about Noida real estate, investments, RERA, or property selection.
-      </p>
-      <div style={{height:'180px', overflowY:'auto', background:'var(--bg1)', borderRadius:'10px', padding:'12px', marginBottom:'12px', fontSize:'13px', lineHeight:'1.7'}}>
-        {messages.map((msg, idx) => (
-          <div key={idx} style={{
-            textAlign: msg.role === 'user' ? 'right' : 'left',
-            marginBottom: '8px'
-          }}>
-            <span style={{
-              background: msg.role === 'user' ? 'var(--red)' : 'var(--bg)',
-              color: msg.role === 'user' ? '#fff' : 'var(--txt)',
-              padding: msg.role === 'user' ? '6px 12px' : '8px 12px',
-              borderRadius: msg.role === 'user' ? '10px 10px 2px 10px' : '2px 10px 10px 10px',
-              display: 'inline-block',
-              border: msg.role === 'assistant' ? '1px solid var(--border)' : 'none',
-              lineHeight: '1.5',
-              maxWidth: '80%'
-            }}>
-              {msg.content}
-            </span>
-          </div>
-        ))}
-        {loading && <div style={{color:'var(--txt3)', fontStyle:'italic'}}>Thinking…</div>}
-      </div>
-      <div style={{display:'flex', gap:'8px'}}>
-        <input 
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="e.g. Best sector to invest in 2026?" 
-          style={{flex:1, border:'1px solid var(--border)', borderRadius:'8px', padding:'10px 14px', fontSize:'14px', outline:'none'}}
-          onKeyPress={(e) => e.key === 'Enter' && handleAsk()}
-          disabled={loading}
-        />
-        <button 
-          onClick={handleAsk} 
-          style={{background:'var(--red)', color:'#fff', border:'none', borderRadius:'8px', padding:'10px 18px', fontSize:'13px', fontWeight:'600', cursor:'pointer'}}
-          disabled={loading}
-        >
-          {loading ? '…' : 'Ask'}
-        </button>
-      </div>
-    </div>
-  );
-};
-
 const ROICalculator = () => {
   const [investment, setInvestment] = React.useState('5000000');
   const [appreciation, setAppreciation] = React.useState('8');
@@ -153,7 +80,19 @@ const EMIPlanner = () => {
   );
 };
 
-// ✅ NEW: Property Valuation Component
+const NRIComponent = () => (
+  <div>
+    <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3>
+    <p style={{fontSize:'13px', lineHeight:'1.6'}}>
+      Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. 
+      Contact our NRI Investment Desk for detailed consultation.
+    </p>
+    <p style={{marginTop:'12px', fontSize:'13px'}}>
+      📞 <strong>WhatsApp +91 8130504183</strong> for NRI support
+    </p>
+  </div>
+);
+
 const Valuation = () => {
   const [price, setPrice] = React.useState('10000000');
   const [rate, setRate] = React.useState('8');
@@ -236,11 +175,12 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         >
           ×
         </button>
+
         {content === 'roi' && <ROICalculator />}
         {content === 'emi' && <EMIPlanner />}
-        {content === 'iq' && <AIAdvisor />}
-        {content === 'nri' && <div><h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'12px'}}>NRI Realty Edge</h3><p style={{fontSize:'13px', lineHeight:'1.6'}}>Special guidance for NRI investors including FEMA regulations, tax implications, and property laws. Contact our NRI Investment Desk for detailed consultation.</p><p style={{marginTop:'12px', fontSize:'13px'}}>📞 <strong>WhatsApp +91 8130504183</strong> for NRI support</p></div>}
+        {content === 'nri' && <NRIComponent />}
         {content === 'valuation' && <Valuation />}
+        {/* ✅ 'iq' case removed */}
       </div>
     </div>
   );

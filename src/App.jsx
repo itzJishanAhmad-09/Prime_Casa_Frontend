@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
-import ChatBot from './components/ChatBot';   // ✅ your new chat component
+ 
 
 // Pages
 import Home from './pages/Home';
@@ -79,7 +79,6 @@ function App() {
 
       <Footer />
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
-      <ChatBot />   {/* ✅ Floating chat button will appear on every page */}
     </>
   );
 }
