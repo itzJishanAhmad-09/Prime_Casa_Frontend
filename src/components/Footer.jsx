@@ -36,7 +36,7 @@ const Footer = () => {
             <a className="social-btn" href="https://www.youtube.com/@theprimecasa" target="_blank" rel="noopener noreferrer">
               <i className="ti ti-brand-youtube"></i>
             </a>
-            <a className="social-btn" href="https://www.linkedin.com/company/theprimecasa" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
               <i className="ti ti-brand-linkedin"></i>
             </a>
             <a className="social-btn" href="https://wa.me/918130504183" target="_blank" rel="noopener noreferrer">
