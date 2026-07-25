@@ -1,22 +1,21 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-// Components
+// Components (these are small – keep as normal imports)
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ToolkitModal from './components/ToolkitModal';
- 
 
-// Pages
-import Home from './pages/Home';
-import ProjectDetail from './pages/ProjectDetail';
-import SectorDetail from './pages/SectorDetail';
-import BlogDetail from './pages/BlogDetail.jsx';
-import ScheduleVisit from './pages/ScheduleVisit';
-import ScheduleVisitGeneric from './pages/ScheduleVisitGeneric';  
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsPage from './pages/TermsPage';
+// Lazy‑load pages (they are larger and not always needed immediately)
+const Home = lazy(() => import('./pages/Home'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const SectorDetail = lazy(() => import('./pages/SectorDetail'));
+const BlogDetail = lazy(() => import('./pages/BlogDetail'));
+const ScheduleVisit = lazy(() => import('./pages/ScheduleVisit'));
+const ScheduleVisitGeneric = lazy(() => import('./pages/ScheduleVisitGeneric'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
 
 // Data
 import { projects } from './data/projects';
@@ -53,29 +52,32 @@ function App() {
     <>
       <Navbar scrollTo={scrollTo} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              projects={projects}
-              sectors={sectors}
-              marketData={marketData}
-              news={news}
-              testimonials={testimonials}
-              openModal={openModal}
-              scrollTo={scrollTo}
-            />
-          }
-        />
-        <Route path="/project/:id" element={<ProjectDetail />} />
-        <Route path="/sector/:name" element={<SectorDetail />} />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
-        <Route path="/schedule/:id" element={<ScheduleVisit />} />
-        <Route path="/schedule" element={<ScheduleVisitGeneric />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsPage />} />
-      </Routes>
+      {/* Suspense wraps all routes – shows a fallback while loading */}
+      <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                projects={projects}
+                sectors={sectors}
+                marketData={marketData}
+                news={news}
+                testimonials={testimonials}
+                openModal={openModal}
+                scrollTo={scrollTo}
+              />
+            }
+          />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/sector/:name" element={<SectorDetail />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/schedule/:id" element={<ScheduleVisit />} />
+          <Route path="/schedule" element={<ScheduleVisitGeneric />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsPage />} />
+        </Routes>
+      </Suspense>
 
       <Footer />
       <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
