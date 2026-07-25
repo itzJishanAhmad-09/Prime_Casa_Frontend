@@ -87,7 +87,7 @@ const Footer = () => {
             <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> hr@theprimecasa.in
           </a>
           <a href="#" onClick={() => scrollTo('contact')}>
-            <i className="ti ti-map-pin" style={{ fontSize: '13px' }}></i> Noida, Uttar Pradesh
+            <i className="ti ti-map-pin" style={{ fontSize: '13px' }}></i> Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304
           </a>
           <a>Tue–Sun · 11 AM – 7 PM</a>
         </div>
