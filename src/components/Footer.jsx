@@ -73,7 +73,6 @@ const Footer = () => {
           <a onClick={() => openTool('roi')} style={{ cursor: 'pointer' }}>ROI Calculator</a>
           <a onClick={() => openTool('emi')} style={{ cursor: 'pointer' }}>EMI Planner</a>
           <a onClick={() => openTool('nri')} style={{ cursor: 'pointer' }}>NRI Realty Edge</a>
-          <a onClick={() => openTool('iq')} style={{ cursor: 'pointer' }}>AI Property Advisor</a>
           <a onClick={() => openTool('valuation')} style={{ cursor: 'pointer' }}>Property Valuation</a>
         </div>
 
