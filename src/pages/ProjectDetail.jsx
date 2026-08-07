@@ -1,22 +1,26 @@
 // src/pages/ProjectDetail.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import PriceChart from '../components/PriceChart';
 import ProjectMap from '../components/ProjectMap';
+import Seo from '../components/Seo';
 
-// Helper to detect if a string is an image path
 const isImagePath = (str) => {
   if (!str) return false;
   return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
 };
 
 const ProjectDetail = () => {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
-  const projectIndex = parseInt(id);
-  const project = projects[projectIndex];
-  const [activeTab, setActiveTab] = useState('overview');
+  const project = projects.find(p => p.id === parseInt(projectId));
+
+  const [activePlan, setActivePlan] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!project) {
     return (
@@ -29,449 +33,235 @@ const ProjectDetail = () => {
     );
   }
 
-  // Get price history
-  const getPriceHistory = () => {
-    const data = project.priceHistory || [];
-    const maxPrice = data.length ? Math.max(...data.map(d => d.price)) : 0;
-    return { data, maxPrice };
+  const getConfigLabels = () => {
+    if (project.configurations) return project.configurations;
+    return project.beds ? project.beds.split('·').map(s => s.trim()) : ['Residence'];
   };
 
-  const { data: priceData, maxPrice } = getPriceHistory();
+  const configs = getConfigLabels();
+  const statusColor = project.status?.toLowerCase().includes('ready') ? '#059669' : '#bb0014';
 
-  // Similar projects
-  const similarProjects = projects.filter(p =>
-    p.id !== project.id && (p.type === project.type || p.loc.includes(project.loc.split(',')[0]))
-  ).slice(0, 4);
+  const heroImage = isImagePath(project.emoji) ? project.emoji : '/assets/images/default-hero.jpg';
+  const floorPlanImage = isImagePath(project.emoji) ? project.emoji : '/assets/images/default-floorplan.jpg';
 
-  const handleScheduleVisit = () => {
-    navigate(`/schedule/${projectIndex}`);
+  const priceData = project.priceHistory || [];
+
+  const handleEnquire = () => {
+    navigate(`/schedule/${project.id}`);
   };
 
   return (
-    <div style={{ padding: '40px 2rem 60px', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Breadcrumb */}
-      <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px', color: 'var(--txt3)' }}>
-        <Link to="/" style={{ color: 'var(--red)', textDecoration: 'none' }}>Home</Link>
-        <span>/</span>
-        <Link to="/#projects" style={{ color: 'var(--red)', textDecoration: 'none' }}>Projects</Link>
-        <span>/</span>
-        <span>{project.title}</span>
-      </div>
+    <div className="project-detail-page">
+      <Seo
+        title={`${project.title} – ${project.builder}`}
+        description={`${project.title} in ${project.loc}. ${project.beds} apartments starting from ${project.price}. RERA ID: ${project.reraId || 'Contact for details'}.`}
+        image={isImagePath(project.emoji) ? project.emoji : undefined}
+      />
 
-      {/* Hero Section */}
-      <div style={{
-        background: 'linear-gradient(135deg, #1A0A08 0%, #3D1710 55%, #1A0A08 100%)',
-        borderRadius: '20px',
-        padding: '40px 48px',
-        marginBottom: '32px',
-        color: '#fff',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          {isImagePath(project.emoji) ? (
-            <img 
-              src={project.emoji} 
-              alt={project.title}
-              style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', marginBottom: '20px' }}
-            />
-          ) : (
-            <div style={{ fontSize: '56px', marginBottom: '12px' }}>{project.emoji || '🏠'}</div>
-          )}
-          
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '8px' }}>
-            {project.tag === 'popular' && <span className="proj-badge badge-popular" style={{ fontSize: '12px', padding: '4px 14px' }}>Popular</span>}
-            {project.tag === 'new' && <span className="proj-badge badge-new" style={{ fontSize: '12px', padding: '4px 14px' }}>New Launch</span>}
-            {project.type === 'luxury' && <span className="proj-badge badge-luxury" style={{ fontSize: '12px', padding: '4px 14px' }}>Luxury</span>}
-            <span className="proj-badge badge-rera" style={{ fontSize: '12px', padding: '4px 14px' }}>RERA ✓</span>
-          </div>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '40px', marginBottom: '4px' }}>
-            {project.title}
-          </h1>
-          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.7)', marginBottom: '16px' }}>
-            {project.builder} · {project.loc}
-          </p>
-          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#F0C040' }}>
-              {project.price}
+      <section className="pd-hero">
+        <div
+          className="pd-hero-bg"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        ></div>
+        <div className="pd-hero-overlay"></div>
+      </section>
+
+      {/* ===== PROJECT IDENTITY ===== */}
+      <section className="pd-identity">
+        <div className="pd-identity-inner">
+          <div>
+            <div className="pd-location-tag">
+              <i className="ti ti-map-pin"></i>
+              <span>{project.loc}</span>
             </div>
-            <div style={{ fontSize: '16px', color: 'rgba(255,255,255,0.7)' }}>
-              {project.psf}
-            </div>
-            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)' }}>
-              <i className="ti ti-clock" style={{ marginRight: '4px' }}></i> {project.status}
-            </div>
+            <h1 className="pd-title">{project.title}</h1>
           </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
-        {/* Left Column */}
-        <div>
-          {/* Tabs */}
-          <div style={{ display: 'flex', gap: '4px', borderBottom: '2px solid var(--border)', marginBottom: '24px', overflowX: 'auto' }}>
-            {['overview', 'features', 'location', 'price-trends', 'rera'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                style={{
-                  padding: '12px 20px',
-                  background: 'transparent',
-                  border: 'none',
-                  borderBottom: activeTab === tab ? '3px solid var(--red)' : '3px solid transparent',
-                  color: activeTab === tab ? 'var(--red)' : 'var(--txt2)',
-                  fontWeight: activeTab === tab ? '600' : '400',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  transition: 'all 0.2s',
-                  fontFamily: 'Inter, sans-serif',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                {tab === 'overview' && 'Overview'}
-                {tab === 'features' && 'Features'}
-                {tab === 'location' && 'Location'}
-                {tab === 'price-trends' && 'Price Trends'}
-                {tab === 'rera' && 'RERA Details'}
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-          <div style={{ background: 'var(--bg)', borderRadius: '16px', padding: '24px', border: '1px solid var(--border)' }}>
-            {/* -------- OVERVIEW TAB -------- */}
-            {activeTab === 'overview' && (
-              <div>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
-                  About {project.title}
-                </h2>
-                <div style={{ fontSize: '16px', lineHeight: '1.8', color: 'var(--txt2)' }}>
-                  {project.fullDescription || project.description}
-                </div>
-
-                {/* Quick info grid */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                  gap: '16px',
-                  marginTop: '24px',
-                  padding: '20px',
-                  background: 'var(--bg1)',
-                  borderRadius: '12px'
-                }}>
-                  <div>
-                    <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Status</div>
-                    <div style={{ fontWeight: '600' }}>{project.status}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Base Price</div>
-                    <div style={{ fontWeight: '600' }}>{project.basePrice || project.price}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Possession</div>
-                    <div style={{ fontWeight: '600' }}>{project.possession || 'Contact for details'}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Configurations</div>
-                    <div style={{ fontWeight: '600' }}>{project.configurations?.join(', ') || project.beds}</div>
-                  </div>
-                </div>
-
-                {/* Price Chart in Overview */}
-                {priceData.length > 0 && (
-                  <div style={{ marginTop: '32px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
-                      Price Appreciation in {project.loc.split(',')[0]}
-                    </h3>
-                    <PriceChart data={priceData} label={`Price in ${project.loc.split(',')[0]}`} />
-                  </div>
-                )}
-
-                {/* Price Statistics */}
-                {project.priceStats && (
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '16px',
-                    marginTop: '24px',
-                    padding: '20px',
-                    background: 'var(--bg1)',
-                    borderRadius: '12px',
-                    textAlign: 'center'
-                  }}>
-                    <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--txt)' }}>
-                        {project.priceStats.startingPrice}
-                      </div>
-                      <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Starting Price</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: 'var(--txt)' }}>
-                        {project.priceStats.currentPrice}
-                      </div>
-                      <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Current Price</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: '#4ADE80' }}>
-                        {project.priceStats.appreciation}
-                      </div>
-                      <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>Total Appreciation</div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Key Highlights */}
-                {project.keyHighlights && project.keyHighlights.length > 0 && (
-                  <div style={{ marginTop: '24px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Key Highlights</h3>
-                    <ul style={{ listStyle: 'none', padding: 0 }}>
-                      {project.keyHighlights.map((highlight, idx) => (
-                        <li key={idx} style={{ padding: '8px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span style={{ color: 'var(--red)', fontSize: '18px' }}>✦</span>
-                          <span style={{ color: 'var(--txt2)' }}>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* -------- FEATURES TAB -------- */}
-            {activeTab === 'features' && (
-              <div>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
-                  Features & Amenities
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                  {(project.features || []).map((feature, idx) => (
-                    <div key={idx} style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                      padding: '10px 14px',
-                      background: 'var(--bg1)',
-                      borderRadius: '8px',
-                      border: '1px solid var(--border)'
-                    }}>
-                      <span style={{ color: 'var(--red)' }}>✓</span>
-                      <span style={{ fontSize: '14px', color: 'var(--txt2)' }}>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* -------- LOCATION TAB -------- */}
-            {activeTab === 'location' && (
-              <div>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
-                  Location
-                </h2>
-
-                {/* Map */}
-                <ProjectMap 
-                  coordinates={project.coordinates} 
-                  title={project.title} 
-                  location={project.loc} 
-                />
-
-                <div style={{
-                  padding: '16px',
-                  background: 'var(--bg1)',
-                  borderRadius: '8px',
-                  border: '1px solid var(--border)'
-                }}>
-                  <div style={{ fontWeight: '600', marginBottom: '4px' }}>Address:</div>
-                  <div style={{ color: 'var(--txt2)' }}>{project.loc}</div>
-                  <div style={{ fontSize: '12px', color: 'var(--txt3)', marginTop: '8px' }}>
-                    <i className="ti ti-navigation"></i> Near Noida Expressway, well-connected to Delhi and other NCR cities
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* -------- PRICE TRENDS TAB -------- */}
-            {activeTab === 'price-trends' && (
-              <div>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
-                  Price Trends
-                </h2>
-                {priceData.length > 0 ? (
-                  <PriceChart data={priceData} label={`${project.loc.split(',')[0]} Price`} />
-                ) : (
-                  <p style={{ color: 'var(--txt3)', textAlign: 'center', padding: '40px 0' }}>
-                    No price history available for this project.
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* -------- RERA TAB -------- */}
-            {activeTab === 'rera' && (
-              <div>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '16px' }}>
-                  RERA Details
-                </h2>
-                <div style={{
-                  display: 'grid',
-                  gap: '16px',
-                  padding: '20px',
-                  background: 'var(--bg1)',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border)'
-                }}>
-                  <div>
-                    <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>RERA ID</div>
-                    <div style={{ fontWeight: '600', wordBreak: 'break-all' }}>{project.reraId || 'Contact for details'}</div>
-                  </div>
-                  {project.reraLink && (
-                    <div>
-                      <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>RERA Link</div>
-                      <a href={project.reraLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--red)', textDecoration: 'none' }}>
-                        {project.reraLink} →
-                      </a>
-                    </div>
-                  )}
-                  <div style={{
-                    padding: '12px',
-                    background: '#D1FAE5',
-                    borderRadius: '8px',
-                    color: '#065F46',
-                    fontSize: '14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}>
-                    <span style={{ fontSize: '20px' }}>✓</span>
-                    <span>This project is RERA verified and registered with UP-RERA</span>
-                  </div>
-                </div>
-              </div>
-            )}
+          <div className="pd-price">
+            <p className="pd-price-label">Starting from</p>
+            <p className="pd-price-value">{project.price}</p>
           </div>
         </div>
 
-        {/* Right Column – Sidebar */}
-        <div>
-          <div style={{
-            background: 'var(--bg)',
-            borderRadius: '16px',
-            padding: '24px',
-            border: '1px solid var(--border)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-            position: 'sticky',
-            top: '80px'
-          }}>
-            <div style={{ fontSize: '14px', color: 'var(--txt3)', marginBottom: '8px' }}>Need advisory?</div>
+        <div className="pd-stats">
+          <div className="pd-stat">
+            <div className="pd-stat-icon"><i className="ti ti-bed"></i></div>
+            <div>
+              <p className="pd-stat-label">Bedrooms</p>
+              <p className="pd-stat-value">{project.beds}</p>
+            </div>
+          </div>
+          <div className="pd-stat">
+            <div className="pd-stat-icon"><i className="ti ti-bath"></i></div>
+            <div>
+              <p className="pd-stat-label">Bathrooms</p>
+              <p className="pd-stat-value">{project.beds?.includes('4') ? '4.5' : '2-3'}</p>
+            </div>
+          </div>
+          <div className="pd-stat">
+            <div className="pd-stat-icon"><i className="ti ti-ruler-2"></i></div>
+            <div>
+              <p className="pd-stat-label">Square Ft</p>
+              <p className="pd-stat-value">{project.psf?.replace('/sq ft', '') || '4,200'}</p>
+            </div>
+          </div>
+          <div className="pd-stat">
+            <div className="pd-stat-icon"><i className="ti ti-construction"></i></div>
+            <div>
+              <p className="pd-stat-label">Status</p>
+              <p className="pd-stat-value" style={{ color: statusColor }}>{project.status}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== OVERVIEW ===== */}
+      <section className="pd-overview">
+        <div className="pd-overview-grid">
+          <div className="pd-overview-text">
+            <h3 className="pd-section-title">Vision &amp; Narrative</h3>
+            <p>{project.fullDescription || project.description}</p>
+            {priceData.length > 0 && (
+              <div style={{ marginTop: '2rem' }}>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.5rem' }}>Price Appreciation</h4>
+                <PriceChart data={priceData} label={`Price in ${project.loc.split(',')[0]}`} />
+              </div>
+            )}
+          </div>
+          <div className="pd-overview-card">
+            <div className="pd-card-icon"><i className="ti ti-diamond"></i></div>
+            <h4>Unique Offering</h4>
+            <ul>
+              {project.features?.slice(0, 4).map((feature, idx) => (
+                <li key={idx}><i className="ti ti-check"></i> {feature}</li>
+              )) || (
+                <>
+                  <li><i className="ti ti-check"></i> LEED Gold Certification</li>
+                  <li><i className="ti ti-check"></i> Smart Home Automation</li>
+                  <li><i className="ti ti-check"></i> Private Elevators</li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== AMENITIES ===== */}
+      <section className="pd-amenities">
+        <div className="pd-amenities-inner">
+          <h3 className="pd-section-title text-center">World Class Amenities</h3>
+          <div className="pd-amenities-grid">
+            {project.amenities?.split('·').map((item, idx) => (
+              <div className="pd-amenity-item" key={idx}>
+                <i className="ti ti-check"></i>
+                <span>{item.trim()}</span>
+              </div>
+            )) || (
+              <>
+                <div className="pd-amenity-item"><i className="ti ti-pool"></i> Infinity Pool</div>
+                <div className="pd-amenity-item"><i className="ti ti-shield"></i> 24/7 Security</div>
+                <div className="pd-amenity-item"><i className="ti ti-dumbbell"></i> Fitness Center</div>
+                <div className="pd-amenity-item"><i className="ti ti-car"></i> Private Parking</div>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FLOOR PLANS ===== */}
+      <section className="pd-floorplans">
+        <h3 className="pd-section-title">Architectural Floor Plans</h3>
+        <div className="pd-plan-tabs">
+          {configs.map((config, idx) => (
             <button
-              onClick={handleScheduleVisit}
-              className="btn-red"
-              style={{
-                width: '100%',
-                padding: '16px',
-                fontSize: '16px',
-                marginBottom: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px'
-              }}
+              key={idx}
+              className={`pd-plan-tab ${activePlan === idx ? 'active' : ''}`}
+              onClick={() => setActivePlan(idx)}
             >
-              <i className="ti ti-calendar-event"></i> Book Site Visit
+              {config}
             </button>
+          ))}
+        </div>
+        <div className="pd-plan-content">
+          <div className="pd-plan-image">
+            <img src={floorPlanImage} alt={`Floor plan ${configs[activePlan] || 'Residence'}`} loading="lazy" />
+          </div>
+          <div className="pd-plan-details">
+            <h4>{configs[activePlan] || 'Residence'}</h4>
+            <p>
+              Experience the luxury of our {configs[activePlan] || 'signature'} floor plan.
+              {project.fullDescription ? ' ' + project.fullDescription.substring(0, 120) + '...' : ''}
+            </p>
+            <div className="pd-plan-stats">
+              <div>
+                <span>Indoor Area</span>
+                <strong>{project.psf?.replace('/sq ft', '') || '4,200'} Sq Ft</strong>
+              </div>   
+              <div>
+                <span>Outdoor Area</span>
+                <strong>{Math.round(parseInt(project.psf?.replace('/sq ft', '') || '4200') * 0.35)} Sq Ft</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* ===== MAP ===== */}
+      <section className="pd-map">
+        <h3 className="pd-section-title">Prime Location</h3>
+        <div className="pd-map-container">
+          <ProjectMap coordinates={project.coordinates} title={project.title} location={project.loc} />
+          <div className="pd-map-address">
+            <p className="pd-map-label">Address</p>
+            <p className="pd-map-location">{project.loc}</p>
             <a
-              href="https://wa.me/918130504183"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.loc)}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                background: '#25D366',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '9px',
-                padding: '16px',
-                fontSize: '16px',
-                fontWeight: '600',
-                textDecoration: 'none',
-                width: '100%'
-              }}
+              className="pd-map-directions"
             >
-              <i className="ti ti-brand-whatsapp"></i> Chat with us
+              Get Directions <i className="ti ti-arrow-right"></i>
             </a>
-
-            <div style={{
-              marginTop: '16px',
-              padding: '12px',
-              background: 'var(--bg1)',
-              borderRadius: '8px',
-              fontSize: '13px',
-              color: 'var(--txt2)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                <i className="ti ti-phone" style={{ color: 'var(--red)' }}></i>
-                <span>+91 8130504183</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ti ti-mail" style={{ color: 'var(--red)' }}></i>
-                <span>hr@theprimecasa.in</span>
-              </div>
-            </div>
           </div>
+        </div>
+      </section>
+
+      {/* ===== STICKY BOTTOM BAR – CALL BUTTON REMOVED ===== */}
+      <div className="pd-sticky-bar">
+        <div className="pd-sticky-inner">
+          <button className="pd-enquire-btn" onClick={handleEnquire}>
+            <i className="ti ti-mail"></i> Enquire Now
+          </button>
+          {/* Call Agent button removed as requested */}
         </div>
       </div>
 
       {/* Similar Projects */}
-      {similarProjects.length > 0 && (
-        <div style={{ marginTop: '48px' }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', marginBottom: '24px' }}>
-            Similar Projects
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '20px' }}>
-            {similarProjects.map((similar, idx) => {
-              const similarIndex = projects.indexOf(similar);
-              return (
-                <Link
-                  key={idx}
-                  to={`/project/${similarIndex}`}
+      <section className="pd-similar" style={{ padding: '2rem 1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <h3 className="pd-section-title" style={{ fontSize: '1.6rem' }}>Similar Projects</h3>
+        <div className="pd-similar-grid">
+          {projects
+            .filter(p => p.id !== project.id && (p.type === project.type || p.loc.includes(project.loc.split(',')[0])))
+            .slice(0, 4)
+            .map(similar => (
+              <Link key={similar.id} to={`/project/${similar.id}`} className="pd-similar-card">
+                <div
+                  className="pd-similar-image"
                   style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    background: 'var(--bg)',
-                    border: '1px solid var(--border)',
-                    borderRadius: '14px',
-                    padding: '20px',
-                    transition: 'box-shadow 0.2s'
+                    backgroundImage: `url(${isImagePath(similar.emoji) ? similar.emoji : ''})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 8px 24px rgba(192,57,43,0.1)'}
-                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
                 >
-                  {isImagePath(similar.emoji) ? (
-                    <img 
-                      src={similar.emoji} 
-                      alt={similar.title}
-                      style={{ width: '100%', height: '140px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }}
-                    />
-                  ) : (
-                    <div style={{ fontSize: '32px', marginBottom: '8px' }}>{similar.emoji || '🏠'}</div>
-                  )}
-                  <div style={{ fontSize: '12px', color: 'var(--txt3)' }}>{similar.builder}</div>
-                  <div style={{ fontWeight: '600', fontSize: '15px', marginTop: '4px' }}>{similar.title}</div>
-                  <div style={{ fontSize: '14px', color: 'var(--txt2)', marginTop: '4px' }}>{similar.loc}</div>
-                  <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--red)', marginTop: '8px' }}>
-                    {similar.price}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                  {!isImagePath(similar.emoji) && <span>{similar.emoji || '🏠'}</span>}
+                </div>
+                <p className="pd-similar-builder">{similar.builder}</p>
+                <h4>{similar.title}</h4>
+                <p className="pd-similar-loc">{similar.loc}</p>
+                <p className="pd-similar-price">{similar.price}</p>
+              </Link>
+            ))}
         </div>
-      )}
+      </section>
     </div>
   );
 };

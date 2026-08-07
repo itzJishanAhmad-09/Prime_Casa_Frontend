@@ -6,8 +6,11 @@ const ROICalculator = () => {
   const [appreciation, setAppreciation] = React.useState('8');
   const [years, setYears] = React.useState('5');
   
-  const roi = (investment * ((1 + appreciation/100) ** years) - investment).toFixed(0);
-  const finalValue = (investment * ((1 + appreciation/100) ** years)).toFixed(0);
+  const inv = parseFloat(investment) || 0;
+  const appr = parseFloat(appreciation) || 0;
+  const yrs = parseFloat(years) || 0;
+  const roi = (inv * ((1 + appr/100) ** yrs) - inv).toFixed(0);
+  const finalValue = (inv * ((1 + appr/100) ** yrs)).toFixed(0);
   
   return (
     <div>
@@ -41,11 +44,17 @@ const EMIPlanner = () => {
   const [rate, setRate] = React.useState('6.5');
   const [tenure, setTenure] = React.useState('20');
   
-  const monthlyRate = rate / 12 / 100;
-  const months = tenure * 12;
-  const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1)).toFixed(0);
+  const p = parseFloat(principal) || 0;
+  const r = parseFloat(rate) || 0;
+  const t = parseFloat(tenure) || 0;
+  const monthlyRate = r / 12 / 100;
+  const months = t * 12;
+  const emi = months > 0 && monthlyRate > 0
+    ? (p * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1))
+    : 0;
+  const emiRounded = emi.toFixed(0);
   const totalAmount = (emi * months).toFixed(0);
-  const totalInterest = (totalAmount - principal).toFixed(0);
+  const totalInterest = (totalAmount - p).toFixed(0);
   
   return (
     <div>
@@ -64,7 +73,7 @@ const EMIPlanner = () => {
       </div>
       <div style={{background:'var(--accent-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px'}}>
         <div style={{fontSize:'12px', color:'var(--text)'}}>Monthly EMI</div>
-        <div style={{fontSize:'18px', fontWeight:'700', color:'var(--accent)'}}>₹{parseInt(emi).toLocaleString('en-IN')}</div>
+        <div style={{fontSize:'18px', fontWeight:'700', color:'var(--accent)'}}>₹{parseInt(emiRounded).toLocaleString('en-IN')}</div>
       </div>
       <div style={{background:'var(--code-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px', fontSize:'13px'}}>
         <div style={{display:'flex', justifyContent:'space-between', marginBottom:'4px'}}>
@@ -98,9 +107,12 @@ const Valuation = () => {
   const [rate, setRate] = React.useState('8');
   const [years, setYears] = React.useState('5');
 
-  const futureValue = (price * ((1 + rate/100) ** years)).toFixed(0);
-  const gain = (futureValue - price).toFixed(0);
-  const gainPercent = ((gain / price) * 100).toFixed(2);
+  const p = parseFloat(price) || 0;
+  const r = parseFloat(rate) || 0;
+  const y = parseFloat(years) || 0;
+  const futureValue = (p * ((1 + r/100) ** y)).toFixed(0);
+  const gain = (futureValue - p).toFixed(0);
+  const gainPercent = p !== 0 ? ((gain / p) * 100).toFixed(2) : 'N/A';
 
   return (
     <div>
@@ -157,8 +169,6 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         padding: '28px',
         maxWidth: '500px',
         width: '90%',
-        maxHeight: '80vh',
-        overflowY: 'auto',
         position: 'relative'
       }}>
         <button
@@ -180,7 +190,6 @@ const ToolkitModal = ({ isOpen, onClose, content }) => {
         {content === 'emi' && <EMIPlanner />}
         {content === 'nri' && <NRIComponent />}
         {content === 'valuation' && <Valuation />}
-        {/* ✅ 'iq' case removed */}
       </div>
     </div>
   );

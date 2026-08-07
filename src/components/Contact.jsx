@@ -11,23 +11,43 @@ const Contact = () => {
   });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
+  const [phoneError, setPhoneError] = useState(''); //  new state for phone validation
 
-  // Use environment variable or fallback to localhost
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    //  Phone validation: only digits, max 10 characters
+    if (name === 'phone') {
+      const digitsOnly = value.replace(/\D/g, ''); // remove non-digits
+      if (digitsOnly.length > 10) return; // block more than 10 digits
+      setFormData({ ...formData, [name]: digitsOnly });
+
+      // Validate length
+      if (digitsOnly.length === 10) {
+        setPhoneError('');
+      } else {
+        setPhoneError('Phone number must be exactly 10 digits.');
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const submitContact = async (e) => {
     e.preventDefault();
+
+    //  Final validation before sending
+    if (formData.phone.length !== 10) {
+      setPhoneError('Phone number must be exactly 10 digits.');
+      return;
+    }
+
     setLoading(true);
     setStatus({ type: '', message: '' });
 
     try {
-      // Use 127.0.0.1 instead of localhost if needed (bypass DNS issues)
-      // const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api';
-      
       const response = await fetch(`${API_URL}/enquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -46,9 +66,10 @@ const Contact = () => {
       if (response.ok) {
         setStatus({
           type: 'success',
-          message: '✅ Your enquiry has been sent! We will get back to you within 24 hours.',
+          message: ' Your enquiry has been sent! We will get back to you within 24 hours.',
         });
         setFormData({ name: '', email: '', phone: '', sector: '', message: '' });
+        setPhoneError('');
       } else {
         setStatus({
           type: 'error',
@@ -59,7 +80,7 @@ const Contact = () => {
       console.error('Failed to connect to server:', error);
       setStatus({
         type: 'error',
-        message: '⚠️ Cannot connect to server. Please make sure the backend is running (port 5000) or try again later.',
+        message: 'Cannot connect to server. Please try again later.',
       });
     } finally {
       setLoading(false);
@@ -77,14 +98,16 @@ const Contact = () => {
       <div className="contact-grid">
         <div className="contact-form">
           {status.message && (
-            <div style={{
-              padding: '12px 16px',
-              borderRadius: '8px',
-              marginBottom: '16px',
-              background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
-              color: status.type === 'success' ? '#065F46' : '#96281B',
-              fontWeight: '500',
-            }}>
+            <div
+              style={{
+                padding: '12px 16px',
+                borderRadius: '8px',
+                marginBottom: '16px',
+                background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
+                color: status.type === 'success' ? '#065F46' : '#96281B',
+                fontWeight: '500',
+              }}
+            >
               {status.message}
             </div>
           )}
@@ -109,11 +132,19 @@ const Contact = () => {
             <input
               type="tel"
               name="phone"
-              placeholder="Phone Number"
+              placeholder="Phone Number (10 digits)"
               value={formData.phone}
               onChange={handleChange}
               required
+              maxLength="10"
+              pattern="\d{10}"
+              title="Please enter exactly 10 digits"
             />
+            {phoneError && (
+              <div style={{ color: '#C0392B', fontSize: '14px', marginTop: '-6px', marginBottom: '8px' }}>
+                {phoneError}
+              </div>
+            )}
             <input
               type="text"
               name="sector"
@@ -128,7 +159,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
             />
-            <button type="submit" className="btn-red" disabled={loading}>
+            <button type="submit" className="btn-red" disabled={loading || !!phoneError}>
               {loading ? 'Sending...' : 'Send Enquiry →'}
             </button>
           </form>
@@ -136,7 +167,7 @@ const Contact = () => {
 
         <div className="contact-info">
           <div className="info-item"><i className="ti ti-phone"></i> +91 8130504183</div>
-          <div className="info-item"><i className="ti ti-mail"></i> hr@theprimecasa.in</div>
+          <div className="info-item"><i className="ti ti-mail"></i> crm@theprimecasa.in</div>
           <div className="info-item"><i className="ti ti-map-pin"></i> Noida, Uttar Pradesh</div>
           <div className="info-item"><i className="ti ti-clock"></i> Tue–Sun · 11 AM – 7 PM</div>
           <div style={{ marginTop: '16px' }}>

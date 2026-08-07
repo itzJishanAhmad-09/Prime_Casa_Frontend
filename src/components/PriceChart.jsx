@@ -34,7 +34,9 @@ const PriceChart = ({ data, label = 'Price (₹/sq ft)' }) => {
 
   const startPrice = prices[0];
   const currentPrice = prices[prices.length - 1];
-  const appreciation = ((currentPrice - startPrice) / startPrice * 100).toFixed(2);
+  const appreciation = startPrice !== 0
+    ? ((currentPrice - startPrice) / startPrice * 100).toFixed(2)
+    : 'N/A';
 
   const chartData = {
     labels: years,
@@ -42,17 +44,17 @@ const PriceChart = ({ data, label = 'Price (₹/sq ft)' }) => {
       {
         label: label,
         data: prices,
-        borderColor: '#059669',                // GREEN line
+        borderColor: '#059669',
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-          gradient.addColorStop(0, 'rgba(5, 150, 105, 0.25)');   // green gradient
+          gradient.addColorStop(0, 'rgba(5, 150, 105, 0.25)');
           gradient.addColorStop(1, 'rgba(5, 150, 105, 0.0)');
           return gradient;
         },
         fill: true,
         tension: 0.4,
-        pointBackgroundColor: '#059669',       // green points
+        pointBackgroundColor: '#059669',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointRadius: 5,
@@ -115,26 +117,25 @@ const PriceChart = ({ data, label = 'Price (₹/sq ft)' }) => {
   };
 
   return (
-    <div style={{ 
-      background: '#fff', 
-      borderRadius: '16px', 
+    <div style={{
+      background: '#fff',
+      borderRadius: '16px',
       padding: '24px 20px 20px',
       border: '1px solid var(--border)',
       boxShadow: '0 2px 12px rgba(0,0,0,0.04)'
     }}>
-      {/* Summary Stats */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: '16px',
         flexWrap: 'wrap',
         gap: '12px'
       }}>
-        <h3 style={{ 
-          fontFamily: "'Playfair Display', serif", 
-          fontSize: '18px', 
-          margin: 0 
+        <h3 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: '18px',
+          margin: 0
         }}>
           Price Appreciation
         </h3>
@@ -157,15 +158,13 @@ const PriceChart = ({ data, label = 'Price (₹/sq ft)' }) => {
         </div>
       </div>
 
-      {/* Chart */}
       <div style={{ height: '280px' }}>
         <Line data={chartData} options={options} />
       </div>
 
-      {/* Year labels */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
         marginTop: '12px',
         fontSize: '11px',
         color: 'var(--txt3)',

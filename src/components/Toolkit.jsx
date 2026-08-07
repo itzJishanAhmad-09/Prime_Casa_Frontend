@@ -13,9 +13,20 @@ const Toolkit = ({ openModal }) => (
         { key: 'roi', icon: 'ti-chart-bar', title: 'Realty ROI Calculator', desc: 'Estimate returns and forecast growth on your property investments.' },
         { key: 'emi', icon: 'ti-calculator', title: 'EMI Planner', desc: 'Calculate monthly EMIs and optimize loan tenure for better returns.' },
         { key: 'nri', icon: 'ti-world', title: 'NRI Realty Edge', desc: 'Navigate property laws, taxation & loans as an NRI investor.' },
-        { key: 'valuation', icon: 'ti-coin', title: 'Property Valuation Tool', desc: 'Estimate future property value based on annual appreciation.' },
       ].map((t, i) => (
-        <div className="toolkit-card" key={i} onClick={() => openModal(t.key)}>
+        <div
+          className="toolkit-card"
+          key={i}
+          role="button"
+          tabIndex={0}
+          onClick={() => openModal(t.key)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openModal(t.key);
+            }
+          }}
+        >
           <div className="toolkit-icon"><i className={`ti ${t.icon}`}></i></div>
           <div className="toolkit-title">{t.title}</div>
           <div className="toolkit-desc">{t.desc}</div>

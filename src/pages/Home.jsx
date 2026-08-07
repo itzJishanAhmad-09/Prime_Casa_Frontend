@@ -1,25 +1,21 @@
 // src/pages/Home.jsx
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Seo from '../components/Seo';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
-import Projects from '../components/Projects';
-import Sectors from '../components/Sectors';
-import MarketTable from '../components/MarketTable';
+import PropertiesSlider from '../components/PropertiesSlider';
 import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
 import Toolkit from '../components/Toolkit';
-import Testimonials from '../components/Testimonials';
 import Quote from '../components/Quote';
-import Insights from '../components/Insights';
+import Blog from '../components/Blog';
+import TestimonialsSlider from '../components/TestimonialsSlider';
 import WhyUs from '../components/WhyUs';
 import Contact from '../components/Contact';
-import CTA from '../components/CTA';
 
 const Home = ({
   projects,
-  sectors,
-  marketData,
   news,
   testimonials,
   openModal,
@@ -27,10 +23,8 @@ const Home = ({
 }) => {
   const location = useLocation();
 
-  // Handle navigation from detail pages (navbar clicks)
   useEffect(() => {
     if (location.state?.scrollTo) {
-      // Small delay to ensure DOM is fully rendered
       setTimeout(() => {
         scrollTo(location.state.scrollTo);
       }, 150);
@@ -39,20 +33,25 @@ const Home = ({
 
   return (
     <>
+      <Seo
+        title="Home"
+        description="Find your dream home or investment property in Noida. Zero brokerage, RERA verified projects, and expert guidance."
+      />
       <Hero />
       <Stats />
-      <Projects projects={projects} />
-      <Sectors sectors={sectors} />
-      <MarketTable marketData={marketData} />
+      <PropertiesSlider 
+        projects={projects} 
+        title="Trending Properties in Noida"
+        subtitle="Handpicked RERA-verified projects with the highest buyer interest & market confidence"
+      />
       <Services />
       <HowItWorks />
       <Toolkit openModal={openModal} />
-      <Testimonials testimonials={testimonials} />
       <Quote />
-      <Insights news={news} />
+      <Blog news={news} />
+      <TestimonialsSlider testimonials={testimonials} />
       <WhyUs />
       <Contact />
-      <CTA />
     </>
   );
 };

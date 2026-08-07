@@ -12,10 +12,41 @@ const Footer = () => {
     window.dispatchEvent(new CustomEvent('openTool', { detail: tool }));
   };
 
+  const handleKeyDown = (callback) => (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      callback();
+    }
+  };
+
+  // Helper to create a button-like element for navigation
+  const NavButton = ({ onClick, children, className }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      onKeyDown={handleKeyDown(onClick)}
+      style={{
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        fontSize: '0.75rem',
+        color: 'var(--txt2)',
+        display: 'block',
+        marginBottom: '0.3rem',
+        padding: 0,
+        textAlign: 'left',
+        width: '100%',
+        fontFamily: 'inherit',
+      }}
+      className={className}
+    >
+      {children}
+    </button>
+  );
+
   return (
     <footer>
       <div className="footer-inner">
-        {/* Brand */}
         <div className="footer-brand">
           <img
             src="/primecasa.jpg"
@@ -45,49 +76,45 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Popular Sectors */}
         <div className="footer-col">
           <h4>Popular Sectors</h4>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 150 (Ultra-Premium)</a>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 128 (Green Belt)</a>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Sector 107 (Mid-Premium)</a>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Noida Extension</a>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Greater Noida West</a>
-          <a onClick={() => scrollTo('sectors')} style={{ cursor: 'pointer' }}>Yamuna Expressway</a>
+          <NavButton onClick={() => {}}>Sector 150 (Ultra-Premium)</NavButton>
+          <NavButton onClick={() => {}}>Sector 128 (Green Belt)</NavButton>
+          <NavButton onClick={() => {}}>Sector 107 (Mid-Premium)</NavButton>
+          <NavButton onClick={() => {}}>Noida Extension</NavButton>
+          <NavButton onClick={() => {}}>Greater Noida West</NavButton>
+          <NavButton onClick={() => {}}>Yamuna Expressway</NavButton>
         </div>
 
-        {/* Services */}
         <div className="footer-col">
           <h4>Services</h4>
-          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Buy Property</a>
-          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Rent Property</a>
-          <a onClick={() => openTool('nri')} style={{ cursor: 'pointer' }}>NRI Investment</a>
-          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>Property Valuation</a>
-          <a onClick={() => scrollTo('services')} style={{ cursor: 'pointer' }}>RERA Consultation</a>
-          <a onClick={() => openTool('emi')} style={{ cursor: 'pointer' }}>Home Loans</a>
+          <NavButton onClick={() => scrollTo('services')}>Buy Property</NavButton>
+          <NavButton onClick={() => scrollTo('services')}>Rent Property</NavButton>
+          <NavButton onClick={() => openTool('nri')}>NRI Investment</NavButton>
+          <NavButton onClick={() => scrollTo('services')}>Property Valuation</NavButton>
+          <NavButton onClick={() => scrollTo('services')}>RERA Consultation</NavButton>
+          <NavButton onClick={() => openTool('emi')}>Home Loans</NavButton>
         </div>
 
-        {/* Toolkit */}
         <div className="footer-col">
           <h4>Toolkit</h4>
-          <a onClick={() => openTool('roi')} style={{ cursor: 'pointer' }}>ROI Calculator</a>
-          <a onClick={() => openTool('emi')} style={{ cursor: 'pointer' }}>EMI Planner</a>
-          <a onClick={() => openTool('nri')} style={{ cursor: 'pointer' }}>NRI Realty Edge</a>
-          <a onClick={() => openTool('valuation')} style={{ cursor: 'pointer' }}>Property Valuation</a>
+          <NavButton onClick={() => openTool('roi')}>ROI Calculator</NavButton>
+          <NavButton onClick={() => openTool('emi')}>EMI Planner</NavButton>
+          <NavButton onClick={() => openTool('nri')}>NRI Realty Edge</NavButton>
+          <NavButton onClick={() => openTool('valuation')}>Property Valuation</NavButton>
         </div>
 
-        {/* Contact */}
         <div className="footer-col">
           <h4>Contact</h4>
           <a href="tel:+918130504183">
             <i className="ti ti-phone" style={{ fontSize: '13px' }}></i> +91 8130504183
           </a>
-          <a href="mailto:hr@theprimecasa.in">
-            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> hr@theprimecasa.in
+          <a href="mailto:crm@theprimecasa.in">
+            <i className="ti ti-mail" style={{ fontSize: '13px' }}></i> crm@theprimecasa.in
           </a>
-          <a href="#" onClick={() => scrollTo('contact')}>
+          <NavButton onClick={() => scrollTo('contact')}>
             <i className="ti ti-map-pin" style={{ fontSize: '13px' }}></i> Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304
-          </a>
+          </NavButton>
           <a>Tue–Sun · 11 AM – 7 PM</a>
         </div>
       </div>
