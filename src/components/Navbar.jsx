@@ -103,27 +103,7 @@ const Navbar = ({ scrollTo }) => {
         <button onClick={handleContactClick} style={navBtnStyle}>Contact</button>
       </div>
 
-      <div className="nav-right">
-        <a
-          className="nav-wa"
-          href="https://wa.me/918130504183"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            background: '#25D366',
-            color: '#fff',
-            padding: '0.5rem 1rem',
-            fontSize: '0.8rem',
-            fontWeight: '600',
-            textDecoration: 'none',
-            borderRadius: '8px',
-          }}
-        >
-          <i className="ti ti-brand-whatsapp"></i> WhatsApp
-        </a>
+      <div className="nav-cta-container">
         <button
           onClick={handleBookVisit}
           className="nav-cta"

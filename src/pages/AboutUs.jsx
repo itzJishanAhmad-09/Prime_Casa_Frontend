@@ -51,7 +51,7 @@ const AboutUs = () => {
             <div className="about-details-images">
               <div className="about-details-img-main">
                 <img
-                  src="/assets/images/aboutus1.jpg"
+                  src="/assets/images/aboutus1.png"
                   alt="Prime Casa property"
                   loading="lazy"
                 />
@@ -123,7 +123,7 @@ const AboutUs = () => {
               {
                 name: 'ROBIN SINGH',
                 role: 'Director',
-                img: '',
+                img: '/assets/images/Robin_Singh.jpeg',
                 desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
               }
             ].map((member, idx) => (

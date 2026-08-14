@@ -11,20 +11,18 @@ const Contact = () => {
   });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
-  const [phoneError, setPhoneError] = useState(''); //  new state for phone validation
+  const [phoneError, setPhoneError] = useState('');
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    //  Phone validation: only digits, max 10 characters
     if (name === 'phone') {
-      const digitsOnly = value.replace(/\D/g, ''); // remove non-digits
-      if (digitsOnly.length > 10) return; // block more than 10 digits
+      const digitsOnly = value.replace(/\D/g, '');
+      if (digitsOnly.length > 10) return;
       setFormData({ ...formData, [name]: digitsOnly });
 
-      // Validate length
       if (digitsOnly.length === 10) {
         setPhoneError('');
       } else {
@@ -38,7 +36,6 @@ const Contact = () => {
   const submitContact = async (e) => {
     e.preventDefault();
 
-    //  Final validation before sending
     if (formData.phone.length !== 10) {
       setPhoneError('Phone number must be exactly 10 digits.');
       return;
@@ -103,9 +100,10 @@ const Contact = () => {
                 padding: '12px 16px',
                 borderRadius: '8px',
                 marginBottom: '16px',
-                background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
-                color: status.type === 'success' ? '#065F46' : '#96281B',
+                background: status.type === 'success' ? '#F9FAFB' : '#FEE2DE',
+                color: status.type === 'success' ? '#1F2937' : '#96281B',
                 fontWeight: '500',
+                border: status.type === 'success' ? '1px solid #E5E7EB' : 'none',
               }}
             >
               {status.message}

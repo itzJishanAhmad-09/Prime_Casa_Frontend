@@ -140,9 +140,10 @@ const ScheduleVisit = () => {
                   padding: '12px 16px',
                   borderRadius: '8px',
                   marginBottom: '16px',
-                  background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
-                  color: status.type === 'success' ? '#065F46' : '#96281B',
+                  background: status.type === 'success' ? '#F9FAFB' : '#FEE2DE',
+                  color: status.type === 'success' ? '#1F2937' : '#96281B',
                   fontWeight: '500',
+                  border: status.type === 'success' ? '1px solid #E5E7EB' : 'none',
                 }}
               >
                 {status.message}

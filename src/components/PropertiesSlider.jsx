@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import PropertyCard from './PropertyCard'; // ✅ import
+import PropertyCard from './PropertyCard'; 
 
 const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = "Handpicked RERA-verified projects for you" }) => {
   if (!projects || projects.length === 0) {

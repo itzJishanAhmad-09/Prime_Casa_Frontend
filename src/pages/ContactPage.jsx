@@ -8,9 +8,6 @@ const ContactPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  
-
-  // --- Form state & logic (copied from components/Contact.jsx) ---
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -102,23 +99,21 @@ const ContactPage = () => {
 
       {/* ===== HERO ===== */}
       <section className="contact-hero">
-  <div className="contact-hero-bg"></div>
-  <div className="contact-hero-overlay"></div>
-  <div className="contact-hero-content">
-    {/* Added breadcrumb */}
-    <ul className="about-breadcrumb" style={{ justifyContent: 'center' }}> 
-      <li><Link to="/">Home</Link></li>
-      <li>/</li>
-      <li>Contact</li>
-    </ul>
-    <h1 className="contact-hero-title">Contact Us</h1>
-  </div>
-</section>
+        <div className="contact-hero-bg"></div>
+        <div className="contact-hero-overlay"></div>
+        <div className="contact-hero-content">
+          <ul className="about-breadcrumb" style={{ justifyContent: 'center' }}>
+            <li><Link to="/">Home</Link></li>
+            <li>/</li>
+            <li>Contact</li>
+          </ul>
+          <h1 className="contact-hero-title">Contact Us</h1>
+        </div>
+      </section>
 
       {/* ===== CONTACT FORM + INFO ===== */}
       <section className="contact-page-section">
         <div className="contact-page-grid">
-          {/* Left: Info Cards */}
           <div className="contact-info-cards">
             <div className="info-card">
               <h3>Office Headquarters</h3>
@@ -152,7 +147,6 @@ const ContactPage = () => {
             </div>
           </div>
 
-          {/* Right: Form */}
           <div className="contact-form-wrapper">
             <h2>Send us a message</h2>
             <p>Our dedicated team is ready to assist you with any inquiry.</p>
@@ -163,9 +157,10 @@ const ContactPage = () => {
                   padding: '12px 16px',
                   borderRadius: '8px',
                   marginBottom: '16px',
-                  background: status.type === 'success' ? '#D1FAE5' : '#FEE2DE',
-                  color: status.type === 'success' ? '#065F46' : '#96281B',
+                  background: status.type === 'success' ? '#F9FAFB' : '#FEE2DE',
+                  color: status.type === 'success' ? '#1F2937' : '#96281B',
                   fontWeight: '500',
+                  border: status.type === 'success' ? '1px solid #E5E7EB' : 'none',
                 }}
               >
                 {status.message}
