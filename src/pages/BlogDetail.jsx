@@ -1,5 +1,5 @@
 // src/pages/BlogDetail.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { news } from '../data/news';
 import Seo from '../components/Seo';
@@ -21,16 +21,25 @@ const BlogDetail = () => {
   }, []);
 
   const heroImageRef = useRef(null);
+  const ticking = useRef(false);
+
+  const handleScroll = useCallback(() => {
+    if (!ticking.current) {
+      requestAnimationFrame(() => {
+        if (heroImageRef.current) {
+          const scrollPos = window.pageYOffset;
+          heroImageRef.current.style.transform = `translateY(${scrollPos * 0.4}px)`;
+        }
+        ticking.current = false;
+      });
+      ticking.current = true;
+    }
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (heroImageRef.current) {
-        const scrollPos = window.pageYOffset;
-        heroImageRef.current.style.transform = `translateY(${scrollPos * 0.4}px)`;
-      }
-    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   if (!blog) {
     return (
@@ -66,7 +75,6 @@ const BlogDetail = () => {
     });
   };
 
-  // Use local default image if blog.emoji is not a valid image path
   const heroImage = isImagePath(blog.emoji) ? blog.emoji : '/assets/images/default-blog.jpg';
 
   const handleShare = () => {
@@ -102,7 +110,7 @@ const BlogDetail = () => {
             src={heroImage}
             alt={blog.title}
             className="blog-detail-hero-img"
-            onError={(e) => { e.target.src = '/assets/images/default-blog.jpg'; }}
+            onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
           />
           <div className="blog-detail-hero-overlay"></div>
         </div>
@@ -181,7 +189,7 @@ const BlogDetail = () => {
                 <img
                   src={isImagePath(item.emoji) ? item.emoji : '/assets/images/default-blog.jpg'}
                   alt={item.title}
-                  onError={(e) => { e.target.src = '/assets/images/default-blog.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
                 />
                 <span className="blog-related-card-badge">{item.tag || 'Insight'}</span>
               </div>

@@ -10,15 +10,6 @@ const Navbar = ({ scrollTo }) => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
-  const navigateWithRefresh = (path) => {
-    if (location.pathname === path) {
-      window.location.reload();
-    } else {
-      navigate(path);
-    }
-    closeMenu();
-  };
-
   const handleNavClick = (sectionId) => {
     if (location.pathname === '/') {
       scrollTo(sectionId);
@@ -38,24 +29,23 @@ const Navbar = ({ scrollTo }) => {
   };
 
   const handleAboutClick = () => {
-    if (location.pathname === '/about') {
-      window.location.reload();
-    } else {
-      navigate('/about');
-    }
+    navigate('/about');
     closeMenu();
   };
 
   const handlePropertiesClick = () => {
-    navigateWithRefresh('/properties');
+    navigate('/properties');
+    closeMenu();
   };
 
   const handleBlogClick = () => {
-    navigateWithRefresh('/blog');
+    navigate('/blog');
+    closeMenu();
   };
 
   const handleServicesClick = () => {
-    navigateWithRefresh('/services');
+    navigate('/services');
+    closeMenu();
   };
 
   const handleContactClick = () => {
@@ -86,17 +76,19 @@ const Navbar = ({ scrollTo }) => {
 
   return (
     <nav>
-      <div className="nav-logo" onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
-        <img src="/primecasa.jpg" alt="The Prime Casa" style={{ height: '90px', width: 'auto' }} />
-      </div>
+      <div className="nav-left">
+        <button className="hamburger" onClick={toggleMenu} aria-label="Toggle menu">
+          <i className="ti ti-menu-2"></i>
+        </button>
 
-      <button className="hamburger" onClick={toggleMenu} aria-label="Toggle menu">
-        <i className="ti ti-menu-2"></i>
-      </button>
+        <div className="nav-logo" onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
+          <img src="/primecasa.jpg" alt="The Prime Casa" style={{ height: '90px', width: 'auto' }} />
+        </div>
+      </div>
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <button onClick={handleHomeClick} style={navBtnStyle}>Home</button>
-        <button onClick={handleAboutClick} style={navBtnStyle}>Aboutus</button>
+        <button onClick={handleAboutClick} style={navBtnStyle}>About</button>   {/* ← changed from "Aboutus" */}
         <button onClick={handlePropertiesClick} style={navBtnStyle}>Properties</button>
         <button onClick={handleServicesClick} style={navBtnStyle}>Services</button>
         <button onClick={handleBlogClick} style={navBtnStyle}>Blog</button>

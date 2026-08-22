@@ -56,7 +56,12 @@ const BlogList = () => {
               <div className="blog-card" key={item.id}>
                 <div className="blog-card-img">
                   {isImagePath(item.emoji) ? (
-                    <img src={item.emoji} alt={item.title} loading="lazy" />
+                    <img
+                      src={item.emoji}
+                      alt={item.title}
+                      loading="lazy"
+                      onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                    />
                   ) : (
                     <span className="blog-card-emoji">{item.emoji || '📰'}</span>
                   )}

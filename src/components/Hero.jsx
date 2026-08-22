@@ -1,10 +1,53 @@
 // src/components/Hero.jsx
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const videoRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
+  // IntersectionObserver – load video only when hero enters viewport
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(videoRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  
+  useEffect(() => {
+    if (!shouldLoad || !videoRef.current) return;
+
+    const video = videoRef.current;
+    video.preload = 'auto';
+    video.load();
+
+    const onLoaded = () => {
+      setVideoLoaded(true);
+      video.play().catch(() => { /* autoplay may be blocked */ });
+    };
+
+    video.addEventListener('loadeddata', onLoaded);
+
+    return () => {
+      video.removeEventListener('loadeddata', onLoaded);
+    };
+  }, [shouldLoad]);
+
+  // Search handlers (unchanged)
   const handleSearch = () => {
     const category = document.getElementById('s-cat')?.value || '';
     const sector = document.getElementById('s-sector')?.value || '';
@@ -24,26 +67,28 @@ const Hero = () => {
     navigate(`/properties?sector=${encodeURIComponent(sector)}`);
   };
 
-  const posterPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A0A08' /%3E%3Cstop offset='55%25' style='stop-color:%233D1710' /%3E%3Cstop offset='100%25' style='stop-color:%231A0A08' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1920' height='1080' fill='url(%23g)'/%3E%3Ctext x='960' y='540' font-family='Playfair Display, serif' font-size='72' fill='%23F0C040' text-anchor='middle' dominant-baseline='central'%3EPRIME CASA%3C/text%3E%3Ctext x='960' y='620' font-family='Inter, sans-serif' font-size='28' fill='%23FFFFFF' text-anchor='middle' dominant-baseline='central' opacity='0.7'%3ETrusted Properties. Simplified Search.%3C/text%3E%3C/svg%3E";
-
   return (
     <div className="hero">
       <video
-        className="hero-video"
+        ref={videoRef}
+        className={`hero-video ${videoLoaded ? 'loaded' : ''}`}
         autoPlay
         muted
         loop
         playsInline
         preload="metadata"
-        poster={posterPlaceholder}
+        // ❌ poster removed – no 404 error
       >
+        {/* Video files should be in public/assets/videos/ */}
         <source src="/assets/videos/noida-drone.mp4" type="video/mp4" />
+        <source src="/assets/videos/noida-drone.webm" type="video/webm" />
+        Your browser does not support the video tag.
       </video>
 
       <div className="hero-overlay"></div>
 
       <div className="hero-content">
-        {/* ---- SEARCH BAR ---- */}
+        {/* Search bar and localities – unchanged */}
         <div className="search-wrap">
           <div className="search-row">
             <div className="search-field">

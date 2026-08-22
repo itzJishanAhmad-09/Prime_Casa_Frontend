@@ -51,7 +51,7 @@
     <priority>0.3</priority>
   </url>
 
-  <!-- ===== PROJECTS (9 total) ===== -->
+  <!-- ===== PROJECTS (10 total) ===== -->
   <url>
     <loc>https://theprimecasa.in/project/1</loc>
     <lastmod>2026-08-19</lastmod>
@@ -103,6 +103,12 @@
   <url>
     <loc>https://theprimecasa.in/project/9</loc>
     <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://theprimecasa.in/project/10</loc>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

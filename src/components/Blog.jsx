@@ -79,6 +79,7 @@ const Blog = ({ news }) => {
                       loading="lazy"
                       decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
                     />
                   ) : (
                     <span className="blog-slide-emoji">{item.emoji || '📰'}</span>
@@ -101,4 +102,4 @@ const Blog = ({ news }) => {
   );
 };
 
-export default Blog; 
+export default Blog;
