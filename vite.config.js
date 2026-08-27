@@ -1,0 +1,54 @@
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      injectRegister: false,          
+      manifest: {
+        name: 'The Prime Casa',
+        short_name: 'PrimeCasa',
+        description: 'Premium real estate in Noida',
+        theme_color: '#C0392B',
+        background_color: '#ffffff',
+        display: 'standalone',
+        start_url: '/',
+        icons: [],
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,avif}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/api\.yourbackend\.com\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 3600 },
+            },
+          },
+        ],
+      },
+    }),
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('swiper')) return 'swiper';
+            if (id.includes('react-router')) return 'router';
+            if (id.includes('react-helmet')) return 'helmet';
+            if (id.includes('react-dom')) return 'react-dom';
+            if (id.includes('react')) return 'react';
+            return 'vendor';
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 500,
+  },
+});

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="Y_dcU7_6EcWO_qpAVuz54mXeVUmxNsvS-b3zH4T1fhw" />
+
+    <title>The Prime Casa – Turning Dreams into Addresses</title>
+
+    <!-- ===== FAVICON (WebP) ===== -->
+    <link rel="icon" href="/primecasa.webp" type="image/webp" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="64x64" />
+
+    <!-- ===== Preconnect ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- No more Tabler icons CDN – we use @tabler/icons-react -->
+
+    <!-- ===== Defer manifest (non-blocking) ===== -->
+    <link rel="manifest" href="/manifest.webmanifest" media="print" onload="this.media='all'" />
+
+    <!-- ===== Preload Google Fonts CSS ===== -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" />
+
+    <!-- ===== Google Fonts (async) ===== -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" />
+    </noscript>
+
+    <!-- ===== Schema.org Structured Data ===== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "The Prime Casa",
+        "url": "https://theprimecasa.in",
+        "logo": "https://theprimecasa.in/primecasa.webp",
+        "description": "The Prime Casa is a real estate advisory and property brokerage firm headquartered in Sector 90, Noida, Uttar Pradesh. They specialize in commercial spaces, luxury villas, residential plots, and studio apartments across the National Capital Area.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-8130504183",
+          "contactType": "Sales",
+          "availableLanguage": ["English", "Hindi"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Unit No 1230, TOWER-B, Bhutani Alphathum",
+          "addressLocality": "Sector 90",
+          "addressRegion": "Noida",
+          "postalCode": "201304",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.facebook.com/theprimecasa",
+          "https://www.instagram.com/theprimecasa",
+          "https://www.youtube.com/@theprimecasa",
+          "https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx" defer></script>
+  </body>
+</html>

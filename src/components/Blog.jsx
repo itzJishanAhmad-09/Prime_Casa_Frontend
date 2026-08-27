@@ -1,0 +1,96 @@
+// src/components/Blog.jsx
+import React, { lazy, Suspense, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import LazySwiper from './LazySwiper';
+
+const isImagePath = (str) => {
+  if (!str) return false;
+  return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
+};
+
+const Blog = ({ news }) => {
+  const hasNews = useMemo(() => news && news.length > 0, [news]);
+
+  if (!hasNews) {
+    return (
+      <section className="section" id="blog">
+        <div className="section-header">
+          <div className="section-label">Latest Blog Posts</div>
+          <div className="section-title">Noida Real Estate Blog</div>
+          <div className="section-sub">Stay updated with the latest market trends and insights</div>
+        </div>
+        <p style={{ textAlign: 'center', color: 'var(--txt3)' }}>No blog posts available.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="section" id="blog">
+      <div className="section-header">
+        <div className="section-label">Latest Blog Posts</div>
+        <div className="section-title">Noida Real Estate Blog</div>
+        <div className="section-sub">Stay ahead with the latest market developments, launches, and policy updates</div>
+      </div>
+
+      <div className="blog-slider-wrapper">
+        <LazySwiper
+          modules={[]}
+          spaceBetween={30}
+          slidesPerView={1}
+          centeredSlides
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          pagination={{ clickable: true, dynamicBullets: true }}
+          loop
+          speed={600}
+          observer={true}
+          observeParents={true}
+          breakpoints={{
+            640: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          }}
+          className="blog-swiper"
+          aria-label="Blog posts carousel"
+        >
+          {news.map((item) => (
+            <SwiperSlide key={item.id || item.slug}>
+              <div className="blog-slide-card">
+                <div className="blog-slide-img">
+                  {isImagePath(item.image || item.emoji) ? (
+                    <img
+                      src={item.image || item.emoji}
+                      alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      width="400"
+                      height="200"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                    />
+                  ) : (
+                    <span className="blog-slide-emoji" aria-hidden="true">{item.emoji || '📰'}</span>
+                  )}
+                </div>
+                <div className="blog-slide-body">
+                  <div className="blog-slide-tag">{item.tag} · {item.date}</div>
+                  <div className="blog-slide-title">{item.title}</div>
+                  <div className="blog-slide-excerpt">{item.excerpt}</div>
+                  <Link to={`/blog/${item.slug}`} className="blog-slide-link">Read More →</Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </LazySwiper>
+      </div>
+    </section>
+  );
+};
+
+export default React.memo(Blog);

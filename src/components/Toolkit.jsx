@@ -1,0 +1,46 @@
+// src/components/Toolkit.jsx
+import React from 'react';
+import { IconChartBar, IconCalculator, IconWorld } from '@tabler/icons-react';
+
+const Toolkit = ({ openModal }) => (
+  <div className="section section-alt" id="toolkit" style={{ background: 'var(--dark)', border: 'none' }}>
+    <div className="section-header">
+      <div className="section-label" style={{ color: 'var(--gold-l)' }}>Free Tools</div>
+      <div className="section-title" style={{ color: '#fff' }}>Prime Casa Realty Toolkit</div>
+      <div className="section-sub" style={{ color: 'rgba(255,255,255,0.55)' }}>Smart tools to plan, calculate, and invest with confidence</div>
+    </div>
+    <div className="toolkit-grid">
+      {[
+        { key: 'roi', icon: IconChartBar, title: 'Realty ROI Calculator', desc: 'Estimate returns and forecast growth on your property investments.' },
+        { key: 'emi', icon: IconCalculator, title: 'EMI Planner', desc: 'Calculate monthly EMIs and optimize loan tenure for better returns.' },
+        { key: 'nri', icon: IconWorld, title: 'NRI Realty Edge', desc: 'Navigate property laws, taxation & loans as an NRI investor.' },
+      ].map((t, i) => {
+        const IconComponent = t.icon;
+        return (
+          <div
+            className="toolkit-card"
+            key={i}
+            role="button"
+            tabIndex={0}
+            onClick={() => openModal(t.key)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(t.key);
+              }
+            }}
+          >
+            <div className="toolkit-icon">
+              <IconComponent size={32} color="var(--gold-l)" />
+            </div>
+            <div className="toolkit-title">{t.title}</div>
+            <div className="toolkit-desc">{t.desc}</div>
+            <div className="toolkit-arrow">Open →</div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+);
+
+export default Toolkit;
