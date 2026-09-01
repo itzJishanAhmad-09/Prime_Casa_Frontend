@@ -52,5 +52,22 @@ const newLink = `
 `;
 
 html = html.replace(oldLinkRegex, newLink);
+
+// Also defer any VitePWA-injected manifest link (it strips deferral attrs)
+const manifestRegex = /<link rel="manifest" href="\/manifest\.webmanifest">/g;
+if (manifestRegex.test(html)) {
+  html = html.replace(
+    manifestRegex,
+    `<link rel="manifest" href="/manifest.webmanifest" media="print" onload="this.media='all'" />`
+  );
+  console.log('✅ Deferred manifest.webmanifest');
+}
+
+// Also defer any swiper CSS injected separately (if present)
+html = html.replace(/<link rel="stylesheet"[^>]*href="([^"]*swiper-react[^"]*)"[^>]*>/g, (match, href) => {
+  return `\n  <link rel="preload" as="style" href="${href}" />\n  <link rel="stylesheet" href="${href}" media="print" onload="this.media='all'" />\n  <noscript><link rel="stylesheet" href="${href}" /></noscript>\n`;
+});
+
+
 fs.writeFileSync(indexPath, html);
 console.log(`✅ Optimised CSS loading for ${cssPath}`);

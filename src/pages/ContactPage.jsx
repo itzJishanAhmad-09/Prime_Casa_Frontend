@@ -166,7 +166,9 @@ const ContactPage = () => {
               </div>
             )}
 
-            <form onSubmit={submitContact} className="contact-page-form">
+            <form onSubmit={submitContact} className="contact-page-form"
+              data-wmcp='{"name":"contact","description":"Send an enquiry to Prime Casa","endpoint":"POST /api/enquiries","type":"contact"}'
+            >
               <div className="form-group">
                 <label htmlFor="name">Full Name</label>
                 <input
@@ -177,6 +179,7 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  data-wmcp='{"label":"Full Name","type":"string","required":true,"description":"Your full name"}'
                 />
               </div>
               <div className="form-group">
@@ -189,6 +192,7 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  data-wmcp='{"label":"Email Address","type":"email","required":true,"description":"Your email address"}'
                 />
               </div>
               <div className="form-group full-width">
@@ -203,6 +207,7 @@ const ContactPage = () => {
                   required
                   maxLength="10"
                   pattern="\d{10}"
+                  data-wmcp='{"label":"Phone Number","type":"tel","required":true,"pattern":"\\d{10}","maxLength":10,"description":"10-digit mobile number"}'
                 />
                 {phoneError && (
                   <div style={{ color: '#C0392B', fontSize: '14px', marginTop: '4px' }}>
@@ -219,6 +224,7 @@ const ContactPage = () => {
                   placeholder="e.g. Sector 150, Eldeco..."
                   value={formData.sector}
                   onChange={handleChange}
+                  data-wmcp='{"label":"Preferred Sector","type":"string","required":false,"description":"Preferred sector or project name"}'
                 />
               </div>
               <div className="form-group full-width">
@@ -230,6 +236,7 @@ const ContactPage = () => {
                   placeholder="How can we help you find your dream home?"
                   value={formData.message}
                   onChange={handleChange}
+                  data-wmcp='{"label":"Your Message","type":"textarea","required":false,"description":"Your enquiry message"}'
                 />
               </div>
               <button type="submit" className="submit-btn" disabled={loading || !!phoneError}>

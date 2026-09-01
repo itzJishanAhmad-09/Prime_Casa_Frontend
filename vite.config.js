@@ -44,6 +44,7 @@ export default defineConfig({
             if (id.includes('react-helmet')) return 'helmet';
             if (id.includes('react-dom')) return 'react-dom';
             if (id.includes('react')) return 'react';
+            if (id.includes('@tabler/icons-react')) return 'icons';
             return 'vendor';
           }
         },

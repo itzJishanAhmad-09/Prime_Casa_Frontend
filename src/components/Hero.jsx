@@ -78,11 +78,11 @@ const Hero = () => {
       <div className="hero-overlay"></div>
 
       <div className="hero-content">
-        <div className="search-wrap">
+        <div className="search-wrap" data-wmcp='{"name":"propertySearch","description":"Search and filter properties by category, sector, status, and budget","type":"search"}'>
           <div className="search-row">
             <div className="search-field">
               <IconBuilding size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-cat">
+              <select id="s-cat" data-wmcp='{"label":"Category","type":"select","options":["Apartments","Luxury Villas","Penthouses","Office Suites","Retail Space","Workspaces","Residential Plots","Farm Land"]}'>
                 <option value="">All Categories</option>
                 <option>Apartments</option>
                 <option>Luxury Villas</option>
@@ -97,7 +97,7 @@ const Hero = () => {
 
             <div className="search-field">
               <IconMapPin size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-sector">
+              <select id="s-sector" data-wmcp='{"label":"Sector","type":"select","options":["Sector 150","Sector 128","Sector 107","Sector 94","Sector 72","Sector 62","Noida Extension","Greater Noida West","Yamuna Expressway"]}'>
                 <option value="">All Sectors</option>
                 <option>Sector 150</option>
                 <option>Sector 128</option>
@@ -113,7 +113,7 @@ const Hero = () => {
 
             <div className="search-field">
               <IconClock size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-status">
+              <select id="s-status" data-wmcp='{"label":"Status","type":"select","options":["New Launch","Under Construction","Ready to Move"]}'>
                 <option value="">Any Status</option>
                 <option>New Launch</option>
                 <option>Under Construction</option>
@@ -123,7 +123,7 @@ const Hero = () => {
 
             <div className="search-field">
               <IconCurrencyRupee size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-budget">
+              <select id="s-budget" data-wmcp='{"label":"Budget","type":"select","options":["Under ₹50L","₹50L – ₹1Cr","₹1Cr – ₹2Cr","₹2Cr – ₹5Cr","Above ₹5Cr"]}'>
                 <option value="">Any Budget</option>
                 <option>Under ₹50L</option>
                 <option>₹50L – ₹1Cr</option>

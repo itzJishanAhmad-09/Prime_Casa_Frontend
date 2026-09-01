@@ -111,7 +111,9 @@ const Contact = () => {
             </div>
           )}
 
-          <form onSubmit={submitContact}>
+          <form onSubmit={submitContact}
+            data-wmcp='{"name":"contactQuick","description":"Quick enquiry form on homepage","endpoint":"POST /api/enquiries","type":"contact"}'
+          >
             <input
               type="text"
               name="name"
@@ -119,6 +121,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
+              data-wmcp='{"label":"Your Name","type":"string","required":true,"description":"Your full name"}'
             />
             <input
               type="email"
@@ -127,6 +130,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              data-wmcp='{"label":"Your Email","type":"email","required":true,"description":"Your email address"}'
             />
             <input
               type="tel"
@@ -138,6 +142,7 @@ const Contact = () => {
               maxLength="10"
               pattern="\d{10}"
               title="Please enter exactly 10 digits"
+              data-wmcp='{"label":"Phone Number","type":"tel","required":true,"pattern":"\\d{10}","maxLength":10,"description":"10-digit mobile number"}'
             />
             {phoneError && (
               <div style={{ color: '#C0392B', fontSize: '14px', marginTop: '-6px', marginBottom: '8px' }}>
@@ -150,6 +155,7 @@ const Contact = () => {
               placeholder="Preferred Sector / Project"
               value={formData.sector}
               onChange={handleChange}
+              data-wmcp='{"label":"Preferred Sector","type":"string","required":false,"description":"Preferred sector or project name"}'
             />
             <textarea
               name="message"
@@ -157,6 +163,7 @@ const Contact = () => {
               rows="4"
               value={formData.message}
               onChange={handleChange}
+              data-wmcp='{"label":"Message","type":"textarea","required":false,"description":"Your requirements details"}'
             />
             <button type="submit" className="btn-red" disabled={loading || !!phoneError}>
               {loading ? 'Sending...' : 'Send Enquiry →'}

@@ -239,11 +239,13 @@ const BlogDetail = () => {
               e.preventDefault();
               alert('Subscribed to Prime Casa Insights');
             }}
+            data-wmcp='{"name":"newsletter","description":"Subscribe to the Prime Casa newsletter for market intelligence","endpoint":"(client-side)","type":"newsletter"}'
           >
             <input
               type="email"
               placeholder="Your professional email"
               required
+              data-wmcp='{"label":"Email Address","type":"email","required":true,"description":"Your professional email for real estate intelligence reports"}'
             />
             <button type="submit">Subscribe</button>
           </form>

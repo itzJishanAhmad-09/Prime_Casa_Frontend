@@ -13,19 +13,19 @@ const ROICalculator = () => {
   const finalValue = (inv * ((1 + appr/100) ** yrs)).toFixed(0);
   
   return (
-    <div>
+    <div data-wmcp='{"name":"roiCalculator","description":"Calculate Return on Investment for a real estate property","type":"calculator"}'>
       <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'16px'}}>Realty ROI Calculator</h3>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Investment (₹)</label>
-        <input type="number" value={investment} onChange={(e) => setInvestment(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={investment} onChange={(e) => setInvestment(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Investment Amount","type":"number","description":"Total investment amount in INR","example":"5000000"}' />
       </div>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Annual Appreciation (%)</label>
-        <input type="number" value={appreciation} onChange={(e) => setAppreciation(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={appreciation} onChange={(e) => setAppreciation(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Annual Appreciation Rate","type":"number","description":"Expected annual appreciation percentage","example":"8"}' />
       </div>
       <div style={{marginBottom:'16px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Years</label>
-        <input type="number" value={years} onChange={(e) => setYears(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={years} onChange={(e) => setYears(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Investment Period","type":"number","description":"Number of years for the investment horizon","example":"5"}' />
       </div>
       <div style={{background:'var(--accent-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px'}}>
         <div style={{fontSize:'12px', color:'var(--text)'}}>Expected Gain</div>
@@ -57,19 +57,19 @@ const EMIPlanner = () => {
   const totalInterest = (totalAmount - p).toFixed(0);
   
   return (
-    <div>
+    <div data-wmcp='{"name":"emiPlanner","description":"Calculate EMI for a home loan","type":"calculator"}'>
       <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'16px'}}>EMI Planner</h3>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Loan Amount (₹)</label>
-        <input type="number" value={principal} onChange={(e) => setPrincipal(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={principal} onChange={(e) => setPrincipal(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Loan Amount","type":"number","description":"Total loan amount in INR","example":"3000000"}' />
       </div>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Interest Rate (% p.a.)</label>
-        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} step="0.1" style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} step="0.1" style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Interest Rate","type":"number","description":"Annual interest rate in percentage","example":"6.5"}' />
       </div>
       <div style={{marginBottom:'16px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Tenure (Years)</label>
-        <input type="number" value={tenure} onChange={(e) => setTenure(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={tenure} onChange={(e) => setTenure(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Loan Tenure","type":"number","description":"Loan repayment period in years","example":"20"}' />
       </div>
       <div style={{background:'var(--accent-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px'}}>
         <div style={{fontSize:'12px', color:'var(--text)'}}>Monthly EMI</div>
@@ -115,19 +115,19 @@ const Valuation = () => {
   const gainPercent = p !== 0 ? ((gain / p) * 100).toFixed(2) : 'N/A';
 
   return (
-    <div>
+    <div data-wmcp='{"name":"propertyValuation","description":"Estimate future value of a property based on appreciation","type":"calculator"}'>
       <h3 style={{fontFamily:"'Playfair Display',serif", fontSize:'20px', marginBottom:'16px'}}>Property Valuation Calculator</h3>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Current Property Price (₹)</label>
-        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Current Property Price","type":"number","description":"Current market price of the property in INR","example":"10000000"}' />
       </div>
       <div style={{marginBottom:'12px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Expected Annual Appreciation (%)</label>
-        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} step="0.1" style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} step="0.1" style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Expected Annual Appreciation","type":"number","description":"Expected annual appreciation rate in percentage","example":"8"}' />
       </div>
       <div style={{marginBottom:'16px'}}>
         <label style={{fontSize:'13px', fontWeight:'500', marginBottom:'4px', display:'block'}}>Holding Period (Years)</label>
-        <input type="number" value={years} onChange={(e) => setYears(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} />
+        <input type="number" value={years} onChange={(e) => setYears(e.target.value)} style={{width:'100%', padding:'8px', border:'1px solid var(--border)', borderRadius:'6px', fontSize:'13px'}} data-wmcp='{"label":"Holding Period","type":"number","description":"Number of years the property will be held","example":"5"}' />
       </div>
       <div style={{background:'var(--accent-bg)', padding:'12px', borderRadius:'8px', marginBottom:'8px'}}>
         <div style={{fontSize:'12px', color:'var(--text)'}}>Estimated Future Value</div>

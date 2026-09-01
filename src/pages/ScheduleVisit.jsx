@@ -151,7 +151,11 @@ const ScheduleVisit = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="schedule-form">
+            <form
+              onSubmit={handleSubmit}
+              className="schedule-form"
+              data-wmcp='{"name":"scheduleVisit","description":"Book a site visit / property viewing appointment","endpoint":"POST /api/enquiries","type":"site-visit"}'
+            >
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="name">Full Name</label>
@@ -164,6 +168,7 @@ const ScheduleVisit = () => {
                     onChange={handleChange}
                     required
                     disabled={loading}
+                    data-wmcp='{"label":"Full Name","type":"string","required":true,"description":"Full name of the visitor"}'
                   />
                 </div>
                 <div className="form-group">
@@ -177,6 +182,7 @@ const ScheduleVisit = () => {
                     onChange={handleChange}
                     required
                     disabled={loading}
+                    data-wmcp='{"label":"Email Address","type":"email","required":true,"description":"Email address for confirmation"}'
                   />
                 </div>
               </div>
@@ -195,6 +201,7 @@ const ScheduleVisit = () => {
                     disabled={loading}
                     maxLength="10"
                     pattern="\d{10}"
+                    data-wmcp='{"label":"Phone Number","type":"tel","required":true,"pattern":"\\d{10}","maxLength":10,"description":"10-digit mobile number"}'
                   />
                   {phoneError && (
                     <div style={{ color: '#C0392B', fontSize: '14px', marginTop: '4px' }}>
@@ -210,6 +217,7 @@ const ScheduleVisit = () => {
                     value={formData.projectId}
                     onChange={handleChange}
                     disabled={loading}
+                    data-wmcp='{"label":"Preferred Estate","type":"select","required":false,"description":"Select a property project to visit"}'
                   >
                     <option value="">Select a property</option>
                     {projects.map((p) => (
@@ -232,6 +240,7 @@ const ScheduleVisit = () => {
                     onChange={handleChange}
                     required
                     disabled={loading}
+                    data-wmcp='{"label":"Preferred Date","type":"date","required":true,"description":"Desired date for the site visit"}'
                   />
                 </div>
                 <div className="form-group">
@@ -244,6 +253,7 @@ const ScheduleVisit = () => {
                     onChange={handleChange}
                     required
                     disabled={loading}
+                    data-wmcp='{"label":"Preferred Time","type":"time","required":true,"description":"Desired time for the site visit"}'
                   />
                 </div>
               </div>
@@ -258,6 +268,7 @@ const ScheduleVisit = () => {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={loading}
+                  data-wmcp='{"label":"Special Requirements","type":"textarea","required":false,"description":"Any special requirements or details the visitor wants to see"}'
                 />
               </div>
 

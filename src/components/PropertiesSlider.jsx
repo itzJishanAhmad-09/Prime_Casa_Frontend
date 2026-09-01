@@ -1,11 +1,11 @@
 // src/components/PropertiesSlider.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import PropertyCard from './PropertyCard';
-import LazySwiper from './LazySwiper';
+import PropertyCard from './PropertyCard'; 
 
 const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = "Handpicked RERA-verified projects for you" }) => {
   if (!projects || projects.length === 0) {
@@ -25,8 +25,8 @@ const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = 
       </div>
 
       <div className="properties-slider-wrapper">
-        <LazySwiper
-          modules={[]}
+        <Swiper
+          modules={[Autoplay, Pagination]}
           spaceBetween={24}
           slidesPerView={1}
           centeredSlides={true}
@@ -41,8 +41,6 @@ const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = 
           }}
           loop={true}
           speed={600}
-          observer={true}
-          observeParents={true}
           breakpoints={{
             640: { slidesPerView: 1, spaceBetween: 20 },
             768: { slidesPerView: 2, spaceBetween: 24 },
@@ -58,7 +56,7 @@ const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = 
               </SwiperSlide>
             );
           })}
-        </LazySwiper>
+        </Swiper>
       </div>
     </section>
   );
