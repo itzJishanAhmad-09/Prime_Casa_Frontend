@@ -35,7 +35,7 @@ const Hero = () => {
   return (
     <div className="hero">
       <img
-        src="/assets/videos/hero.png"
+        src="/assets/videos/hero.webp"
         alt="Noida skyline"
         fetchpriority="high"
         style={{

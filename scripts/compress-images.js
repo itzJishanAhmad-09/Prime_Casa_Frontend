@@ -8,35 +8,35 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const imageDir = path.join(__dirname, '../public/assets/images');
+const videoDir = path.join(__dirname, '../public/assets/videos');
 
-if (!fs.existsSync(imageDir)) {
-  console.log('❌ Image directory not found – skipping.');
-  process.exit(0);
-}
-
-// Lower quality = smaller files. 60 is a good balance for real estate photos.
 const WEBP_QUALITY = 60;
 const JPEG_QUALITY = 60;
-const MAX_WIDTH = 800; // Increased from 500 — modern devices need larger thumbs
+const MAX_WIDTH = 800;
 
-const allFiles = fs.readdirSync(imageDir).filter(f =>
-  /\.(jpe?g|png|webp)$/i.test(f) &&
-  !f.startsWith('_temp_') &&
-  f !== 'placeholder.jpg' && f !== 'placeholder.webp'
-);
+// Function to process a directory
+async function processDirectory(dir, folderName) {
+  if (!fs.existsSync(dir)) {
+    console.log(`❌ ${folderName} directory not found – skipping.`);
+    return 0;
+  }
 
-if (allFiles.length === 0) {
-  console.log('📸 No images to compress.');
-  process.exit(0);
-}
+  const allFiles = fs.readdirSync(dir).filter(f =>
+    /\.(jpe?g|png)$/i.test(f) &&
+    !f.startsWith('_temp_') &&
+    f !== 'placeholder.jpg' && f !== 'placeholder.webp'
+  );
 
-console.log(`📸 Found ${allFiles.length} images to process...`);
+  if (allFiles.length === 0) {
+    console.log(`📸 No JPEG/PNG images to compress in ${folderName}.`);
+    return 0;
+  }
 
-// Process each file sequentially to avoid disk contention
-(async () => {
+  console.log(`📸 Found ${allFiles.length} images to process in ${folderName}...`);
   let processed = 0;
+
   for (const file of allFiles) {
-    const inputPath = path.join(imageDir, file);
+    const inputPath = path.join(dir, file);
     const ext = path.extname(file).toLowerCase();
     const name = path.basename(file, ext);
 
@@ -44,21 +44,18 @@ console.log(`📸 Found ${allFiles.length} images to process...`);
       const pipeline = sharp(inputPath)
         .resize({ width: MAX_WIDTH, withoutEnlargement: true });
 
-      // Generate or overwrite WebP
-      const webpPath = path.join(imageDir, `${name}.webp`);
+      const webpPath = path.join(dir, `${name}.webp`);
       await pipeline.clone().webp({ quality: WEBP_QUALITY }).toFile(webpPath);
 
-      // For JPEG/PNG sources, also update the JPEG fallback
       if (ext === '.jpg' || ext === '.jpeg' || ext === '.png') {
-        const tempJpg = path.join(imageDir, `_temp_${name}.jpg`);
+        const tempJpg = path.join(dir, `_temp_${name}.jpg`);
         await pipeline.clone().jpeg({ quality: JPEG_QUALITY, progressive: true }).toFile(tempJpg);
 
         if (ext === '.jpg' || ext === '.jpeg') {
           fs.unlinkSync(inputPath);
           fs.renameSync(tempJpg, inputPath);
         } else {
-          // PNG → keep original and add .jpg
-          fs.renameSync(tempJpg, path.join(imageDir, `${name}.jpg`));
+          fs.renameSync(tempJpg, path.join(dir, `${name}.jpg`));
         }
       }
 
@@ -70,12 +67,22 @@ console.log(`📸 Found ${allFiles.length} images to process...`);
     }
   }
 
-  // Clean up any leftover temp files
-  fs.readdirSync(imageDir)
+  // Clean up temp files
+  fs.readdirSync(dir)
     .filter(f => f.startsWith('_temp_'))
     .forEach(f => {
-      try { fs.unlinkSync(path.join(imageDir, f)); } catch {}
+      try { fs.unlinkSync(path.join(dir, f)); } catch {}
     });
 
-  console.log(`🎉 Done! ${processed} images optimised (WebP Q=${WEBP_QUALITY}, JPEG Q=${JPEG_QUALITY}, maxW=${MAX_WIDTH})`);
+  return processed;
+}
+
+(async () => {
+  console.log('🔄 Processing images folder...');
+  const imagesProcessed = await processDirectory(imageDir, 'images');
+
+  console.log('\n🔄 Processing videos folder...');
+  const videosProcessed = await processDirectory(videoDir, 'videos');
+
+  console.log(`\n🎉 Done! ${imagesProcessed + videosProcessed} images optimised total.`);
 })();
