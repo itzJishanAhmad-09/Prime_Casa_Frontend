@@ -83,7 +83,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <img
-            src="//primecasa.webp"
+            src="/primecasa.webp"
             alt="The Prime Casa"
             style={{ height: '90px', width: 'auto' }}
             width="200"

@@ -4,7 +4,7 @@ export const projects = [
     id: 1,
     title: "Eldeco Whispers of Wonder",
     builder: "Eldeco",
-    loc: "Yamuna Expressway, Sector 220, Greater Noida",
+    loc: "Yamuna Expressway, Sector 22D, Greater Noida",
     type: "residential",
     tag: "popular",
     emoji: "/assets/images/img1.webp",
@@ -12,7 +12,7 @@ export const projects = [
     status: "Under Construction",
     amenities: "Pool · Gym · Club · Kids Zone · Clubhouse",
     reraId: "UPRE1RAPRL752382/09/2025",
-    description: `Introducing Eldeco Whispers of Wonder, a luxurious residential community located in Sector 220, Yamuna Expressway, Greater Noida. It is a residential development carefully crafted for those who want luxury, comfort, and a beautiful living experience.
+    description: `Introducing Eldeco Whispers of Wonder, a luxurious residential community located in Sector 22D, Yamuna Expressway, Greater Noida. It is a residential development carefully crafted for those who want luxury, comfort, and a beautiful living experience.
 
 Nestled on 5 acres of beautifully planned land, 80% of which is open area with 3 acres of central green, offering 558 homes. The development includes 3 BHK with sizes ranging from 1550 to 1850 sq. ft.`,
     fullDescription: `Discover the luxurious Eldeco Sector 220 on the lush Yamuna Expressway. In recent years, the Yamuna Expressway corridor has been identified as a premier real estate destination in the National Capital Region (NCR).
@@ -149,11 +149,32 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     type: "residential",
     tag: "new",
     emoji: "/assets/images/img10.webp",
-    beds: "1–3 BHK",
-    status: "Under Construction",
+    beds: "Residential Plots and land",
+    status: "New Launch",
     amenities: "Clubhouse · Landscaped Gardens · 24x7 Security · Fountains",
     reraId: "UPRERAAGT26319",
     description: `Corbett Eye is a premium residential plotted development situated on the scenic Ramnagar-Jim Corbett National Highway 309. Spread across 8.5 acres, this exclusive project offers a tranquil retreat amidst nature.`,
     fullDescription: `Corbett Eye offers a perfect blend of modern amenities and natural splendor. The development boasts wide roads, landscaped gardens, and a range of luxurious facilities designed to enhance your lifestyle. From a clubhouse and beautiful fountains to 24×7 security, every aspect of Corbett Eye is crafted to offer comfort and convenience.`
+  },
+  {
+    id: 11,
+    title: "Splendor Onyx Blue",
+    builder: "Splendor Group",
+    loc: "Sector 142, Noida",
+    type: "commercial",
+    tag: "new",
+    emoji: "/assets/images/img11.webp",
+    beds: "Office · Retail",
+    status: "Under Construction",
+    amenities: "Landscaped Greens Areas · Outdoor Amphitheater · EV Charging Facility · High-Speed Elevators · outdoor cafe and dining · Building Management System",
+    reraId: "UPRERAPRJ920006",
+    description: `Splendor Onyx Blue is a premium commercial project located in Sector 142, Noida, developed by the Splendor Group. Spread across 10 acres, the project is primarily dedicated to IT/ITES and office spaces. It offers a diverse range of retail shops, office spaces, and hospitality venues. The project features three towering structures with modern design and world-class amenities. Strategically located with excellent connectivity to major transportation hubs. RERA registered with registration number UPRERAPRJ920006`,
+    fullDescription: `Splendor Onyx Blue is a landmark commercial destination redefining the business landscape of Sector 142, Noida. Developed by the renowned Splendor Group with over 30 years of legacy, this 10-acre mixed-use development is designed as a futuristic commercial hub, offering a diverse range of retail shops, office spaces, and hospitality venues, making it an ideal destination for establishing or expanding your business ventures.
+
+The project comprises three towering structures, with Tower 1 featuring G+14 floors, while the remaining towers will be constructed according to upcoming plans. Demonstrating architectural excellence, Splendor Onyx Blue embodies sophistication and innovation. The project has been meticulously designed to cater to the varied needs of businesses, providing a selection of commercial spaces that can be tailored to meet specific requirements.
+
+Location of Splendor Onyx in Sector 142 of Noida offers exceptional connectivity and accessibility. Positioned close to major transportation hubs and arterial roads, the property provides seamless access to the entire city and beyond. The advantageous location is further underscored by its proximity to significant landmarks such as Advant, Noida Sector 142 Metro Station, and the Maha Maya Flyover, all within walking distance.
+
+The project integrates green building principles and sustainable design practices aimed at reducing its environmental footprint. It encompasses various features, including energy-efficient systems, water conservation measures, and eco-friendly landscaping. In addition to its environmental initiatives, the project offers a wide array of amenities designed to elevate the overall experience for both tenants and visitors. From cutting-edge security systems to swift and efficient elevators, every aspect of the property is tailored to prioritize convenience and comfort.`
   }
 ];
