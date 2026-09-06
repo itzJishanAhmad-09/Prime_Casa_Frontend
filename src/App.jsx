@@ -18,7 +18,7 @@ const ScheduleVisit = lazy(() => import('./pages/ScheduleVisit'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const Services = lazy(() => import('./pages/Services'));
+const ServicePage = lazy(() => import('./pages/ServicePage'));
 
 import { projects } from './data/projects';
 import { news } from './data/news';
@@ -76,7 +76,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<ServicePage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>

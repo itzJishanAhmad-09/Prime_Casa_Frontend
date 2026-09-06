@@ -119,7 +119,7 @@ const ContactPage = () => {
               <div className="info-item">
                 <IconMapPin size={22} color="var(--red)" />
                 <div>
-                  <p className="info-label">Main Office</p>
+                  <p className="info-label">Head Office</p>
                   <p className="info-value">Unit No 1230, TOWER-B, Bhutani Alphathum,<br />Sector 90, Noida, UP 201304</p>
                 </div>
               </div>
