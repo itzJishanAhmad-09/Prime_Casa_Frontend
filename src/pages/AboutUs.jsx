@@ -115,10 +115,10 @@ const AboutUs = () => {
                 desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
               },
               {
-                name: 'Surbhi Singh',
+                name: 'Surbhi Khullar',
                 role: 'Director',
-                img: '/assets/images/Surbhi_Singh.webp',
-                desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
+                img: '/assets/images/Shurbhi_Khullar.webp',
+                desc: 'Surbhi Khullar is an MBA in Marketing from Chandigarh University with 5 years of experience in real estate. She combines strong market understanding with expertise in client relationships, negotiation, and team handling to deliver strategic, client-focused solutions in the real estate industry.'
               },
               {
                 name: 'SAJAL GUPTA',
