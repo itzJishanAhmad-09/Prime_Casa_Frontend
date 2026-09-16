@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/compress-images.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "prebuild": "npm run sitemap && node scripts/compress-images.js",
     "build": "vite build && node scripts/inline-css.js",
     "preview": "vite preview"
   },

@@ -19,7 +19,13 @@ Nestled on 5 acres of beautifully planned land, 80% of which is open area with 3
 
 The project offers spacious 3 BHK, 4 BHK, and 4+ BHK apartments with modern amenities and world-class specifications. Each apartment is designed to provide maximum natural light and ventilation with running balconies on three sides.
 
-Eldeco Whispers of Wonder is strategically located with excellent connectivity to Delhi, Noida, and Agra. The upcoming Noida International Airport at Jewar is just 20 minutes away, making this an ideal investment destination.`
+Eldeco Whispers of Wonder is strategically located with excellent connectivity to Delhi, Noida, and Agra. The upcoming Noida International Airport at Jewar is just 20 minutes away, making this an ideal investment destination.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Yamuna Expressway', detail: '5 min drive' },
+      { icon: '🚇', label: 'Metro (Aqua Line) station', detail: '2 km · 8 min' },
+      { icon: '📍', label: 'Delhi Border', detail: '32 km · 40 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '12 km · 15 min' },
+    ],
   },
   {
     id: 2,
@@ -34,7 +40,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Sky Deck · Spa · Golf · Pool · Clubhouse",
     reraId: "UPRE1RAPRL752383/09/2025",
     description: `Max Estate 128 is a premium luxury residential development located in Sector 128, Noida. Offering 3 and 4 BHK apartments with world-class amenities and breathtaking views.`,
-    fullDescription: `Max Estate 128 redefines luxury living with its exquisite design, premium specifications, and unparalleled amenities. The project features spacious apartments with modern architecture and panoramic views of the surrounding green belt.`
+    fullDescription: `Max Estate 128 redefines luxury living with its exquisite design, premium specifications, and unparalleled amenities. The project features spacious apartments with modern architecture and panoramic views of the surrounding green belt.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '3 min drive' },
+      { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '500 m · 6 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '15 km · 18 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '35 km · 45 min' },
+    ],
   },
   {
     id: 3,
@@ -49,7 +61,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Pool · Gym · Kids Zone · Clubhouse",
     reraId: "UPRE1RAPRL752384/09/2025",
     description: `Ace Mahagun Medalleo offers premium 2 to 4 BHK apartments in Sector 107, Noida with modern amenities and excellent connectivity.`,
-    fullDescription: `Ace Mahagun Medalleo is a thoughtfully designed residential project that combines luxury with convenience. Located in the heart of Noida, this project offers easy access to schools, hospitals, and shopping centers.`
+    fullDescription: `Ace Mahagun Medalleo is a thoughtfully designed residential project that combines luxury with convenience. Located in the heart of Noida, this project offers easy access to schools, hospitals, and shopping centers.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '7 min drive' },
+      { icon: '🚇', label: 'Metro station (Blue Line)', detail: '1.2 km · 12 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '12 km · 20 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '28 km · 35 min' },
+    ],
   },
   {
     id: 4,
@@ -64,7 +82,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Boulevard · Fine Dining · Retail",
     reraId: "UPRE1RAPRL752385/09/2025",
     description: `M3M The Line is a premium commercial development offering retail and office spaces in Sector 72, Noida.`,
-    fullDescription: `M3M The Line is a prestigious commercial project located in the heart of Noida's business district. Featuring state-of-the-art retail and office spaces with world-class amenities.`
+    fullDescription: `M3M The Line is a prestigious commercial project located in the heart of Noida's business district. Featuring state-of-the-art retail and office spaces with world-class amenities.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '2 min drive' },
+      { icon: '🚇', label: 'Metro station (Blue Line)', detail: '800 m · 10 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '18 km · 22 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '30 km · 40 min' },
+    ],
   },
   {
     id: 5,
@@ -79,7 +103,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Pool · Gym · Metro Access",
     reraId: "UPRE1RAPRL752386/09/2025",
     description: `Smart World Sector 98 offers premium 2 and 3 BHK apartments with excellent connectivity and modern amenities.`,
-    fullDescription: `Smart World Sector 98 is a modern residential project located on the Noida Expressway, offering premium 2 and 3 BHK apartments with excellent connectivity and world-class amenities.`
+    fullDescription: `Smart World Sector 98 is a modern residential project located on the Noida Expressway, offering premium 2 and 3 BHK apartments with excellent connectivity and world-class amenities.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '1 min drive' },
+      { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '400 m · 5 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '20 km · 25 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '32 km · 38 min' },
+    ],
   },
   {
     id: 6,
@@ -94,7 +124,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "High Street · Food Court",
     reraId: "UPRE1RAPRL752387/09/2025",
     description: `Gaur Yamuna City offers premium retail and office spaces on the Yamuna Expressway.`,
-    fullDescription: `Gaur Yamuna City is a premier commercial development located on the Yamuna Expressway, offering excellent retail and office spaces with high visibility and footfall.`
+    fullDescription: `Gaur Yamuna City is a premier commercial development located on the Yamuna Expressway, offering excellent retail and office spaces with high visibility and footfall.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Yamuna Expressway', detail: '2 min drive' },
+      { icon: '🚇', label: 'Metro (Aqua Line) station', detail: '3 km · 10 min' },
+      { icon: '📍', label: 'Delhi Border', detail: '30 km · 35 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '10 km · 12 min' },
+    ],
   },
   {
     id: 7,
@@ -109,7 +145,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Eco · Clubhouse · Wellness",
     reraId: "UPRE1RAPRL752388/09/2025",
     description: `L&T Green Reserve offers ultra-luxury 3 and 4 BHK apartments with eco-friendly design and premium amenities.`,
-    fullDescription: `L&T Green Reserve is a benchmark in sustainable luxury living. With eco-friendly design, green building certification, and world-class amenities, it redefines modern living in Noida.`
+    fullDescription: `L&T Green Reserve is a benchmark in sustainable luxury living. With eco-friendly design, green building certification, and world-class amenities, it redefines modern living in Noida.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '4 min drive' },
+      { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '600 m · 7 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '15 km · 18 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '35 km · 45 min' },
+    ],
   },
   {
     id: 8,
@@ -124,7 +166,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "IT Hub · Lounge · Café",
     reraId: "UPRE1RAPRL752389/09/2025",
     description: `One FNG offers premium commercial spaces in Sector 142, Noida.`,
-    fullDescription: `One FNG by Group 108 is a landmark commercial development in Sector 142, Noida, offering modern office and retail spaces with excellent connectivity.`
+    fullDescription: `One FNG by Group 108 is a landmark commercial development in Sector 142, Noida, offering modern office and retail spaces with excellent connectivity.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '3 min drive' },
+      { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '500 m · 6 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '22 km · 28 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '28 km · 32 min' },
+    ],
   },
   {
     id: 9,
@@ -139,7 +187,13 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     amenities: "Rooftop · Sky Club · EV Charging",
     reraId: "UPRE1RAPRL752390/09/2025",
     description: `Max Estates Sector 105 offers ultra-luxury 3 to 5 BHK apartments with premium amenities.`,
-    fullDescription: `Max Estates Sector 105 is a new ultra-luxury residential development offering spacious 3 to 5 BHK apartments with world-class amenities and breathtaking views.`
+    fullDescription: `Max Estates Sector 105 is a new ultra-luxury residential development offering spacious 3 to 5 BHK apartments with world-class amenities and breathtaking views.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '5 min drive' },
+      { icon: '🚇', label: 'Metro station (Blue Line)', detail: '1 km · 10 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '14 km · 17 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '30 km · 38 min' },
+    ],
   },
   {
     id: 10,
@@ -152,9 +206,15 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     beds: "Residential Plots and land",
     status: "New Launch",
     amenities: "Clubhouse · Landscaped Gardens · 24x7 Security · Fountains",
-    reraId: "UPRERAAGT26319",
+    reraId: "UPRE1RAPRL752390/09/2025",
     description: `Corbett Eye is a premium residential plotted development situated on the scenic Ramnagar-Jim Corbett National Highway 309. Spread across 8.5 acres, this exclusive project offers a tranquil retreat amidst nature.`,
-    fullDescription: `Corbett Eye offers a perfect blend of modern amenities and natural splendor. The development boasts wide roads, landscaped gardens, and a range of luxurious facilities designed to enhance your lifestyle. From a clubhouse and beautiful fountains to 24×7 security, every aspect of Corbett Eye is crafted to offer comfort and convenience.`
+    fullDescription: `Corbett Eye offers a perfect blend of modern amenities and natural splendor. The development boasts wide roads, landscaped gardens, and a range of luxurious facilities designed to enhance your lifestyle. From a clubhouse and beautiful fountains to 24×7 security, every aspect of Corbett Eye is crafted to offer comfort and convenience.`,
+    connectivity: [
+      { icon: '🚗', label: 'National Highway 309', detail: '1 min drive' },
+      { icon: '🏞️', label: 'Jim Corbett National Park', detail: '10 km · 15 min' },
+      { icon: '📍', label: 'Ramnagar Town', detail: '5 km · 8 min' },
+      { icon: '✈️', label: 'Pantnagar Airport', detail: '75 km · 90 min' },
+    ],
   },
   {
     id: 11,
@@ -175,6 +235,12 @@ The project comprises three towering structures, with Tower 1 featuring G+14 flo
 
 Location of Splendor Onyx in Sector 142 of Noida offers exceptional connectivity and accessibility. Positioned close to major transportation hubs and arterial roads, the property provides seamless access to the entire city and beyond. The advantageous location is further underscored by its proximity to significant landmarks such as Advant, Noida Sector 142 Metro Station, and the Maha Maya Flyover, all within walking distance.
 
-The project integrates green building principles and sustainable design practices aimed at reducing its environmental footprint. It encompasses various features, including energy-efficient systems, water conservation measures, and eco-friendly landscaping. In addition to its environmental initiatives, the project offers a wide array of amenities designed to elevate the overall experience for both tenants and visitors. From cutting-edge security systems to swift and efficient elevators, every aspect of the property is tailored to prioritize convenience and comfort.`
-  }
+The project integrates green building principles and sustainable design practices aimed at reducing its environmental footprint. It encompasses various features, including energy-efficient systems, water conservation measures, and eco-friendly landscaping. In addition to its environmental initiatives, the project offers a wide array of amenities designed to elevate the overall experience for both tenants and visitors. From cutting-edge security systems to swift and efficient elevators, every aspect of the property is tailored to prioritize convenience and comfort.`,
+    connectivity: [
+      { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '3 min drive' },
+      { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '400 m · 5 min walk' },
+      { icon: '📍', label: 'Delhi Border', detail: '22 km · 28 min' },
+      { icon: '✈️', label: 'Jewar International Airport', detail: '28 km · 32 min' },
+    ],
+  },
 ];

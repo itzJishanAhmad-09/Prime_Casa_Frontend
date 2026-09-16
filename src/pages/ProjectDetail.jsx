@@ -3,11 +3,66 @@ import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Seo from '../components/Seo';
-import { IconRoute, IconCheck } from '@tabler/icons-react';
+import { 
+  IconRoute, IconCheck, IconCar, IconTrain, IconPlane, IconMapPin,
+  IconSwimming, IconBarbell, IconBuildingCommunity, IconBalloon, 
+  IconFlower, IconGolf, IconBuildingSkyscraper, IconShieldCheck, 
+  IconTree, IconShoppingBag, IconChefHat, IconBuildingStore, IconBolt, 
+  IconTheater, IconCoffee, IconBuilding, IconCode, IconArmchair
+} from '@tabler/icons-react';
 
 const isImagePath = (str) => {
   if (!str) return false;
   return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
+};
+
+// Maps the old emoji icons to the new Tabler vector icons (Connectivity)
+const iconMap = {
+  '🚗': IconCar,
+  '🚇': IconTrain,
+  '✈️': IconPlane,
+  '📍': IconMapPin,
+  'default': IconRoute,
+};
+
+// Maps amenity keywords to specific Tabler icons (Amenities)
+const amenityIconMap = {
+  pool: IconSwimming,
+  gym: IconBarbell,
+  club: IconBuildingCommunity,
+  kids: IconBalloon,
+  spa: IconFlower,
+  golf: IconGolf,
+  sky: IconBuildingSkyscraper,
+  security: IconShieldCheck,
+  garden: IconTree,
+  landscape: IconTree,
+  greens: IconTree,
+  boulevard: IconShoppingBag,
+  retail: IconBuildingStore,
+  dining: IconChefHat,
+  cafe: IconCoffee,
+  café: IconCoffee,
+  ev: IconBolt,
+  charging: IconBolt,
+  amphitheater: IconTheater,
+  management: IconBuilding,
+  // New additions for One FNG
+  it: IconCode,
+  hub: IconCode,
+  lounge: IconArmchair,
+};
+
+// Helper to normalize accents (so "Café" matches "cafe")
+const normalizeText = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+// Helper function to find the right icon based on text
+const getAmenityIcon = (amenity) => {
+  const lower = normalizeText(amenity);
+  for (const [key, icon] of Object.entries(amenityIconMap)) {
+    if (lower.includes(key)) return icon;
+  }
+  return IconBuilding; // Better default than a checkmark
 };
 
 const getShortDesc = (text, maxWords = 20) => {
@@ -40,11 +95,11 @@ const ProjectDetail = () => {
   const statusColor = project.status?.toLowerCase().includes('ready') ? '#059669' : '#bb0014';
   const heroImage = isImagePath(project.emoji) ? project.emoji : '/assets/images/default-hero.jpg';
 
-  const connectivityItems = [
-    'Direct access to Noida Expressway',
-    'Metro station within 5 min',
-    '15 min to Delhi border',
-    '30 min to Jewar Airport',
+  const connectivityData = project.connectivity || [
+    { icon: '🚗', label: 'Direct access to Noida Expressway', detail: '5 min drive' },
+    { icon: '🚇', label: 'Metro station within 5 min', detail: '10 min walk' },
+    { icon: '📍', label: '15 min to Delhi border', detail: '25 km · 30 min' },
+    { icon: '✈️', label: '30 min to Jewar Airport', detail: '20 km · 25 min' },
   ];
 
   const amenitiesArray = project.amenities
@@ -59,6 +114,7 @@ const ProjectDetail = () => {
         image={isImagePath(project.emoji) ? project.emoji : undefined}
       />
 
+      {/* HERO */}
       <section
         style={{
           position: 'relative',
@@ -130,6 +186,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* OVERVIEW */}
       <section
         style={{
           padding: '3rem 1.5rem',
@@ -203,6 +260,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* CONNECTED WITH THE WORLD */}
       <section style={{ padding: '3rem 1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
         <h2
           style={{
@@ -213,28 +271,65 @@ const ProjectDetail = () => {
         >
           Connected With the World
         </h2>
-        <p style={{ color: 'var(--txt2)', marginBottom: '1.5rem', lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--txt2)', marginBottom: '2rem', lineHeight: 1.7 }}>
           Strategically located in {project.loc}, enjoying excellent connectivity to key business hubs.
         </p>
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {connectivityItems.map((item, idx) => (
-            <li
-              key={idx}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                borderBottom: '1px solid var(--border)',
-                paddingBottom: '0.75rem',
-              }}
-            >
-              <IconRoute size={28} color="var(--red)" />
-              <span style={{ fontSize: '1rem' }}>{item}</span>
-            </li>
-          ))}
-        </ul>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+          gap: '1rem' 
+        }}>
+          {connectivityData.map((item, idx) => {
+            const IconComponent = iconMap[item.icon] || iconMap['default'];
+            return (
+              <div
+                key={idx}
+                className="connectivity-card"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  background: 'var(--bg1)',
+                  padding: '1rem 1.5rem',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border)',
+                  transition: 'border-color 0.2s, transform 0.2s',
+                  cursor: 'default',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--red)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+              >
+                <div
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    background: 'var(--red)',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
+                  <IconComponent size={24} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--txt)' }}>
+                    {item.label}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--txt3)' }}>
+                    {item.detail}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
+      {/* AMENITIES */}
       <section style={{ background: 'var(--bg1)', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <h2
@@ -255,30 +350,46 @@ const ProjectDetail = () => {
               marginBottom: '2.5rem',
             }}
           >
-            {amenitiesArray.slice(0, 8).map((amenity, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: 'var(--bg)',
-                  padding: '1.5rem 1rem',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  transition: 'border-color 0.2s',
-                }}
-                className="amenity-card"
-              >
-                <IconCheck size={32} color="var(--red)" style={{ marginBottom: '0.5rem' }} />
-                <span style={{ fontWeight: 500, fontSize: '0.95rem' }}>{amenity}</span>
-              </div>
-            ))}
+            {amenitiesArray.slice(0, 8).map((amenity, idx) => {
+              const AmenityIcon = getAmenityIcon(amenity);
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    background: 'var(--bg)',
+                    padding: '1.5rem 1rem',
+                    borderRadius: '16px',
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    transition: 'border-color 0.2s',
+                  }}
+                  className="amenity-card"
+                >
+                  <div style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    background: 'var(--bg1)',
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.75rem',
+                  }}>
+                    <AmenityIcon size={24} color="var(--red)" />
+                  </div>
+                  <span style={{ fontWeight: 500, fontSize: '0.95rem' }}>{amenity}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* SIMILAR PROJECTS */}
       <section style={{ padding: '3rem 1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
         <h2
           style={{

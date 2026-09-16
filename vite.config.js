@@ -9,16 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: false,          
-      manifest: {
-        name: 'The Prime Casa',
-        short_name: 'PrimeCasa',
-        description: 'Premium real estate in Noida',
-        theme_color: '#C0392B',
-        background_color: '#ffffff',
-        display: 'standalone',
-        start_url: '/',
-        icons: [],
-      },
+      manifest: false,
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,avif}'],
         runtimeCaching: [

@@ -103,28 +103,34 @@ const AboutUs = () => {
           <div className="about-leadership-grid">
             {[
               {
-                name: 'JITENDRA KUMAR',
+                name: 'MAM',
                 role: 'FOUNDER & CEO',
                 img: '',
                 desc: 'Sachin Gupta is the Founder and CEO of Prime Casa. He has done B.A. in Economics from Delhi University before obtaining his masters in Marketing & Finance from IBS, Hyderabad. Prior to starting his own firm Prime Casa, Sachin has more than 15+ years of experience in leading banking firms including ICICI, HSBC, and Standard Chartered.'
-              },
-              {
-                name: 'NARENDRA SINGH',
-                role: 'DIRECTOR',
-                img: '',
-                desc: 'Himanshu is a Management Graduate from S.C.H.M.R.D. Pune. He comes with a rich 20+ years of experience across the Banking and Finance Industry. He has held various leadership roles in Sales & Product Management fields with companies like Godrej Capital, RBL Bank, Barclays Finance & ICICI Bank.'
-              },
-              {
-                name: 'ADITYA SHARMA',
-                role: 'DIRECTOR',
-                img: '',
-                desc: 'Nitin is a graduate in Engineering from IIT Roorkee. He has more than 20+ years of experience in IT Consulting. He has worked with Infosys, Cognizant in US, UK, India & Switzerland. He is also qualified with an Executive management Certification from IIM Bangalore, Diploma Holder in Finance from Brickwork Finance Academy & CFA level 1.'
               },
               {
                 name: 'ROBIN SINGH',
                 role: 'Director',
                 img: '/assets/images/Robin_Singh.webp',
                 desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
+              },
+              {
+                name: 'Surbhi Singh',
+                role: 'Director',
+                img: '/assets/images/Surbhi_Singh.webp',
+                desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
+              },
+              {
+                name: 'SAJAL GUPTA',
+                role: 'SENIOR SALE MANAGER',
+                img: '/assets/images/Sajal_Gupta.webp',
+                desc: 'Sajal Gupta is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.'
+              },
+              {
+                name: 'ABHISHEK GUPTA',
+                role: 'SENIOR SALE MANAGER',
+                img: '/assets/images/Abhishek_Gupta.webp',
+                desc: 'Senior Sales Manager with over 2 years of real estate experience. He is specialized in commercial and residential properties. Known for transparent negotiations and sharp market insight, he helps clients maximize returns on every purchase, sale, or lease in the NCR/Delhi region.'
               }
             ].map((member, idx) => (
               <div key={idx} className="about-leadership-card">
