@@ -1,0 +1,18 @@
+# The Prime Casa
+
+The Prime Casa is a real estate advisory and property brokerage firm serving Noida and Greater Noida.
+
+## Website
+
+- [Home](https://theprimecasa.in/)
+- [Properties](https://theprimecasa.in/properties)
+- [Services](https://theprimecasa.in/services)
+- [About Us](https://theprimecasa.in/about)
+- [Blog](https://theprimecasa.in/blog)
+- [Contact](https://theprimecasa.in/contact)
+- [Privacy Policy](https://theprimecasa.in/privacy-policy)
+- [Terms](https://theprimecasa.in/terms)
+
+## Guidance
+
+Use the website pages above as the source of truth for property listings, services, company information, and published real estate insights. Do not infer availability, pricing, approvals, or legal status beyond the information shown on the relevant page.
