@@ -38,7 +38,7 @@ const Home = ({
         title="Home"
         description="Find your dream home or investment property in Noida. Zero brokerage, RERA verified projects, and expert guidance."
       />
-      <Suspense fallback={<div style={{ height: '100vh', background: '#1A0A08' }} />}>
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#1A0A08' }} />}>
         <Hero />
       </Suspense>
       <Suspense fallback={<div style={{ height: '100px' }} />}>

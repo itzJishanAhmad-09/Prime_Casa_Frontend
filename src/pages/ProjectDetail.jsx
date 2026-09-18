@@ -1,85 +1,68 @@
 // src/pages/ProjectDetail.jsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Seo from '../components/Seo';
-import { 
-  IconRoute, IconCheck, IconCar, IconTrain, IconPlane, IconMapPin,
-  IconSwimming, IconBarbell, IconBuildingCommunity, IconBalloon, 
-  IconFlower, IconGolf, IconBuildingSkyscraper, IconShieldCheck, 
-  IconTree, IconShoppingBag, IconChefHat, IconBuildingStore, IconBolt, 
-  IconTheater, IconCoffee, IconBuilding, IconCode, IconArmchair
+import { isImagePath, getShortDesc, normalizeText } from '../utils/helpers';
+import {
+  IconRoute, IconCar, IconTrain, IconPlane, IconMapPin,
+  IconSwimming, IconBarbell, IconBuildingCommunity, IconBalloon,
+  IconFlower, IconGolf, IconBuildingSkyscraper, IconShieldCheck,
+  IconTree, IconShoppingBag, IconChefHat, IconBuildingStore, IconBolt,
+  IconTheater, IconCoffee, IconBuilding, IconCode, IconArmchair,
 } from '@tabler/icons-react';
 
-const isImagePath = (str) => {
-  if (!str) return false;
-  return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
-};
-
-// Maps the old emoji icons to the new Tabler vector icons (Connectivity)
+// Maps emoji icons to Tabler vector icons (Connectivity)
 const iconMap = {
   '🚗': IconCar,
   '🚇': IconTrain,
   '✈️': IconPlane,
   '📍': IconMapPin,
-  'default': IconRoute,
+  default: IconRoute,
 };
 
-// Maps amenity keywords to specific Tabler icons (Amenities)
+// Maps amenity keywords to specific Tabler icons
 const amenityIconMap = {
-  pool: IconSwimming,
-  gym: IconBarbell,
-  club: IconBuildingCommunity,
-  kids: IconBalloon,
-  spa: IconFlower,
-  golf: IconGolf,
-  sky: IconBuildingSkyscraper,
-  security: IconShieldCheck,
-  garden: IconTree,
-  landscape: IconTree,
-  greens: IconTree,
-  boulevard: IconShoppingBag,
-  retail: IconBuildingStore,
-  dining: IconChefHat,
-  cafe: IconCoffee,
-  café: IconCoffee,
-  ev: IconBolt,
-  charging: IconBolt,
+  pool:         IconSwimming,
+  gym:          IconBarbell,
+  club:         IconBuildingCommunity,
+  kids:         IconBalloon,
+  spa:          IconFlower,
+  golf:         IconGolf,
+  sky:          IconBuildingSkyscraper,
+  security:     IconShieldCheck,
+  garden:       IconTree,
+  landscape:    IconTree,
+  greens:       IconTree,
+  boulevard:    IconShoppingBag,
+  retail:       IconBuildingStore,
+  dining:       IconChefHat,
+  cafe:         IconCoffee,
+  café:         IconCoffee,
+  ev:           IconBolt,
+  charging:     IconBolt,
   amphitheater: IconTheater,
-  management: IconBuilding,
-  // New additions for One FNG
-  it: IconCode,
-  hub: IconCode,
-  lounge: IconArmchair,
+  management:   IconBuilding,
+  it:           IconCode,
+  hub:          IconCode,
+  lounge:       IconArmchair,
 };
 
-// Helper to normalize accents (so "Café" matches "cafe")
-const normalizeText = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-// Helper function to find the right icon based on text
+// Find the right icon based on amenity text
 const getAmenityIcon = (amenity) => {
   const lower = normalizeText(amenity);
   for (const [key, icon] of Object.entries(amenityIconMap)) {
     if (lower.includes(key)) return icon;
   }
-  return IconBuilding; // Better default than a checkmark
-};
-
-const getShortDesc = (text, maxWords = 20) => {
-  if (!text) return '';
-  const words = text.split(' ');
-  if (words.length <= maxWords) return text;
-  return words.slice(0, maxWords).join(' ') + '...';
+  return IconBuilding;
 };
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const project = projects.find(p => p.id === parseInt(projectId));
+  const project = projects.find((p) => p.id === parseInt(projectId));
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // Scroll-to-top is now handled globally by <ScrollToTop /> in main.jsx
 
   if (!project) {
     return (

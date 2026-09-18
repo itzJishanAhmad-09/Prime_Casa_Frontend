@@ -1,44 +1,45 @@
 // src/pages/ScheduleVisit.jsx
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Seo from '../components/Seo';
 import { IconMapPin, IconPhone, IconShield } from '@tabler/icons-react';
+import { submitEnquiry } from '../services/api';
+import { isImagePath } from '../utils/helpers';
+
+// Show the first 3 projects as "Curated Previews" — stays in sync with projects data
+const SHOWCASE_PROJECTS = projects.slice(0, 3);
 
 const ScheduleVisit = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id }    = useParams();
+  const navigate  = useNavigate();
 
-  const defaultProjectId = id ? projects.find(p => p.id === parseInt(id))?.id || '' : '';
+  const defaultProjectId = id
+    ? (projects.find((p) => p.id === parseInt(id))?.id ?? '')
+    : '';
 
   const [formData, setFormData] = useState({
     projectId: defaultProjectId,
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    message: ''
+    name:      '',
+    email:     '',
+    phone:     '',
+    date:      '',
+    time:      '',
+    message:   '',
   });
-  const [status, setStatus] = useState({ type: '', message: '' });
-  const [loading, setLoading] = useState(false);
+  const [status, setStatus]         = useState({ type: '', message: '' });
+  const [loading, setLoading]       = useState(false);
   const [phoneError, setPhoneError] = useState('');
-
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'phone') {
       const digitsOnly = value.replace(/\D/g, '');
       if (digitsOnly.length > 10) return;
-      setFormData({ ...formData, [name]: digitsOnly });
+      setFormData((prev) => ({ ...prev, [name]: digitsOnly }));
       setPhoneError(digitsOnly.length === 10 ? '' : 'Phone must be exactly 10 digits');
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -51,34 +52,25 @@ const ScheduleVisit = () => {
     setLoading(true);
     setStatus({ type: '', message: '' });
 
-    const selectedProject = projects.find(p => p.id === parseInt(formData.projectId));
+    const selectedProject = projects.find((p) => p.id === parseInt(formData.projectId));
 
     try {
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
+      await submitEnquiry({
+        name:            formData.name,
+        email:           formData.email,
+        phone:           formData.phone,
         preferredSector: selectedProject?.loc?.split(',')[0] || 'Noida',
         message: `Site visit request for ${selectedProject?.title || 'Not specified'}\nPreferred Date: ${formData.date}\nPreferred Time: ${formData.time}\nAdditional Info: ${formData.message || ''}`,
         enquiryType: 'site-visit',
-      };
-
-      const response = await fetch(`${API_URL}/enquiries`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus({ type: 'success', message: 'Your site visit request has been sent!' });
-        setTimeout(() => navigate('/'), 3000);
-      } else {
-        setStatus({ type: 'error', message: data.message || 'Something went wrong.' });
-      }
+      setStatus({ type: 'success', message: 'Your site visit request has been sent!' });
+      setTimeout(() => navigate('/'), 3000);
     } catch (error) {
-      setStatus({ type: 'error', message: 'Network error. Please try again.' });
+      setStatus({
+        type: 'error',
+        message: error.message || 'Something went wrong. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
@@ -92,13 +84,14 @@ const ScheduleVisit = () => {
       />
 
       <section className="schedule-hero">
-        <div className="schedule-hero-bg"></div>
-        <div className="schedule-hero-overlay"></div>
+        <div className="schedule-hero-bg" />
+        <div className="schedule-hero-overlay" />
         <div className="schedule-hero-content">
           <span className="schedule-hero-badge">Experience Excellence</span>
           <h1 className="schedule-hero-title">Visit Your Future Home</h1>
           <p className="schedule-hero-sub">
-            Step into a world of architectural mastery. We offer private, guided tours tailored to your schedule and investment goals.
+            Step into a world of architectural mastery. We offer private, guided tours tailored to
+            your schedule and investment goals.
           </p>
         </div>
       </section>
@@ -107,13 +100,16 @@ const ScheduleVisit = () => {
         <div className="schedule-form-grid">
           <div className="schedule-info">
             <h2>Concierge-Level Service</h2>
-            <p>Our advisors are available to guide you through every detail of the estate, from structural integrity to smart-home integration.</p>
+            <p>
+              Our advisors are available to guide you through every detail of the estate, from
+              structural integrity to smart-home integration.
+            </p>
             <div className="schedule-info-items">
               <div className="info-item">
                 <IconMapPin size={22} color="var(--red)" />
                 <div>
                   <h4>Location</h4>
-                  <p> Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304</p>
+                  <p>Unit No 1230, TOWER-B, Bhutani Alphathum, Sector 90, Noida, UP 201304</p>
                 </div>
               </div>
               <div className="info-item">
@@ -142,9 +138,9 @@ const ScheduleVisit = () => {
                   borderRadius: '8px',
                   marginBottom: '16px',
                   background: status.type === 'success' ? '#F9FAFB' : '#FEE2DE',
-                  color: status.type === 'success' ? '#1F2937' : '#96281B',
+                  color:      status.type === 'success' ? '#1F2937'  : '#96281B',
                   fontWeight: '500',
-                  border: status.type === 'success' ? '1px solid #E5E7EB' : 'none',
+                  border:     status.type === 'success' ? '1px solid #E5E7EB' : 'none',
                 }}
               >
                 {status.message}
@@ -163,7 +159,7 @@ const ScheduleVisit = () => {
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="Johnathan Doe"
+                    placeholder="Aarav Mehta"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -177,7 +173,7 @@ const ScheduleVisit = () => {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="j.doe@example.com"
+                    placeholder="aarav.mehta@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -287,49 +283,35 @@ const ScheduleVisit = () => {
         </div>
       </section>
 
+      {/* Curated Previews — driven by projects data, always in sync */}
       <section className="schedule-showcase">
         <div className="showcase-header">
           <h3>Curated Previews</h3>
-          <div className="showcase-divider"></div>
+          <div className="showcase-divider" />
         </div>
         <div className="showcase-grid">
-          {[
-            {
-              image: '/assets/images/img1.webp',
-              label: 'Yamuna Expressway',
-              title: 'Eldeco Whispers of Wonder'
-            },
-            {
-              image: '/assets/images/img2.webp',
-              label: 'Noida, Sector 107 Noida',
-              title: 'Ace Mahagun Medalleo'
-            },
-            {
-              image: '/assets/images/img3.webp',
-              label: 'Sector 128 Noida',
-              title: 'Max Estate'
-            }
-          ].map((card, idx) => (
-            <div className="showcase-card" key={idx}>
+          {SHOWCASE_PROJECTS.map((project) => (
+            <div className="showcase-card" key={project.id}>
               <div className="showcase-card-image">
                 <img
-                  src={card.image}
-                  alt={card.title}
+                  src={isImagePath(project.emoji) ? project.emoji : '/assets/images/placeholder.jpg'}
+                  alt={project.title}
                   loading="lazy"
                   width="400"
                   height="200"
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
                     borderRadius: '12px',
-                    border: '1px solid var(--border)'
+                    border: '1px solid var(--border)',
                   }}
                 />
               </div>
               <div className="showcase-card-body">
-                <span className="showcase-card-label">{card.label}</span>
-                <h4>{card.title}</h4>
+                <span className="showcase-card-label">{project.loc}</span>
+                <h4>{project.title}</h4>
               </div>
             </div>
           ))}

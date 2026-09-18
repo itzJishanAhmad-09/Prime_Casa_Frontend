@@ -3,47 +3,53 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Seo from '../components/Seo';
 import PropertyCard from '../components/PropertyCard';
+import { CATEGORY_MAP } from '../utils/helpers';
+
+const FILTER_TABS = ['all', 'residential', 'commercial', 'luxury', 'new'];
 
 const PropertiesList = ({ projects }) => {
   const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState('all');
 
-  const category = searchParams.get('cat') || '';
-  const sector = searchParams.get('sector') || '';
-  const status = searchParams.get('status') || '';
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const category = searchParams.get('cat')    || '';
+  const sector   = searchParams.get('sector') || '';
+  const status   = searchParams.get('status') || '';
 
   const filtered = useMemo(() => {
     let result = projects.filter((p) => {
+      // Category filter — driven by shared CATEGORY_MAP (no brittle string literals)
       let catMatch = true;
       if (category) {
         const catLower = category.toLowerCase();
-        if (catLower === 'apartments' || catLower === 'luxury villas' || catLower === 'penthouses') {
-          catMatch = p.type === 'residential' || p.type === 'luxury';
-        } else if (catLower === 'office suites' || catLower === 'retail space' || catLower === 'workspaces') {
-          catMatch = p.type === 'commercial';
-        } else {
-          if (catLower === 'popular') catMatch = p.tag === 'popular';
-          if (catLower === 'new launch') catMatch = p.tag === 'new';
+        const mappedType = CATEGORY_MAP[catLower];
+        if (mappedType) {
+          catMatch = p.type === mappedType;
+        } else if (catLower === 'popular') {
+          catMatch = p.tag === 'popular';
+        } else if (catLower === 'new launch') {
+          catMatch = p.tag === 'new';
         }
       }
-      let sectorMatch = true;
-      if (sector) {
-        sectorMatch = p.loc.toLowerCase().includes(sector.toLowerCase());
-      }
-      let statusMatch = true;
-      if (status) {
-        statusMatch = p.status.toLowerCase().includes(status.toLowerCase());
-      }
+
+      // Sector filter
+      const sectorMatch = sector
+        ? p.loc.toLowerCase().includes(sector.toLowerCase())
+        : true;
+
+      // Status filter
+      const statusMatch = status
+        ? p.status.toLowerCase().includes(status.toLowerCase())
+        : true;
+
       return catMatch && sectorMatch && statusMatch;
     });
 
     if (filter !== 'all') {
-      result = result.filter(p => p.type === filter || (filter === 'new' && p.tag === 'new'));
+      result = result.filter(
+        (p) => p.type === filter || (filter === 'new' && p.tag === 'new')
+      );
     }
+
     return result;
   }, [projects, filter, category, sector, status]);
 
@@ -59,8 +65,8 @@ const PropertiesList = ({ projects }) => {
       />
 
       <section className="property-hero-banner">
-        <div className="property-hero-bg"></div>
-        <div className="property-hero-overlay"></div>
+        <div className="property-hero-bg" />
+        <div className="property-hero-overlay" />
         <div className="property-hero-container">
           <div className="property-hero-content">
             <ul className="property-breadcrumb">
@@ -70,7 +76,7 @@ const PropertiesList = ({ projects }) => {
             </ul>
             <h1 className="property-hero-title">All Properties</h1>
             <p className="property-hero-sub">
-              Handpicked RERA-verified properties with the highest buyer interest & market confidence
+              Handpicked RERA-verified properties with the highest buyer interest &amp; market confidence
             </p>
           </div>
         </div>
@@ -80,15 +86,16 @@ const PropertiesList = ({ projects }) => {
         <div className="property-preview-header">
           <span className="property-preview-label">Browse All</span>
           <h2>Trending Properties in Noida</h2>
-          <p>Handpicked RERA-verified properties with the highest buyer interest & market confidence</p>
+          <p>Handpicked RERA-verified properties with the highest buyer interest &amp; market confidence</p>
         </div>
 
         <div className="property-filters">
-          {['all', 'residential', 'commercial', 'luxury', 'new'].map(f => (
+          {FILTER_TABS.map((f) => (
             <button
               key={f}
               className={`property-filter-btn ${filter === f ? 'active' : ''}`}
               onClick={() => setFilter(f)}
+              type="button"
             >
               {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
             </button>

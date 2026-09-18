@@ -104,7 +104,7 @@ const AboutUs = () => {
             {[
               {
                 name: 'MAM',
-                role: 'FOUNDER & CEO',
+                role: 'FOUNDER & CEO', 
                 img: '',
                 desc: 'Sachin Gupta is the Founder and CEO of Prime Casa. He has done B.A. in Economics from Delhi University before obtaining his masters in Marketing & Finance from IBS, Hyderabad. Prior to starting his own firm Prime Casa, Sachin has more than 15+ years of experience in leading banking firms including ICICI, HSBC, and Standard Chartered.'
               },
@@ -112,7 +112,7 @@ const AboutUs = () => {
                 name: 'ROBIN SINGH',
                 role: 'Director',
                 img: '/assets/images/Robin_Singh.webp',
-                desc: '10+ years in Sales across Hospitality, EdTech & Real Estate. Proven in streamlining operations, driving CX, and building teams across Singapore, Malaysian & Indian markets. Currently aligning strategy to execution for sustainable growth in NCR/Delhi Real Estate.'
+                desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.'
               },
               {
                 name: 'Surbhi Khullar',
@@ -124,13 +124,13 @@ const AboutUs = () => {
                 name: 'SAJAL GUPTA',
                 role: 'SENIOR SALE MANAGER',
                 img: '/assets/images/Sajal_Gupta.webp',
-                desc: 'Sajal Gupta is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.'
+                desc: 'Sajal Gupta is a  BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.'
               },
               {
                 name: 'ABHISHEK GUPTA',
-                role: 'SENIOR SALE MANAGER',
+                role: 'ASSISSTANT SALE MANAGER',
                 img: '/assets/images/Abhishek_Gupta.webp',
-                desc: 'Senior Sales Manager with over 2 years of real estate experience. He is specialized in commercial and residential properties. Known for transparent negotiations and sharp market insight, he helps clients maximize returns on every purchase, sale, or lease in the NCR/Delhi region.'
+                desc: 'Assistant Sales Manager specialising in commercial and residential real estate across Delhi NCR and Noida. With over 2 years of industry experience and an MBA from Galgotias University, I help clients make informed property decisions while driving sales growth.'
               }
             ].map((member, idx) => (
               <div key={idx} className="about-leadership-card">
