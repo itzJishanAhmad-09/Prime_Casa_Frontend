@@ -31,9 +31,22 @@ export const login = async (email, password) => {
 export const getCurrentUser = async (token) => {
   const res = await fetch(`${API_URL}/auth/me`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return handleResponse(res);
 };
 
+// ---------- ENQUIRIES ----------
+/**
+ * Submits a contact or site-visit enquiry to the backend.
+ * @param {Object} payload - The enquiry data to send.
+ */
+export const submitEnquiry = async (payload) => {
+  const res = await fetch(`${API_URL}/enquiries`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  return handleResponse(res);
+};
