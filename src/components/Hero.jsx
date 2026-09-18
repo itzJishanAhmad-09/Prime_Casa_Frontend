@@ -9,22 +9,28 @@ import {
   IconSearch,
 } from '@tabler/icons-react';
 
+const CATEGORIES = ['Apartments', 'Luxury Villas', 'Penthouses', 'Office Suites', 'Retail Space', 'Workspaces', 'Residential Plots', 'Farm Land'];
+const SECTORS    = ['Sector 150', 'Sector 128', 'Sector 107', 'Sector 94', 'Sector 72', 'Sector 62', 'Noida Extension', 'Greater Noida West', 'Yamuna Expressway'];
+const STATUSES   = ['New Launch', 'Under Construction', 'Ready to Move'];
+const BUDGETS    = ['Under ₹50L', '₹50L – ₹1Cr', '₹1Cr – ₹2Cr', '₹2Cr – ₹5Cr', 'Above ₹5Cr'];
+const LOCALITIES = ['Yamuna Expressway', 'Noida Expressway', 'Central Noida', 'Noida Extension', 'Greater Noida West'];
+
 const Hero = () => {
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
 
+  // Controlled state — React-idiomatic, no DOM access needed
+  const [filters, setFilters] = useState({ cat: '', sector: '', status: '', budget: '' });
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSearch = () => {
-    const category = document.getElementById('s-cat')?.value || '';
-    const sector = document.getElementById('s-sector')?.value || '';
-    const status = document.getElementById('s-status')?.value || '';
-    const budget = document.getElementById('s-budget')?.value || '';
-
-    const params = new URLSearchParams();
-    if (category) params.append('cat', category);
-    if (sector) params.append('sector', sector);
-    if (status) params.append('status', status);
-    if (budget) params.append('budget', budget);
-
+    const params = new URLSearchParams(
+      Object.entries(filters).filter(([, v]) => v)
+    );
     navigate(`/properties?${params.toString()}`);
   };
 
@@ -34,6 +40,7 @@ const Hero = () => {
 
   return (
     <div className="hero">
+      {/* LCP placeholder image — shown while video loads */}
       <img
         src="/assets/videos/hero.webp"
         alt="Noida skyline"
@@ -75,65 +82,71 @@ const Hero = () => {
         <source src="/assets/videos/noida-drone.mp4" type="video/mp4" />
       </video>
 
-      <div className="hero-overlay"></div>
+      <div className="hero-overlay" />
 
       <div className="hero-content">
-        <div className="search-wrap" data-wmcp='{"name":"propertySearch","description":"Search and filter properties by category, sector, status, and budget","type":"search"}'>
+        <div
+          className="search-wrap"
+          data-wmcp='{"name":"propertySearch","description":"Search and filter properties by category, sector, status, and budget","type":"search"}'
+        >
           <div className="search-row">
+            {/* Category */}
             <div className="search-field">
               <IconBuilding size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-cat" data-wmcp='{"label":"Category","type":"select","options":["Apartments","Luxury Villas","Penthouses","Office Suites","Retail Space","Workspaces","Residential Plots","Farm Land"]}'>
+              <select
+                name="cat"
+                value={filters.cat}
+                onChange={handleFilterChange}
+                aria-label="Property category"
+              >
                 <option value="">All Categories</option>
-                <option>Apartments</option>
-                <option>Luxury Villas</option>
-                <option>Penthouses</option>
-                <option>Office Suites</option>
-                <option>Retail Space</option>
-                <option>Workspaces</option>
-                <option>Residential Plots</option>
-                <option>Farm Land</option>
+                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
               </select>
             </div>
 
+            {/* Sector */}
             <div className="search-field">
               <IconMapPin size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-sector" data-wmcp='{"label":"Sector","type":"select","options":["Sector 150","Sector 128","Sector 107","Sector 94","Sector 72","Sector 62","Noida Extension","Greater Noida West","Yamuna Expressway"]}'>
+              <select
+                name="sector"
+                value={filters.sector}
+                onChange={handleFilterChange}
+                aria-label="Property sector"
+              >
                 <option value="">All Sectors</option>
-                <option>Sector 150</option>
-                <option>Sector 128</option>
-                <option>Sector 107</option>
-                <option>Sector 94</option>
-                <option>Sector 72</option>
-                <option>Sector 62</option>
-                <option>Noida Extension</option>
-                <option>Greater Noida West</option>
-                <option>Yamuna Expressway</option>
+                {SECTORS.map((s) => <option key={s}>{s}</option>)}
               </select>
             </div>
 
+            {/* Status */}
             <div className="search-field">
               <IconClock size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-status" data-wmcp='{"label":"Status","type":"select","options":["New Launch","Under Construction","Ready to Move"]}'>
+              <select
+                name="status"
+                value={filters.status}
+                onChange={handleFilterChange}
+                aria-label="Property status"
+              >
                 <option value="">Any Status</option>
-                <option>New Launch</option>
-                <option>Under Construction</option>
-                <option>Ready to Move</option>
+                {STATUSES.map((s) => <option key={s}>{s}</option>)}
               </select>
             </div>
 
+            {/* Budget */}
             <div className="search-field">
               <IconCurrencyRupee size={18} color="var(--gold-l)" style={{ padding: '0 0.6rem', opacity: 0.7 }} />
-              <select id="s-budget" data-wmcp='{"label":"Budget","type":"select","options":["Under ₹50L","₹50L – ₹1Cr","₹1Cr – ₹2Cr","₹2Cr – ₹5Cr","Above ₹5Cr"]}'>
+              <select
+                name="budget"
+                value={filters.budget}
+                onChange={handleFilterChange}
+                aria-label="Property budget"
+              >
                 <option value="">Any Budget</option>
-                <option>Under ₹50L</option>
-                <option>₹50L – ₹1Cr</option>
-                <option>₹1Cr – ₹2Cr</option>
-                <option>₹2Cr – ₹5Cr</option>
-                <option>Above ₹5Cr</option>
+                {BUDGETS.map((b) => <option key={b}>{b}</option>)}
               </select>
             </div>
 
-            <button className="search-btn" onClick={handleSearch}>
+            <button className="search-btn" onClick={handleSearch} type="button">
               <IconSearch size={20} /> Search
             </button>
           </div>
@@ -146,22 +159,19 @@ const Hero = () => {
           </div>
         </div>
 
+        {/* Locality chips — using <button> for accessibility */}
         <div className="localities">
-          <span className="loc-chip" onClick={() => handleLocalityClick('Yamuna Expressway')}>
-            <IconMapPin size={13} style={{ marginRight: '4px' }} /> Yamuna Expressway
-          </span>
-          <span className="loc-chip" onClick={() => handleLocalityClick('Noida Expressway')}>
-            <IconMapPin size={13} style={{ marginRight: '4px' }} /> Noida Expressway
-          </span>
-          <span className="loc-chip" onClick={() => handleLocalityClick('Central Noida')}>
-            <IconMapPin size={13} style={{ marginRight: '4px' }} /> Central Noida
-          </span>
-          <span className="loc-chip" onClick={() => handleLocalityClick('Noida Extension')}>
-            <IconMapPin size={13} style={{ marginRight: '4px' }} /> Noida Extension
-          </span>
-          <span className="loc-chip" onClick={() => handleLocalityClick('Greater Noida West')}>
-            <IconMapPin size={13} style={{ marginRight: '4px' }} /> Greater Noida West
-          </span>
+          {LOCALITIES.map((loc) => (
+            <button
+              key={loc}
+              type="button"
+              className="loc-chip"
+              onClick={() => handleLocalityClick(loc)}
+            >
+              <IconMapPin size={13} style={{ marginRight: '4px' }} />
+              {loc}
+            </button>
+          ))}
         </div>
       </div>
     </div>

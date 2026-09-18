@@ -94,19 +94,19 @@ const Footer = () => {
             <span className="rera-tag">RERA ✓</span>
           </p>
           <div className="footer-social">
-            <a className="social-btn" href="https://www.facebook.com/theprimecasa" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://www.facebook.com/theprimecasa" aria-label="The Prime Casa on Facebook" target="_blank" rel="noopener noreferrer">
               <IconBrandFacebook size={20} />
             </a>
-            <a className="social-btn" href="https://www.instagram.com/theprimecasa" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://www.instagram.com/theprimecasa" aria-label="The Prime Casa on Instagram" target="_blank" rel="noopener noreferrer">
               <IconBrandInstagram size={20} />
             </a>
-            <a className="social-btn" href="https://www.youtube.com/@theprimecasa" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://www.youtube.com/@theprimecasa" aria-label="The Prime Casa on YouTube" target="_blank" rel="noopener noreferrer">
               <IconBrandYoutube size={20} />
             </a>
-            <a className="social-btn" href="https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd/?viewAsMember=true" aria-label="The Prime Casa on LinkedIn" target="_blank" rel="noopener noreferrer">
               <IconBrandLinkedin size={20} />
             </a>
-            <a className="social-btn" href="https://wa.me/918130504183" target="_blank" rel="noopener noreferrer">
+            <a className="social-btn" href="https://wa.me/918130504183" aria-label="Contact The Prime Casa on WhatsApp" target="_blank" rel="noopener noreferrer">
               <IconBrandWhatsapp size={20} />
             </a>
           </div>
@@ -158,7 +158,7 @@ const Footer = () => {
               Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304
             </span>
           </NavButton>
-          <a>Tue–Sun · 11 AM – 7 PM</a>
+          <span className="footer-hours">Tue–Sun · 11 AM – 7 PM</span>
         </div>
       </div>
 

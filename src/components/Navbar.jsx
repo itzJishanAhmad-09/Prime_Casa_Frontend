@@ -1,51 +1,34 @@
 // src/components/Navbar.jsx
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IconMenu2 } from '@tabler/icons-react';
 
+const NAV_LINKS = [
+  { label: 'Home',       path: '/' },
+  { label: 'About Us',   path: '/about' },
+  { label: 'Properties', path: '/properties' },
+  { label: 'Services',   path: '/services' },
+  { label: 'Blog',       path: '/blog' },
+  { label: 'Contact',    path: '/contact' },
+];
+
 const Navbar = ({ scrollTo }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate   = useNavigate();
+  const location   = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-  const handleHomeClick = () => {
-    if (location.pathname === '/') {
+  const handleNavClick = useCallback((path) => {
+    if (path === '/' && location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      navigate('/');
+      navigate(path);
     }
     closeMenu();
-  };
+  }, [navigate, location.pathname, closeMenu]);
 
-  const handleAboutClick = () => {
-    navigate('/about');
-    closeMenu();
-  };
-
-  const handlePropertiesClick = () => {
-    navigate('/properties');
-    closeMenu();
-  };
-
-  const handleBlogClick = () => {
-    navigate('/blog');
-    closeMenu();
-  };
-
-  const handleServicesClick = () => {
-    navigate('/services');
-    closeMenu();
-  };
-
-  const handleContactClick = () => {
-    navigate('/contact');
-    closeMenu();
-  };
-
-  const handleBookVisit = () => {
+  const handleBookVisit = useCallback(() => {
     if (location.pathname.startsWith('/project/')) {
       const projectId = location.pathname.split('/').pop();
       navigate(`/schedule/${projectId}`);
@@ -53,27 +36,29 @@ const Navbar = ({ scrollTo }) => {
       navigate('/schedule');
     }
     closeMenu();
-  };
-
-  const navBtnStyle = {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '0.9rem',
-    fontWeight: 500,
-    color: 'var(--txt2)',
-    padding: '0.5rem 0',
-    fontFamily: 'inherit',
-  };
+  }, [navigate, location.pathname, closeMenu]);
 
   return (
     <nav>
       <div className="nav-left">
-        <button className="hamburger" onClick={toggleMenu} aria-label="Toggle menu">
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
           <IconMenu2 size={24} />
         </button>
 
-        <div className="nav-logo" onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
+        <div
+          className="nav-logo"
+          onClick={() => handleNavClick('/')}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleNavClick('/')}
+          style={{ cursor: 'pointer' }}
+          aria-label="Go to homepage"
+        >
           <img
             src="/primecasa.webp"
             alt="The Prime Casa"
@@ -85,29 +70,19 @@ const Navbar = ({ scrollTo }) => {
       </div>
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <button onClick={handleHomeClick} style={navBtnStyle}>Home</button>
-        <button onClick={handleAboutClick} style={navBtnStyle}>About Us</button>
-        <button onClick={handlePropertiesClick} style={navBtnStyle}>Properties</button>
-        <button onClick={handleServicesClick} style={navBtnStyle}>Services</button>
-        <button onClick={handleBlogClick} style={navBtnStyle}>Blog</button>
-        <button onClick={handleContactClick} style={navBtnStyle}>Contact</button>
+        {NAV_LINKS.map(({ label, path }) => (
+          <button
+            key={path}
+            className="nav-link-btn"
+            onClick={() => handleNavClick(path)}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <div className="nav-cta-container">
-        <button
-          onClick={handleBookVisit}
-          className="nav-cta"
-          style={{
-            border: 'none',
-            background: 'var(--red)',
-            color: '#fff',
-            padding: '0.5rem 1.2rem',
-            fontSize: '0.8rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            borderRadius: '8px',
-          }}
-        >
+        <button onClick={handleBookVisit} className="nav-cta">
           Book Site Visit
         </button>
       </div>
