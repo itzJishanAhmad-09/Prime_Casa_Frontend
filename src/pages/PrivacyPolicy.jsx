@@ -237,7 +237,7 @@ const PrivacyPolicy = () => {
                 <div>
                   <p><IconMail size={18} color="var(--gold-l)" /> crm@theprimecasa.in</p>
                   <p><IconPhone size={18} color="var(--gold-l)" /> +91 8130504183</p>
-                  <p><IconMapPin size={18} color="var(--gold-l)" /> Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304</p>
+                  <p><IconMapPin size={18} color="var(--gold-l)" />  Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304</p>
                 </div>
                 <div></div>
               </div>

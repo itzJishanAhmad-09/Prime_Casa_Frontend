@@ -104,7 +104,7 @@ const AboutUs = () => {
             {[
               {
                 name: 'MAM',
-                role: 'FOUNDER & CEO', 
+                role: 'FOUNDER & CEO',
                 img: '',
                 desc: 'Sachin Gupta is the Founder and CEO of Prime Casa. He has done B.A. in Economics from Delhi University before obtaining his masters in Marketing & Finance from IBS, Hyderabad. Prior to starting his own firm Prime Casa, Sachin has more than 15+ years of experience in leading banking firms including ICICI, HSBC, and Standard Chartered.'
               },
@@ -122,13 +122,13 @@ const AboutUs = () => {
               },
               {
                 name: 'SAJAL GUPTA',
-                role: 'SENIOR SALE MANAGER',
+                role: 'SENIOR SALES MANAGER',
                 img: '/assets/images/Sajal_Gupta.webp',
                 desc: 'Sajal Gupta is a  BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.'
               },
               {
                 name: 'ABHISHEK GUPTA',
-                role: 'ASSISSTANT SALE MANAGER',
+                role: 'ASSISSTANT SALES MANAGER',
                 img: '/assets/images/Abhishek_Gupta.webp',
                 desc: 'Assistant Sales Manager specialising in commercial and residential real estate across Delhi NCR and Noida. With over 2 years of industry experience and an MBA from Galgotias University, I help clients make informed property decisions while driving sales growth.'
               }
