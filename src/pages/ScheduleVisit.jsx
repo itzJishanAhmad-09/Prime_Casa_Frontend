@@ -109,7 +109,7 @@ const ScheduleVisit = () => {
                 <IconMapPin size={22} color="var(--red)" />
                 <div>
                   <h4>Location</h4>
-                  <p>Unit No 1230, TOWER-B, Bhutani Alphathum, Sector 90, Noida, UP 201304</p>
+                  <p>Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida, Uttar Pradesh 201304</p>
                 </div>
               </div>
               <div className="info-item">

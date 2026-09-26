@@ -155,7 +155,7 @@ const Footer = () => {
           <NavButton onClick={() => scrollTo('contact')}>
             <span style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
               <IconMapPin size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
-              Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304
+              Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida, Uttar Pradesh 201304
             </span>
           </NavButton>
           <span className="footer-hours">Tue–Sun · 11 AM – 7 PM</span>

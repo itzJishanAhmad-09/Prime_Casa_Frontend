@@ -182,7 +182,7 @@ const TermsPage = () => {
                   <p><IconPhone size={18} color="var(--gold-l)" /> +91 8130504183</p>
                 </div>
                 <div>
-                  <p><IconMapPin size={18} color="var(--gold-l)" /> Unit No 1230,TOWER-B, Bhutani Alphathum, Sector 90, Noida, Uttar Pradesh 201304</p>
+                  <p><IconMapPin size={18} color="var(--gold-l)" /> Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida, Uttar Pradesh 201304</p>
                 </div>
               </div>
             </article>

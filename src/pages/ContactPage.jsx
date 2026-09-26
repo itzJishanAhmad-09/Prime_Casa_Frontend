@@ -29,7 +29,7 @@ const ContactPage = () => {
       const digitsOnly = value.replace(/\D/g, '');
       if (digitsOnly.length > 10) return;
       setFormData({ ...formData, [name]: digitsOnly });
-
+ 
       if (digitsOnly.length === 10) {
         setPhoneError('');
       } else {
@@ -120,7 +120,7 @@ const ContactPage = () => {
                 <IconMapPin size={22} color="var(--red)" />
                 <div>
                   <p className="info-label">Head Office</p>
-                  <p className="info-value">Unit No 1230, TOWER-B, Bhutani Alphathum,<br />Sector 90, Noida, UP 201304</p>
+                  <p className="info-value">Unit No. 302, Regus Tower, 3rd Floor,<br />Sector 142, Noida, Uttar Pradesh 201304</p>
                 </div>
               </div>
               <div className="info-item">
