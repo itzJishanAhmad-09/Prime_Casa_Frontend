@@ -294,12 +294,12 @@ const ScheduleVisit = () => {
             <div className="showcase-card" key={project.id}>
               <div className="showcase-card-image">
                 <img
-                  src={isImagePath(project.emoji) ? project.emoji : '/assets/images/placeholder.jpg'}
+                  src={isImagePath(project.emoji) ? project.emoji : '/assets/images/placeholder.webp'}
                   alt={project.title}
                   loading="lazy"
                   width="400"
                   height="200"
-                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
                   style={{
                     width: '100%',
                     height: '100%',

@@ -115,7 +115,7 @@ const ProjectDetail = () => {
             src={heroImage}
             alt={project.title}
             style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.5)' }}
-            onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+            onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
           />
         </div>
         <div
@@ -411,7 +411,7 @@ const ProjectDetail = () => {
                 <div
                   style={{
                     height: '160px',
-                    background: `url(${isImagePath(similar.emoji) ? similar.emoji : '/assets/images/placeholder.jpg'}) center/cover`,
+                    background: `url(${isImagePath(similar.emoji) ? similar.emoji : '/assets/images/placeholder.webp'}) center/cover`,
                   }}
                 />
                 <div style={{ padding: '1rem' }}>

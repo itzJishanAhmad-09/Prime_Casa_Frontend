@@ -78,7 +78,7 @@ const Blog = ({ news }) => {
                       height="200"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => {
-                        e.target.src = '/assets/images/placeholder.jpg';
+                        e.target.src = '/assets/images/placeholder.webp';
                       }}
                     />
                   ) : (

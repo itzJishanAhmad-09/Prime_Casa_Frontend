@@ -129,7 +129,7 @@ const BlogDetail = () => {
             width="1200"
             height="600"
             style={{ willChange: 'transform', width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+            onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
           />
           <div className="blog-detail-hero-overlay"></div>
         </div>
@@ -211,7 +211,7 @@ const BlogDetail = () => {
                   width="400"
                   height="200"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
                 />
                 <span className="blog-related-card-badge">{item.tag || 'Insight'}</span>
               </div>

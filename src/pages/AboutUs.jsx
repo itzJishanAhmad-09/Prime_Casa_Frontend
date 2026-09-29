@@ -52,7 +52,7 @@ const AboutUs = () => {
                   loading="lazy"
                   width="600"
                   height="420"
-                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
                 />
               </div>
               <div className="about-details-img-small">
@@ -62,7 +62,7 @@ const AboutUs = () => {
                   loading="lazy"
                   width="280"
                   height="200"
-                  onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                  onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
                 />
               </div>
             </div>

@@ -59,7 +59,7 @@ const BlogList = () => {
                       src={item.emoji}
                       alt={item.title}
                       loading="lazy"
-                      onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+                      onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
                     />
                   ) : (
                     <span className="blog-card-emoji">{item.emoji || '📰'}</span>

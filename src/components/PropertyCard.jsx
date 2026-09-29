@@ -19,7 +19,7 @@ const PropertyCard = ({ project, variant = 'grid' }) => {
             decoding="async"
             height={isSlider ? 180 : 160}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={(e) => { e.target.src = '/assets/images/placeholder.jpg'; }}
+            onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
           />
         ) : isSlider ? (
           <span className="property-slide-emoji">{project.emoji || '🏠'}</span>
