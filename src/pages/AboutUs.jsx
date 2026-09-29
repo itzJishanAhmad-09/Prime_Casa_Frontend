@@ -115,12 +115,6 @@ const AboutUs = () => {
                 desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.'
               },
               {
-                name: 'Surbhi Khullar',
-                role: 'Director',
-                img: '/assets/images/Shurbhi_Khullar.webp',
-                desc: 'Surbhi Khullar is an MBA in Marketing from Chandigarh University with 5 years of experience in real estate. She combines strong market understanding with expertise in client relationships, negotiation, and team handling to deliver strategic, client-focused solutions in the real estate industry.'
-              },
-              {
                 name: 'SAJAL GUPTA',
                 role: 'SENIOR SALES MANAGER',
                 img: '/assets/images/Sajal_Gupta.webp',
