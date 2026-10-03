@@ -40,15 +40,6 @@ const Navbar = ({ scrollTo }) => {
   return (
     <nav>
       <div className="nav-left">
-        <button
-          className="hamburger"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          <IconMenu2 size={24} />
-        </button>
-
         <div
           className="nav-logo"
           onClick={() => handleNavClick('/')}
@@ -66,6 +57,7 @@ const Navbar = ({ scrollTo }) => {
             height="80"
           />
         </div>
+        <span className="nav-brand-text">The Prime Casa</span>
       </div>
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
@@ -78,6 +70,9 @@ const Navbar = ({ scrollTo }) => {
             {label}
           </button>
         ))}
+        <button onClick={handleBookVisit} className="mobile-cta">
+          Book Site Visit
+        </button>
       </div>
 
       <div className="nav-cta-container">
@@ -90,6 +85,14 @@ const Navbar = ({ scrollTo }) => {
         </a>
         <button onClick={handleBookVisit} className="nav-cta">
           Book Site Visit
+        </button>
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <IconMenu2 size={24} />
         </button>
       </div>
     </nav>

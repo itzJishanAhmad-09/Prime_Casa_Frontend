@@ -141,29 +141,7 @@ h1, h2, h3, h4, h5, h6,
 
 
 /* ------------------------------------------------------------
-   04. TICKER
-   ------------------------------------------------------------ */
-.ticker {
-  background: var(--red);
-  color: #fff;
-  font-size: 0.7rem;
-  padding: 0.4rem 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.ticker-in {
-  display: inline-block;
-  animation: tickerScroll 35s linear infinite;
-  padding-left: 100%;
-}
-@keyframes tickerScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-
-/* ------------------------------------------------------------
-   05. NAVBAR
+   04. NAVBAR
    ------------------------------------------------------------ */
 nav {
   display: flex;
@@ -197,6 +175,8 @@ nav {
   width: auto;
   display: block;
 }
+
+.nav-brand-text { display: none; }
 
 .nav-links {
   display: flex;
@@ -287,35 +267,111 @@ nav {
   padding: 0.25rem;
 }
 
+/* Hide mobile-only CTA on desktop */
+.mobile-cta { display: none; }
+
 /* Mobile drawer */
 @media (max-width: 768px) {
+  nav { padding: 0 16px; }
+
+  .nav-logo img { height: 40px; width: auto; }
+  .nav-left {
+    gap: 0.5rem;
+    max-width: 65vw;
+    min-width: 0;
+  }
+
+  .nav-brand-text {
+    display: block;
+    color: var(--txt);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
   .nav-links {
     display: none;
     flex-direction: column;
     gap: 0;
     position: absolute;
-    top: var(--nav-h);
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 0.8rem 1.2rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    top: calc(var(--nav-h) + 8px);
+    left: 50%;
+    right: auto;
+    width: min(480px, calc(100vw - 32px));
+    margin: 0;
+    max-height: calc(100vh - var(--nav-h) - 24px);
+    max-height: calc(100dvh - var(--nav-h) - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(-50%);
+    background: var(--ivory);
+    border-radius: 16px;
+    padding: 12px 18px 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    z-index: 200;
   }
   .nav-links.open { display: flex; }
+
   .nav-links .nav-link-btn {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--txt);
+    text-align: left;
+    line-height: 1.3;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--sand-2);
+    width: 100%;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
   }
-  .nav-links .nav-link-btn:last-child { border-bottom: none; }
-  .hamburger { display: block; }
-  .nav-cta { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
-  .nav-right { gap: 0.3rem; }
+  .nav-links .nav-link-btn::after { display: none; }
+  .nav-links .nav-link-btn:last-of-type { border-bottom: none; }
+
+  /* Mobile-only CTA inside the dropdown */
+  .nav-links .mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .nav-links .mobile-cta:hover { background: var(--red-d); }
+
+  /* Navbar row adjustments */
+  .nav-call-btn { display: none; }
+  .nav-cta { display: none; }
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-cta-container { gap: 0.3rem; }
+}
+
+/* Shrink brand text on very small phones */
+@media (max-width: 380px) {
+  .nav-brand-text { font-size: 0.85rem; }
 }
 
 
 /* ------------------------------------------------------------
-   06. HERO
+   05. HERO
    ------------------------------------------------------------ */
 .hero {
   position: relative;
@@ -500,7 +556,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   07. METRICS BAR
+   06. METRICS BAR
    ------------------------------------------------------------ */
 .metrics-bar {
   width: 100%;
@@ -548,14 +604,9 @@ nav {
 
 
 /* ------------------------------------------------------------
-   08. GENERIC SECTIONS
+   07. GENERIC SECTIONS
    ------------------------------------------------------------ */
 .section { padding: 3rem 1rem; }
-.section-alt {
-  background: var(--bg-1);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
 .section-header { text-align: center; margin-bottom: 2rem; }
 .section-label {
   font-size: 0.65rem;
@@ -580,7 +631,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   09. PROPERTIES SLIDER
+   08. PROPERTIES SLIDER
    ------------------------------------------------------------ */
 .properties-slider-wrapper {
   max-width: 1200px;
@@ -598,7 +649,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   10. PROPERTY CARD (pc-*)
+   09. PROPERTY CARD (pc-*)
    ------------------------------------------------------------ */
 .pc-card {
   display: flex;
@@ -829,7 +880,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   11. EXCLUSIVE SERVICES (exc-*)
+   10. EXCLUSIVE SERVICES (exc-*)
    ------------------------------------------------------------ */
 .exc-section {
   width: 100%;
@@ -965,7 +1016,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   12. HOW IT WORKS (steps-*)
+   11. HOW IT WORKS (steps-*)
    ------------------------------------------------------------ */
 .steps-section {
   width: 100%;
@@ -1110,7 +1161,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   13. TOOLKIT (tk-*)
+   12. TOOLKIT (tk-*)
    ------------------------------------------------------------ */
 .tk-section {
   width: 100%;
@@ -1587,7 +1638,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   14. QUOTE BANNER (quote-banner-*)
+   13. QUOTE BANNER (quote-banner-*)
    ------------------------------------------------------------ */
 .quote-banner {
   width: 100%;
@@ -1689,7 +1740,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   15. BLOG SLIDER (blog-section, blog-card)
+   14. BLOG SLIDER (blog-section, blog-card)
    ------------------------------------------------------------ */
 .blog-section {
   width: 100%;
@@ -1894,7 +1945,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   16. TESTIMONIALS SLIDER (tst-*)
+   15. TESTIMONIALS SLIDER (tst-*)
    ------------------------------------------------------------ */
 .tst-section {
   width: 100%;
@@ -2103,7 +2154,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   17. WHY US (au-why-*)
+   16. WHY US (au-why-*)
    ------------------------------------------------------------ */
 .au-why {
   width: 100%;
@@ -2245,7 +2296,7 @@ nav {
 
 
 /* ------------------------------------------------------------
-   18. CONTACT SECTION (ct-*)
+   17. CONTACT SECTION (ct-*)
    ------------------------------------------------------------ */
 .ct-section {
   width: 100%;
@@ -2483,7 +2534,7 @@ a.ct-contact-item:hover { opacity: 0.8; }
 
 
 /* ------------------------------------------------------------
-   19. FOOTER (ft-*)
+   18. FOOTER (ft-*)
    ------------------------------------------------------------ */
 .ft-root {
   position: relative;
@@ -2806,7 +2857,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   20. WHATSAPP FLOAT
+   19. WHATSAPP FLOAT
    ------------------------------------------------------------ */
 .wa-float {
   position: fixed;
@@ -2845,65 +2896,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   21. STICKY CTA (legacy, kept for future use)
-   ------------------------------------------------------------ */
-.sticky-cta-wrapper {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 900;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: #ffffff;
-  padding: 0.4rem 0.4rem 0.4rem 0.6rem;
-  border-radius: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--border);
-}
-.sticky-call-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid var(--border-s);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--txt);
-  transition: all 0.2s ease;
-}
-.sticky-call-btn:hover {
-  background: var(--bg-1);
-  border-color: var(--red);
-  color: var(--red);
-}
-.sticky-book-btn {
-  background: var(--red);
-  color: #ffffff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s ease;
-}
-.sticky-book-btn:hover { background: var(--red-d); }
-
-@media (max-width: 480px) {
-  .sticky-cta-wrapper {
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    justify-content: center;
-  }
-  .sticky-book-btn { flex: 1; text-align: center; }
-}
-
-
-/* ------------------------------------------------------------
-   22. VISIT MODAL (vm-*)
+   20. VISIT MODAL (vm-*)
    ------------------------------------------------------------ */
 .vm-overlay {
   position: fixed;
@@ -3147,7 +3140,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   23. ABOUT PAGE (au-*)
+   21. ABOUT PAGE (au-*)
    ------------------------------------------------------------ */
 .about-us-page { --about-blue: #007CC2; --about-blue-bg: #F3F7FD; }
 
@@ -3449,7 +3442,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   24. SERVICE PAGE (sp-*)
+   22. SERVICE PAGE (sp-*)
    ------------------------------------------------------------ */
 .sp-page { background: var(--cream); color: var(--txt); min-height: 100vh; }
 
@@ -3929,7 +3922,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   25. PROPERTIES PAGE (pp-*)
+   23. PROPERTIES PAGE (pp-*)
    ------------------------------------------------------------ */
 .pp-hero {
   position: relative;
@@ -4227,7 +4220,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   26. BLOG LIST PAGE (bp-*)
+   24. BLOG LIST PAGE (bp-*)
    ------------------------------------------------------------ */
 .bp-hero {
   position: relative;
@@ -4473,7 +4466,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   27. BLOG DETAIL PAGE (bpd-*)
+   25. BLOG DETAIL PAGE (bpd-*)
    ------------------------------------------------------------ */
 .bpd-page {
   width: 100%;
@@ -4735,7 +4728,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   28. CONTACT PAGE (cp-*)
+   26. CONTACT PAGE (cp-*)
    ------------------------------------------------------------ */
 .cp-hero {
   position: relative;
@@ -5000,7 +4993,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   29. PROJECT DETAIL PAGE (pd-*)
+   27. PROJECT DETAIL PAGE (pd-*)
    ------------------------------------------------------------ */
 .pd-page {
   width: 100%;
@@ -5449,7 +5442,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   30. PRIVACY PAGE (privacy-*)
+   28. PRIVACY PAGE (privacy-*)
    ------------------------------------------------------------ */
 .privacy-hero-banner {
   position: relative;
@@ -5795,7 +5788,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   31. TERMS PAGE (terms-*)
+   29. TERMS PAGE (terms-*)
    ------------------------------------------------------------ */
 .terms-hero-banner {
   position: relative;
@@ -6054,7 +6047,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 
 /* ------------------------------------------------------------
-   32. GLOBAL BUTTONS (btn-red, btn-sm)
+   30. GLOBAL BUTTONS
    ------------------------------------------------------------ */
 .btn-red {
   display: inline-flex;
@@ -6072,29 +6065,9 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 }
 .btn-red:hover { background: var(--red-d); }
 
-.btn-sm {
-  flex: 1;
-  padding: 0.5rem 0;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  transition: background var(--t);
-}
-.btn-sm-red { background: var(--red); color: #fff; }
-.btn-sm-red:hover { background: var(--red-d); }
-.btn-sm-out {
-  background: transparent;
-  color: var(--red);
-  border: 1px solid var(--border-s);
-}
-.btn-sm-out:hover { background: var(--bg-1); }
-
 
 /* ------------------------------------------------------------
-   33. ANIMATIONS & ACCESSIBILITY
+   31. ANIMATIONS & ACCESSIBILITY
    ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -6106,4 +6079,3 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
     scroll-behavior: auto !important;
   }
 }
-

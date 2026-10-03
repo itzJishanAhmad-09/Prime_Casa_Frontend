@@ -11,7 +11,7 @@ const LEADERS = [
   {
     name: 'SUDHI YADAV',
     role: 'Founder & Director',
-    img: '/assets/images/Sudhi_Yadav.jpeg',
+    img: '/assets/images/Sudhi_Yadav.webp',
     desc: 'Sudhi Yadav is the Founder and Director of The Prime Casa Realty Pvt. Ltd. With an MBA completed in 2015 and experience in real estate since 2016, she brings expertise in business development, sales, marketing, and client relationships. With a strong strategic vision and leadership approach, she drives the company’s growth while delivering innovative and customer-focused real estate solutions.'
   },
   {
@@ -21,22 +21,23 @@ const LEADERS = [
     desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
   },
   {
-    name: 'RONIT',
-    role: 'Director',
-    img: '/assets/images/',
-    desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
-  },
-  {
     name: 'SAJAL GUPTA',
     role: 'Senior Sales Manager',
     img: '/assets/images/Sajal_Gupta.webp',
-    desc: 'Sajal Gupta is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
+    desc: 'Sajal Gupta is a B. A. Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
   },
+  {
+    name: 'RONIT VARSHNEY',
+    role: 'Senior Sales Manager',
+    img: '/assets/images/Ronit_Varshney.webp',
+    desc: 'BBA graduate with 5 years of experience in real estate, specializing in sales, client relationship management, and business development. With strong communication skills and a customer-focused approach, he is committed to delivering effective property solutions, building lasting client relationships, and driving business growth.',
+  },
+
    {
     name: 'ANJALI VASHISHTH',
-    role: 'ASSISTANT SALES MANAGER',
-    img: '/assets/images/Anjali_Vashisht.jpeg',
-    desc: 'Anjali Vashisht is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. She combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
+    role: 'Assistant Sales Manager',
+    img: '/assets/images/Anjali_Vashisht.webp',
+    desc: 'Anjali Vashisht is a B Economics graduate with 4 years of business ownership experience and 3 years in real estate. She combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
   },
 ];
 
