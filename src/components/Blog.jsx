@@ -15,92 +15,113 @@ const Blog = ({ news }) => {
   const hasNews = useMemo(() => news && news.length > 0, [news]);
 
   if (!hasNews) {
-    return (
-      <section className="section" id="blog">
-        <div className="section-header">
-          <div className="section-label">Latest Blog Posts</div>
-          <div className="section-title">Noida Real Estate Blog</div>
-          <div className="section-sub">
-            Stay updated with the latest market trends and insights
-          </div>
-        </div>
-        <p style={{ textAlign: 'center', color: 'var(--txt3)' }}>
-          No blog posts available.
-        </p>
-      </section>
-    );
+    return null;
   }
 
   return (
-    <section className="section" id="blog">
-      <div className="section-header">
-        <div className="section-label">Latest Blog Posts</div>
-        <div className="section-title">Noida Real Estate Blog</div>
-        <div className="section-sub">
-          Stay ahead with the latest market developments, launches, and policy
-          updates
-        </div>
-      </div>
+    <section className="blog-section" id="blog">
+      <div className="blog-inner">
 
-      <div className="blog-slider-wrapper">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={30}
-          slidesPerView={1}
-          centeredSlides
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          loop
-          speed={600}
-          breakpoints={{
-            640: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2, spaceBetween: 30 },
-            1024: { slidesPerView: 3, spaceBetween: 30 },
-          }}
-          className="blog-swiper"
-          aria-label="Blog posts carousel"
-        >
-          {news.map((item) => (
-            <SwiperSlide key={item.id || item.slug}>
-              <div className="blog-slide-card">
-                <div className="blog-slide-img">
-                  {isImagePath(item.image || item.emoji) ? (
-                    <img
-                      src={item.image || item.emoji}
-                      alt={item.title}
-                      loading="lazy"
-                      decoding="async"
-                      width="400"
-                      height="200"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      onError={(e) => {
-                        e.target.src = '/assets/images/placeholder.webp';
-                      }}
-                    />
-                  ) : (
-                    <span className="blog-slide-emoji" aria-hidden="true">
-                      {item.emoji || '📰'}
-                    </span>
-                  )}
-                </div>
-                <div className="blog-slide-body">
-                  <div className="blog-slide-tag">
-                    {item.tag} · {item.date}
-                  </div>
-                  <div className="blog-slide-title">{item.title}</div>
-                  <div className="blog-slide-excerpt">{item.excerpt}</div>
-                  <Link to={`/blog/${item.slug}`} className="blog-slide-link">
-                    Read More →
+        {/* ---------- Header ---------- */}
+        <header className="blog-header">
+          <div className="blog-header-left">
+            <div className="blog-eyebrow">
+              <span className="blog-eyebrow-dot" aria-hidden="true" />
+              Noida Real Estate Blog
+            </div>
+            <h2 className="blog-title">
+              Market <em>intelligence.</em>
+            </h2>
+          </div>
+
+          <Link to="/blog" className="blog-viewall">
+            <span>All insights</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                 strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
+        </header>
+
+        {/* ---------- Slider ---------- */}
+        <div className="blog-slider-wrap">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={28}
+            slidesPerView={1}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            loop
+            speed={600}
+            breakpoints={{
+              640: { slidesPerView: 1, spaceBetween: 24 },
+              768: { slidesPerView: 2, spaceBetween: 28 },
+              1024: { slidesPerView: 3, spaceBetween: 32 },
+            }}
+            className="blog-swiper"
+            aria-label="Real estate insights"
+          >
+            {news.map((item) => (
+              <SwiperSlide key={item.id || item.slug}>
+                <article className="blog-card">
+                  <Link
+                    to={`/blog/${item.slug}`}
+                    className="blog-card-media"
+                    aria-label={`Read: ${item.title}`}
+                  >
+                    {isImagePath(item.image || item.emoji) ? (
+                      <img
+                        src={item.image || item.emoji}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          e.target.src = '/assets/images/placeholder.webp';
+                        }}
+                      />
+                    ) : (
+                      <span className="blog-card-emoji" aria-hidden="true">
+                        {item.emoji || '📰'}
+                      </span>
+                    )}
+
+                    {item.tag && (
+                      <span className="blog-card-tag">{item.tag.toUpperCase()}</span>
+                    )}
                   </Link>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+
+                  <div className="blog-card-body">
+                    {item.date && (
+                      <span className="blog-card-date">{item.date.toUpperCase()}</span>
+                    )}
+
+                    <h3 className="blog-card-title">{item.title}</h3>
+
+                    <p className="blog-card-excerpt">{item.excerpt}</p>
+
+                    <Link
+                      to={`/blog/${item.slug}`}
+                      className="blog-card-link"
+                    >
+                      Read more
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"
+                           strokeLinejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </Link>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
       </div>
     </section>
   );

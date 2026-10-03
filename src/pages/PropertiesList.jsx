@@ -1,61 +1,126 @@
 // src/pages/PropertiesList.jsx
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Seo from '../components/Seo';
 import PropertyCard from '../components/PropertyCard';
 import { CATEGORY_MAP } from '../utils/helpers';
+import { IconChevronDown } from '@tabler/icons-react';
 
-const FILTER_TABS = ['all', 'residential', 'commercial', 'luxury', 'new'];
+const CATEGORY_CHIPS = [
+  { key: 'all',         label: 'All' },
+  { key: 'residential', label: 'Residential' },
+  { key: 'luxury',      label: 'Luxury' },
+  { key: 'commercial',  label: 'Commercial' },
+  { key: 'plots',       label: 'Plots & land' },
+  { key: 'new',         label: 'New launch' },
+];
+
+const SECTORS = [
+  { value: 'all', label: 'All sectors' },
+  { value: 'Sector 72',  label: 'Sector 72' },
+  { value: 'Sector 98',  label: 'Sector 98' },
+  { value: 'Sector 105', label: 'Sector 105' },
+  { value: 'Sector 107', label: 'Sector 107' },
+  { value: 'Sector 128', label: 'Sector 128' },
+  { value: 'Sector 142', label: 'Sector 142' },
+  { value: 'Sector 22D', label: 'Sector 22D · Yamuna Expwy' },
+  { value: 'Ramnagar',   label: 'Ramnagar · Uttarakhand' },
+];
+
+const BUDGETS = [
+  { value: 'all', label: 'Any budget' },
+  { value: 'u50', label: 'Under ₹50 L' },
+  { value: '50-100', label: '₹50 L – ₹1 Cr' },
+  { value: '100-200', label: '₹1 Cr – ₹2 Cr' },
+  { value: '200-500', label: '₹2 Cr – ₹5 Cr' },
+  { value: '500', label: 'Above ₹5 Cr' },
+];
+
+const STATUSES = [
+  { value: 'all', label: 'Any status' },
+  { value: 'New Launch', label: 'New launch' },
+  { value: 'Under Construction', label: 'Under construction' },
+  { value: 'Ready to Move', label: 'Ready to move' },
+];
 
 const PropertiesList = ({ projects }) => {
   const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState('all');
+  const [q, setQ] = useState('');
+  const [sector, setSector] = useState('all');
+  const [budget, setBudget] = useState('all');
+  const [status, setStatus] = useState('all');
 
-  const category = searchParams.get('cat')    || '';
-  const sector   = searchParams.get('sector') || '';
-  const status   = searchParams.get('status') || '';
+  // Read URL query params on mount
+  useEffect(() => {
+    const urlCat = searchParams.get('cat');
+    const urlSector = searchParams.get('sector');
+    const urlStatus = searchParams.get('status');
+    if (urlCat) {
+      const catLower = urlCat.toLowerCase();
+      if (catLower === 'popular') setFilter('all');
+      else if (catLower === 'new launch') setFilter('new');
+      else setFilter(catLower);
+    }
+    if (urlSector) setSector(urlSector);
+    if (urlStatus) setStatus(urlStatus);
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
-    let result = projects.filter((p) => {
-      // Category filter — driven by shared CATEGORY_MAP (no brittle string literals)
-      let catMatch = true;
-      if (category) {
-        const catLower = category.toLowerCase();
-        const mappedType = CATEGORY_MAP[catLower];
-        if (mappedType) {
-          catMatch = p.type === mappedType;
-        } else if (catLower === 'popular') {
-          catMatch = p.tag === 'popular';
-        } else if (catLower === 'new launch') {
-          catMatch = p.tag === 'new';
-        }
+    if (!projects || projects.length === 0) return [];
+
+    return projects.filter((p) => {
+      // Filter chip
+      let chipMatch = true;
+      if (filter !== 'all') {
+        if (filter === 'new') chipMatch = p.tag === 'new';
+        else if (filter === 'plots') chipMatch = p.type === 'plots';
+        else chipMatch = p.type === filter;
       }
 
-      // Sector filter
-      const sectorMatch = sector
-        ? p.loc.toLowerCase().includes(sector.toLowerCase())
-        : true;
+      // Sector
+      const sectorMatch = sector === 'all'
+        ? true
+        : p.loc.toLowerCase().includes(sector.toLowerCase());
 
-      // Status filter
-      const statusMatch = status
-        ? p.status.toLowerCase().includes(status.toLowerCase())
-        : true;
+      // Status
+      const statusMatch = status === 'all'
+        ? true
+        : p.status.toLowerCase().includes(status.toLowerCase());
 
-      return catMatch && sectorMatch && statusMatch;
+      // Budget
+      let budgetMatch = true;
+      if (budget !== 'all' && p.price) {
+        const ranges = {
+          u50: [0, 5e6],
+          '50-100': [5e6, 1e7],
+          '100-200': [1e7, 2e7],
+          '200-500': [2e7, 5e7],
+          '500': [5e7, Infinity],
+        };
+        const [min, max] = ranges[budget] || [0, Infinity];
+        budgetMatch = p.price >= min && p.price < max;
+      }
+
+      // Search query
+      const query = q.trim().toLowerCase();
+      const queryMatch = !query
+        ? true
+        : `${p.name || p.title} ${p.builder} ${p.loc} ${p.beds}`
+            .toLowerCase()
+            .includes(query);
+
+      return chipMatch && sectorMatch && statusMatch && budgetMatch && queryMatch;
     });
+  }, [projects, filter, sector, status, budget, q]);
 
-    if (filter !== 'all') {
-      result = result.filter(
-        (p) => p.type === filter || (filter === 'new' && p.tag === 'new')
-      );
-    }
-
-    return result;
-  }, [projects, filter, category, sector, status]);
-
-  if (!projects || projects.length === 0) {
-    return <p style={{ textAlign: 'center', padding: '40px' }}>No properties available.</p>;
-  }
+  const resetFilters = () => {
+    setFilter('all');
+    setSector('all');
+    setBudget('all');
+    setStatus('all');
+    setQ('');
+  };
 
   return (
     <>
@@ -64,55 +129,176 @@ const PropertiesList = ({ projects }) => {
         description="Browse all RERA-verified residential and commercial properties in Noida, Greater Noida, and Yamuna Expressway."
       />
 
-      <section className="property-hero-banner">
-        <div className="property-hero-bg" />
-        <div className="property-hero-overlay" />
-        <div className="property-hero-container">
-          <div className="property-hero-content">
-            <ul className="property-breadcrumb">
-              <li><Link to="/">Home</Link></li>
-              <li>/</li>
-              <li>Properties</li>
-            </ul>
-            <h1 className="property-hero-title">All Properties</h1>
-            <p className="property-hero-sub">
-              Handpicked RERA-verified properties with the highest buyer interest &amp; market confidence
-            </p>
-          </div>
+      {/* ================================================== */}
+      {/* HERO                                                */}
+      {/* ================================================== */}
+      <section className="pp-hero">
+        <div className="pp-hero-bg" aria-hidden="true" />
+        <div className="pp-hero-scrim" aria-hidden="true" />
+
+        <div className="pp-hero-inner">
+          <nav className="pp-crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <span className="pp-crumb-current">Properties</span>
+          </nav>
+
+          <h1 className="pp-hero-title">
+            All properties,<br />
+            <em>verified.</em>
+          </h1>
+
+          <p className="pp-hero-sub">
+            Handpicked RERA-verified projects with the highest buyer
+            interest and market confidence.
+          </p>
         </div>
       </section>
 
-      <section className="property-preview-section">
-        <div className="property-preview-header">
-          <span className="property-preview-label">Browse All</span>
-          <h2>Trending Properties in Noida</h2>
-          <p>Handpicked RERA-verified properties with the highest buyer interest &amp; market confidence</p>
-        </div>
+      {/* ================================================== */}
+      {/* FILTER BAR                                          */}
+      {/* ================================================== */}
+      <section className="pp-filters">
+        <div className="pp-filters-inner">
 
-        <div className="property-filters">
-          {FILTER_TABS.map((f) => (
+          {/* Category chips */}
+          <div className="pp-chips" role="group" aria-label="Property type">
+            {CATEGORY_CHIPS.map((c) => (
+              <button
+                key={c.key}
+                type="button"
+                className={`pp-chip ${filter === c.key ? 'is-active' : ''}`}
+                aria-pressed={filter === c.key}
+                onClick={() => setFilter(c.key)}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Dropdown row */}
+          <div className="pp-bar">
+            <div className="pp-field">
+              <label htmlFor="pp-q">Search</label>
+              <input
+                id="pp-q"
+                type="search"
+                placeholder="Project or developer"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+              />
+            </div>
+
+            <div className="pp-field">
+              <label htmlFor="pp-cat">Category</label>
+              <select
+                id="pp-cat"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                {CATEGORY_CHIPS.map((c) => (
+                  <option key={c.key} value={c.key}>{c.label}</option>
+                ))}
+              </select>
+              <IconChevronDown size={14} className="pp-field-chev" aria-hidden="true" />
+            </div>
+
+            <div className="pp-field">
+              <label htmlFor="pp-sector">Sector</label>
+              <select
+                id="pp-sector"
+                value={sector}
+                onChange={(e) => setSector(e.target.value)}
+              >
+                {SECTORS.map((s) => (
+                  <option key={s.value} value={s.value}>{s.label}</option>
+                ))}
+              </select>
+              <IconChevronDown size={14} className="pp-field-chev" aria-hidden="true" />
+            </div>
+
+            <div className="pp-field">
+              <label htmlFor="pp-budget">Budget</label>
+              <select
+                id="pp-budget"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
+              >
+                {BUDGETS.map((b) => (
+                  <option key={b.value} value={b.value}>{b.label}</option>
+                ))}
+              </select>
+              <IconChevronDown size={14} className="pp-field-chev" aria-hidden="true" />
+            </div>
+
+            <div className="pp-field">
+              <label htmlFor="pp-status">Status</label>
+              <select
+                id="pp-status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                {STATUSES.map((s) => (
+                  <option key={s.value} value={s.value}>{s.label}</option>
+                ))}
+              </select>
+              <IconChevronDown size={14} className="pp-field-chev" aria-hidden="true" />
+            </div>
+
             <button
-              key={f}
-              className={`property-filter-btn ${filter === f ? 'active' : ''}`}
-              onClick={() => setFilter(f)}
               type="button"
+              className="pp-reset"
+              onClick={resetFilters}
             >
-              {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
+              Reset
             </button>
-          ))}
-        </div>
+          </div>
 
-        <div className="property-card-grid">
-          {filtered.map((project) => (
-            <PropertyCard key={project.id} project={project} variant="grid" />
-          ))}
         </div>
+      </section>
 
-        {filtered.length === 0 && (
-          <p style={{ textAlign: 'center', color: 'var(--txt3)', marginTop: '2rem' }}>
-            No properties match your search criteria.
+      {/* ================================================== */}
+      {/* RESULTS                                             */}
+      {/* ================================================== */}
+      <section className="pp-results">
+        <div className="pp-results-inner">
+          <p className="pp-count" aria-live="polite">
+            {filtered.length} {filtered.length === 1 ? 'PROPERTY' : 'PROPERTIES'}
+            {' · '}
+            ALL RERA-VERIFIED
           </p>
-        )}
+
+          {filtered.length === 0 ? (
+            <div className="pp-empty">
+              <h3>Nothing matches — yet.</h3>
+              <p>
+                We add verified projects every month. Loosen a filter, or
+                tell us what you&rsquo;re after and we&rsquo;ll scout it for you.
+              </p>
+              <div className="pp-empty-buttons">
+                <button
+                  type="button"
+                  className="pp-empty-btn pp-empty-btn--red"
+                  onClick={resetFilters}
+                >
+                  Clear filters
+                </button>
+                <Link
+                  to="/contact"
+                  className="pp-empty-btn pp-empty-btn--outline"
+                >
+                  Ask an advisor
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="pp-grid">
+              {filtered.map((project) => (
+                <PropertyCard key={project.id} project={project} />
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </>
   );

@@ -1,9 +1,8 @@
 // src/pages/BlogList.jsx
-import React, { useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { news } from '../data/news';
 import Seo from '../components/Seo';
-import { IconArrowRight } from '@tabler/icons-react';
 
 const isImagePath = (str) => {
   if (!str) return false;
@@ -15,68 +14,144 @@ const BlogList = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Build unique categories from data
+  const categories = useMemo(() => {
+    const set = new Set();
+    news.forEach((item) => {
+      if (item.tag) set.add(item.tag);
+    });
+    return ['ALL', ...Array.from(set)];
+  }, []);
+
+  const [activeCat, setActiveCat] = useState('ALL');
+
+  const filtered = useMemo(() => {
+    if (activeCat === 'ALL') return news;
+    return news.filter((item) => item.tag === activeCat);
+  }, [activeCat]);
+
   return (
     <>
       <Seo
-        title="Real Estate Blog"
+        title="Noida Real Estate Blog"
         description="Stay updated with the latest news, trends, and launches in Noida and Greater Noida real estate. Expert insights and policy updates."
       />
 
-      <section className="blog-hero-banner">
-        <div className="blog-hero-bg"></div>
-        <div className="blog-hero-overlay"></div>
-        <div className="blog-hero-container">
-          <div className="blog-hero-content">
-            <ul className="blog-breadcrumb">
-              <li><Link to="/">Home</Link></li>
-              <li>/</li>
-              <li>Blog</li>
-            </ul>
-            <h1 className="blog-hero-title">Noida Real Estate Blog</h1>
-            <p className="blog-hero-sub">
-              Stay ahead with the latest market developments, launches, and policy updates
-            </p>
+      {/* ================================================== */}
+      {/* HERO                                                */}
+      {/* ================================================== */}
+      <section className="bp-hero">
+        <div className="bp-hero-bg" aria-hidden="true" />
+        <div className="bp-hero-scrim" aria-hidden="true" />
+
+        <div className="bp-hero-inner">
+          <nav className="bp-crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <span className="bp-crumb-current">Blog</span>
+          </nav>
+
+          <h1 className="bp-hero-title">
+            Market<br />
+            <em>intelligence.</em>
+          </h1>
+
+          <p className="bp-hero-sub">
+            Launches, infrastructure and policy updates that move Noida
+            property values — curated for the discerning investor.
+          </p>
+        </div>
+      </section>
+
+      {/* ================================================== */}
+      {/* FILTER CHIPS                                        */}
+      {/* ================================================== */}
+      <section className="bp-filters">
+        <div className="bp-filters-inner">
+          <div className="bp-chips" role="group" aria-label="Filter by topic">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                className={`bp-chip ${activeCat === cat ? 'is-active' : ''}`}
+                aria-pressed={activeCat === cat}
+                onClick={() => setActiveCat(cat)}
+              >
+                {cat === 'ALL' ? 'All' : cat}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="blog-preview-section">
-        <div className="blog-preview-header">
-          <span className="blog-preview-label">Latest Blog Posts</span>
-          <h2>Noida Real Estate Blog</h2>
-          <p>Stay ahead with the latest market developments, launches, and policy updates</p>
-        </div>
+      {/* ================================================== */}
+      {/* POSTS GRID                                          */}
+      {/* ================================================== */}
+      <section className="bp-posts">
+        <div className="bp-posts-inner">
+          {filtered.length === 0 ? (
+            <p className="bp-empty">No articles in this category yet.</p>
+          ) : (
+            <div className="bp-grid">
+              {filtered.map((item) => (
+                <article className="bp-card" key={item.id || item.slug}>
+                  <Link
+                    to={`/blog/${item.slug}`}
+                    className="bp-card-media"
+                    aria-label={`Read: ${item.title}`}
+                  >
+                    {isImagePath(item.emoji) ? (
+                      <img
+                        src={item.emoji}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          e.target.src = '/assets/images/placeholder.webp';
+                        }}
+                      />
+                    ) : (
+                      <span className="bp-card-emoji" aria-hidden="true">
+                        {item.emoji || '📰'}
+                      </span>
+                    )}
 
-        {news.length === 0 ? (
-          <p style={{ textAlign: 'center', color: 'var(--txt3)' }}>No blog posts available.</p>
-        ) : (
-          <div className="blog-card-grid">
-            {news.map((item) => (
-              <div className="blog-card" key={item.id}>
-                <div className="blog-card-img">
-                  {isImagePath(item.emoji) ? (
-                    <img
-                      src={item.emoji}
-                      alt={item.title}
-                      loading="lazy"
-                      onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
-                    />
-                  ) : (
-                    <span className="blog-card-emoji">{item.emoji || '📰'}</span>
-                  )}
-                </div>
-                <div className="blog-card-body">
-                  <div className="blog-card-tag">{item.tag} · {item.date}</div>
-                  <div className="blog-card-title">{item.title}</div>
-                  <div className="blog-card-excerpt">{item.excerpt}</div>
-                  <Link to={`/blog/${item.slug}`} className="blog-card-link">
-                    Read More <IconArrowRight size={16} />
+                    {item.tag && (
+                      <span className="bp-card-tag">
+                        {item.tag.toUpperCase()}
+                      </span>
+                    )}
                   </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+
+                  <div className="bp-card-body">
+                    {item.date && (
+                      <span className="bp-card-date">
+                        {item.date.toUpperCase()}
+                      </span>
+                    )}
+
+                    <h3 className="bp-card-title">{item.title}</h3>
+
+                    <p className="bp-card-excerpt">{item.excerpt}</p>
+
+                    <Link
+                      to={`/blog/${item.slug}`}
+                      className="bp-card-link"
+                    >
+                      Read more
+                      <svg width="14" height="14" viewBox="0 0 24 24"
+                           fill="none" stroke="currentColor" strokeWidth="2.2"
+                           strokeLinecap="round" strokeLinejoin="round"
+                           aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </>
   );

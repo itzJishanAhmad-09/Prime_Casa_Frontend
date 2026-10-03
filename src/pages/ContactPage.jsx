@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { IconMapPin, IconPhone, IconClock } from '@tabler/icons-react';
+import { submitEnquiry } from '../services/api';
 
 const ContactPage = () => {
   useEffect(() => {
@@ -20,23 +20,18 @@ const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const [phoneError, setPhoneError] = useState('');
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === 'phone') {
       const digitsOnly = value.replace(/\D/g, '');
       if (digitsOnly.length > 10) return;
-      setFormData({ ...formData, [name]: digitsOnly });
- 
-      if (digitsOnly.length === 10) {
-        setPhoneError('');
-      } else {
-        setPhoneError('Phone number must be exactly 10 digits.');
-      }
+      setFormData((prev) => ({ ...prev, [name]: digitsOnly }));
+      setPhoneError(
+        digitsOnly.length === 10 ? '' : 'Phone number must be exactly 10 digits.'
+      );
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -52,39 +47,26 @@ const ContactPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await fetch(`${API_URL}/enquiries`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          preferredSector: formData.sector,
-          message: formData.message,
-          enquiryType: 'contact',
-        }),
+      await submitEnquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        preferredSector: formData.sector,
+        message: formData.message,
+        enquiryType: 'contact',
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus({
-          type: 'success',
-          message: 'Your enquiry has been sent! We will get back to you within 24 hours.',
-        });
-        setFormData({ name: '', email: '', phone: '', sector: '', message: '' });
-        setPhoneError('');
-      } else {
-        setStatus({
-          type: 'error',
-          message: data.message || 'Something went wrong. Please try again.',
-        });
-      }
+      setStatus({
+        type: 'success',
+        message: 'Your enquiry has been sent! We will get back to you within 24 hours.',
+      });
+      setFormData({ name: '', email: '', phone: '', sector: '', message: '' });
+      setPhoneError('');
     } catch (error) {
-      console.error('Failed to connect to server:', error);
+      console.error('Contact form submission failed:', error);
       setStatus({
         type: 'error',
-        message: 'Cannot connect to server. Please try again later.',
+        message: error.message || 'Something went wrong. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -98,163 +80,195 @@ const ContactPage = () => {
         description="Get in touch with Prime Casa – we'll help you find your dream property in Noida."
       />
 
-      <section className="contact-hero">
-        <div className="contact-hero-bg"></div>
-        <div className="contact-hero-overlay"></div>
-        <div className="contact-hero-content">
-          <ul className="about-breadcrumb" style={{ justifyContent: 'center' }}>
-            <li><Link to="/">Home</Link></li>
-            <li>/</li>
-            <li>Contact</li>
-          </ul>
-          <h1 className="contact-hero-title">Contact Us</h1>
+      {/* ---------- HERO ---------- */}
+      <section className="cp-hero">
+        <div className="cp-hero-bg" aria-hidden="true" />
+        <div className="cp-hero-scrim" aria-hidden="true" />
+
+        <div className="cp-hero-inner">
+          <nav className="cp-crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <span className="cp-crumb-current">Contact</span>
+          </nav>
+
+          <h1 className="cp-hero-title">
+            Let&rsquo;s find your <em>address.</em>
+          </h1>
+
+          <p className="cp-hero-sub">
+            Tell us your budget, sector and horizon — an advisor gets back
+            to you within 24 hours.
+          </p>
         </div>
       </section>
 
-      <section className="contact-page-section">
-        <div className="contact-page-grid">
-          <div className="contact-info-cards">
-            <div className="info-card">
-              <h3>Office Headquarters</h3>
-              <div className="info-item">
-                <IconMapPin size={22} color="var(--red)" />
-                <div>
-                  <p className="info-label">Head Office</p>
-                  <p className="info-value">Unit No. 302, Regus Tower, 3rd Floor,<br />Sector 142, Noida, Uttar Pradesh 201304</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <IconPhone size={22} color="var(--red)" />
-                <div>
-                  <p className="info-label">Phone Support</p>
-                  <p className="info-value">+91 8130504183</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <IconClock size={22} color="var(--red)" />
-                <div>
-                  <p className="info-label">Business Hours</p>
-                  <p className="info-value">Tue – Sun · 11 AM – 7 PM</p>
-                </div>
-              </div>
+      {/* ---------- BODY ---------- */}
+      <section className="cp-body">
+        <div className="cp-body-inner">
+
+          {/* ---------- LEFT: Info list ---------- */}
+          <aside className="cp-info">
+
+            <div className="cp-info-block">
+              <span className="cp-info-label">Head Office</span>
+              <p className="cp-info-value">
+                Unit No. 302, Regus Tower, 3rd Floor,<br />
+                Sector 142, Noida,<br />
+                Uttar Pradesh 201304
+              </p>
+              <a
+                className="cp-info-link"
+                href="https://www.google.com/maps/search/?api=1&query=Unit+No.+302+Regus+Tower+3rd+Floor+Sector+142+Noida+Uttar+Pradesh+201304"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Open in Google Maps</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" strokeWidth="2.2"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
             </div>
 
-            <div className="info-card cta-card">
-              <h3>Join Our Network</h3>
-              <p>Become a part of the fastest-growing premium real estate ecosystem.</p>
-              <Link to="/properties" className="cta-card-btn">Explore Properties</Link>
+            <div className="cp-info-block">
+              <span className="cp-info-label">Phone Support</span>
+              <p className="cp-info-value">+91 81305 04183</p>
+              <a className="cp-info-link" href="tel:+918130504183">
+                <span>Call now</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" strokeWidth="2.2"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
             </div>
-          </div>
 
-          <div className="contact-form-wrapper">
-            <h2>Send us a message</h2>
-            <p>Our dedicated team is ready to assist you with any inquiry.</p>
+            <div className="cp-info-block">
+              <span className="cp-info-label">Email</span>
+              <p className="cp-info-value">crm@theprimecasa.in</p>
+              <a className="cp-info-link" href="mailto:crm@theprimecasa.in">
+                <span>Write to us</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" strokeWidth="2.2"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+
+            <div className="cp-info-block">
+              <span className="cp-info-label">Business Hours</span>
+              <p className="cp-info-value">Tue – Sun · 11 AM – 7 PM</p>
+            </div>
+
+          </aside>
+
+          {/* ---------- RIGHT: Form card ---------- */}
+          <div className="cp-form-card">
+            <h2 className="cp-form-title">Send us a message</h2>
+            <p className="cp-form-sub">
+              Our team is ready to assist you with any inquiry.
+            </p>
 
             {status.message && (
-              <div
-                style={{
-                  padding: '12px 16px',
-                  borderRadius: '8px',
-                  marginBottom: '16px',
-                  background: status.type === 'success' ? '#F9FAFB' : '#FEE2DE',
-                  color: status.type === 'success' ? '#1F2937' : '#96281B',
-                  fontWeight: '500',
-                  border: status.type === 'success' ? '1px solid #E5E7EB' : 'none',
-                }}
-              >
+              <div className={`cp-status ${status.type}`} role="alert">
                 {status.message}
               </div>
             )}
 
-            <form onSubmit={submitContact} className="contact-page-form"
-              data-wmcp='{"name":"contact","description":"Send an enquiry to Prime Casa","endpoint":"POST /api/enquiries","type":"contact"}'
-            >
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Rahul Sharma"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  data-wmcp='{"label":"Full Name","type":"string","required":true,"description":"Your full name"}'
-                />
+            <form onSubmit={submitContact} className="cp-form" noValidate>
+              <div className="cp-row">
+                <div className="cp-field">
+                  <label htmlFor="cp-name">Full name</label>
+                  <input
+                    id="cp-name"
+                    type="text"
+                    name="name"
+                    placeholder="Vikramaditya Sharma"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                  />
+                </div>
+                <div className="cp-field">
+                  <label htmlFor="cp-phone">Phone number</label>
+                  <input
+                    id="cp-phone"
+                    type="tel"
+                    name="phone"
+                    placeholder="10 digit mobile"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    maxLength="10"
+                    pattern="\d{10}"
+                    disabled={loading}
+                  />
+                  {phoneError && <span className="cp-field-err">{phoneError}</span>}
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="rahul.sharma@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  data-wmcp='{"label":"Email Address","type":"email","required":true,"description":"Your email address"}'
-                />
+
+              <div className="cp-row">
+                <div className="cp-field">
+                  <label htmlFor="cp-email">Email address</label>
+                  <input
+                    id="cp-email"
+                    type="email"
+                    name="email"
+                    placeholder="name@domain.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    disabled={loading}
+                  />
+                </div>
+                <div className="cp-field">
+                  <label htmlFor="cp-sector">Preferred sector / project</label>
+                  <input
+                    id="cp-sector"
+                    type="text"
+                    name="sector"
+                    placeholder="e.g. Sector 128 / Max Estates"
+                    value={formData.sector}
+                    onChange={handleChange}
+                    disabled={loading}
+                  />
+                </div>
               </div>
-              <div className="form-group full-width">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="9876543210"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  maxLength="10"
-                  pattern="\d{10}"
-                  data-wmcp='{"label":"Phone Number","type":"tel","required":true,"pattern":"\\d{10}","maxLength":10,"description":"10-digit mobile number"}'
-                />
-                {phoneError && (
-                  <div style={{ color: '#C0392B', fontSize: '14px', marginTop: '4px' }}>
-                    {phoneError}
-                  </div>
-                )}
-              </div>
-              <div className="form-group full-width">
-                <label htmlFor="sector">Preferred Sector / Project</label>
-                <input
-                  type="text"
-                  id="sector"
-                  name="sector"
-                  placeholder="e.g. Sector 150, Eldeco..."
-                  value={formData.sector}
-                  onChange={handleChange}
-                  data-wmcp='{"label":"Preferred Sector","type":"string","required":false,"description":"Preferred sector or project name"}'
-                />
-              </div>
-              <div className="form-group full-width">
-                <label htmlFor="message">Your Message</label>
+
+              <div className="cp-field cp-field-full">
+                <label htmlFor="cp-message">Your message</label>
                 <textarea
-                  id="message"
+                  id="cp-message"
                   name="message"
-                  rows="4"
-                  placeholder="How can we help you find your dream home?"
+                  rows="5"
+                  placeholder="Share your investment horizon, property specifications, or questions…"
                   value={formData.message}
                   onChange={handleChange}
-                  data-wmcp='{"label":"Your Message","type":"textarea","required":false,"description":"Your enquiry message"}'
+                  disabled={loading}
                 />
               </div>
-              <button type="submit" className="submit-btn" disabled={loading || !!phoneError}>
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
+
+              <div className="cp-actions">
+                <button
+                  type="submit"
+                  className="cp-submit"
+                  disabled={loading || !!phoneError}
+                >
+                  <span>{loading ? 'Sending…' : 'Send message'}</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" strokeWidth="2.2"
+                       strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
             </form>
           </div>
-        </div>
-      </section>
 
-      <section className="contact-map">
-        <div
-          className="map-image"
-          style={{
-            backgroundImage:
-              "url('https://media.istockphoto.com/id/893323636/photo/unrecognizable-insurance-agent-rubbing-his-hands-while-making-a-fraud.webp?a=1&b=1&s=612x612&w=0&k=20&c=TmYlEVYv-v4VPzx6dXdkRyPRmKhxq5nkeX6LGfWH8k4=')",
-          }}
-        ></div>
+        </div>
       </section>
     </>
   );

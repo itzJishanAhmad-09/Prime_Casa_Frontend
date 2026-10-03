@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 import React, { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { IconMenu2 } from '@tabler/icons-react';
+import { IconMenu2, IconPhone } from '@tabler/icons-react';
 
 const NAV_LINKS = [
   { label: 'Home',       path: '/' },
@@ -13,8 +13,8 @@ const NAV_LINKS = [
 ];
 
 const Navbar = ({ scrollTo }) => {
-  const navigate   = useNavigate();
-  const location   = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -29,14 +29,13 @@ const Navbar = ({ scrollTo }) => {
   }, [navigate, location.pathname, closeMenu]);
 
   const handleBookVisit = useCallback(() => {
-    if (location.pathname.startsWith('/project/')) {
-      const projectId = location.pathname.split('/').pop();
-      navigate(`/schedule/${projectId}`);
-    } else {
-      navigate('/schedule');
-    }
+    const match = location.pathname.match(/^\/project\/(\d+)/);
+    const projectId = match ? parseInt(match[1], 10) : null;
+    window.dispatchEvent(
+      new CustomEvent('openVisit', { detail: { projectId } })
+    );
     closeMenu();
-  }, [navigate, location.pathname, closeMenu]);
+  }, [location.pathname, closeMenu]);
 
   return (
     <nav>
@@ -62,9 +61,9 @@ const Navbar = ({ scrollTo }) => {
           <img
             src="/primecasa.webp"
             alt="The Prime Casa"
-            style={{ height: '90px', width: 'auto' }}
+            style={{ height: '80px', width: 'auto' }}
             width="200"
-            height="90"
+            height="80"
           />
         </div>
       </div>
@@ -82,6 +81,13 @@ const Navbar = ({ scrollTo }) => {
       </div>
 
       <div className="nav-cta-container">
+        <a
+          href="tel:+918130504183"
+          className="nav-call-btn"
+          aria-label="Call Prime Casa"
+        >
+          <IconPhone size={18} />
+        </a>
         <button onClick={handleBookVisit} className="nav-cta">
           Book Site Visit
         </button>

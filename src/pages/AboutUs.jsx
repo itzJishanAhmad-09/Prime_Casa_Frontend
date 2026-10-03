@@ -3,6 +3,68 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 
+/* ------------------------------------------------------------------ */
+/*  Data                                                               */
+/* ------------------------------------------------------------------ */
+
+const LEADERS = [
+  {
+    name: 'SUDHI YADAV',
+    role: 'Founder & Director',
+    img: '/assets/images/Sudhi_Yadav.jpeg',
+    desc: 'Sudhi Yadav is the Founder and Director of The Prime Casa Realty Pvt. Ltd. With an MBA completed in 2015 and experience in real estate since 2016, she brings expertise in business development, sales, marketing, and client relationships. With a strong strategic vision and leadership approach, she drives the company’s growth while delivering innovative and customer-focused real estate solutions.'
+  },
+  {
+    name: 'ROBIN SINGH',
+    role: 'Director',
+    img: '/assets/images/Robin_Singh.webp',
+    desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
+  },
+  {
+    name: 'RONIT',
+    role: 'Director',
+    img: '/assets/images/',
+    desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
+  },
+  {
+    name: 'SAJAL GUPTA',
+    role: 'Senior Sales Manager',
+    img: '/assets/images/Sajal_Gupta.webp',
+    desc: 'Sajal Gupta is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
+  },
+   {
+    name: 'ANJALI VASHISHTH',
+    role: 'ASSISTANT SALES MANAGER',
+    img: '/assets/images/Anjali_Vashisht.jpeg',
+    desc: 'Anjali Vashisht is a BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. She combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
+  },
+];
+
+const PILLARS = [
+  {
+    n: 'i.',
+    title: 'Passionate',
+    desc: 'Driven by a deep love of real estate — finding not just properties, but long-term opportunities that fit your life goals.',
+  },
+  {
+    n: 'ii.',
+    title: 'Professional',
+    desc: 'Market knowledge that keeps every deal transparent, reliable and backed by data and RERA compliance.',
+  },
+  {
+    n: 'iii.',
+    title: 'Full support',
+    desc: 'Search, site visits, financing and possession — end-to-end support for a zero-stress experience.',
+  },
+];
+
+const PLACEHOLDER =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23eee"/%3E%3Ctext x="100" y="100" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image%3C/text%3E%3C/svg%3E';
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
+
 const AboutUs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,32 +77,55 @@ const AboutUs = () => {
         description="Learn about Prime Casa – our story, core values, leadership team, and commitment to excellence in Noida real estate."
       />
 
-      <section className="about-hero-banner">
-        <div className="about-hero-bg"></div>
-        <div className="about-hero-overlay"></div>
-        <div className="about-hero-container">
-          <div className="about-hero-content">
-            <ul className="about-breadcrumb">
-              <li><Link to="/">Home</Link></li>
-              <li>/</li>
-              <li>About Us</li>
-            </ul>
-            <h1 className="about-hero-title">About Us</h1>
-          </div>
+      {/* ================================================== */}
+      {/* HERO                                                */}
+      {/* ================================================== */}
+      <section className="au-hero">
+        <div className="au-hero-bg" aria-hidden="true" />
+        <div className="au-hero-scrim" aria-hidden="true" />
+
+        <div className="au-hero-inner">
+          <nav className="au-crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <span className="au-crumb-current">About</span>
+          </nav>
+
+          <h1 className="au-hero-title">
+            Welcome to<br />
+            <em>Prime Casa.</em>
+          </h1>
+
+          <p className="au-hero-sub">
+            Turning dreams into addresses — with trust, transparency
+            and outstanding service.
+          </p>
         </div>
       </section>
 
-      <section className="about-welcome">
-        <div className="container">
-          <div className="about-welcome-content">
-            <h2 className="about-welcome-title">Welcome to Prime Casa Realty Pvt. Ltd.</h2>
-            <p className="about-welcome-text">
-              Welcome to Prime Casa, a renowned market leader in the industry specializing in the sale of residential and commercial real estate projects. Our industry experience speaks for itself, and we are dedicated to delivering top-notch service and knowledgeable investment guidance to our clients.
-            </p>
-          </div>
+      {/* ================================================== */}
+      {/* WELCOME — two-column intro                          */}
+      {/* ================================================== */}
+      <section className="au-welcome">
+        <div className="au-welcome-inner">
+          <p className="au-welcome-lead">
+            Prime Casa Realty Pvt. Ltd. specialises in the sale of residential
+            and commercial real-estate projects, with a decade of experience
+            marketing some of India&rsquo;s most prestigious properties.
+          </p>
+          <p className="au-welcome-body">
+            Through Prime Casa Wealth Management we help individuals, families
+            and businesses build and preserve wealth — investment management,
+            retirement and real-estate planning, tax strategy and risk
+            management. We succeed when you do, and we build relationships on
+            trust, transparency and outstanding service.
+          </p>
         </div>
       </section>
 
+      {/* ================================================== */}
+      {/* DETAILS — image + text                              */}
+      {/* ================================================== */}
       <section className="about-details">
         <div className="container">
           <div className="about-details-grid">
@@ -71,73 +156,76 @@ const AboutUs = () => {
               <span className="about-details-label">About Us</span>
               <h3 className="about-details-title">About Prime Casa Wealth Management</h3>
               <p className="about-details-desc">
-                At Prime Casa Wealth Management, we are dedicated to helping individuals, families, and businesses build and preserve wealth for the long term. With a client-first approach and a team of seasoned financial professionals, we provide personalized wealth management solutions tailored to meet your unique goals and financial aspirations.
+                At Prime Casa Wealth Management, we are dedicated to helping
+                individuals, families, and businesses build and preserve wealth
+                for the long term. With a client-first approach and a team of
+                seasoned financial professionals, we provide personalized wealth
+                management solutions tailored to meet your unique goals and
+                financial aspirations.
               </p>
               <p className="about-details-desc">
-                Our expertise spans diverse areas, including investment management, retirement planning, real estate planning, tax strategies, and risk management. Whether you are planning for the future, looking to grow your investments, or seeking to protect your legacy, we offer comprehensive strategies to guide you at every stage.
+                Our expertise spans diverse areas, including investment
+                management, retirement planning, real estate planning, tax
+                strategies, and risk management. Whether you are planning for
+                the future, looking to grow your investments, or seeking to
+                protect your legacy, we offer comprehensive strategies to guide
+                you at every stage.
               </p>
               <p className="about-details-desc">
-                At Prime Casa Wealth Management, we succeed when you do. Our commitment is to building lasting relationships founded on trust, transparency, and outstanding service.
+                At Prime Casa Wealth Management, we succeed when you do. Our
+                commitment is to building lasting relationships founded on
+                trust, transparency, and outstanding service.
               </p>
               <p className="about-details-desc">
-                Our agency is the industry's top luxury producer with over 10 years of experience in marketing India's most prestigious properties. Choosing the right real estate agency is crucial for a successful and stress-free property transaction.
+                Our agency is the industry&apos;s top luxury producer with over
+                10 years of experience in marketing India&apos;s most
+                prestigious properties. Choosing the right real estate agency
+                is crucial for a successful and stress-free property
+                transaction.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ================================================== */}
+      {/* LEADERSHIP                                          */}
+      {/* ================================================== */}
       <section className="about-leadership">
         <div className="container">
           <div className="about-leadership-header">
             <span className="about-leadership-label">Our Leaders</span>
             <h3 className="about-leadership-title">Leaders Behind the Wheel</h3>
             <p className="about-leadership-desc">
-              Leadership is the backbone of any successful organization, and our leaders exemplify vision, dedication, and excellence. With years of experience and a commitment to innovation, they guide us toward growth and success. Each leader in our team brings unique expertise and a deep understanding of our mission. Their strategic thinking and passion for excellence inspire every member of our organization to strive for the best.
+              Leadership is the backbone of any successful organization, and
+              our leaders exemplify vision, dedication, and excellence. With
+              years of experience and a commitment to innovation, they guide
+              us toward growth and success. Each leader in our team brings
+              unique expertise and a deep understanding of our mission. Their
+              strategic thinking and passion for excellence inspire every
+              member of our organization to strive for the best.
             </p>
             <p className="about-leadership-desc">
-              Through integrity, hard work, and a people-first approach, our leaders ensure that we continue to grow while maintaining our core values. They believe in teamwork, transparency, and making a lasting impact on our industry and community. Under their leadership, we are not just achieving milestones—we are setting new benchmarks for success.
+              Through integrity, hard work, and a people-first approach, our
+              leaders ensure that we continue to grow while maintaining our
+              core values. They believe in teamwork, transparency, and making
+              a lasting impact on our industry and community. Under their
+              leadership, we are not just achieving milestones—we are setting
+              new benchmarks for success.
             </p>
           </div>
 
           <div className="about-leadership-grid">
-            {[
-              {
-                name: 'MAM',
-                role: 'FOUNDER & CEO',
-                img: '',
-                desc: 'Sachin Gupta is the Founder and CEO of Prime Casa. He has done B.A. in Economics from Delhi University before obtaining his masters in Marketing & Finance from IBS, Hyderabad. Prior to starting his own firm Prime Casa, Sachin has more than 15+ years of experience in leading banking firms including ICICI, HSBC, and Standard Chartered.'
-              },
-              {
-                name: 'ROBIN SINGH',
-                role: 'Director',
-                img: '/assets/images/Robin_Singh.webp',
-                desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.'
-              },
-              {
-                name: 'SAJAL GUPTA',
-                role: 'SENIOR SALES MANAGER',
-                img: '/assets/images/Sajal_Gupta.webp',
-                desc: 'Sajal Gupta is a  BSc Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.'
-              },
-              {
-                name: 'ABHISHEK GUPTA',
-                role: 'ASSISSTANT SALES MANAGER',
-                img: '/assets/images/Abhishek_Gupta.webp',
-                desc: 'Assistant Sales Manager specialising in commercial and residential real estate across Delhi NCR and Noida. With over 2 years of industry experience and an MBA from Galgotias University, I help clients make informed property decisions while driving sales growth.'
-              }
-            ].map((member, idx) => (
+            {LEADERS.map((member, idx) => (
               <div key={idx} className="about-leadership-card">
                 <div className="about-leadership-card-img">
                   <img
-                    src={member.img || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23eee"/%3E%3Ctext x="50" y="50" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em" x="100" y="100"%3ENo Image%3C/text%3E%3C/svg%3E'}
+                    src={member.img || PLACEHOLDER}
                     alt={member.name}
                     loading="lazy"
                     width="200"
                     height="200"
-                    onError={(e) => {
-                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23eee"/%3E%3Ctext x="50" y="50" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em" x="100" y="100"%3ENo Image%3C/text%3E%3C/svg%3E';
-                    }}
+                    onError={(e) => { e.target.src = PLACEHOLDER; }}
                   />
                 </div>
                 <div className="about-leadership-card-content">
@@ -151,22 +239,46 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <section className="section about-cta">
-        <div className="about-cta-content">
-          <div className="section-title">Ready to Begin Your Legacy?</div>
-          <div className="section-sub">
-            Connect with our executive advisors today to discuss your vision and discover how Prime Casa can turn your dreams into a prestigious address.
+      {/* ================================================== */}
+      {/* WHY CHOOSE US                                       */}
+      {/* ================================================== */}
+      <section className="au-why">
+        <div className="au-why-inner">
+          <div className="au-why-header">
+            <div className="au-why-eyebrow">
+              <span className="au-why-eyebrow-line" aria-hidden="true" />
+              <span>Why choose us</span>
+            </div>
+            <h2 className="au-why-title">
+              The Prime Casa <em>difference.</em>
+            </h2>
           </div>
-          <div className="about-cta-buttons">
-            <Link to="/" state={{ scrollTo: 'contact' }} className="btn-red">
-              Connect With Us
+
+          <div className="au-why-grid">
+            {PILLARS.map((p) => (
+              <article className="au-why-card" key={p.n}>
+                <span className="au-why-num">{p.n}</span>
+                <h3 className="au-why-card-title">{p.title}</h3>
+                <p className="au-why-card-desc">{p.desc}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="au-why-actions">
+            <Link
+              to="/"
+              state={{ scrollTo: 'contact' }}
+              className="au-why-btn au-why-btn--red"
+            >
+              Connect with us
             </Link>
-            <Link to="/properties" className="about-cta-outline">
-              View Properties
+            <Link to="/properties" className="au-why-btn au-why-btn--outline">
+              View properties
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

@@ -1,35 +1,29 @@
 // src/pages/BlogDetail.jsx
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { news } from '../data/news';
 import Seo from '../components/Seo';
-import {
-  IconUser,
-  IconCalendar,
-  IconClock,
-  IconShare,
-  IconLink,
-  IconBrandTwitter,
-  IconBrandLinkedin,
-  IconArrowRight,
-} from '@tabler/icons-react';
 
 const isImagePath = (str) => {
   if (!str) return false;
   return str.startsWith('/') || str.startsWith('./') || str.startsWith('http');
 };
 
+const WA_SHARE = 'https://wa.me/?text=';
+
 const BlogDetail = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
-  const blog = news.find(item => item.slug === slug);
+  const blog = news.find((item) => item.slug === slug);
 
-  const relatedPosts = news.filter(item => item.slug !== slug).slice(0, 2);
+  const relatedPosts = news
+    .filter((item) => item.slug !== slug)
+    .slice(0, 3);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [slug]);
 
+  // Subtle parallax on hero image
   const heroImageRef = useRef(null);
   const ticking = useRef(false);
   const lastScrollY = useRef(0);
@@ -40,7 +34,7 @@ const BlogDetail = () => {
         if (heroImageRef.current) {
           const scrollPos = window.pageYOffset;
           if (Math.abs(scrollPos - lastScrollY.current) > 1) {
-            heroImageRef.current.style.transform = `translateY(${scrollPos * 0.4}px)`;
+            heroImageRef.current.style.transform = `translateY(${scrollPos * 0.15}px)`;
             lastScrollY.current = scrollPos;
           }
         }
@@ -57,201 +51,189 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div style={{ padding: '60px 2rem', textAlign: 'center' }}>
-        <h2>Blog post not found</h2>
-        <Link to="/" style={{ color: 'var(--red)', textDecoration: 'none' }}>
-          ← Back to Home
-        </Link>
-      </div>
+      <>
+        <Seo
+          title="Article not found"
+          description="The article you're looking for doesn't exist."
+        />
+        <div className="bpd-notfound">
+          <h2>Article not found</h2>
+          <Link to="/blog">← Back to blog</Link>
+        </div>
+      </>
     );
   }
 
-  const fullContent = blog.fullContent || blog.excerpt;
-  const contentParagraphs = fullContent.split('\n\n');
+  const fullContent = blog.fullContent || blog.excerpt || '';
+  const contentParagraphs = fullContent.split('\n\n').filter(Boolean);
+  const heroImage = isImagePath(blog.emoji)
+    ? blog.emoji
+    : '/assets/images/placeholder.webp';
 
-  const renderContent = () => {
-    return contentParagraphs.map((para, idx) => {
-      const headingMatch = para.match(/^(\d+)\.\s+(.+)/);
-      if (headingMatch) {
-        return (
-          <h2 key={idx} className="blog-article-heading">
-            {headingMatch[1]}. {headingMatch[2]}
-          </h2>
-        );
-      }
-      if (para.startsWith('"') && para.endsWith('"')) {
-        return (
-          <blockquote key={idx} className="blog-pull-quote">
-            <p>{para}</p>
-            <cite>— Jitendra Kumar, Senior Advisor at Prime Casa</cite>
-          </blockquote>
-        );
-      }
-      return <p key={idx} className="blog-article-paragraph">{para}</p>;
-    });
-  };
+  const shareUrl =
+    typeof window !== 'undefined' ? window.location.href : '';
 
-  const heroImage = isImagePath(blog.emoji) ? blog.emoji : '/assets/images/default-blog.jpg';
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: blog.title,
-        text: blog.excerpt,
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
+  const handleCopy = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl);
       alert('Link copied to clipboard!');
     }
   };
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert('Link copied to clipboard!');
-  };
-
   return (
-    <div className="blog-detail-page">
+    <div className="bpd-page">
       <Seo
         title={blog.title}
         description={blog.excerpt}
         image={isImagePath(blog.emoji) ? blog.emoji : undefined}
       />
 
-      <section className="blog-detail-hero">
-        <div className="blog-detail-hero-bg">
+      {/* ================================================== */}
+      {/* HEADER                                              */}
+      {/* ================================================== */}
+      <header className="bpd-header">
+        <div className="bpd-header-inner">
+
+          <nav className="bpd-crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <Link to="/blog">Blog</Link>
+          </nav>
+
+          <div className="bpd-meta">
+            {blog.tag && <span className="bpd-meta-tag">{blog.tag}</span>}
+            {blog.date && (
+              <>
+                <span className="bpd-meta-dot" aria-hidden="true">·</span>
+                <span>{blog.date}</span>
+              </>
+            )}
+            <span className="bpd-meta-dot" aria-hidden="true">·</span>
+            <span>{blog.author || 'Prime Casa Team'}</span>
+          </div>
+
+          <h1 className="bpd-title">{blog.title}</h1>
+
+          {blog.excerpt && (
+            <p className="bpd-lead">{blog.excerpt}</p>
+          )}
+
+        </div>
+      </header>
+
+      {/* ================================================== */}
+      {/* HERO IMAGE                                          */}
+      {/* ================================================== */}
+      <div className="bpd-hero-image-wrap">
+        <div className="bpd-hero-image">
           <img
             ref={heroImageRef}
             src={heroImage}
             alt={blog.title}
-            className="blog-detail-hero-img"
-            width="1200"
-            height="600"
-            style={{ willChange: 'transform', width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
+            loading="eager"
+            decoding="async"
+            onError={(e) => {
+              e.target.src = '/assets/images/placeholder.webp';
+            }}
           />
-          <div className="blog-detail-hero-overlay"></div>
         </div>
-        <div className="blog-detail-hero-content">
-          <div className="blog-detail-hero-tag">{blog.tag || 'Insight'}</div>
-          <h1 className="blog-detail-hero-title">{blog.title}</h1>
-          <p className="blog-detail-hero-sub">{blog.excerpt}</p>
-          <div className="blog-detail-hero-meta">
-            <div className="blog-detail-hero-author">
-              <span className="blog-detail-hero-avatar">
-                <IconUser size={16} />
-              </span>
-              <span>{blog.author || 'Prime Casa Team'}</span>
-            </div>
-            <div className="blog-detail-hero-date">
-              <IconCalendar size={16} />
-              <span>{blog.date}</span>
-            </div>
-            <div className="blog-detail-hero-readtime">
-              <IconClock size={16} />
-              <span>12 min read</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
 
-      <article className="blog-article">
-        <div className="blog-article-inner">
-          {renderContent()}
+      {/* ================================================== */}
+      {/* ARTICLE BODY                                        */}
+      {/* ================================================== */}
+      <article className="bpd-article">
+        <div className="bpd-article-inner">
+          {contentParagraphs.map((para, idx) => (
+            <p key={idx} className="bpd-paragraph">
+              {para}
+            </p>
+          ))}
         </div>
 
-        <div className="blog-article-share">
-          <div className="blog-article-share-left">
-            <span className="blog-article-share-label">Share Insight</span>
-            <div className="blog-article-share-buttons">
-              <button onClick={handleShare} aria-label="Share">
-                <IconShare size={18} />
-              </button>
-              <button onClick={handleCopyLink} aria-label="Copy link">
-                <IconLink size={18} />
-              </button>
-              <button
-                onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(blog.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
-                aria-label="Tweet"
-              >
-                <IconBrandTwitter size={18} />
-              </button>
-              <button
-                onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
-                aria-label="LinkedIn"
-              >
-                <IconBrandLinkedin size={18} />
-              </button>
-            </div>
-          </div>
-          <Link to="/contact" className="blog-article-share-cta">
-            Contact an Advisor
+        {/* Share bar */}
+        <div className="bpd-actions">
+          <Link to="/contact" className="bpd-btn bpd-btn--red">
+            Contact an advisor
           </Link>
+
+          <a
+            href={`${WA_SHARE}${encodeURIComponent(blog.title + ' — ' + shareUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bpd-btn bpd-btn--outline"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="1.8"
+                 strokeLinecap="round" strokeLinejoin="round"
+                 aria-hidden="true">
+              <path d="M4 20l1.3-3.9A8 8 0 1 1 8 19.1z" />
+            </svg>
+            Share on WhatsApp
+          </a>
         </div>
       </article>
 
-      <section className="blog-related">
-        <div className="blog-related-header">
-          <div>
-            <h2>Market Intelligence</h2>
-            <p>Explore more curated insights for the discerning investor.</p>
-          </div>
-          <Link to="/blog" className="blog-related-viewall">
-            View All Reports <IconArrowRight size={18} />
-          </Link>
-        </div>
-        <div className="blog-related-grid">
-          {relatedPosts.map((item) => (
-            <Link key={item.id} to={`/blog/${item.slug}`} className="blog-related-card">
-              <div className="blog-related-card-image">
-                <img
-                  src={isImagePath(item.emoji) ? item.emoji : '/assets/images/default-blog.jpg'}
-                  alt={item.title}
-                  width="400"
-                  height="200"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
-                />
-                <span className="blog-related-card-badge">{item.tag || 'Insight'}</span>
-              </div>
-              <div className="blog-related-card-body">
-                <h3>{item.title}</h3>
-                <p>{item.excerpt}</p>
-                <div className="blog-related-card-footer">
-                  <span className="blog-related-card-date">{item.date}</span>
-                  <IconArrowRight size={16} />
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* ================================================== */}
+      {/* RELATED POSTS                                       */}
+      {/* ================================================== */}
+      {relatedPosts.length > 0 && (
+        <section className="bpd-related">
+          <div className="bpd-related-inner">
+            <h2 className="bpd-related-title">
+              Keep <em>reading.</em>
+            </h2>
 
-      <section className="blog-newsletter">
-        <div className="blog-newsletter-bg"></div>
-        <div className="blog-newsletter-content">
-          <h2>Market Trends, Delivered.</h2>
-          <p>Join our exclusive mailing list to receive bi-weekly intelligence reports on luxury real estate movements and off-market opportunities.</p>
-          <form
-            className="blog-newsletter-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Subscribed to Prime Casa Insights');
-            }}
-            data-wmcp='{"name":"newsletter","description":"Subscribe to the Prime Casa newsletter for market intelligence","endpoint":"(client-side)","type":"newsletter"}'
-          >
-            <input
-              type="email"
-              placeholder="Your professional email"
-              required
-              data-wmcp='{"label":"Email Address","type":"email","required":true,"description":"Your professional email for real estate intelligence reports"}'
-            />
-            <button type="submit">Subscribe</button>
-          </form>
-          <p className="blog-newsletter-note">Strictly confidential. No spam, ever.</p>
-        </div>
-      </section>
+            <div className="bpd-related-grid">
+              {relatedPosts.map((item) => (
+                <Link
+                  key={item.id || item.slug}
+                  to={`/blog/${item.slug}`}
+                  className="bpd-related-card"
+                >
+                  <div className="bpd-related-media">
+                    {isImagePath(item.emoji) ? (
+                      <img
+                        src={item.emoji}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          e.target.src = '/assets/images/placeholder.webp';
+                        }}
+                      />
+                    ) : (
+                      <span className="bpd-related-emoji" aria-hidden="true">
+                        {item.emoji || '📰'}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="bpd-related-body">
+                    <div className="bpd-related-meta">
+                      {item.tag && (
+                        <span className="bpd-related-tag">
+                          {item.tag}
+                        </span>
+                      )}
+                      {item.date && (
+                        <>
+                          <span className="bpd-related-dot" aria-hidden="true">·</span>
+                          <span>{item.date}</span>
+                        </>
+                      )}
+                    </div>
+
+                    <h3 className="bpd-related-card-title">
+                      {item.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

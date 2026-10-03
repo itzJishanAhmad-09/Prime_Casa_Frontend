@@ -198,7 +198,7 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
   {
     id: 10,
     title: "Corbett Eye",
-    builder: "NPR Infra",
+    builder: "Global birth developers",
     loc: "Ramnagar-Jim Corbett National Highway 309, Ramnagar, Uttarakhand",
     type: "residential",
     tag: "new",

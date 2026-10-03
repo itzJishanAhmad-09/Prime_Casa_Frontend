@@ -1,43 +1,81 @@
-// src/components/Services.jsx (the component, not the page)
+// src/components/Services.jsx
 import React from 'react';
-import {
-  IconShieldCheck,
-  IconBuildingBank,
-  IconPalette,
-  IconHeadset,
-  IconWorld,
-  IconCertificate,
-} from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+import { IconArrowRight } from '@tabler/icons-react';
+
+const EXCLUSIVES = [
+  {
+    n: '01',
+    title: 'Expert home inspection',
+    desc: 'Detailed structural checks for carpet-area variance, construction quality, seepage and MEP safety — so you invest with complete peace of mind.',
+  },
+  {
+    n: '02',
+    title: 'Hassle-free home loans',
+    desc: 'End-to-end loan assistance with top banks and financial institutions for the lowest repo-linked rates and fast approvals.',
+  },
+  {
+    n: '03',
+    title: 'Exclusive interior benefits',
+    desc: 'Pre-negotiated architectural rates with premier design studios to curate custom luxury interiors for your penthouse or villa.',
+  },
+  {
+    n: '04',
+    title: 'Dedicated post-sales care',
+    desc: 'Concierge support that continues after purchase — managing developer milestones, builder-buyer agreements and possession formalities.',
+  },
+  {
+    n: '05',
+    title: 'NRI investment desk',
+    desc: 'Specialised cross-border desk resolving FEMA guidelines, NRE/NRO repatriation, Power of Attorney handling and rental management.',
+  },
+  {
+    n: '06',
+    title: 'RERA consultation',
+    desc: 'Statutory verification of UP-RERA registration, quarterly progress reports, sanctioned layouts and legal dispute audits.',
+  },
+];
 
 const Services = () => (
-  <div className="section section-alt" id="services">
-    <div className="section-header">
-      <div className="section-label">Prime Casa Exclusives</div>
-      <div className="section-title">Beyond Just Helping You Buy</div>
-      <div className="section-sub">We offer exclusive services that make your real estate journey smooth, secure, and rewarding.</div>
+  <section className="exc-section" id="services">
+    <div className="exc-inner">
+
+      {/* ---------- Left editorial intro ---------- */}
+      <div className="exc-intro">
+        <div className="exc-eyebrow">
+          <span className="exc-eyebrow-dot" aria-hidden="true" />
+          Prime Casa Exclusives
+        </div>
+
+        <h2 className="exc-title">
+          Beyond just<br />
+          helping you <em>buy.</em>
+        </h2>
+
+        <p className="exc-sub">
+          Exclusive services that make your real-estate journey smooth,
+          secure and rewarding — long after the booking amount clears.
+        </p>
+
+        <Link to="/services" className="exc-cta">
+          <span>Explore all services</span>
+          <IconArrowRight size={18} />
+        </Link>
+      </div>
+
+      {/* ---------- Right: 6 numbered cards ---------- */}
+      <div className="exc-grid">
+        {EXCLUSIVES.map((s) => (
+          <article className="exc-card" key={s.n}>
+            <span className="exc-card-num">{s.n}</span>
+            <h3 className="exc-card-title">{s.title}</h3>
+            <p className="exc-card-desc">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+
     </div>
-    <div className="services-grid">
-      {[
-        { icon: IconShieldCheck, title: 'Expert Home Inspection', desc: 'Detailed property checks to ensure quality, safety, and complete peace of mind before you invest.' },
-        { icon: IconBuildingBank, title: 'Hassle-Free Home Loans', desc: 'End-to-end loan assistance with top banks and financial partners for seamless, fast approvals.' },
-        { icon: IconPalette, title: 'Exclusive Interior Benefits', desc: 'Special deals on premium interior solutions to customize your new home affordably.' },
-        { icon: IconHeadset, title: 'Dedicated Post-Sales Care', desc: 'Support that continues after purchase — from documentation to possession assistance.' },
-        { icon: IconWorld, title: 'NRI Investment Desk', desc: 'Navigate property laws, FEMA regulations, taxation & NRI loans with expert guidance.' },
-        { icon: IconCertificate, title: 'RERA Consultation', desc: 'Full compliance support — verify registrations, file complaints, and protect your investment legally.' }
-      ].map((s, i) => {
-        const IconComponent = s.icon;
-        return (
-          <div className="service-card" key={i}>
-            <div className="service-icon">
-              <IconComponent size={22} color="#fff" />
-            </div>
-            <div className="service-title">{s.title}</div>
-            <div className="service-desc">{s.desc}</div>
-          </div>
-        );
-      })}
-    </div>
-  </div>
+  </section>
 );
 
 export default Services;

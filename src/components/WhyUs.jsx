@@ -1,31 +1,62 @@
 // src/components/WhyUs.jsx
 import React from 'react';
-import { IconHeart, IconAward, IconLifebuoy } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+
+const PILLARS = [
+  {
+    n: 'i.',
+    title: 'Passionate',
+    desc: 'Driven by a deep love of real estate — finding not just properties, but long-term opportunities that fit your life goals.',
+  },
+  {
+    n: 'ii.',
+    title: 'Professional',
+    desc: 'Market knowledge that keeps every deal transparent, reliable and backed by data and RERA compliance.',
+  },
+  {
+    n: 'iii.',
+    title: 'Full support',
+    desc: 'Search, site visits, financing and possession — end-to-end support for a zero-stress experience.',
+  },
+];
 
 const WhyUs = () => (
-  <div className="section section-alt">
-    <div className="section-header">
-      <div className="section-label">Why Choose Us</div>
-      <div className="section-title">The Prime Casa Difference</div>
+  <section className="au-why" id="why-us">
+    <div className="au-why-inner">
+      <div className="au-why-header">
+        <div className="au-why-eyebrow">
+          <span className="au-why-eyebrow-line" aria-hidden="true" />
+          <span>Why choose us</span>
+        </div>
+        <h2 className="au-why-title">
+          The Prime Casa <em>difference.</em>
+        </h2>
+      </div>
+
+      <div className="au-why-grid">
+        {PILLARS.map((p) => (
+          <article className="au-why-card" key={p.n}>
+            <span className="au-why-num">{p.n}</span>
+            <h3 className="au-why-card-title">{p.title}</h3>
+            <p className="au-why-card-desc">{p.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="au-why-actions">
+        <Link
+          to="/"
+          state={{ scrollTo: 'contact' }}
+          className="au-why-btn au-why-btn--red"
+        >
+          Connect with us
+        </Link>
+        <Link to="/properties" className="au-why-btn au-why-btn--outline">
+          View properties
+        </Link>
+      </div>
     </div>
-    <div className="why-grid">
-      <div className="why-card">
-        <div className="why-icon"><IconHeart size={32} color="var(--red)" /></div>
-        <div className="why-title">Passionate</div>
-        <div className="why-desc">Driven by deep passion for real estate, helping clients find not just properties, but long-term opportunities that fit their life goals.</div>
-      </div>
-      <div className="why-card">
-        <div className="why-icon"><IconAward size={32} color="var(--red)" /></div>
-        <div className="why-title">Professional</div>
-        <div className="why-desc">Years of market knowledge ensuring every deal is transparent, reliable, and backed by data-driven insights and RERA compliance.</div>
-      </div>
-      <div className="why-card">
-        <div className="why-icon"><IconLifebuoy size={32} color="var(--red)" /></div>
-        <div className="why-title">Full Support</div>
-        <div className="why-desc">From search to site visits, financing to final possession — complete end-to-end support ensuring a seamless, zero-stress experience.</div>
-      </div>
-    </div>
-  </div>
+  </section>
 );
 
 export default WhyUs;
