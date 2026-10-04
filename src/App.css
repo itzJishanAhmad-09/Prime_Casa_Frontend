@@ -3267,7 +3267,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 /* About details block */
 .about-details {
   padding: 4rem 1.5rem;
-  background: var(--about-blue-bg);
+  background: var(--ivory);
 }
 .about-details .container {
   max-width: 1200px;
@@ -3332,7 +3332,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 }
 
 /* About leadership */
-.about-leadership { padding: 4rem 1.5rem; background: #fff; }
+.about-leadership { padding: 4rem 1.5rem; background: var(--bg); }
 .about-leadership .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -3374,7 +3374,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   grid-template-columns: 1fr;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: var(--about-blue-bg);
+  background: var(--bg);
   border-radius: 12px;
   transition: transform 0.25s, box-shadow 0.25s;
 }
@@ -6079,4 +6079,3 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
     scroll-behavior: auto !important;
   }
 }
-
