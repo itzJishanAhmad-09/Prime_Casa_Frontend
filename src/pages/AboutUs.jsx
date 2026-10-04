@@ -37,7 +37,7 @@ const LEADERS = [
     name: 'ANJALI VASHISHTH',
     role: 'Assistant Sales Manager',
     img: '/assets/images/Anjali_Vashisht.webp',
-    desc: 'Anjali Vashisht is a B Economics graduate with 4 years of business ownership experience and 3 years in real estate. She combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
+    desc: 'Anjali Vashishth is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
   },
 ];
 
@@ -199,33 +199,36 @@ const AboutUs = () => {
             <h3 className="about-leadership-title">Leaders Behind the Wheel</h3>
             <p className="about-leadership-desc">
               Leadership is the backbone of any successful organization, and
-              our leaders exemplify vision, dedication, and excellence. With
-              years of experience and a commitment to innovation, they guide
-              us toward growth and success. Each leader in our team brings
-              unique expertise and a deep understanding of our mission. Their
-              strategic thinking and passion for excellence inspire every
-              member of our organization to strive for the best.
-            </p>
-            <p className="about-leadership-desc">
-              Through integrity, hard work, and a people-first approach, our
-              leaders ensure that we continue to grow while maintaining our
-              core values. They believe in teamwork, transparency, and making
-              a lasting impact on our industry and community. Under their
-              leadership, we are not just achieving milestones—we are setting
-              new benchmarks for success.
+              our leaders exemplify vision, dedication, and excellence.
             </p>
           </div>
 
+          <div className="about-leadership-founder-container">
+            <div className="about-leadership-card about-leadership-card--founder">
+              <div className="about-leadership-card-img">
+                <img
+                  src={LEADERS[0].img || PLACEHOLDER}
+                  alt={LEADERS[0].name}
+                  loading="lazy"
+                  onError={(e) => { e.target.src = PLACEHOLDER; }}
+                />
+              </div>
+              <div className="about-leadership-card-content">
+                <span className="about-leadership-card-role">{LEADERS[0].role}</span>
+                <h5 className="about-leadership-card-name">{LEADERS[0].name}</h5>
+                <p className="about-leadership-card-desc">{LEADERS[0].desc}</p>
+              </div>
+            </div>
+          </div>
+
           <div className="about-leadership-grid">
-            {LEADERS.map((member, idx) => (
+            {LEADERS.slice(1).map((member, idx) => (
               <div key={idx} className="about-leadership-card">
                 <div className="about-leadership-card-img">
                   <img
                     src={member.img || PLACEHOLDER}
                     alt={member.name}
                     loading="lazy"
-                    width="200"
-                    height="200"
                     onError={(e) => { e.target.src = PLACEHOLDER; }}
                   />
                 </div>
