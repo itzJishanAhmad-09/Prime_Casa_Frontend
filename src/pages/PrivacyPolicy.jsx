@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
               <Link to="/" className="privacy-back-link">
                 <IconArrowLeft size={16} /> Back to Home
               </Link>
-              <h4>On this page</h4>
+              <h2>On this page</h2>
             </div>
             <nav className="privacy-sidebar-nav">
               <a href="#introduction" className="active">
@@ -155,21 +155,21 @@ const PrivacyPolicy = () => {
                 <div className="privacy-use-item">
                   <IconCheck size={20} color="var(--red)" />
                   <div>
-                    <h4>Service Delivery</h4>
+                    <h3>Service Delivery</h3>
                     <p>To match you with luxury listings and coordinate with sellers, buyers, and legal entities during the closing process.</p>
                   </div>
                 </div>
                 <div className="privacy-use-item">
                   <IconCheck size={20} color="var(--red)" />
                   <div>
-                    <h4>Communications</h4>
+                    <h3>Communications</h3>
                     <p>Providing critical updates on property status, market reports, and administrative notifications regarding your account.</p>
                   </div>
                 </div>
                 <div className="privacy-use-item">
                   <IconCheck size={20} color="var(--red)" />
                   <div>
-                    <h4>Legal Compliance</h4>
+                    <h3>Legal Compliance</h3>
                     <p>Fulfilling our regulatory obligations within the real estate industry, including anti-money laundering (AML) checks.</p>
                   </div>
                 </div>

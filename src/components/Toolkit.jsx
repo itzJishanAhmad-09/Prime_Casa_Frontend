@@ -16,6 +16,12 @@ const TABS = [
   { key: 'nri', label: 'NRI Edge' },
 ];
 
+const NRI_HIGHLIGHTS = [
+  'Jewar International Airport (Phase 1 operational 2025–26) creating 15–20% annualized perimeter growth.',
+  'Institutional MNC offices moving to Sector 142 and Noida Expressway.',
+  'UP-RERA provides strict escrow security on developer funds.',
+];
+
 const Toolkit = () => {
   const [tab, setTab] = useState('roi');
 
@@ -427,17 +433,13 @@ const Toolkit = () => {
             {/* Right — checklist */}
             <div className="tk-nri-side">
               <span className="tk-nri-side-label">Foreign Exchange Dividend</span>
-              <h4 className="tk-nri-side-title">
+              <h3 className="tk-nri-side-title">
                 Why NRIs are investing heavily in Noida
-              </h4>
+              </h3>
 
               <ul className="tk-nri-list">
-                {[
-                  'Jewar International Airport (Phase 1 operational 2025–26) creating 15–20% annualized perimeter growth.',
-                  'Institutional MNC offices moving to Sector 142 and Noida Expressway.',
-                  'UP-RERA provides strict escrow security on developer funds.',
-                ].map((t, i) => (
-                  <li key={i} className="tk-nri-item">
+                {NRI_HIGHLIGHTS.map((t) => (
+                  <li key={t} className="tk-nri-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"
                          strokeLinejoin="round" aria-hidden="true">

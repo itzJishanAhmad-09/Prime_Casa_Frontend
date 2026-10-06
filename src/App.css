@@ -3305,7 +3305,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   font-weight: 600;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: var(--about-blue);
+  color: var(--red);
 }
 .about-details-title {
   font-size: clamp(1.4rem, 2.5vw, 2rem);
@@ -3347,7 +3347,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   font-weight: 600;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: var(--about-blue);
+  color: var(--red);
 }
 .about-leadership-title {
   font-size: clamp(1.8rem, 3vw, 2.6rem);

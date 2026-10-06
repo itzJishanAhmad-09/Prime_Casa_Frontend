@@ -77,7 +77,7 @@ const TermsPage = () => {
               <Link to="/" className="terms-back-link">
                 <IconArrowLeft size={16} /> Back to Home
               </Link>
-              <h4>Legal Sections</h4>
+              <h2>Legal Sections</h2>
             </div>
             <nav className="sidebar-nav">
               <a href="#acceptance" className="active">

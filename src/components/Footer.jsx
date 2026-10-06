@@ -141,7 +141,7 @@ const Footer = () => {
           </div>
 
           <div className="ft-col">
-            <h4 className="ft-col-title">Popular sectors</h4>
+            <h3 className="ft-col-title">Popular sectors</h3>
             <ul>
               {SECTORS.map((s) => (
                 <li key={s.label}>
@@ -157,7 +157,7 @@ const Footer = () => {
           </div>
 
           <div className="ft-col">
-            <h4 className="ft-col-title">Company</h4>
+            <h3 className="ft-col-title">Company</h3>
             <ul>
               {NAV_LINKS.map((n) => (
                 <li key={n.path}>
@@ -168,7 +168,7 @@ const Footer = () => {
           </div>
 
           <div className="ft-col">
-            <h4 className="ft-col-title">Toolkit</h4>
+            <h3 className="ft-col-title">Toolkit</h3>
             <ul>
               {TOOLKIT_LINKS.map((t) => (
                 <li key={t.label}>

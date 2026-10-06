@@ -98,7 +98,7 @@ const BlogList = () => {
                   <Link
                     to={`/blog/${item.slug}`}
                     className="bp-card-media"
-                    aria-label={`Read: ${item.title}`}
+                    aria-label={`Read ${item.title}`}
                   >
                     {isImagePath(item.emoji) ? (
                       <img
@@ -137,6 +137,7 @@ const BlogList = () => {
                     <Link
                       to={`/blog/${item.slug}`}
                       className="bp-card-link"
+                      aria-label={`Read ${item.title}`}
                     >
                       Read more
                       <svg width="14" height="14" viewBox="0 0 24 24"

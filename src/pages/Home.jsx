@@ -2,8 +2,8 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Seo from '../components/Seo';
+import Hero from '../components/Hero';
 
-const Hero                = lazy(() => import('../components/Hero'));
 const Stats               = lazy(() => import('../components/Stats'));
 const PropertiesSlider  = lazy(() => import('../components/PropertiesSlider'));
 const Services            = lazy(() => import('../components/Services'));
@@ -26,7 +26,7 @@ const Home = ({ projects, news, testimonials, openModal, scrollTo }) => {
   return (
     <>
       <Seo title="Home" description="Find your dream home or investment property in Noida. Zero brokerage, RERA verified projects, and expert guidance." />
-      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#1A0A08' }} />}><Hero /></Suspense>
+      <Hero />
       <Suspense fallback={<div style={{ height: '120px', background: '#F5F0E8' }} />}><Stats /></Suspense>
       <Suspense fallback={<div style={{ height: '700px', background: '#FBF8F3' }} />}><PropertiesSlider projects={projects} /></Suspense>
       <Suspense fallback={<div style={{ height: '400px' }} />}><Services /></Suspense>
@@ -41,4 +41,3 @@ const Home = ({ projects, news, testimonials, openModal, scrollTo }) => {
 };
 
 export default Home;
-

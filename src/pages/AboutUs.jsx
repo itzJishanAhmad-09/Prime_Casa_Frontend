@@ -155,7 +155,7 @@ const AboutUs = () => {
 
             <div className="about-details-text">
               <span className="about-details-label">About Us</span>
-              <h3 className="about-details-title">About Prime Casa Wealth Management</h3>
+              <h2 className="about-details-title">About Prime Casa Wealth Management</h2>
               <p className="about-details-desc">
                 At Prime Casa Wealth Management, we are dedicated to helping
                 individuals, families, and businesses build and preserve wealth
@@ -196,7 +196,7 @@ const AboutUs = () => {
         <div className="container">
           <div className="about-leadership-header">
             <span className="about-leadership-label">Our Leaders</span>
-            <h3 className="about-leadership-title">Leaders Behind the Wheel</h3>
+            <h2 className="about-leadership-title">Leaders Behind the Wheel</h2>
             <p className="about-leadership-desc">
               Leadership is the backbone of any successful organization, and
               our leaders exemplify vision, dedication, and excellence.
@@ -215,7 +215,7 @@ const AboutUs = () => {
               </div>
               <div className="about-leadership-card-content">
                 <span className="about-leadership-card-role">{LEADERS[0].role}</span>
-                <h5 className="about-leadership-card-name">{LEADERS[0].name}</h5>
+                <h3 className="about-leadership-card-name">{LEADERS[0].name}</h3>
                 <p className="about-leadership-card-desc">{LEADERS[0].desc}</p>
               </div>
             </div>
@@ -234,7 +234,7 @@ const AboutUs = () => {
                 </div>
                 <div className="about-leadership-card-content">
                   <span className="about-leadership-card-role">{member.role}</span>
-                  <h5 className="about-leadership-card-name">{member.name}</h5>
+                  <h3 className="about-leadership-card-name">{member.name}</h3>
                   <p className="about-leadership-card-desc">{member.desc}</p>
                 </div>
               </div>

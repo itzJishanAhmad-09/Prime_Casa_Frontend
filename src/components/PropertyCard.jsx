@@ -44,7 +44,7 @@ const PropertyCard = ({ project }) => {
       <Link
         to={`/project/${project.id}`}
         className="pc-media"
-        aria-label={`View ${project.title}`}
+        aria-label={`Learn more about ${project.title}`}
       >
         {isImagePath(project.emoji) ? (
           <img
@@ -114,6 +114,7 @@ const PropertyCard = ({ project }) => {
           <Link
             to={`/project/${project.id}`}
             className="pc-btn pc-btn--ghost"
+            aria-label={`Learn more about ${project.title}`}
           >
             Know more
           </Link>

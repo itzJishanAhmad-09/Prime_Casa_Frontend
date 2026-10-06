@@ -1,5 +1,5 @@
 // src/components/Hero.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSearch } from '@tabler/icons-react';
 
@@ -10,7 +10,38 @@ const BUDGETS    = ['Under ₹50L', '₹50L – ₹1Cr', '₹1Cr – ₹2Cr', '�
 const Hero = () => {
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoEnabled, setVideoEnabled] = useState(false);
   const [filters, setFilters] = useState({ cat: '', sector: '', budget: '' });
+
+  useEffect(() => {
+    let idleHandle;
+    let timeoutHandle;
+
+    const scheduleVideo = () => {
+      if (typeof window.requestIdleCallback === 'function') {
+        idleHandle = window.requestIdleCallback(
+          () => setVideoEnabled(true),
+          { timeout: 5000 }
+        );
+      } else {
+        timeoutHandle = window.setTimeout(() => setVideoEnabled(true), 2000);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      scheduleVideo();
+    } else {
+      window.addEventListener('load', scheduleVideo, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('load', scheduleVideo);
+      if (idleHandle !== undefined && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleHandle);
+      }
+      window.clearTimeout(timeoutHandle);
+    };
+  }, []);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -29,8 +60,8 @@ const Hero = () => {
       {/* LCP placeholder image — shown while video loads */}
       <img
         src="/assets/videos/hero.webp"
-        alt="Noida skyline"
-        fetchpriority="high"
+        alt=""
+        fetchPriority="high"
         style={{
           position: 'absolute',
           top: 0,
@@ -43,30 +74,32 @@ const Hero = () => {
         }}
       />
 
-      <video
-        className={`hero-video ${videoLoaded ? 'loaded' : ''}`}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 1,
-          opacity: videoLoaded ? 1 : 0,
-          transition: 'opacity 0.8s ease',
-          background: 'transparent',
-          willChange: 'opacity, transform',
-        }}
-        onLoadedData={() => setVideoLoaded(true)}
-      >
-        <source src="/assets/videos/noida-drone.mp4" type="video/mp4" />
-      </video>
+      {videoEnabled && (
+        <video
+          className={`hero-video ${videoLoaded ? 'loaded' : ''}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1,
+            opacity: videoLoaded ? 1 : 0,
+            transition: 'opacity 0.8s ease',
+            background: 'transparent',
+            willChange: 'opacity, transform',
+          }}
+          onLoadedData={() => setVideoLoaded(true)}
+        >
+          <source src="/assets/videos/noida-drone.mp4" type="video/mp4" />
+        </video>
+      )}
 
       <div className="hero-overlay" />
 

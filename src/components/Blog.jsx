@@ -72,7 +72,7 @@ const Blog = ({ news }) => {
                   <Link
                     to={`/blog/${item.slug}`}
                     className="blog-card-media"
-                    aria-label={`Read: ${item.title}`}
+                    aria-label={`Read ${item.title}`}
                   >
                     {isImagePath(item.image || item.emoji) ? (
                       <img
@@ -107,6 +107,7 @@ const Blog = ({ news }) => {
                     <Link
                       to={`/blog/${item.slug}`}
                       className="blog-card-link"
+                      aria-label={`Read ${item.title}`}
                     >
                       Read more
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"

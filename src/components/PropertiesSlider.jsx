@@ -20,7 +20,7 @@ const PropertiesSlider = ({ projects, title = "Featured Properties", subtitle = 
     <section className="section" id="properties-slider">
       <div className="section-header">
         <div className="section-label">✦ Featured Properties</div>
-        <div className="section-title">{title}</div>
+        <h2 className="section-title">{title}</h2>
         <div className="section-sub">{subtitle}</div>
       </div>
 

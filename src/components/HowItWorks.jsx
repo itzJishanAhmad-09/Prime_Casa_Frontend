@@ -1,5 +1,5 @@
 // src/components/HowItWorks.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 const STEPS = [
   {
@@ -24,41 +24,51 @@ const STEPS = [
   },
 ];
 
-const HowItWorks = () => (
-  <section className="steps-section" id="how-it-works">
-    <div className="steps-inner">
+const HowItWorks = () => {
+  const [activeStep, setActiveStep] = useState(4);
 
-      {/* ---------- Header ---------- */}
-      <header className="steps-header">
-        <div className="steps-eyebrow">
-          <span className="steps-eyebrow-dot" aria-hidden="true" />
-          The Process
+  return (
+    <section className="steps-section" id="how-it-works">
+      <div className="steps-inner">
+
+        {/* ---------- Header ---------- */}
+        <header className="steps-header">
+          <div className="steps-eyebrow">
+            <span className="steps-eyebrow-dot" aria-hidden="true" />
+            The Process
+          </div>
+          <h2 className="steps-title">
+            Four steps to your <em>address.</em>
+          </h2>
+        </header>
+
+        {/* ---------- Steps grid ---------- */}
+        <div className="steps-grid-wrap">
+          {/* Connecting line (desktop only) */}
+          <div className="steps-line" aria-hidden="true" />
+
+          <div className="steps-grid">
+            {STEPS.map((s) => (
+              <article className="step-item" key={s.n}>
+                <button
+                  type="button"
+                  className={`step-num ${activeStep === s.n ? 'is-accent' : ''}`}
+                  aria-pressed={activeStep === s.n}
+                  aria-label={`Select step ${s.n}: ${s.title}`}
+                  onClick={() => setActiveStep(s.n)}
+                >
+                  {s.n}
+                </button>
+                <h3 className="step-title">{s.title}</h3>
+                <p className="step-desc">{s.desc}</p>
+              </article>
+            ))}
+          </div>
         </div>
-        <h2 className="steps-title">
-          Four steps to your <em>address.</em>
-        </h2>
-      </header>
 
-      {/* ---------- Steps grid ---------- */}
-      <div className="steps-grid-wrap">
-        {/* Connecting line (desktop only) */}
-        <div className="steps-line" aria-hidden="true" />
-
-        <div className="steps-grid">
-          {STEPS.map((s) => (
-            <article className="step-item" key={s.n}>
-              <div className={`step-num ${s.n === 4 ? 'is-accent' : ''}`}>
-                {s.n}
-              </div>
-              <h3 className="step-title">{s.title}</h3>
-              <p className="step-desc">{s.desc}</p>
-            </article>
-          ))}
-        </div>
       </div>
-
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HowItWorks;
