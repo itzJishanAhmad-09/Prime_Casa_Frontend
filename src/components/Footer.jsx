@@ -1,7 +1,14 @@
 // src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IconArrowUp } from '@tabler/icons-react';
+import {
+  IconArrowUp,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandX,
+  IconBrandLinkedin,
+} from '@tabler/icons-react';
 
 const NAV_LINKS = [
   { label: 'Home',       path: '/' },
@@ -22,9 +29,16 @@ const SECTORS = [
 ];
 
 const TOOLKIT_LINKS = [
-  { label: 'ROI Calculator', path: '/#toolkit' },
-  { label: 'EMI Planner',    path: '/#toolkit' },
+  { label: 'ROI Calculator',  path: '/#toolkit' },
+  { label: 'EMI Planner',     path: '/#toolkit' },
   { label: 'NRI Realty Edge', path: '/#toolkit' },
+];
+
+const SOCIAL_LINKS = [
+  { label: 'Facebook',  href: 'https://www.facebook.com/theprimecasa',                                   Icon: IconBrandFacebook  },
+  { label: 'Instagram', href: 'https://www.instagram.com/theprimecasa',                                  Icon: IconBrandInstagram },
+  { label: 'YouTube',   href: 'https://www.youtube.com/@theprimecasa',                                   Icon: IconBrandYoutube   },
+  { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd',          Icon: IconBrandLinkedin  },
 ];
 
 const WA_GENERAL = 'https://wa.me/918130504183?text=' + encodeURIComponent(
@@ -138,6 +152,26 @@ const Footer = () => {
               Trusted property advisor across all Noida sectors. RERA
               registered. Zero brokerage.
             </p>
+
+            {/* ---------- Follow Us ---------- */}
+            <div className="ft-social">
+              <span className="ft-social-title">Follow Us:</span>
+              <div className="ft-social-icons">
+                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ft-social-link"
+                    aria-label={label}
+                    title={label}
+                  >
+                    <Icon size={20} stroke={1.8} />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="ft-col">

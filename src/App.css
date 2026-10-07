@@ -3440,7 +3440,6 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   .about-leadership-card-img { max-width: 180px; }
 }
 
-
 /* ------------------------------------------------------------
    22. SERVICE PAGE (sp-*)
    ------------------------------------------------------------ */
@@ -6077,5 +6076,86 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+/* ------------------------------------------------------------
+   33. FOOTER — FOLLOW US (SOCIAL ICONS)
+   ------------------------------------------------------------ */
+.ft-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ft-social-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F6D5D0; /* Same accent as ft-brand-tagline / ft-col-title */
+}
+
+.ft-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ft-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px; /* gives the "squircle" shape from your image */
+  background: rgba(245, 240, 232, 0.06);
+  border: 1px solid rgba(245, 240, 232, 0.18);
+  color: var(--ivory);
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ft-social-link:hover,
+.ft-social-link:focus-visible {
+  background: var(--red);
+  border-color: var(--red);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.ft-social-link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.35);
+}
+
+/* ---- Responsive tuning ---- */
+@media (max-width: 480px) {
+  .ft-social-icons { gap: 8px; }
+  .ft-social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .ft-social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ft-social-link {
+    width: 38px;
+    height: 38px;
+  }
+  .ft-social-link svg {
+    width: 16px;
+    height: 16px;
   }
 }
