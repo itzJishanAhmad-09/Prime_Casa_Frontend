@@ -43,18 +43,15 @@ const LEADERS = [
 
 const PILLARS = [
   {
-    n: 'i.',
-    title: 'Passionate',
+    n: 'i. Passionate',
     desc: 'Driven by a deep love of real estate — finding not just properties, but long-term opportunities that fit your life goals.',
   },
   {
-    n: 'ii.',
-    title: 'Professional',
+    n: 'ii. Professional',
     desc: 'Market knowledge that keeps every deal transparent, reliable and backed by data and RERA compliance.',
   },
   {
-    n: 'iii.',
-    title: 'Full support',
+    n: 'iii. Full support',
     desc: 'Search, site visits, financing and possession — end-to-end support for a zero-stress experience.',
   },
 ];

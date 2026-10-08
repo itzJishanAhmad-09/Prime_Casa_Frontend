@@ -57,7 +57,7 @@ const Navbar = ({ scrollTo }) => {
             height="80"
           />
         </div>
-        <span className="nav-brand-text">The Prime Casa</span>
+        <span className="nav-brand-text">The Prime Casa Realty Pvt Ltd</span>
       </div>
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>

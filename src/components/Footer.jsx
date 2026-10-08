@@ -19,15 +19,6 @@ const NAV_LINKS = [
   { label: 'Contact',    path: '/contact' },
 ];
 
-const SECTORS = [
-  { label: 'Sector 128',        query: 'Sector 128' },
-  { label: 'Sector 142',        query: 'Sector 142' },
-  { label: 'Sector 105',        query: 'Sector 105' },
-  { label: 'Sector 107',        query: 'Sector 107' },
-  { label: 'Sector 72',         query: 'Sector 72' },
-  { label: 'Yamuna Expressway', query: 'Yamuna Expressway' },
-];
-
 const TOOLKIT_LINKS = [
   { label: 'ROI Calculator',  path: '/#toolkit' },
   { label: 'EMI Planner',     path: '/#toolkit' },
@@ -172,22 +163,6 @@ const Footer = () => {
                 ))}
               </div>
             </div>
-          </div>
-
-          <div className="ft-col">
-            <h3 className="ft-col-title">Popular sectors</h3>
-            <ul>
-              {SECTORS.map((s) => (
-                <li key={s.label}>
-                  <Link
-                    to={`/properties?sector=${encodeURIComponent(s.query)}`}
-                    className="ft-link"
-                  >
-                    {s.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="ft-col">
