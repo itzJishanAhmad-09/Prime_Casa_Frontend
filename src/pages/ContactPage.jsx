@@ -186,7 +186,7 @@ const ContactPage = () => {
                     id="cp-name"
                     type="text"
                     name="name"
-                    placeholder="Vikramaditya Sharma"
+                    placeholder="Rahul Sharma"
                     value={formData.name}
                     onChange={handleChange}
                     required
