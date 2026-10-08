@@ -56,14 +56,14 @@ const TermsPage = () => {
         <div className="terms-hero-bg"></div>
         <div className="terms-hero-overlay"></div>
         <div className="terms-hero-container">
-          <div className="terms-hero-content">
-            <ul className="terms-breadcrumb">
+          <div className="terms-hero-content" data-reveal>
+            <ul className="terms-breadcrumb" data-reveal data-reveal-delay="1">
               <li><Link to="/">Home</Link></li>
               <li>/</li>
               <li>Terms of Service</li>
             </ul>
-            <h1 className="terms-hero-title">Terms of Service</h1>
-            <p className="terms-hero-sub">
+            <h1 className="terms-hero-title" data-reveal data-reveal-delay="2">Terms of Service</h1>
+            <p className="terms-hero-sub" data-reveal data-reveal-delay="3">
               By accessing or using The Prime Casa services, you agree to be bound by the legal standards outlined in these Terms.
             </p>
           </div>
@@ -71,7 +71,7 @@ const TermsPage = () => {
       </section>
 
       <div className="terms-page-wrapper">
-        <aside className="terms-sidebar">
+        <aside className="terms-sidebar" data-reveal>
           <div className="terms-sidebar-inner">
             <div className="terms-sidebar-header">
               <Link to="/" className="terms-back-link">
@@ -104,7 +104,7 @@ const TermsPage = () => {
 
         <main className="terms-main">
           <div className="terms-articles">
-            <article id="acceptance" className="terms-card">
+            <article id="acceptance" className="terms-card" data-reveal>
               <div className="terms-card-header">
                 <span className="terms-card-icon"><IconGavel size={22} /></span>
                 <h2>1. Acceptance of Terms</h2>
@@ -114,21 +114,21 @@ const TermsPage = () => {
               </p>
             </article>
 
-            <article id="description" className="terms-card">
+            <article id="description" className="terms-card" data-reveal data-reveal-delay="1">
               <h2>2. Description of Service</h2>
               <p>
                 The Prime Casa provides real estate services, including property listings, consulting, and management in Noida, Uttar Pradesh, and surrounding areas.
               </p>
             </article>
 
-            <article id="privacy" className="terms-card">
+            <article id="privacy" className="terms-card" data-reveal data-reveal-delay="2">
               <h2>3. Privacy Policy</h2>
               <p>
                 Your use of our service is also governed by our Privacy Policy, which describes how we collect and use your personal information.
               </p>
             </article>
 
-            <article id="conduct" className="terms-card">
+            <article id="conduct" className="terms-card" data-reveal data-reveal-delay="3">
               <h2>4. User Conduct</h2>
               <p className="mb-3">
                 Users agree not to use the service for any unlawful purposes or to engage in any conduct that harms The Prime Casa or its users.
@@ -139,14 +139,14 @@ const TermsPage = () => {
               </ul>
             </article>
 
-            <article className="terms-card">
+            <article className="terms-card" data-reveal data-reveal-delay="4">
               <h2>5. Intellectual Property</h2>
               <p>
                 All content on this site, including logos, text, and images, is the property of The Prime Casa and is protected by copyright laws.
               </p>
             </article>
 
-            <article className="terms-card terms-card-highlight">
+            <article className="terms-card terms-card-highlight" data-reveal data-reveal-delay="5">
               <h2>6. Limitation of Liability</h2>
               <blockquote>
                 The Prime Casa shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our services.
@@ -174,7 +174,7 @@ const TermsPage = () => {
               </p>
             </article>
 
-            <article id="contact" className="terms-card terms-card-dark">
+            <article id="contact" className="terms-card terms-card-dark" data-reveal data-reveal-delay="6">
               <h2>10. Contact Information</h2>
               <div className="terms-contact-grid">
                 <div>

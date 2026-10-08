@@ -136,19 +136,19 @@ const PropertiesList = ({ projects }) => {
         <div className="pp-hero-bg" aria-hidden="true" />
         <div className="pp-hero-scrim" aria-hidden="true" />
 
-        <div className="pp-hero-inner">
-          <nav className="pp-crumb" aria-label="Breadcrumb">
+        <div className="pp-hero-inner" data-reveal>
+          <nav className="pp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="pp-crumb-current">Properties</span>
           </nav>
 
-          <h1 className="pp-hero-title">
+          <h1 className="pp-hero-title" data-reveal data-reveal-delay="2">
             All properties,<br />
             <em>verified.</em>
           </h1>
 
-          <p className="pp-hero-sub">
+          <p className="pp-hero-sub" data-reveal data-reveal-delay="3">
             Handpicked RERA-verified projects with the highest buyer
             interest and market confidence.
           </p>
@@ -159,17 +159,19 @@ const PropertiesList = ({ projects }) => {
       {/* FILTER BAR                                          */}
       {/* ================================================== */}
       <section className="pp-filters">
-        <div className="pp-filters-inner">
+        <div className="pp-filters-inner" data-reveal>
 
           {/* Category chips */}
           <div className="pp-chips" role="group" aria-label="Property type">
-            {CATEGORY_CHIPS.map((c) => (
+            {CATEGORY_CHIPS.map((c, idx) => (
               <button
                 key={c.key}
                 type="button"
                 className={`pp-chip ${filter === c.key ? 'is-active' : ''}`}
                 aria-pressed={filter === c.key}
                 onClick={() => setFilter(c.key)}
+                data-reveal
+                data-reveal-delay={String((idx % 6) + 1)}
               >
                 {c.label}
               </button>
@@ -177,7 +179,7 @@ const PropertiesList = ({ projects }) => {
           </div>
 
           {/* Dropdown row */}
-          <div className="pp-bar">
+          <div className="pp-bar" data-reveal data-reveal-delay="1">
             <div className="pp-field">
               <label htmlFor="pp-q">Search</label>
               <input
@@ -261,7 +263,7 @@ const PropertiesList = ({ projects }) => {
       {/* RESULTS                                             */}
       {/* ================================================== */}
       <section className="pp-results">
-        <div className="pp-results-inner">
+        <div className="pp-results-inner" data-reveal>
           <p className="pp-count" aria-live="polite">
             {filtered.length} {filtered.length === 1 ? 'PROPERTY' : 'PROPERTIES'}
             {' · '}
@@ -293,8 +295,14 @@ const PropertiesList = ({ projects }) => {
             </div>
           ) : (
             <div className="pp-grid">
-              {filtered.map((project) => (
-                <PropertyCard key={project.id} project={project} />
+              {filtered.map((project, idx) => (
+                <div
+                  key={project.id}
+                  data-reveal
+                  data-reveal-delay={String((idx % 6) + 1)}
+                >
+                  <PropertyCard project={project} />
+                </div>
               ))}
             </div>
           )}

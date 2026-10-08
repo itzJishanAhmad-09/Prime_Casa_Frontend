@@ -85,18 +85,18 @@ const ContactPage = () => {
         <div className="cp-hero-bg" aria-hidden="true" />
         <div className="cp-hero-scrim" aria-hidden="true" />
 
-        <div className="cp-hero-inner">
-          <nav className="cp-crumb" aria-label="Breadcrumb">
+        <div className="cp-hero-inner" data-reveal>
+          <nav className="cp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="cp-crumb-current">Contact</span>
           </nav>
 
-          <h1 className="cp-hero-title">
+          <h1 className="cp-hero-title" data-reveal data-reveal-delay="2">
             Let&rsquo;s find your <em>address.</em>
           </h1>
 
-          <p className="cp-hero-sub">
+          <p className="cp-hero-sub" data-reveal data-reveal-delay="3">
             Tell us your budget, sector and horizon — an advisor gets back
             to you within 24 hours.
           </p>
@@ -108,9 +108,9 @@ const ContactPage = () => {
         <div className="cp-body-inner">
 
           {/* ---------- LEFT: Info list ---------- */}
-          <aside className="cp-info">
+          <aside className="cp-info" data-reveal>
 
-            <div className="cp-info-block">
+            <div className="cp-info-block" data-reveal data-reveal-delay="1">
               <span className="cp-info-label">Head Office</span>
               <p className="cp-info-value">
                 Unit No. 302, Regus Tower, 3rd Floor,<br />
@@ -132,7 +132,7 @@ const ContactPage = () => {
               </a>
             </div>
 
-            <div className="cp-info-block">
+            <div className="cp-info-block" data-reveal data-reveal-delay="2">
               <span className="cp-info-label">Phone Support</span>
               <p className="cp-info-value">+91 81305 04183</p>
               <a className="cp-info-link" href="tel:+918130504183">
@@ -145,7 +145,7 @@ const ContactPage = () => {
               </a>
             </div>
 
-            <div className="cp-info-block">
+            <div className="cp-info-block" data-reveal data-reveal-delay="3">
               <span className="cp-info-label">Email</span>
               <p className="cp-info-value">crm@theprimecasa.in</p>
               <a className="cp-info-link" href="mailto:crm@theprimecasa.in">
@@ -158,7 +158,7 @@ const ContactPage = () => {
               </a>
             </div>
 
-            <div className="cp-info-block">
+            <div className="cp-info-block" data-reveal data-reveal-delay="4">
               <span className="cp-info-label">Business Hours</span>
               <p className="cp-info-value">Tue – Sun · 11 AM – 7 PM</p>
             </div>
@@ -166,7 +166,7 @@ const ContactPage = () => {
           </aside>
 
           {/* ---------- RIGHT: Form card ---------- */}
-          <div className="cp-form-card">
+          <div className="cp-form-card" data-reveal data-reveal-delay="1">
             <h2 className="cp-form-title">Send us a message</h2>
             <p className="cp-form-sub">
               Our team is ready to assist you with any inquiry.

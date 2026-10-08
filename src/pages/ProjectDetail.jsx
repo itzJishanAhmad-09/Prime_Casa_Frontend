@@ -84,9 +84,9 @@ const ProjectDetail = () => {
       {/* HEADER                                              */}
       {/* ================================================== */}
       <section className="pd-header">
-        <div className="pd-header-inner">
+        <div className="pd-header-inner" data-reveal>
 
-          <nav className="pd-crumb" aria-label="Breadcrumb">
+          <nav className="pd-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <Link to="/properties">Properties</Link>
@@ -94,15 +94,15 @@ const ProjectDetail = () => {
             <span className="pd-crumb-current">{project.title}</span>
           </nav>
 
-          <div className="pd-badges">
+          <div className="pd-badges" data-reveal data-reveal-delay="2">
             {isNew && <span className="pd-badge pd-badge--red">NEW LAUNCH</span>}
             {isPopular && <span className="pd-badge pd-badge--dark">POPULAR</span>}
             {isLuxury && <span className="pd-badge pd-badge--dark">LUXURY</span>}
           </div>
 
-          <h1 className="pd-title">{project.title}</h1>
+          <h1 className="pd-title" data-reveal data-reveal-delay="3">{project.title}</h1>
 
-          <div className="pd-title-meta">
+          <div className="pd-title-meta" data-reveal data-reveal-delay="4">
             <span className="pd-loc">◎ {project.loc}</span>
             <span className="pd-dev">BY {project.builder.toUpperCase()}</span>
           </div>
@@ -114,7 +114,7 @@ const ProjectDetail = () => {
       {/* HERO IMAGE                                          */}
       {/* ================================================== */}
       <section className="pd-hero-section">
-        <div className="pd-hero-wrap">
+        <div className="pd-hero-wrap" data-reveal>
           <img
             src={heroImage}
             alt={project.title}
@@ -135,7 +135,7 @@ const ProjectDetail = () => {
           <div className="pd-main">
 
             {/* Overview */}
-            <div className="pd-block">
+            <div className="pd-block" data-reveal>
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
                 <span>Overview</span>
@@ -146,7 +146,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Property details */}
-            <div className="pd-block">
+            <div className="pd-block" data-reveal data-reveal-delay="1">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
                 <span>Property details</span>
@@ -181,7 +181,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Connectivity */}
-            <div className="pd-block">
+            <div className="pd-block" data-reveal data-reveal-delay="2">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
                 <span>Connected with the world</span>
@@ -203,7 +203,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Amenities */}
-            <div className="pd-block">
+            <div className="pd-block" data-reveal data-reveal-delay="3">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
                 <span>Amenities</span>
@@ -230,7 +230,7 @@ const ProjectDetail = () => {
           </div>
 
           {/* ---------- RIGHT COLUMN (STICKY) ---------- */}
-          <aside className="pd-sidebar">
+          <aside className="pd-sidebar" data-reveal data-reveal-delay="1">
             <div className="pd-enquiry-card">
               <span className="pd-enquiry-label">Interested?</span>
               <h2 className="pd-enquiry-title">

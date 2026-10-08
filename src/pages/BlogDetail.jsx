@@ -92,15 +92,15 @@ const BlogDetail = () => {
       {/* HEADER                                              */}
       {/* ================================================== */}
       <header className="bpd-header">
-        <div className="bpd-header-inner">
+        <div className="bpd-header-inner" data-reveal>
 
-          <nav className="bpd-crumb" aria-label="Breadcrumb">
+          <nav className="bpd-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <Link to="/blog">Blog</Link>
           </nav>
 
-          <div className="bpd-meta">
+          <div className="bpd-meta" data-reveal data-reveal-delay="2">
             {blog.tag && <span className="bpd-meta-tag">{blog.tag}</span>}
             {blog.date && (
               <>
@@ -112,10 +112,10 @@ const BlogDetail = () => {
             <span>{blog.author || 'Prime Casa Team'}</span>
           </div>
 
-          <h1 className="bpd-title">{blog.title}</h1>
+          <h1 className="bpd-title" data-reveal data-reveal-delay="3">{blog.title}</h1>
 
           {blog.excerpt && (
-            <p className="bpd-lead">{blog.excerpt}</p>
+            <p className="bpd-lead" data-reveal data-reveal-delay="4">{blog.excerpt}</p>
           )}
 
         </div>
@@ -124,7 +124,7 @@ const BlogDetail = () => {
       {/* ================================================== */}
       {/* HERO IMAGE                                          */}
       {/* ================================================== */}
-      <div className="bpd-hero-image-wrap">
+      <div className="bpd-hero-image-wrap" data-reveal>
         <div className="bpd-hero-image">
           <img
             ref={heroImageRef}
@@ -145,15 +145,20 @@ const BlogDetail = () => {
       <article className="bpd-article">
         <div className="bpd-article-inner">
           {contentParagraphs.map((para, idx) => (
-            <p key={idx} className="bpd-paragraph">
+            <p
+              key={idx}
+              className="bpd-paragraph"
+              data-reveal
+              data-reveal-delay={String((idx % 6) + 1)}
+            >
               {para}
             </p>
           ))}
         </div>
 
         {/* Share bar */}
-        <div className="bpd-actions">
-          <Link to="/contact" className="bpd-btn bpd-btn--red">
+        <div className="bpd-actions" data-reveal>
+          <Link to="/contact" className="bpd-btn bpd-btn--red" data-reveal data-reveal-delay="1">
             Contact an advisor
           </Link>
 
@@ -162,6 +167,8 @@ const BlogDetail = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bpd-btn bpd-btn--outline"
+            data-reveal
+            data-reveal-delay="2"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" strokeWidth="1.8"
@@ -179,17 +186,19 @@ const BlogDetail = () => {
       {/* ================================================== */}
       {relatedPosts.length > 0 && (
         <section className="bpd-related">
-          <div className="bpd-related-inner">
-            <h2 className="bpd-related-title">
+          <div className="bpd-related-inner" data-reveal>
+            <h2 className="bpd-related-title" data-reveal data-reveal-delay="1">
               Keep <em>reading.</em>
             </h2>
 
             <div className="bpd-related-grid">
-              {relatedPosts.map((item) => (
+              {relatedPosts.map((item, idx) => (
                 <Link
                   key={item.id || item.slug}
                   to={`/blog/${item.slug}`}
                   className="bpd-related-card"
+                  data-reveal
+                  data-reveal-delay={String((idx % 6) + 1)}
                 >
                   <div className="bpd-related-media">
                     {isImagePath(item.emoji) ? (

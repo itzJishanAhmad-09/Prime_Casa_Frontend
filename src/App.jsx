@@ -11,17 +11,32 @@ import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
 import Contact from './components/Contact';
 
-const Home           = lazy(() => import('./pages/Home'));
-const AboutUs        = lazy(() => import('./pages/AboutUs'));
-const ProjectDetail  = lazy(() => import('./pages/ProjectDetail'));
-const BlogList       = lazy(() => import('./pages/BlogList'));
-const BlogDetail     = lazy(() => import('./pages/BlogDetail'));
-const PropertiesList = lazy(() => import('./pages/PropertiesList'));
-const PrivacyPolicy  = lazy(() => import('./pages/PrivacyPolicy'));
-const TermsPage      = lazy(() => import('./pages/TermsPage'));
-const ContactPage    = lazy(() => import('./pages/ContactPage'));
-const ServicePage    = lazy(() => import('./pages/ServicePage'));
-const NotFound       = lazy(() => import('./pages/NotFound'));
+import useScrollReveal from './hooks/useScrollReveal';
+
+// Named lazy loaders — required for @vitejs/plugin-react-swc
+const loadHomepage       = () => import('./pages/Homepage');
+const loadAboutUs        = () => import('./pages/AboutUs');
+const loadProjectDetail  = () => import('./pages/ProjectDetail');
+const loadBlogList       = () => import('./pages/BlogList');
+const loadBlogDetail     = () => import('./pages/BlogDetail');
+const loadPropertiesList = () => import('./pages/PropertiesList');
+const loadPrivacyPolicy  = () => import('./pages/PrivacyPolicy');
+const loadTermsPage      = () => import('./pages/TermsPage');
+const loadContactPage    = () => import('./pages/ContactPage');
+const loadServicePage    = () => import('./pages/ServicePage');
+const loadNotFound       = () => import('./pages/NotFound');
+
+const Homepage       = lazy(loadHomepage);
+const AboutUs        = lazy(loadAboutUs);
+const ProjectDetail  = lazy(loadProjectDetail);
+const BlogList       = lazy(loadBlogList);
+const BlogDetail     = lazy(loadBlogDetail);
+const PropertiesList = lazy(loadPropertiesList);
+const PrivacyPolicy  = lazy(loadPrivacyPolicy);
+const TermsPage      = lazy(loadTermsPage);
+const ContactPage    = lazy(loadContactPage);
+const ServicePage    = lazy(loadServicePage);
+const NotFound       = lazy(loadNotFound);
 
 import { projects } from './data/projects';
 import { news } from './data/news';
@@ -31,11 +46,15 @@ import { testimonials } from './data/testimonials';
 const HIDE_CONTACT_ON = ['/contact', '/schedule'];
 
 function App() {
-  const [modalOpen, setModalOpen]             = useState(false);
-  const [modalContent, setModalContent]       = useState('');
-  const [visitOpen, setVisitOpen]             = useState(false);
-  const [visitProjectId, setVisitProjectId]   = useState(null);
+  const [modalOpen, setModalOpen]           = useState(false);
+  const [modalContent, setModalContent]     = useState('');
+  const [visitOpen, setVisitOpen]           = useState(false);
+  const [visitProjectId, setVisitProjectId] = useState(null);
+
   const location = useLocation();
+
+  // Global scroll-reveal system
+  useScrollReveal();
 
   const openModal = useCallback((type) => {
     setModalContent(type);
@@ -74,38 +93,41 @@ function App() {
     <>
       <Navbar scrollTo={scrollTo} />
 
-      <ErrorBoundary>
-        <Suspense fallback={<LoadingSpinner size={48} />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  projects={projects}
-                  news={news}
-                  testimonials={testimonials}
-                  openModal={openModal}
-                  scrollTo={scrollTo}
-                />
-              }
-            />
-            <Route path="/about"          element={<AboutUs />} />
-            <Route path="/properties"     element={<PropertiesList projects={projects} />} />
-            <Route path="/project/:projectId" element={<ProjectDetail />} />
-            <Route path="/blog"           element={<BlogList />} />
-            <Route path="/blog/:slug"     element={<BlogDetail />} />
-            <Route path="/schedule/:id"   element={<Navigate to="/contact" replace />} />
-            <Route path="/schedule"       element={<Navigate to="/contact" replace />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms"          element={<TermsPage />} />
-            <Route path="/contact"        element={<ContactPage />} />
-            <Route path="/services"       element={<ServicePage />} />
-            <Route path="*"              element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </ErrorBoundary>
+      {/* Page wrapper — key forces remount so the .page fade-in replays */}
+      <main className="page" key={location.pathname}>
+        <ErrorBoundary>
+          <Suspense fallback={<LoadingSpinner size={48} />}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Homepage
+                    projects={projects}
+                    news={news}
+                    testimonials={testimonials}
+                    openModal={openModal}
+                    scrollTo={scrollTo}
+                  />
+                }
+              />
+              <Route path="/about"              element={<AboutUs />} />
+              <Route path="/properties"         element={<PropertiesList projects={projects} />} />
+              <Route path="/project/:projectId" element={<ProjectDetail />} />
+              <Route path="/blog"               element={<BlogList />} />
+              <Route path="/blog/:slug"         element={<BlogDetail />} />
+              <Route path="/schedule/:id"       element={<Navigate to="/contact" replace />} />
+              <Route path="/schedule"           element={<Navigate to="/contact" replace />} />
+              <Route path="/privacy-policy"     element={<PrivacyPolicy />} />
+              <Route path="/terms"              element={<TermsPage />} />
+              <Route path="/contact"            element={<ContactPage />} />
+              <Route path="/services"           element={<ServicePage />} />
+              <Route path="*"                   element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
+      </main>
 
-      {/* ---------- Contact section on every page ---------- */}
+      {/* Contact section on every page except /contact and /schedule */}
       {showContact && (
         <Suspense fallback={<div style={{ height: '600px' }} />}>
           <Contact />
@@ -114,8 +136,12 @@ function App() {
 
       <Footer />
 
-      {/* Toolkits modal (ROI/EMI/NRI) */}
-      <ToolkitModal isOpen={modalOpen} onClose={closeModal} content={modalContent} />
+      {/* Toolkits modal (ROI / EMI / NRI) */}
+      <ToolkitModal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        content={modalContent}
+      />
 
       {/* Visit booking modal */}
       <VisitModal

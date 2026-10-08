@@ -32,12 +32,12 @@ const HowItWorks = () => {
       <div className="steps-inner">
 
         {/* ---------- Header ---------- */}
-        <header className="steps-header">
-          <div className="steps-eyebrow">
+        <header className="steps-header" data-reveal>
+          <div className="steps-eyebrow" data-reveal data-reveal-delay="1">
             <span className="steps-eyebrow-dot" aria-hidden="true" />
             The Process
           </div>
-          <h2 className="steps-title">
+          <h2 className="steps-title" data-reveal data-reveal-delay="2">
             Four steps to your <em>address.</em>
           </h2>
         </header>
@@ -48,8 +48,13 @@ const HowItWorks = () => {
           <div className="steps-line" aria-hidden="true" />
 
           <div className="steps-grid">
-            {STEPS.map((s) => (
-              <article className="step-item" key={s.n}>
+            {STEPS.map((s, index) => (
+              <article
+                className="step-item"
+                key={s.n}
+                data-reveal
+                data-reveal-delay={String(index + 1)}
+              >
                 <button
                   type="button"
                   className={`step-num ${activeStep === s.n ? 'is-accent' : ''}`}

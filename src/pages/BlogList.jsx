@@ -44,19 +44,19 @@ const BlogList = () => {
         <div className="bp-hero-bg" aria-hidden="true" />
         <div className="bp-hero-scrim" aria-hidden="true" />
 
-        <div className="bp-hero-inner">
-          <nav className="bp-crumb" aria-label="Breadcrumb">
+        <div className="bp-hero-inner" data-reveal>
+          <nav className="bp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="bp-crumb-current">Blog</span>
           </nav>
 
-          <h1 className="bp-hero-title">
+          <h1 className="bp-hero-title" data-reveal data-reveal-delay="2">
             Market<br />
             <em>intelligence.</em>
           </h1>
 
-          <p className="bp-hero-sub">
+          <p className="bp-hero-sub" data-reveal data-reveal-delay="3">
             Launches, infrastructure and policy updates that move Noida
             property values — curated for the discerning investor.
           </p>
@@ -67,15 +67,17 @@ const BlogList = () => {
       {/* FILTER CHIPS                                        */}
       {/* ================================================== */}
       <section className="bp-filters">
-        <div className="bp-filters-inner">
+        <div className="bp-filters-inner" data-reveal>
           <div className="bp-chips" role="group" aria-label="Filter by topic">
-            {categories.map((cat) => (
+            {categories.map((cat, idx) => (
               <button
                 key={cat}
                 type="button"
                 className={`bp-chip ${activeCat === cat ? 'is-active' : ''}`}
                 aria-pressed={activeCat === cat}
                 onClick={() => setActiveCat(cat)}
+                data-reveal
+                data-reveal-delay={String((idx % 6) + 1)}
               >
                 {cat === 'ALL' ? 'All' : cat}
               </button>
@@ -88,13 +90,18 @@ const BlogList = () => {
       {/* POSTS GRID                                          */}
       {/* ================================================== */}
       <section className="bp-posts">
-        <div className="bp-posts-inner">
+        <div className="bp-posts-inner" data-reveal>
           {filtered.length === 0 ? (
             <p className="bp-empty">No articles in this category yet.</p>
           ) : (
             <div className="bp-grid">
-              {filtered.map((item) => (
-                <article className="bp-card" key={item.id || item.slug}>
+              {filtered.map((item, idx) => (
+                <article
+                  className="bp-card"
+                  key={item.id || item.slug}
+                  data-reveal
+                  data-reveal-delay={String((idx % 6) + 1)}
+                >
                   <Link
                     to={`/blog/${item.slug}`}
                     className="bp-card-media"

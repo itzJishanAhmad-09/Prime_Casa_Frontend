@@ -82,19 +82,19 @@ const AboutUs = () => {
         <div className="au-hero-bg" aria-hidden="true" />
         <div className="au-hero-scrim" aria-hidden="true" />
 
-        <div className="au-hero-inner">
-          <nav className="au-crumb" aria-label="Breadcrumb">
+        <div className="au-hero-inner" data-reveal>
+          <nav className="au-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="au-crumb-current">About</span>
           </nav>
 
-          <h1 className="au-hero-title">
+          <h1 className="au-hero-title" data-reveal data-reveal-delay="2">
             Welcome to<br />
             <em>Prime Casa.</em>
           </h1>
 
-          <p className="au-hero-sub">
+          <p className="au-hero-sub" data-reveal data-reveal-delay="3">
             Turning dreams into addresses — with trust, transparency
             and outstanding service.
           </p>
@@ -105,13 +105,13 @@ const AboutUs = () => {
       {/* WELCOME — two-column intro                          */}
       {/* ================================================== */}
       <section className="au-welcome">
-        <div className="au-welcome-inner">
-          <p className="au-welcome-lead">
+        <div className="au-welcome-inner" data-reveal>
+          <p className="au-welcome-lead" data-reveal data-reveal-delay="1">
             Prime Casa Realty Pvt. Ltd. specialises in the sale of residential
             and commercial real-estate projects, with a decade of experience
             marketing some of India&rsquo;s most prestigious properties.
           </p>
-          <p className="au-welcome-body">
+          <p className="au-welcome-body" data-reveal data-reveal-delay="2">
             Through Prime Casa Wealth Management we help individuals, families
             and businesses build and preserve wealth — investment management,
             retirement and real-estate planning, tax strategy and risk
@@ -126,8 +126,8 @@ const AboutUs = () => {
       {/* ================================================== */}
       <section className="about-details">
         <div className="container">
-          <div className="about-details-grid">
-            <div className="about-details-images">
+          <div className="about-details-grid" data-reveal>
+            <div className="about-details-images" data-reveal data-reveal-delay="1">
               <div className="about-details-img-main">
                 <img
                   src="/assets/images/aboutus1.webp"
@@ -150,7 +150,7 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="about-details-text">
+            <div className="about-details-text" data-reveal data-reveal-delay="2">
               <span className="about-details-label">About Us</span>
               <h2 className="about-details-title">About Prime Casa Wealth Management</h2>
               <p className="about-details-desc">
@@ -220,7 +220,12 @@ const AboutUs = () => {
 
           <div className="about-leadership-grid">
             {LEADERS.slice(1).map((member, idx) => (
-              <div key={idx} className="about-leadership-card">
+              <div
+                key={idx}
+                className="about-leadership-card"
+                data-reveal
+                data-reveal-delay={String((idx % 6) + 1)}
+              >
                 <div className="about-leadership-card-img">
                   <img
                     src={member.img || PLACEHOLDER}
@@ -245,21 +250,26 @@ const AboutUs = () => {
       {/* ================================================== */}
       <section className="au-why">
         <div className="au-why-inner">
-          <div className="au-why-header">
-            <div className="au-why-eyebrow">
+          <div className="au-why-header" data-reveal>
+            <div className="au-why-eyebrow" data-reveal data-reveal-delay="1">
               <span className="au-why-eyebrow-line" aria-hidden="true" />
               <span>Why choose us</span>
             </div>
-            <h2 className="au-why-title">
+            <h2 className="au-why-title" data-reveal data-reveal-delay="2">
               The Prime Casa <em>difference.</em>
             </h2>
           </div>
 
           <div className="au-why-grid">
-            {PILLARS.map((p) => (
-              <article className="au-why-card" key={p.n}>
+            {PILLARS.map((p, idx) => (
+              <article
+                className="au-why-card"
+                key={p.n}
+                data-reveal
+                data-reveal-delay={String(idx + 1)}
+              >
                 <span className="au-why-num">{p.n}</span>
-                <h3 className="au-why-card-title">{p.title}</h3>
+                <h3 className="au-why-card-title">{p.n}</h3>
                 <p className="au-why-card-desc">{p.desc}</p>
               </article>
             ))}
@@ -270,10 +280,17 @@ const AboutUs = () => {
               to="/"
               state={{ scrollTo: 'contact' }}
               className="au-why-btn au-why-btn--red"
+              data-reveal
+              data-reveal-delay="1"
             >
               Connect with us
             </Link>
-            <Link to="/properties" className="au-why-btn au-why-btn--outline">
+            <Link
+              to="/properties"
+              className="au-why-btn au-why-btn--outline"
+              data-reveal
+              data-reveal-delay="2"
+            >
               View properties
             </Link>
           </div>

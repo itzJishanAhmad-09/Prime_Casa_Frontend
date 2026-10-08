@@ -6159,3 +6159,181 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
     height: 16px;
   }
 }
+
+/* ------------------------------------------------------------
+   36. SCROLL REVEAL & ENTRANCE ANIMATIONS
+   ------------------------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"]  { transform: translateX(-32px); }
+[data-reveal="right"] { transform: translateX(32px); }
+[data-reveal="scale"] { transform: scale(0.94); }
+[data-reveal="fade"]  { transform: none; }
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+[data-reveal-delay="1"] { transition-delay: 0.08s; }
+[data-reveal-delay="2"] { transition-delay: 0.16s; }
+[data-reveal-delay="3"] { transition-delay: 0.24s; }
+[data-reveal-delay="4"] { transition-delay: 0.32s; }
+[data-reveal-delay="5"] { transition-delay: 0.40s; }
+[data-reveal-delay="6"] { transition-delay: 0.48s; }
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-title {
+  animation: heroFadeUp 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both;
+}
+
+.hero-sub {
+  animation: heroFadeUp 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.22s both;
+}
+
+.hero-search-bar {
+  animation: heroFadeUp 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s both;
+}
+
+@keyframes bannerFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.au-hero-inner > *,
+.sp-hero-inner > *,
+.pp-hero-inner > *,
+.bp-hero-inner > *,
+.cp-hero-inner > * {
+  animation: bannerFadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.au-hero-inner > *:nth-child(1),
+.sp-hero-inner > *:nth-child(1),
+.pp-hero-inner > *:nth-child(1),
+.bp-hero-inner > *:nth-child(1),
+.cp-hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+
+.au-hero-inner > *:nth-child(2),
+.sp-hero-inner > *:nth-child(2),
+.pp-hero-inner > *:nth-child(2),
+.bp-hero-inner > *:nth-child(2),
+.cp-hero-inner > *:nth-child(2) { animation-delay: 0.18s; }
+
+.au-hero-inner > *:nth-child(3),
+.sp-hero-inner > *:nth-child(3),
+.pp-hero-inner > *:nth-child(3),
+.bp-hero-inner > *:nth-child(3),
+.cp-hero-inner > *:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes metricPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+.metric-value.is-accent {
+  animation: metricPulse 2.4s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal].is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-title,
+  .hero-sub,
+  .hero-search-bar,
+  .au-hero-inner > *,
+  .sp-hero-inner > *,
+  .pp-hero-inner > *,
+  .bp-hero-inner > *,
+  .cp-hero-inner > *,
+  .metric-value.is-accent {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   Unified badge / pill look
+   ------------------------------------------------------------ */
+.pc-badge,
+.pd-badge,
+.pd-sim-badge,
+.blog-card-tag,
+.bp-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Colored variants */
+.pc-badge--red,
+.pd-badge--red,
+.pd-sim-badge {
+  background: var(--red);
+}
+
+.pc-badge--dark,
+.pd-badge--dark {
+  background: #1C1916;
+}
+
+.pc-badge--terra {
+  background: var(--terra);
+}
+
+/* Blog tags keep their dark background */
+.blog-card-tag,
+.bp-card-tag {
+  background: #1C1916;
+  color: var(--ivory);
+}
+
+.pc-badge--dark,
+.pd-badge--dark {
+  background: #FFFFFF;
+  color: #1C1916;
+  border: 1px solid rgba(28, 25, 22, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.pc-badge--terra {
+  background: #1C1916;
+  color: #FFFFFF;
+}

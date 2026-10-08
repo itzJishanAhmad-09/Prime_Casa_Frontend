@@ -107,21 +107,21 @@ const Hero = () => {
         {/* ================================================ */}
         {/* TITLE + SUBTITLE                                 */}
         {/* ================================================ */}
-        <h1 className="hero-title">
+        <h1 className="hero-title" data-reveal>
           <span>Turning dreams</span>
           <span>
             into <em>addresses.</em>
           </span>
         </h1>
 
-        <p className="hero-sub">
+        <p className="hero-sub" data-reveal data-reveal-delay="1">
           Zero-brokerage advisory on RERA-verified properties across Noida.
         </p>
 
         {/* ================================================ */}
         {/* SEARCH BAR                                       */}
         {/* ================================================ */}
-        <div className="hero-search-bar" role="search">
+        <div className="hero-search-bar" role="search" data-reveal data-reveal-delay="2">
           {/* Category */}
           <div className="hsb-field">
             <label className="hsb-label" htmlFor="hsb-cat">Category</label>

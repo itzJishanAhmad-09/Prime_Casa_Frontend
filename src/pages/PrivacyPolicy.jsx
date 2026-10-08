@@ -57,23 +57,23 @@ const PrivacyPolicy = () => {
         <div className="privacy-hero-bg"></div>
         <div className="privacy-hero-overlay"></div>
         <div className="privacy-hero-container">
-          <div className="privacy-hero-content">
-            <ul className="privacy-breadcrumb">
+          <div className="privacy-hero-content" data-reveal>
+            <ul className="privacy-breadcrumb" data-reveal data-reveal-delay="1">
               <li><Link to="/">Home</Link></li>
               <li>/</li>
               <li>Privacy Policy</li>
             </ul>
-            <h1 className="privacy-hero-title">Privacy Policy</h1>
-            <p className="privacy-hero-sub">
+            <h1 className="privacy-hero-title" data-reveal data-reveal-delay="2">Privacy Policy</h1>
+            <p className="privacy-hero-sub" data-reveal data-reveal-delay="3">
               Your trust is our most valuable asset. Learn how Prime Casa protects and respects your personal information.
             </p>
-            <div className="privacy-hero-date">Last Updated: July 2026</div>
+            <div className="privacy-hero-date" data-reveal data-reveal-delay="4">Last Updated: July 2026</div>
           </div>
         </div>
       </section>
 
       <div className="privacy-page-wrapper">
-        <aside className="privacy-sidebar">
+        <aside className="privacy-sidebar" data-reveal>
           <div className="privacy-sidebar-inner">
             <div className="privacy-sidebar-header">
               <Link to="/" className="privacy-back-link">
@@ -109,7 +109,7 @@ const PrivacyPolicy = () => {
 
         <main className="privacy-main">
           <div className="privacy-sections">
-            <section id="introduction" className="privacy-section">
+            <section id="introduction" className="privacy-section" data-reveal>
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconShield size={22} /></span>
                 <h2>Introduction</h2>
@@ -121,7 +121,7 @@ const PrivacyPolicy = () => {
               </div>
             </section>
 
-            <section id="data-collection" className="privacy-section">
+            <section id="data-collection" className="privacy-section" data-reveal data-reveal-delay="1">
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconDatabase size={22} /></span>
                 <h2>Data Collection</h2>
@@ -146,7 +146,7 @@ const PrivacyPolicy = () => {
               </div>
             </section>
 
-            <section id="how-we-use" className="privacy-section">
+            <section id="how-we-use" className="privacy-section" data-reveal data-reveal-delay="2">
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconSettings size={22} /></span>
                 <h2>How We Use Data</h2>
@@ -176,7 +176,7 @@ const PrivacyPolicy = () => {
               </div>
             </section>
 
-            <section id="security" className="privacy-section privacy-section-dark">
+            <section id="security" className="privacy-section privacy-section-dark" data-reveal data-reveal-delay="3">
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconLock size={22} /></span>
                 <h2>Data Security</h2>

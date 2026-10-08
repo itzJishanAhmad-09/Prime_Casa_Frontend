@@ -20,21 +20,26 @@ const PILLARS = [
 const WhyUs = () => (
   <section className="au-why" id="why-us">
     <div className="au-why-inner">
-      <div className="au-why-header">
-        <div className="au-why-eyebrow">
+      <div className="au-why-header" data-reveal>
+        <div className="au-why-eyebrow" data-reveal data-reveal-delay="1">
           <span className="au-why-eyebrow-line" aria-hidden="true" />
           <span>Why choose us</span>
         </div>
-        <h2 className="au-why-title">
+        <h2 className="au-why-title" data-reveal data-reveal-delay="2">
           The Prime Casa <em>difference.</em>
         </h2>
       </div>
 
       <div className="au-why-grid">
-        {PILLARS.map((p) => (
-          <article className="au-why-card" key={p.n}>
+        {PILLARS.map((p, index) => (
+          <article
+            className="au-why-card"
+            key={p.n}
+            data-reveal
+            data-reveal-delay={String(index + 1)}
+          >
             <span className="au-why-num">{p.n}</span>
-            <h3 className="au-why-card-title">{p.title}</h3>
+            <h3 className="au-why-card-title">{p.n}</h3>
             <p className="au-why-card-desc">{p.desc}</p>
           </article>
         ))}
@@ -45,10 +50,17 @@ const WhyUs = () => (
           to="/"
           state={{ scrollTo: 'contact' }}
           className="au-why-btn au-why-btn--red"
+          data-reveal
+          data-reveal-delay="1"
         >
           Connect with us
         </Link>
-        <Link to="/properties" className="au-why-btn au-why-btn--outline">
+        <Link
+          to="/properties"
+          className="au-why-btn au-why-btn--outline"
+          data-reveal
+          data-reveal-delay="2"
+        >
           View properties
         </Link>
       </div>

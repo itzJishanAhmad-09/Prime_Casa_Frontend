@@ -9,10 +9,15 @@ const METRICS = [
 ];
 
 const Stats = () => (
-  <section className="metrics-bar" aria-label="Key metrics">
+  <section className="metrics-bar" aria-label="Key metrics" data-reveal>
     <div className="metrics-bar-inner">
-      {METRICS.map((m) => (
-        <div className="metric" key={m.label}>
+      {METRICS.map((m, index) => (
+        <div
+          className="metric"
+          key={m.label}
+          data-reveal
+          data-reveal-delay={String(index + 1)}
+        >
           <span className={`metric-value${m.accent ? ' is-accent' : ''}`}>
             {m.value}
           </span>

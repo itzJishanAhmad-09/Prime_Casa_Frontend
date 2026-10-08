@@ -11,6 +11,7 @@ const NotFound = () => {
         description="The page you are looking for does not exist."
       />
       <div
+        data-reveal
         style={{
           display: 'flex',
           flexDirection: 'column',
