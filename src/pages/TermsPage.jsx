@@ -15,6 +15,14 @@ import {
   IconArrowUp,
 } from '@tabler/icons-react';
 
+const NAV_ITEMS = [
+  { id: 'acceptance',  label: 'Acceptance',    Icon: IconGavel },
+  { id: 'description', label: 'Description',   Icon: IconInfoCircle },
+  { id: 'privacy',     label: 'Privacy',       Icon: IconShield },
+  { id: 'conduct',     label: 'User Conduct',  Icon: IconUserCheck },
+  { id: 'contact',     label: 'Contact',       Icon: IconMail },
+];
+
 const TermsPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,21 +35,21 @@ const TermsPage = () => {
       let current = '';
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 120) {
+        if (window.pageYOffset >= section.offsetTop - 120) {
           current = section.getAttribute('id');
         }
       });
 
       navLinks.forEach((link) => {
         link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
+        if (current && link.getAttribute('href').includes(current)) {
           link.classList.add('active');
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -53,8 +61,8 @@ const TermsPage = () => {
       />
 
       <section className="terms-hero-banner">
-        <div className="terms-hero-bg"></div>
-        <div className="terms-hero-overlay"></div>
+        <div className="terms-hero-bg" />
+        <div className="terms-hero-overlay" />
         <div className="terms-hero-container">
           <div className="terms-hero-content" data-reveal>
             <ul className="terms-breadcrumb" data-reveal data-reveal-delay="1">
@@ -62,9 +70,12 @@ const TermsPage = () => {
               <li>/</li>
               <li>Terms of Service</li>
             </ul>
-            <h1 className="terms-hero-title" data-reveal data-reveal-delay="2">Terms of Service</h1>
+            <h1 className="terms-hero-title" data-reveal data-reveal-delay="2">
+              Terms of Service
+            </h1>
             <p className="terms-hero-sub" data-reveal data-reveal-delay="3">
-              By accessing or using The Prime Casa services, you agree to be bound by the legal standards outlined in these Terms.
+              By accessing or using The Prime Casa services, you agree to be
+              bound by the legal standards outlined in these Terms.
             </p>
           </div>
         </div>
@@ -80,21 +91,11 @@ const TermsPage = () => {
               <h2>Legal Sections</h2>
             </div>
             <nav className="sidebar-nav">
-              <a href="#acceptance" className="active">
-                <IconGavel size={18} /> Acceptance
-              </a>
-              <a href="#description">
-                <IconInfoCircle size={18} /> Description
-              </a>
-              <a href="#privacy">
-                <IconShield size={18} /> Privacy
-              </a>
-              <a href="#conduct">
-                <IconUserCheck size={18} /> User Conduct
-              </a>
-              <a href="#contact">
-                <IconMail size={18} /> Contact
-              </a>
+              {NAV_ITEMS.map(({ id, label, Icon }, i) => (
+                <a key={id} href={`#${id}`} className={i === 0 ? 'active' : ''}>
+                  <Icon size={18} /> {label}
+                </a>
+              ))}
             </nav>
             <div className="terms-sidebar-footer">
               <span>Last updated: July 2026</span>
@@ -110,28 +111,41 @@ const TermsPage = () => {
                 <h2>1. Acceptance of Terms</h2>
               </div>
               <p>
-                Welcome to The Prime Casa. By accessing or using our website and services, you agree to comply with and be bound by these Terms of Service. If you do not agree, please do not use our services.
+                Welcome to The Prime Casa. By accessing or using our website
+                and services, you agree to comply with and be bound by these
+                Terms of Service. If you do not agree, please do not use our
+                services.
               </p>
             </article>
 
-            <article id="description" className="terms-card" data-reveal data-reveal-delay="1">
+            <article
+              id="description"
+              className="terms-card"
+              data-reveal
+              data-reveal-delay="1"
+            >
               <h2>2. Description of Service</h2>
               <p>
-                The Prime Casa provides real estate services, including property listings, consulting, and management in Noida, Uttar Pradesh, and surrounding areas.
+                The Prime Casa provides real estate services, including property
+                listings, consulting, and management in Noida, Uttar Pradesh,
+                and surrounding areas.
               </p>
             </article>
 
             <article id="privacy" className="terms-card" data-reveal data-reveal-delay="2">
               <h2>3. Privacy Policy</h2>
               <p>
-                Your use of our service is also governed by our Privacy Policy, which describes how we collect and use your personal information.
+                Your use of our service is also governed by our Privacy Policy,
+                which describes how we collect and use your personal
+                information.
               </p>
             </article>
 
             <article id="conduct" className="terms-card" data-reveal data-reveal-delay="3">
               <h2>4. User Conduct</h2>
               <p className="mb-3">
-                Users agree not to use the service for any unlawful purposes or to engage in any conduct that harms The Prime Casa or its users.
+                Users agree not to use the service for any unlawful purposes or
+                to engage in any conduct that harms The Prime Casa or its users.
               </p>
               <ul className="terms-list">
                 <li><IconCheck size={18} color="var(--red)" /> No unauthorized access to data.</li>
@@ -142,39 +156,58 @@ const TermsPage = () => {
             <article className="terms-card" data-reveal data-reveal-delay="4">
               <h2>5. Intellectual Property</h2>
               <p>
-                All content on this site, including logos, text, and images, is the property of The Prime Casa and is protected by copyright laws.
+                All content on this site, including logos, text, and images, is
+                the property of The Prime Casa and is protected by copyright
+                laws.
               </p>
             </article>
 
-            <article className="terms-card terms-card-highlight" data-reveal data-reveal-delay="5">
+            <article
+              className="terms-card terms-card-highlight"
+              data-reveal
+              data-reveal-delay="5"
+            >
               <h2>6. Limitation of Liability</h2>
               <blockquote>
-                The Prime Casa shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our services.
+                The Prime Casa shall not be liable for any direct, indirect,
+                incidental, or consequential damages resulting from the use or
+                inability to use our services.
               </blockquote>
             </article>
 
             <article className="terms-card">
               <h2>7. Termination</h2>
               <p>
-                We reserve the right to terminate or suspend access to our service immediately, without prior notice, for any reason whatsoever.
+                We reserve the right to terminate or suspend access to our
+                service immediately, without prior notice, for any reason
+                whatsoever.
               </p>
             </article>
 
             <article className="terms-card">
               <h2>8. Governing Law</h2>
               <p>
-                These terms are governed by the laws of India. Any disputes will be subject to the exclusive jurisdiction of the courts in Noida, Uttar Pradesh.
+                These terms are governed by the laws of India. Any disputes
+                will be subject to the exclusive jurisdiction of the courts in
+                Noida, Uttar Pradesh.
               </p>
             </article>
 
             <article className="terms-card">
               <h2>9. Changes to Terms</h2>
               <p>
-                We may update our Terms of Service from time to time. We will notify you of any changes by posting the new Terms on this page.
+                We may update our Terms of Service from time to time. We will
+                notify you of any changes by posting the new Terms on this
+                page.
               </p>
             </article>
 
-            <article id="contact" className="terms-card terms-card-dark" data-reveal data-reveal-delay="6">
+            <article
+              id="contact"
+              className="terms-card terms-card-dark"
+              data-reveal
+              data-reveal-delay="6"
+            >
               <h2>10. Contact Information</h2>
               <div className="terms-contact-grid">
                 <div>
@@ -182,7 +215,11 @@ const TermsPage = () => {
                   <p><IconPhone size={18} color="var(--gold-l)" /> +91 8130504183</p>
                 </div>
                 <div>
-                  <p><IconMapPin size={18} color="var(--gold-l)" /> Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida, Uttar Pradesh 201304</p>
+                  <p>
+                    <IconMapPin size={18} color="var(--gold-l)" />
+                    Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida,
+                    Uttar Pradesh 201304
+                  </p>
                 </div>
               </div>
             </article>

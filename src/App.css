@@ -770,11 +770,19 @@ nav {
   font-size: 12.5px;
   color: var(--muted);
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
-  -webkit-box-orient: vertical;
+  min-width: 0;
   overflow: hidden;
+}
+
+.pc-loc > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.pc-loc svg {
+  flex-shrink: 0;
 }
 
 .pc-config {
@@ -5734,7 +5742,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 .privacy-back-to-top {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 6.5rem;           /* was 1.5rem — clears the WA float */
   right: 1.5rem;
   z-index: 999;
   width: 52px;
@@ -5782,7 +5790,13 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   .privacy-section-body { padding: 1rem; }
   .privacy-card { padding: 1rem; }
   .privacy-table td, .privacy-table th { padding: 0.6rem 1rem; font-size: 0.8rem; }
-  .privacy-back-to-top { width: 44px; height: 44px; font-size: 1.2rem; bottom: 1rem; right: 1rem; }
+  .privacy-back-to-top {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    bottom: 5.5rem;         /* was 1rem */
+    right: 1rem;
+  }
 }
 
 
@@ -5996,7 +6010,7 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
 
 .terms-back-to-top {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 6.5rem;           /* was 1.5rem */
   right: 1.5rem;
   z-index: 999;
   width: 52px;
@@ -6041,7 +6055,13 @@ a.ft-contact-row:hover { color: #F6D5D0; padding-left: 8px; }
   .terms-hero-title { font-size: 1.6rem; }
   .terms-card { padding: 1rem; }
   .terms-card h2 { font-size: 1.2rem; }
-  .terms-back-to-top { width: 44px; height: 44px; font-size: 1.2rem; bottom: 1rem; right: 1rem; }
+  .terms-back-to-top {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    bottom: 5.5rem;         /* was 1rem */
+    right: 1rem;
+  }
 }
 
 

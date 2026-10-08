@@ -16,11 +16,21 @@ import {
   IconArrowUp,
 } from '@tabler/icons-react';
 
+const NAV_ITEMS = [
+  { id: 'introduction',    label: 'Introduction',   Icon: IconShield },
+  { id: 'data-collection', label: 'Data Collection', Icon: IconDatabase },
+  { id: 'how-we-use',      label: 'How We Use Data', Icon: IconSettings },
+  { id: 'security',        label: 'Data Security',   Icon: IconLock },
+  { id: 'rights',          label: 'User Rights',     Icon: IconGavel },
+  { id: 'contact',         label: 'Contact Info',    Icon: IconMail },
+];
+
 const PrivacyPolicy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Active-link tracker — guard against empty `current`
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('.privacy-section[id]');
@@ -28,21 +38,21 @@ const PrivacyPolicy = () => {
       let current = '';
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 120) {
+        if (window.pageYOffset >= section.offsetTop - 120) {
           current = section.getAttribute('id');
         }
       });
 
       navLinks.forEach((link) => {
         link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
+        if (current && link.getAttribute('href').includes(current)) {
           link.classList.add('active');
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -54,8 +64,8 @@ const PrivacyPolicy = () => {
       />
 
       <section className="privacy-hero-banner">
-        <div className="privacy-hero-bg"></div>
-        <div className="privacy-hero-overlay"></div>
+        <div className="privacy-hero-bg" />
+        <div className="privacy-hero-overlay" />
         <div className="privacy-hero-container">
           <div className="privacy-hero-content" data-reveal>
             <ul className="privacy-breadcrumb" data-reveal data-reveal-delay="1">
@@ -63,11 +73,16 @@ const PrivacyPolicy = () => {
               <li>/</li>
               <li>Privacy Policy</li>
             </ul>
-            <h1 className="privacy-hero-title" data-reveal data-reveal-delay="2">Privacy Policy</h1>
+            <h1 className="privacy-hero-title" data-reveal data-reveal-delay="2">
+              Privacy Policy
+            </h1>
             <p className="privacy-hero-sub" data-reveal data-reveal-delay="3">
-              Your trust is our most valuable asset. Learn how Prime Casa protects and respects your personal information.
+              Your trust is our most valuable asset. Learn how Prime Casa
+              protects and respects your personal information.
             </p>
-            <div className="privacy-hero-date" data-reveal data-reveal-delay="4">Last Updated: July 2026</div>
+            <div className="privacy-hero-date" data-reveal data-reveal-delay="4">
+              Last Updated: July 2026
+            </div>
           </div>
         </div>
       </section>
@@ -82,24 +97,11 @@ const PrivacyPolicy = () => {
               <h2>On this page</h2>
             </div>
             <nav className="privacy-sidebar-nav">
-              <a href="#introduction" className="active">
-                <IconShield size={18} /> Introduction
-              </a>
-              <a href="#data-collection">
-                <IconDatabase size={18} /> Data Collection
-              </a>
-              <a href="#how-we-use">
-                <IconSettings size={18} /> How We Use Data
-              </a>
-              <a href="#security">
-                <IconLock size={18} /> Data Security
-              </a>
-              <a href="#rights">
-                <IconGavel size={18} /> User Rights
-              </a>
-              <a href="#contact">
-                <IconMail size={18} /> Contact Info
-              </a>
+              {NAV_ITEMS.map(({ id, label, Icon }, i) => (
+                <a key={id} href={`#${id}`} className={i === 0 ? 'active' : ''}>
+                  <Icon size={18} /> {label}
+                </a>
+              ))}
             </nav>
             <div className="privacy-sidebar-footer">
               <span>Last updated: July 2026</span>
@@ -116,12 +118,24 @@ const PrivacyPolicy = () => {
               </div>
               <div className="privacy-section-body">
                 <p>
-                  At <strong>Prime Casa</strong>, we understand that real estate transactions involve sensitive personal and financial data. Our commitment to privacy is absolute. This Privacy Policy outlines the types of information we collect, how we handle it, and the rigorous standards we employ to ensure its safety. By using our services, you entrust us with your information, and we take that responsibility with the utmost professionalism.
+                  At <strong>Prime Casa</strong>, we understand that real estate
+                  transactions involve sensitive personal and financial data.
+                  Our commitment to privacy is absolute. This Privacy Policy
+                  outlines the types of information we collect, how we handle
+                  it, and the rigorous standards we employ to ensure its safety.
+                  By using our services, you entrust us with your information,
+                  and we take that responsibility with the utmost
+                  professionalism.
                 </p>
               </div>
             </section>
 
-            <section id="data-collection" className="privacy-section" data-reveal data-reveal-delay="1">
+            <section
+              id="data-collection"
+              className="privacy-section"
+              data-reveal
+              data-reveal-delay="1"
+            >
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconDatabase size={22} /></span>
                 <h2>Data Collection</h2>
@@ -129,24 +143,44 @@ const PrivacyPolicy = () => {
               <div className="privacy-grid-2col">
                 <div className="privacy-card">
                   <h3>Identity &amp; Contact</h3>
-                  <p>We collect your full name, email address, phone numbers, and physical mailing address to facilitate property viewings and contracts.</p>
+                  <p>
+                    We collect your full name, email address, phone numbers, and
+                    physical mailing address to facilitate property viewings and
+                    contracts.
+                  </p>
                 </div>
                 <div className="privacy-card">
                   <h3>Property Preferences</h3>
-                  <p>Information about your search criteria, including location preferences, budget ranges, and specific home features you desire.</p>
+                  <p>
+                    Information about your search criteria, including location
+                    preferences, budget ranges, and specific home features you
+                    desire.
+                  </p>
                 </div>
                 <div className="privacy-card">
                   <h3>Financial Credentials</h3>
-                  <p>For pre-qualification, we may collect information regarding your creditworthiness and mortgage eligibility as provided by you.</p>
+                  <p>
+                    For pre-qualification, we may collect information regarding
+                    your creditworthiness and mortgage eligibility as provided
+                    by you.
+                  </p>
                 </div>
                 <div className="privacy-card">
                   <h3>Digital Interactions</h3>
-                  <p>IP addresses, browser types, and interaction history on the Prime Casa portal to improve our technological offerings.</p>
+                  <p>
+                    IP addresses, browser types, and interaction history on the
+                    Prime Casa portal to improve our technological offerings.
+                  </p>
                 </div>
               </div>
             </section>
 
-            <section id="how-we-use" className="privacy-section" data-reveal data-reveal-delay="2">
+            <section
+              id="how-we-use"
+              className="privacy-section"
+              data-reveal
+              data-reveal-delay="2"
+            >
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconSettings size={22} /></span>
                 <h2>How We Use Data</h2>
@@ -156,37 +190,57 @@ const PrivacyPolicy = () => {
                   <IconCheck size={20} color="var(--red)" />
                   <div>
                     <h3>Service Delivery</h3>
-                    <p>To match you with luxury listings and coordinate with sellers, buyers, and legal entities during the closing process.</p>
+                    <p>
+                      To match you with luxury listings and coordinate with
+                      sellers, buyers, and legal entities during the closing
+                      process.
+                    </p>
                   </div>
                 </div>
                 <div className="privacy-use-item">
                   <IconCheck size={20} color="var(--red)" />
                   <div>
                     <h3>Communications</h3>
-                    <p>Providing critical updates on property status, market reports, and administrative notifications regarding your account.</p>
+                    <p>
+                      Providing critical updates on property status, market
+                      reports, and administrative notifications regarding your
+                      account.
+                    </p>
                   </div>
                 </div>
                 <div className="privacy-use-item">
                   <IconCheck size={20} color="var(--red)" />
                   <div>
                     <h3>Legal Compliance</h3>
-                    <p>Fulfilling our regulatory obligations within the real estate industry, including anti-money laundering (AML) checks.</p>
+                    <p>
+                      Fulfilling our regulatory obligations within the real
+                      estate industry, including anti-money laundering (AML)
+                      checks.
+                    </p>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section id="security" className="privacy-section privacy-section-dark" data-reveal data-reveal-delay="3">
+            <section
+              id="security"
+              className="privacy-section privacy-section-dark"
+              data-reveal
+              data-reveal-delay="3"
+            >
               <div className="privacy-section-header">
                 <span className="privacy-section-icon"><IconLock size={22} /></span>
                 <h2>Data Security</h2>
               </div>
               <div className="privacy-section-body">
                 <p>
-                  Prime Casa employs institutional‑grade security protocols. Our data centers utilize multi‑factor authentication, end‑to‑end encryption for all sensitive files, and 24/7 monitoring systems.
+                  Prime Casa employs institutional-grade security protocols. Our
+                  data centers utilize multi-factor authentication, end-to-end
+                  encryption for all sensitive files, and 24/7 monitoring
+                  systems.
                 </p>
                 <div className="privacy-tags">
-                  <span>AES‑256 ENCRYPTION</span>
+                  <span>AES-256 ENCRYPTION</span>
                   <span>SSL/TLS SECURED</span>
                   <span>ISO 27001 COMPLIANT</span>
                 </div>
@@ -221,7 +275,7 @@ const PrivacyPolicy = () => {
                     </tr>
                     <tr>
                       <td>Portability</td>
-                      <td>Obtain your data in a structured, commonly used machine‑readable format.</td>
+                      <td>Obtain your data in a structured, commonly used machine-readable format.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -237,9 +291,13 @@ const PrivacyPolicy = () => {
                 <div>
                   <p><IconMail size={18} color="var(--gold-l)" /> crm@theprimecasa.in</p>
                   <p><IconPhone size={18} color="var(--gold-l)" /> +91 8130504183</p>
-                  <p><IconMapPin size={18} color="var(--gold-l)" /> Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida, Uttar Pradesh 201304</p>
+                  <p>
+                    <IconMapPin size={18} color="var(--gold-l)" />
+                    Unit No. 302, Regus Tower, 3rd Floor, Sector 142, Noida,
+                    Uttar Pradesh 201304
+                  </p>
                 </div>
-                <div></div>
+                <div />
               </div>
             </section>
           </div>

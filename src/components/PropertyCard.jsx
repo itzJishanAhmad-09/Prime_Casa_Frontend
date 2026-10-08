@@ -2,21 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IconMapPin } from '@tabler/icons-react';
-import { isImagePath } from '../utils/helpers';
-
-const PRICE_MAP = {
-  1: '₹1.85 Cr',
-  2: '₹5.80 Cr',
-  3: '₹2.40 Cr',
-  4: '₹1.45 Cr',
-  5: '₹1.20 Cr',
-  6: '₹1.10 Cr',
-  7: '₹5.20 Cr',
-  8: '₹2.80 Cr',
-  9: '₹4.25 Cr',
-  10: 'On Request',
-  11: '₹1.10 Cr',
-};
+import { isImagePath, formatPrice } from '../utils/helpers';
 
 const PropertyCard = ({ project }) => {
   const amenities = Array.isArray(project.amenities)
@@ -52,9 +38,7 @@ const PropertyCard = ({ project }) => {
             alt={project.title}
             loading="lazy"
             decoding="async"
-            onError={(e) => {
-              e.target.src = '/assets/images/placeholder.webp';
-            }}
+            onError={(e) => { e.target.src = '/assets/images/placeholder.webp'; }}
           />
         ) : (
           <span className="pc-emoji">{project.emoji || '🏠'}</span>
@@ -85,7 +69,7 @@ const PropertyCard = ({ project }) => {
 
         <p className="pc-loc">
           <IconMapPin size={13} aria-hidden="true" />
-          {project.loc}
+          <span>{project.loc}</span>
         </p>
 
         <div className="pc-config">
@@ -105,9 +89,7 @@ const PropertyCard = ({ project }) => {
       <div className="pc-footer">
         <div className="pc-price">
           <span className="pc-price-label">Starting from</span>
-          <span className="pc-price-value">
-            {PRICE_MAP[project.id] || 'On Request'}
-          </span>
+          <span className="pc-price-value">{formatPrice(project.price)}</span>
         </div>
 
         <div className="pc-actions">

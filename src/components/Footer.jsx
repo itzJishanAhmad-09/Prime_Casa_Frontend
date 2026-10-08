@@ -6,7 +6,6 @@ import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandYoutube,
-  IconBrandX,
   IconBrandLinkedin,
 } from '@tabler/icons-react';
 
@@ -19,22 +18,23 @@ const NAV_LINKS = [
   { label: 'Contact',    path: '/contact' },
 ];
 
+// These use router state so the Homepage can smooth-scroll to #toolkit
 const TOOLKIT_LINKS = [
-  { label: 'ROI Calculator',  path: '/#toolkit' },
-  { label: 'EMI Planner',     path: '/#toolkit' },
-  { label: 'NRI Realty Edge', path: '/#toolkit' },
+  { label: 'ROI Calculator',  state: { scrollTo: 'toolkit' } },
+  { label: 'EMI Planner',     state: { scrollTo: 'toolkit' } },
+  { label: 'NRI Realty Edge', state: { scrollTo: 'toolkit' } },
 ];
 
 const SOCIAL_LINKS = [
-  { label: 'Facebook',  href: 'https://www.facebook.com/theprimecasa',                                   Icon: IconBrandFacebook  },
-  { label: 'Instagram', href: 'https://www.instagram.com/theprimecasa',                                  Icon: IconBrandInstagram },
-  { label: 'YouTube',   href: 'https://www.youtube.com/@theprimecasa',                                   Icon: IconBrandYoutube   },
-  { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd',          Icon: IconBrandLinkedin  },
+  { label: 'Facebook',  href: 'https://www.facebook.com/theprimecasa',                            Icon: IconBrandFacebook  },
+  { label: 'Instagram', href: 'https://www.instagram.com/theprimecasa',                           Icon: IconBrandInstagram },
+  { label: 'YouTube',   href: 'https://www.youtube.com/@theprimecasa',                            Icon: IconBrandYoutube   },
+  { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd',   Icon: IconBrandLinkedin  },
 ];
 
-const WA_GENERAL = 'https://wa.me/918130504183?text=' + encodeURIComponent(
-  'Hi Prime Casa, I’d like help finding a property in Noida.'
-);
+const WA_GENERAL =
+  'https://wa.me/918130504183?text=' +
+  encodeURIComponent('Hi Prime Casa, I’d like help finding a property in Noida.');
 
 const Footer = () => {
   const handleScrollTop = () => {
@@ -51,7 +51,6 @@ const Footer = () => {
 
   return (
     <footer className="ft-root">
-      {/* ---------- Background image + scrim ---------- */}
       <div className="ft-bg" aria-hidden="true">
         <img
           src="/assets/videos/hero.webp"
@@ -63,12 +62,10 @@ const Footer = () => {
         <div className="ft-bg-scrim" />
       </div>
 
-      {/* ---------- Content ---------- */}
       <div className="ft-inner">
 
         {/* Top: CTA + contact card */}
         <div className="ft-top">
-
           <div className="ft-cta">
             <span className="ft-cta-eyebrow">Start your journey</span>
             <h2 className="ft-cta-title">
@@ -87,8 +84,12 @@ const Footer = () => {
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </button>
-              <a href={WA_GENERAL} target="_blank" rel="noopener noreferrer"
-                 className="ft-btn ft-btn--ivory">
+              <a
+                href={WA_GENERAL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ft-btn ft-btn--ivory"
+              >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" strokeWidth="1.8"
                      strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -106,7 +107,9 @@ const Footer = () => {
             </a>
             <a href="mailto:crm@theprimecasa.in" className="ft-contact-row">
               <span className="ft-contact-label">Email</span>
-              <span className="ft-contact-value ft-contact-value--email">crm@theprimecasa.in</span>
+              <span className="ft-contact-value ft-contact-value--email">
+                crm@theprimecasa.in
+              </span>
             </a>
             <a
               href="https://www.google.com/maps/search/?api=1&query=Unit+No.+302+Regus+Tower+3rd+Floor+Sector+142+Noida+Uttar+Pradesh+201304"
@@ -126,7 +129,6 @@ const Footer = () => {
               </span>
             </div>
           </div>
-
         </div>
 
         {/* Middle: brand + link columns */}
@@ -144,7 +146,6 @@ const Footer = () => {
               registered. Zero brokerage.
             </p>
 
-            {/* ---------- Follow Us ---------- */}
             <div className="ft-social">
               <span className="ft-social-title">Follow Us:</span>
               <div className="ft-social-icons">
@@ -181,7 +182,9 @@ const Footer = () => {
             <ul>
               {TOOLKIT_LINKS.map((t) => (
                 <li key={t.label}>
-                  <Link to={t.path} className="ft-link">{t.label}</Link>
+                  <Link to="/" state={t.state} className="ft-link">
+                    {t.label}
+                  </Link>
                 </li>
               ))}
             </ul>

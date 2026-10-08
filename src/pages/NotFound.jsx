@@ -46,16 +46,23 @@ const NotFound = () => {
         </h1>
         <p
           style={{
-            color: 'var(--txt2)',
+            color: 'var(--txt-2)',
             maxWidth: '480px',
             lineHeight: 1.7,
             marginBottom: '2rem',
           }}
         >
-          The page you are looking for may have been moved, deleted, or never existed.
-          Let's get you back to safety.
+          The page you are looking for may have been moved, deleted, or never
+          existed. Let&apos;s get you back to safety.
         </p>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           <Link
             to="/"
             className="btn-red"

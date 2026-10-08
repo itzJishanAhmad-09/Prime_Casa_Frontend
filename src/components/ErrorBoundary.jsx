@@ -13,7 +13,6 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // TODO: forward to an error reporting service (e.g. Sentry) in production
     console.error('ErrorBoundary caught:', error, errorInfo);
   }
 
@@ -33,7 +32,7 @@ class ErrorBoundary extends React.Component {
             minHeight: '300px',
             padding: '2rem',
             textAlign: 'center',
-            background: 'var(--bg1)',
+            background: 'var(--bg-1)',
             borderRadius: '16px',
             border: '1px solid var(--border)',
             margin: '1rem',
@@ -42,17 +41,34 @@ class ErrorBoundary extends React.Component {
           <div style={{ marginBottom: '16px', color: 'var(--red)' }}>
             <IconAlertTriangle size={48} />
           </div>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', marginBottom: '8px' }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: '24px',
+              marginBottom: '8px',
+            }}
+          >
             Something went wrong
           </h2>
-          <p style={{ color: 'var(--txt2)', maxWidth: '400px', margin: '0 auto 16px' }}>
-            We're sorry, but an unexpected error occurred. Please try again or contact support if
-            the problem persists.
+          <p
+            style={{
+              color: 'var(--txt-2)',
+              maxWidth: '400px',
+              margin: '0 auto 16px',
+            }}
+          >
+            We&apos;re sorry, but an unexpected error occurred. Please try
+            again or contact support if the problem persists.
           </p>
           <button
             onClick={this.handleRetry}
             className="btn-red"
-            style={{ padding: '12px 32px', border: 'none', borderRadius: '8px', cursor: 'pointer' }}
+            style={{
+              padding: '12px 32px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+            }}
           >
             Try Again
           </button>

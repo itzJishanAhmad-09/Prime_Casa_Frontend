@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Seo from '../components/Seo';
-import { isImagePath } from '../utils/helpers';
+import { isImagePath, formatPrice } from '../utils/helpers';
 import { IconPhone, IconBrandWhatsapp } from '@tabler/icons-react';
 
 const SIMILAR_COUNT = 3;
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
-  const project = projects.find((p) => p.id === parseInt(projectId));
+  const project = projects.find((p) => p.id === parseInt(projectId, 10));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -80,12 +80,9 @@ const ProjectDetail = () => {
         image={isImagePath(project.emoji) ? project.emoji : undefined}
       />
 
-      {/* ================================================== */}
-      {/* HEADER                                              */}
-      {/* ================================================== */}
+      {/* HEADER */}
       <section className="pd-header">
         <div className="pd-header-inner" data-reveal>
-
           <nav className="pd-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
             <Link to="/">Home</Link>
             <span>/</span>
@@ -106,13 +103,10 @@ const ProjectDetail = () => {
             <span className="pd-loc">◎ {project.loc}</span>
             <span className="pd-dev">BY {project.builder.toUpperCase()}</span>
           </div>
-
         </div>
       </section>
 
-      {/* ================================================== */}
-      {/* HERO IMAGE                                          */}
-      {/* ================================================== */}
+      {/* HERO IMAGE */}
       <section className="pd-hero-section">
         <div className="pd-hero-wrap" data-reveal>
           <img
@@ -125,16 +119,10 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* ================================================== */}
-      {/* BODY: Overview + Sidebar                            */}
-      {/* ================================================== */}
+      {/* BODY */}
       <section className="pd-body">
         <div className="pd-body-inner">
-
-          {/* ---------- LEFT COLUMN ---------- */}
           <div className="pd-main">
-
-            {/* Overview */}
             <div className="pd-block" data-reveal>
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
@@ -145,7 +133,6 @@ const ProjectDetail = () => {
               </p>
             </div>
 
-            {/* Property details */}
             <div className="pd-block" data-reveal data-reveal-delay="1">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
@@ -163,7 +150,7 @@ const ProjectDetail = () => {
                 </div>
                 <div className="pd-detail">
                   <dt>Starting price</dt>
-                  <dd>{project.price ? `₹${(project.price / 1e7).toFixed(2)} Cr` : '[PRICE]'}</dd>
+                  <dd>{formatPrice(project.price)}</dd>
                 </div>
                 <div className="pd-detail">
                   <dt>Sector</dt>
@@ -180,7 +167,6 @@ const ProjectDetail = () => {
               </dl>
             </div>
 
-            {/* Connectivity */}
             <div className="pd-block" data-reveal data-reveal-delay="2">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
@@ -202,7 +188,6 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            {/* Amenities */}
             <div className="pd-block" data-reveal data-reveal-delay="3">
               <div className="pd-eyebrow">
                 <span className="pd-eyebrow-line" aria-hidden="true" />
@@ -226,10 +211,8 @@ const ProjectDetail = () => {
                 ))}
               </div>
             </div>
-
           </div>
 
-          {/* ---------- RIGHT COLUMN (STICKY) ---------- */}
           <aside className="pd-sidebar" data-reveal data-reveal-delay="1">
             <div className="pd-enquiry-card">
               <span className="pd-enquiry-label">Interested?</span>
@@ -268,17 +251,13 @@ const ProjectDetail = () => {
               </a>
             </div>
           </aside>
-
         </div>
       </section>
 
-      {/* ================================================== */}
-      {/* SIMILAR PROJECTS                                    */}
-      {/* ================================================== */}
+      {/* SIMILAR PROJECTS */}
       {similar.length > 0 && (
         <section className="pd-similar">
           <div className="pd-similar-inner">
-
             <div className="pd-similar-head">
               <h2 className="pd-similar-title">
                 Similar <em>projects.</em>
@@ -293,11 +272,7 @@ const ProjectDetail = () => {
                 const img = isImagePath(p.emoji) ? p.emoji : '/assets/images/placeholder.webp';
                 const pIsNew = p.tag === 'new';
                 return (
-                  <Link
-                    key={p.id}
-                    to={`/project/${p.id}`}
-                    className="pd-sim-card"
-                  >
+                  <Link key={p.id} to={`/project/${p.id}`} className="pd-sim-card">
                     <div className="pd-sim-media">
                       <img
                         src={img}
@@ -319,7 +294,6 @@ const ProjectDetail = () => {
                 );
               })}
             </div>
-
           </div>
         </section>
       )}
