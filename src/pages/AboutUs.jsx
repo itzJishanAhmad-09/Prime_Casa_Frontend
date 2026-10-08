@@ -43,15 +43,15 @@ const LEADERS = [
 
 const PILLARS = [
   {
-    n: 'i. Passionate',
+    title: '1. Passionate',
     desc: 'Driven by a deep love of real estate — finding not just properties, but long-term opportunities that fit your life goals.',
   },
   {
-    n: 'ii. Professional',
+    title: '2. Professional',
     desc: 'Market knowledge that keeps every deal transparent, reliable and backed by data and RERA compliance.',
   },
   {
-    n: 'iii. Full support',
+    title: '3. Full support',
     desc: 'Search, site visits, financing and possession — end-to-end support for a zero-stress experience.',
   },
 ];
@@ -264,12 +264,11 @@ const AboutUs = () => {
             {PILLARS.map((p, idx) => (
               <article
                 className="au-why-card"
-                key={p.n}
+                key={p.title}
                 data-reveal
                 data-reveal-delay={String(idx + 1)}
               >
-                <span className="au-why-num">{p.n}</span>
-                <h3 className="au-why-card-title">{p.n}</h3>
+                <h3 className="au-why-card-title">{p.title}</h3>
                 <p className="au-why-card-desc">{p.desc}</p>
               </article>
             ))}
