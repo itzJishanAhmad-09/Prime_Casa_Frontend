@@ -38,25 +38,26 @@ const BlogList = () => {
       />
 
       {/* ================================================== */}
-      {/* HERO                                                */}
+      {/* HERO — banner-enter + Ken Burns + light sweep      */}
       {/* ================================================== */}
-      <section className="bp-hero">
-        <div className="bp-hero-bg" aria-hidden="true" />
+      <section className="bp-hero banner-enter">
+        <div className="bp-hero-bg banner-bg" aria-hidden="true" />
         <div className="bp-hero-scrim" aria-hidden="true" />
+        <span className="banner-sweep" aria-hidden="true" />
 
-        <div className="bp-hero-inner" data-reveal>
-          <nav className="bp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
+        <div className="bp-hero-inner">
+          <nav className="bp-crumb d1" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="bp-crumb-current">Blog</span>
           </nav>
 
-          <h1 className="bp-hero-title" data-reveal data-reveal-delay="2">
+          <h1 className="bp-hero-title d2">
             Market<br />
             <em>intelligence.</em>
           </h1>
 
-          <p className="bp-hero-sub" data-reveal data-reveal-delay="3">
+          <p className="bp-hero-sub d3">
             Launches, infrastructure and policy updates that move Noida
             property values — curated for the discerning investor.
           </p>
@@ -67,7 +68,7 @@ const BlogList = () => {
       {/* FILTER CHIPS                                        */}
       {/* ================================================== */}
       <section className="bp-filters">
-        <div className="bp-filters-inner" data-reveal>
+        <div className="bp-filters-inner">
           <div className="bp-chips" role="group" aria-label="Filter by topic">
             {categories.map((cat, idx) => (
               <button
@@ -90,7 +91,7 @@ const BlogList = () => {
       {/* POSTS GRID                                          */}
       {/* ================================================== */}
       <section className="bp-posts">
-        <div className="bp-posts-inner" data-reveal>
+        <div className="bp-posts-inner">
           {filtered.length === 0 ? (
             <p className="bp-empty">No articles in this category yet.</p>
           ) : (

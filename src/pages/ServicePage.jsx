@@ -162,25 +162,26 @@ const ServicePage = () => {
       />
 
       {/* ================================================================ */}
-      {/* HERO                                                              */}
+      {/* HERO — banner-enter + Ken Burns + light sweep                    */}
       {/* ================================================================ */}
-      <section className="sp-hero">
-        <div className="sp-hero-bg" aria-hidden="true" />
+      <section className="sp-hero banner-enter">
+        <div className="sp-hero-bg banner-bg" aria-hidden="true" />
         <div className="sp-hero-scrim" aria-hidden="true" />
+        <span className="banner-sweep" aria-hidden="true" />
 
-        <div className="sp-hero-inner" data-reveal>
-          <nav className="sp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
+        <div className="sp-hero-inner">
+          <nav className="sp-crumb d1" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="sp-crumb-current">Services</span>
           </nav>
 
-          <h1 className="sp-hero-title" data-reveal data-reveal-delay="2">
+          <h1 className="sp-hero-title d2">
             Invest intelligently<br />
             in an <em>outperforming market.</em>
           </h1>
 
-          <p className="sp-hero-sub" data-reveal data-reveal-delay="3">
+          <p className="sp-hero-sub d3">
             Noida&rsquo;s residential prices have surged 125% since 2019 —
             the highest appreciation among major Indian cities. Five
             advisory desks help you capture it.
@@ -192,7 +193,7 @@ const ServicePage = () => {
       {/* METRICS                                                           */}
       {/* ================================================================ */}
       <section className="sp-metrics">
-        <div className="sp-metrics-inner" data-reveal>
+        <div className="sp-metrics-inner">
           {METRICS.map((m, idx) => (
             <article
               className="sp-metric-card"
@@ -212,8 +213,12 @@ const ServicePage = () => {
       {/* ADVISORY VERTICALS (ACCORDION)                                    */}
       {/* ================================================================ */}
       <section className="sp-verticals">
-        <div className="sp-verticals-inner" data-reveal>
-          <div className="sp-eyebrow" data-reveal data-reveal-delay="1">
+        <div className="sp-verticals-inner">
+          <div
+            className="sp-eyebrow"
+            data-reveal
+            data-reveal-delay="1"
+          >
             <span className="sp-eyebrow-line" aria-hidden="true" />
             <span>Advisory Verticals</span>
           </div>
@@ -290,13 +295,21 @@ const ServicePage = () => {
       {/* INCLUDED WITH EVERY PURCHASE                                      */}
       {/* ================================================================ */}
       <section className="sp-included">
-        <div className="sp-included-inner" data-reveal>
-          <div className="sp-eyebrow" data-reveal data-reveal-delay="1">
+        <div className="sp-included-inner">
+          <div
+            className="sp-eyebrow"
+            data-reveal
+            data-reveal-delay="1"
+          >
             <span className="sp-eyebrow-line" aria-hidden="true" />
             <span>Included with every purchase</span>
           </div>
 
-          <h2 className="sp-included-title" data-reveal data-reveal-delay="2">
+          <h2
+            className="sp-included-title"
+            data-reveal
+            data-reveal-delay="2"
+          >
             Beyond just helping you <em>buy.</em>
           </h2>
 
@@ -321,8 +334,12 @@ const ServicePage = () => {
       {/* CLOSING CTA                                                       */}
       {/* ================================================================ */}
       <section className="sp-cta">
-        <div className="sp-cta-inner" data-reveal>
-          <h2 className="sp-cta-title" data-reveal data-reveal-delay="1">
+        <div className="sp-cta-inner">
+          <h2
+            className="sp-cta-title"
+            data-reveal
+            data-reveal-delay="1"
+          >
             Tell us your budget, sector
             <br />
             and horizon. <em>We&rsquo;ll do the rest.</em>

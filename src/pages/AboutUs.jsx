@@ -32,8 +32,7 @@ const LEADERS = [
     img: '/assets/images/Ronit_Varshney.webp',
     desc: 'BBA graduate with 5 years of experience in real estate, specializing in sales, client relationship management, and business development. With strong communication skills and a customer-focused approach, he is committed to delivering effective property solutions, building lasting client relationships, and driving business growth.',
   },
-
-   {
+  {
     name: 'ANJALI VASHISHTH',
     role: 'Assistant Sales Manager',
     img: '/assets/images/Anjali_Vashisht.webp',
@@ -76,25 +75,26 @@ const AboutUs = () => {
       />
 
       {/* ================================================== */}
-      {/* HERO                                                */}
+      {/* HERO — banner-enter + Ken Burns + light sweep      */}
       {/* ================================================== */}
-      <section className="au-hero">
-        <div className="au-hero-bg" aria-hidden="true" />
+      <section className="au-hero banner-enter">
+        <div className="au-hero-bg banner-bg" aria-hidden="true" />
         <div className="au-hero-scrim" aria-hidden="true" />
+        <span className="banner-sweep" aria-hidden="true" />
 
-        <div className="au-hero-inner" data-reveal>
-          <nav className="au-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
+        <div className="au-hero-inner">
+          <nav className="au-crumb d1" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="au-crumb-current">About</span>
           </nav>
 
-          <h1 className="au-hero-title" data-reveal data-reveal-delay="2">
+          <h1 className="au-hero-title d2">
             Welcome to<br />
             <em>Prime Casa.</em>
           </h1>
 
-          <p className="au-hero-sub" data-reveal data-reveal-delay="3">
+          <p className="au-hero-sub d3">
             Turning dreams into addresses — with trust, transparency
             and outstanding service.
           </p>
@@ -105,13 +105,21 @@ const AboutUs = () => {
       {/* WELCOME — two-column intro                          */}
       {/* ================================================== */}
       <section className="au-welcome">
-        <div className="au-welcome-inner" data-reveal>
-          <p className="au-welcome-lead" data-reveal data-reveal-delay="1">
+        <div className="au-welcome-inner">
+          <p
+            className="au-welcome-lead"
+            data-reveal
+            data-reveal-delay="1"
+          >
             Prime Casa Realty Pvt. Ltd. specialises in the sale of residential
             and commercial real-estate projects, with a decade of experience
             marketing some of India&rsquo;s most prestigious properties.
           </p>
-          <p className="au-welcome-body" data-reveal data-reveal-delay="2">
+          <p
+            className="au-welcome-body"
+            data-reveal
+            data-reveal-delay="2"
+          >
             Through Prime Casa Wealth Management we help individuals, families
             and businesses build and preserve wealth — investment management,
             retirement and real-estate planning, tax strategy and risk
@@ -126,8 +134,13 @@ const AboutUs = () => {
       {/* ================================================== */}
       <section className="about-details">
         <div className="container">
-          <div className="about-details-grid" data-reveal>
-            <div className="about-details-images" data-reveal data-reveal-delay="1">
+          <div className="about-details-grid">
+
+            <div
+              className="about-details-images"
+              data-reveal
+              data-reveal-delay="1"
+            >
               <div className="about-details-img-main">
                 <img
                   src="/assets/images/aboutus1.webp"
@@ -150,7 +163,11 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="about-details-text" data-reveal data-reveal-delay="2">
+            <div
+              className="about-details-text"
+              data-reveal
+              data-reveal-delay="2"
+            >
               <span className="about-details-label">About Us</span>
               <h2 className="about-details-title">About Prime Casa Wealth Management</h2>
               <p className="about-details-desc">
@@ -182,6 +199,7 @@ const AboutUs = () => {
                 transaction.
               </p>
             </div>
+
           </div>
         </div>
       </section>
@@ -191,7 +209,10 @@ const AboutUs = () => {
       {/* ================================================== */}
       <section className="about-leadership">
         <div className="container">
-          <div className="about-leadership-header">
+          <div
+            className="about-leadership-header"
+            data-reveal
+          >
             <span className="about-leadership-label">Our Leaders</span>
             <h2 className="about-leadership-title">Leaders Behind the Wheel</h2>
             <p className="about-leadership-desc">
@@ -200,8 +221,12 @@ const AboutUs = () => {
             </p>
           </div>
 
+          {/* Founder card — featured */}
           <div className="about-leadership-founder-container">
-            <div className="about-leadership-card about-leadership-card--founder">
+            <div
+              className="about-leadership-card about-leadership-card--founder"
+              data-reveal
+            >
               <div className="about-leadership-card-img">
                 <img
                   src={LEADERS[0].img || PLACEHOLDER}
@@ -218,6 +243,7 @@ const AboutUs = () => {
             </div>
           </div>
 
+          {/* Remaining leaders grid */}
           <div className="about-leadership-grid">
             {LEADERS.slice(1).map((member, idx) => (
               <div
@@ -251,11 +277,19 @@ const AboutUs = () => {
       <section className="au-why">
         <div className="au-why-inner">
           <div className="au-why-header" data-reveal>
-            <div className="au-why-eyebrow" data-reveal data-reveal-delay="1">
+            <div
+              className="au-why-eyebrow"
+              data-reveal
+              data-reveal-delay="1"
+            >
               <span className="au-why-eyebrow-line" aria-hidden="true" />
               <span>Why choose us</span>
             </div>
-            <h2 className="au-why-title" data-reveal data-reveal-delay="2">
+            <h2
+              className="au-why-title"
+              data-reveal
+              data-reveal-delay="2"
+            >
               The Prime Casa <em>difference.</em>
             </h2>
           </div>

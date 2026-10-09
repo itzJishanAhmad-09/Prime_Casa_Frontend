@@ -119,7 +119,6 @@ const PropertiesList = ({ projects }) => {
         const [min, max] = BUDGET_RANGES[budget] || [0, Infinity];
         budgetMatch = p.price >= min && p.price < max;
       } else if (budget !== 'all' && p.price == null) {
-        // "On Request" projects are excluded when a specific budget is chosen
         budgetMatch = false;
       }
 
@@ -150,33 +149,38 @@ const PropertiesList = ({ projects }) => {
         description="Browse all RERA-verified residential and commercial properties in Noida, Greater Noida, and Yamuna Expressway."
       />
 
-      {/* HERO */}
-      <section className="pp-hero">
-        <div className="pp-hero-bg" aria-hidden="true" />
+      {/* ================================================== */}
+      {/* HERO — banner-enter + Ken Burns + light sweep      */}
+      {/* ================================================== */}
+      <section className="pp-hero banner-enter">
+        <div className="pp-hero-bg banner-bg" aria-hidden="true" />
         <div className="pp-hero-scrim" aria-hidden="true" />
+        <span className="banner-sweep" aria-hidden="true" />
 
-        <div className="pp-hero-inner" data-reveal>
-          <nav className="pp-crumb" aria-label="Breadcrumb" data-reveal data-reveal-delay="1">
+        <div className="pp-hero-inner">
+          <nav className="pp-crumb d1" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span>/</span>
             <span className="pp-crumb-current">Properties</span>
           </nav>
 
-          <h1 className="pp-hero-title" data-reveal data-reveal-delay="2">
+          <h1 className="pp-hero-title d2">
             All properties,<br />
             <em>verified.</em>
           </h1>
 
-          <p className="pp-hero-sub" data-reveal data-reveal-delay="3">
+          <p className="pp-hero-sub d3">
             Handpicked RERA-verified projects with the highest buyer
             interest and market confidence.
           </p>
         </div>
       </section>
 
-      {/* FILTER BAR */}
+      {/* ================================================== */}
+      {/* FILTER BAR                                          */}
+      {/* ================================================== */}
       <section className="pp-filters">
-        <div className="pp-filters-inner" data-reveal>
+        <div className="pp-filters-inner">
 
           <div className="pp-chips" role="group" aria-label="Property type">
             {CATEGORY_CHIPS.map((c, idx) => (
@@ -194,7 +198,11 @@ const PropertiesList = ({ projects }) => {
             ))}
           </div>
 
-          <div className="pp-bar" data-reveal data-reveal-delay="1">
+          <div
+            className="pp-bar"
+            data-reveal
+            data-reveal-delay="1"
+          >
             <div className="pp-field">
               <label htmlFor="pp-q">Search</label>
               <input
@@ -269,17 +277,23 @@ const PropertiesList = ({ projects }) => {
         </div>
       </section>
 
-      {/* RESULTS */}
+      {/* ================================================== */}
+      {/* RESULTS                                             */}
+      {/* ================================================== */}
       <section className="pp-results">
-        <div className="pp-results-inner" data-reveal>
-          <p className="pp-count" aria-live="polite">
+        <div className="pp-results-inner">
+          <p
+            className="pp-count"
+            aria-live="polite"
+            data-reveal
+          >
             {filtered.length} {filtered.length === 1 ? 'PROPERTY' : 'PROPERTIES'}
             {' · '}
             ALL RERA-VERIFIED
           </p>
 
           {filtered.length === 0 ? (
-            <div className="pp-empty">
+            <div className="pp-empty" data-reveal>
               <h3>Nothing matches — yet.</h3>
               <p>
                 We add verified projects every month. Loosen a filter, or

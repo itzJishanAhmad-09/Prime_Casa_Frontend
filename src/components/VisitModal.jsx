@@ -70,7 +70,7 @@ const VisitModal = ({ isOpen, onClose, projectId }) => {
     if (err) { setError(err); return; }
 
     setLoading(true);
-    const selected = projects.find((p) => p.id === parseInt(form.project));
+    const selected = projects.find((p) => p.id === parseInt(form.project, 10));
     try {
       await submitEnquiry({
         name: form.name,
@@ -199,7 +199,8 @@ const VisitModal = ({ isOpen, onClose, projectId }) => {
             <span className="vm-done-icon" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="2.4"
-                   strokeLinecap="round" strokeLinejoin="round">
+                   strokeLinecap="round" strokeLinejoin="round"
+                   className="vm-check">
                 <path d="M5 12.5l4.5 4.5L19 7" />
               </svg>
             </span>

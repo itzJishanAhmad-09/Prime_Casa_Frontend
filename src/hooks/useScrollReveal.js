@@ -1,8 +1,9 @@
+// src/useScrollReveal.js
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const REVEAL_CLASS = 'is-revealed';
-const TARGET_SELECTOR = '[data-reveal]:not(.is-revealed)';
+const TARGET_SELECTOR = '.rv, .rv-img, .rv-draw, [data-reveal]:not(.is-revealed)';
 
 export default function useScrollReveal() {
   const { pathname } = useLocation();
@@ -12,9 +13,10 @@ export default function useScrollReveal() {
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
+    // Accessibility — reveal everything instantly
     if (prefersReducedMotion) {
       document
-        .querySelectorAll('[data-reveal]')
+        .querySelectorAll('.rv, .rv-img, .rv-draw, [data-reveal]')
         .forEach((el) => el.classList.add(REVEAL_CLASS));
       return undefined;
     }

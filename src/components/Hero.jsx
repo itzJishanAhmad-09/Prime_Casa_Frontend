@@ -1,7 +1,7 @@
 // src/components/Hero.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
 
 const CATEGORIES = ['Apartments', 'Luxury Villas', 'Penthouses', 'Office Suites', 'Retail Space', 'Workspaces', 'Residential Plots', 'Farm Land'];
 const SECTORS    = ['Sector 150', 'Sector 128', 'Sector 107', 'Sector 94', 'Sector 72', 'Sector 62', 'Noida Extension', 'Greater Noida West', 'Yamuna Expressway'];
@@ -11,7 +11,9 @@ const Hero = () => {
   const navigate = useNavigate();
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoEnabled, setVideoEnabled] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [filters, setFilters] = useState({ cat: '', sector: '', budget: '' });
+  const videoRef = useRef(null);
 
   useEffect(() => {
     let idleHandle;
@@ -43,6 +45,13 @@ const Hero = () => {
     };
   }, []);
 
+  const toggleVideo = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); setIsPlaying(true); }
+    else          { v.pause(); setIsPlaying(false); }
+  };
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
@@ -57,11 +66,12 @@ const Hero = () => {
 
   return (
     <div className="hero">
-      {/* LCP placeholder image — shown while video loads */}
+      {/* LCP poster image */}
       <img
         src="/assets/videos/hero.webp"
         alt=""
         fetchPriority="high"
+        className="hero-poster"
         style={{
           position: 'absolute',
           top: 0,
@@ -76,6 +86,7 @@ const Hero = () => {
 
       {videoEnabled && (
         <video
+          ref={videoRef}
           className={`hero-video ${videoLoaded ? 'loaded' : ''}`}
           autoPlay
           muted
@@ -103,26 +114,34 @@ const Hero = () => {
 
       <div className="hero-overlay" />
 
+      {/* Six cream blinds that wipe away */}
+      <div className="hero-blinds" aria-hidden="true">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i} style={{ '--i': i }} />
+        ))}
+      </div>
+
+      {/* Pause / play button */}
+      <button
+        type="button"
+        className="hero-pause"
+        onClick={toggleVideo}
+        aria-label={isPlaying ? 'Pause video' : 'Play video'}
+      >
+        {isPlaying ? <IconPlayerPause size={16} /> : <IconPlayerPlay size={16} />}
+      </button>
+
       <div className="hero-content">
-        {/* ================================================ */}
-        {/* TITLE + SUBTITLE                                 */}
-        {/* ================================================ */}
-        <h1 className="hero-title" data-reveal>
-          <span>Turning dreams</span>
-          <span>
-            into <em>addresses.</em>
-          </span>
+        <h1 className="hero-title">
+          <span className="hero-line"><span>Turning dreams</span></span>
+          <span className="hero-line"><span>into <em>addresses.</em></span></span>
         </h1>
 
-        <p className="hero-sub" data-reveal data-reveal-delay="1">
+        <p className="hero-sub">
           Zero-brokerage advisory on RERA-verified properties across Noida.
         </p>
 
-        {/* ================================================ */}
-        {/* SEARCH BAR                                       */}
-        {/* ================================================ */}
-        <div className="hero-search-bar" role="search" data-reveal data-reveal-delay="2">
-          {/* Category */}
+        <div className="hero-search-bar" role="search">
           <div className="hsb-field">
             <label className="hsb-label" htmlFor="hsb-cat">Category</label>
             <select
@@ -139,7 +158,6 @@ const Hero = () => {
             </select>
           </div>
 
-          {/* Sector */}
           <div className="hsb-field">
             <label className="hsb-label" htmlFor="hsb-sector">Sector</label>
             <select
@@ -156,7 +174,6 @@ const Hero = () => {
             </select>
           </div>
 
-          {/* Budget */}
           <div className="hsb-field">
             <label className="hsb-label" htmlFor="hsb-budget">Budget</label>
             <select
@@ -173,7 +190,6 @@ const Hero = () => {
             </select>
           </div>
 
-          {/* Search button */}
           <button
             type="button"
             className="hsb-btn"
