@@ -38,7 +38,7 @@ const BlogList = () => {
       />
 
       {/* ================================================== */}
-      {/* HERO — banner-enter + Ken Burns + light sweep      */}
+      {/* HERO                                                */}
       {/* ================================================== */}
       <section className="bp-hero banner-enter">
         <div className="bp-hero-bg banner-bg" aria-hidden="true" />
@@ -123,19 +123,28 @@ const BlogList = () => {
                         {item.emoji || '📰'}
                       </span>
                     )}
-
-                    {item.tag && (
-                      <span className="bp-card-tag">
-                        {item.tag.toUpperCase()}
-                      </span>
-                    )}
                   </Link>
 
                   <div className="bp-card-body">
-                    {item.date && (
-                      <span className="bp-card-date">
-                        {item.date.toUpperCase()}
-                      </span>
+                    {/* Meta row: TAG · DATE above the title */}
+                    {(item.tag || item.date) && (
+                      <div className="bp-card-meta">
+                        {item.tag && (
+                          <span className="bp-card-tag">
+                            {item.tag.toUpperCase()}
+                          </span>
+                        )}
+                        {item.tag && item.date && (
+                          <span className="bp-card-dot" aria-hidden="true">
+                            ·
+                          </span>
+                        )}
+                        {item.date && (
+                          <span className="bp-card-date">
+                            {item.date.toUpperCase()}
+                          </span>
+                        )}
+                      </div>
                     )}
 
                     <h3 className="bp-card-title">{item.title}</h3>

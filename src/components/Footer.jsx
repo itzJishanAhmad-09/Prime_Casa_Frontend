@@ -135,9 +135,9 @@ const Footer = () => {
         <div className="ft-links">
           <div className="ft-brand">
             <Link to="/" className="ft-brand-logo" aria-label="The Prime Casa — home">
-              <img src="/primecasa.webp" alt="" width="52" height="52" />
+              <img src="/theprimecasa.webp" alt="" width="52" height="52" />
               <span className="ft-brand-meta">
-                <span className="ft-brand-name">The Prime Casa</span>
+                <span className="ft-brand-name">The Prime Casa Realty Pvt. Ltd.</span>
                 <span className="ft-brand-tagline">Turning dreams into addresses</span>
               </span>
             </Link>

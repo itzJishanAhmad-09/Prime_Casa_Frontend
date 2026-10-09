@@ -89,15 +89,28 @@ const Blog = ({ news }) => {
                         {item.emoji || '📰'}
                       </span>
                     )}
-
-                    {item.tag && (
-                      <span className="blog-card-tag">{item.tag.toUpperCase()}</span>
-                    )}
                   </Link>
 
                   <div className="blog-card-body">
-                    {item.date && (
-                      <span className="blog-card-date">{item.date.toUpperCase()}</span>
+                    {/* Meta row: TAG · DATE (above the title) */}
+                    {(item.tag || item.date) && (
+                      <div className="blog-card-meta">
+                        {item.tag && (
+                          <span className="blog-card-tag">
+                            {item.tag.toUpperCase()}
+                          </span>
+                        )}
+                        {item.tag && item.date && (
+                          <span className="blog-card-dot" aria-hidden="true">
+                            ·
+                          </span>
+                        )}
+                        {item.date && (
+                          <span className="blog-card-date">
+                            {item.date.toUpperCase()}
+                          </span>
+                        )}
+                      </div>
                     )}
 
                     <h3 className="blog-card-title">{item.title}</h3>

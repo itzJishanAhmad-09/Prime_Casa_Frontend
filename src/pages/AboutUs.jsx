@@ -4,38 +4,43 @@ import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 
 /* ------------------------------------------------------------------ */
-/*  Data                                                               */
+/*  Data — each leader has a short `highlight` and a full `desc`       */
 /* ------------------------------------------------------------------ */
 
 const LEADERS = [
   {
-    name: 'SUDHI YADAV',
+    name: 'Mrs. SUDHI YADAV',
     role: 'Founder & Director',
     img: '/assets/images/Sudhi_Yadav.webp',
-    desc: 'Sudhi Yadav is the Founder and Director of The Prime Casa Realty Pvt. Ltd. With an MBA completed in 2015 and experience in real estate since 2016, she brings expertise in business development, sales, marketing, and client relationships. With a strong strategic vision and leadership approach, she drives the company’s growth while delivering innovative and customer-focused real estate solutions.'
+    highlight: 'MBA (2015) and real-estate leader since 2016, driving growth through strategic vision and lasting client relationships.',
+    desc: 'Sudhi Yadav is the Founder and Director of The Prime Casa Realty Pvt. Ltd. With an MBA completed in 2015 and experience in real estate since 2016, she brings expertise in business development, sales, marketing, and client relationships. With a strong strategic vision and leadership approach, she drives the company’s growth while delivering innovative and customer-focused real estate solutions.',
   },
   {
-    name: 'ROBIN SINGH',
+    name: 'Mr. ROBIN SINGH',
     role: 'Director',
     img: '/assets/images/Robin_Singh.webp',
+    highlight: '14 years across hospitality, education and real estate, with professional exposure in Singapore, Malaysia, Hong Kong and India.',
     desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
   },
   {
-    name: 'SAJAL GUPTA',
+    name: 'Mr. SAJAL GUPTA',
     role: 'Senior Sales Manager',
     img: '/assets/images/Sajal_Gupta.webp',
+    highlight: 'BA Economics, 4 years of business ownership and 3 years in real estate — pairing economic insight with market exposure.',
     desc: 'Sajal Gupta is a B. A. Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
   },
   {
-    name: 'RONIT VARSHNEY',
+    name: 'Mr. RONIT VARSHNEY',
     role: 'Senior Sales Manager',
     img: '/assets/images/Ronit_Varshney.webp',
+    highlight: 'BBA graduate with 5 years in real estate — specialising in sales, client relationships and business development.',
     desc: 'BBA graduate with 5 years of experience in real estate, specializing in sales, client relationship management, and business development. With strong communication skills and a customer-focused approach, he is committed to delivering effective property solutions, building lasting client relationships, and driving business growth.',
   },
   {
-    name: 'ANJALI VASHISHTH',
+    name: 'Miss. ANJALI VASHISHTH',
     role: 'Assistant Sales Manager',
     img: '/assets/images/Anjali_Vashisht.webp',
+    highlight: 'BCA graduate with 2 years in real estate — focused on client relationships, property advisory and customer-centric solutions.',
     desc: 'Anjali Vashishth is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
   },
 ];
@@ -59,7 +64,39 @@ const PLACEHOLDER =
   'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23eee"/%3E%3Ctext x="100" y="100" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image%3C/text%3E%3C/svg%3E';
 
 /* ------------------------------------------------------------------ */
-/*  Component                                                          */
+/*  Leader card — full desc on desktop, highlight only on mobile       */
+/* ------------------------------------------------------------------ */
+
+const LeaderCard = ({ member, isFounder = false }) => (
+  <div
+    className={
+      'about-leadership-card' +
+      (isFounder ? ' about-leadership-card--founder' : '')
+    }
+  >
+    <div className="about-leadership-card-img">
+      <img
+        src={member.img || PLACEHOLDER}
+        alt={member.name}
+        loading="lazy"
+        onError={(e) => { e.target.src = PLACEHOLDER; }}
+      />
+    </div>
+    <div className="about-leadership-card-content">
+      <span className="about-leadership-card-role">{member.role}</span>
+      <h3 className="about-leadership-card-name">{member.name}</h3>
+
+      {/* Full bio — hidden on small phones */}
+      <p className="about-leadership-card-desc">{member.desc}</p>
+
+      {/* Short highlight — hidden on tablet/desktop, shown on phones */}
+      <p className="about-leadership-card-highlight">{member.highlight}</p>
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------------------------ */
+/*  About page                                                         */
 /* ------------------------------------------------------------------ */
 
 const AboutUs = () => {
@@ -75,7 +112,7 @@ const AboutUs = () => {
       />
 
       {/* ================================================== */}
-      {/* HERO — banner-enter + Ken Burns + light sweep      */}
+      {/* HERO                                                */}
       {/* ================================================== */}
       <section className="au-hero banner-enter">
         <div className="au-hero-bg banner-bg" aria-hidden="true" />
@@ -102,24 +139,16 @@ const AboutUs = () => {
       </section>
 
       {/* ================================================== */}
-      {/* WELCOME — two-column intro                          */}
+      {/* WELCOME                                             */}
       {/* ================================================== */}
       <section className="au-welcome">
         <div className="au-welcome-inner">
-          <p
-            className="au-welcome-lead"
-            data-reveal
-            data-reveal-delay="1"
-          >
+          <p className="au-welcome-lead" data-reveal data-reveal-delay="1">
             Prime Casa Realty Pvt. Ltd. specialises in the sale of residential
             and commercial real-estate projects, with a decade of experience
             marketing some of India&rsquo;s most prestigious properties.
           </p>
-          <p
-            className="au-welcome-body"
-            data-reveal
-            data-reveal-delay="2"
-          >
+          <p className="au-welcome-body" data-reveal data-reveal-delay="2">
             Through Prime Casa Wealth Management we help individuals, families
             and businesses build and preserve wealth — investment management,
             retirement and real-estate planning, tax strategy and risk
@@ -130,17 +159,12 @@ const AboutUs = () => {
       </section>
 
       {/* ================================================== */}
-      {/* DETAILS — image + text                              */}
+      {/* DETAILS                                             */}
       {/* ================================================== */}
       <section className="about-details">
         <div className="container">
           <div className="about-details-grid">
-
-            <div
-              className="about-details-images"
-              data-reveal
-              data-reveal-delay="1"
-            >
+            <div className="about-details-images" data-reveal data-reveal-delay="1">
               <div className="about-details-img-main">
                 <img
                   src="/assets/images/aboutus1.webp"
@@ -163,11 +187,7 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div
-              className="about-details-text"
-              data-reveal
-              data-reveal-delay="2"
-            >
+            <div className="about-details-text" data-reveal data-reveal-delay="2">
               <span className="about-details-label">About Us</span>
               <h2 className="about-details-title">About Prime Casa Wealth Management</h2>
               <p className="about-details-desc">
@@ -199,7 +219,6 @@ const AboutUs = () => {
                 transaction.
               </p>
             </div>
-
           </div>
         </div>
       </section>
@@ -209,10 +228,7 @@ const AboutUs = () => {
       {/* ================================================== */}
       <section className="about-leadership">
         <div className="container">
-          <div
-            className="about-leadership-header"
-            data-reveal
-          >
+          <div className="about-leadership-header" data-reveal>
             <span className="about-leadership-label">Our Leaders</span>
             <h2 className="about-leadership-title">Leaders Behind the Wheel</h2>
             <p className="about-leadership-desc">
@@ -221,50 +237,18 @@ const AboutUs = () => {
             </p>
           </div>
 
-          {/* Founder card — featured */}
           <div className="about-leadership-founder-container">
-            <div
-              className="about-leadership-card about-leadership-card--founder"
-              data-reveal
-            >
-              <div className="about-leadership-card-img">
-                <img
-                  src={LEADERS[0].img || PLACEHOLDER}
-                  alt={LEADERS[0].name}
-                  loading="lazy"
-                  onError={(e) => { e.target.src = PLACEHOLDER; }}
-                />
-              </div>
-              <div className="about-leadership-card-content">
-                <span className="about-leadership-card-role">{LEADERS[0].role}</span>
-                <h3 className="about-leadership-card-name">{LEADERS[0].name}</h3>
-                <p className="about-leadership-card-desc">{LEADERS[0].desc}</p>
-              </div>
-            </div>
+            <LeaderCard member={LEADERS[0]} isFounder />
           </div>
 
-          {/* Remaining leaders grid */}
           <div className="about-leadership-grid">
             {LEADERS.slice(1).map((member, idx) => (
               <div
-                key={idx}
-                className="about-leadership-card"
+                key={member.name}
                 data-reveal
                 data-reveal-delay={String((idx % 6) + 1)}
               >
-                <div className="about-leadership-card-img">
-                  <img
-                    src={member.img || PLACEHOLDER}
-                    alt={member.name}
-                    loading="lazy"
-                    onError={(e) => { e.target.src = PLACEHOLDER; }}
-                  />
-                </div>
-                <div className="about-leadership-card-content">
-                  <span className="about-leadership-card-role">{member.role}</span>
-                  <h3 className="about-leadership-card-name">{member.name}</h3>
-                  <p className="about-leadership-card-desc">{member.desc}</p>
-                </div>
+                <LeaderCard member={member} />
               </div>
             ))}
           </div>
@@ -277,19 +261,11 @@ const AboutUs = () => {
       <section className="au-why">
         <div className="au-why-inner">
           <div className="au-why-header" data-reveal>
-            <div
-              className="au-why-eyebrow"
-              data-reveal
-              data-reveal-delay="1"
-            >
+            <div className="au-why-eyebrow" data-reveal data-reveal-delay="1">
               <span className="au-why-eyebrow-line" aria-hidden="true" />
               <span>Why choose us</span>
             </div>
-            <h2
-              className="au-why-title"
-              data-reveal
-              data-reveal-delay="2"
-            >
+            <h2 className="au-why-title" data-reveal data-reveal-delay="2">
               The Prime Casa <em>difference.</em>
             </h2>
           </div>

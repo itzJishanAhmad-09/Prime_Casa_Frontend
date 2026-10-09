@@ -58,7 +58,7 @@ const Services = () => (
         </p>
 
         <Link to="/services" className="exc-cta" data-reveal data-reveal-delay="4">
-          <span>Explore all services</span>
+          <span>All sevices</span>
           <IconArrowRight size={18} />
         </Link>
       </div>

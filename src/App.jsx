@@ -1,7 +1,11 @@
 // src/App.jsx
 import React, { useState, useCallback, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { IconBrandWhatsapp } from '@tabler/icons-react';
+import {
+  IconBrandWhatsapp,
+  IconBrandInstagram,
+  IconBrandFacebook,
+} from '@tabler/icons-react';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,7 +15,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
 import Contact from './components/Contact';
 
-import useScrollReveal from './hooks/useScrollReveal';
+import useScrollReveal from './hooks/useScrollReveal';   // ← FIXED
 
 // Named lazy loaders — required for @vitejs/plugin-react-swc
 const loadHomepage       = () => import('./pages/Homepage');
@@ -42,7 +46,6 @@ import { projects } from './data/projects';
 import { news } from './data/news';
 import { testimonials } from './data/testimonials';
 
-// Pages that already have their own contact form
 const HIDE_CONTACT_ON = ['/contact', '/schedule'];
 
 function App() {
@@ -53,7 +56,6 @@ function App() {
 
   const location = useLocation();
 
-  // Global scroll-reveal system
   useScrollReveal();
 
   const openModal = useCallback((type) => {
@@ -68,14 +70,12 @@ function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  // Toolkit modal events (from footer, toolkit cards, etc.)
   React.useEffect(() => {
     const handler = (e) => openModal(e.detail);
     window.addEventListener('openTool', handler);
     return () => window.removeEventListener('openTool', handler);
   }, [openModal]);
 
-  // Visit modal events (from navbar, property cards, footer, etc.)
   React.useEffect(() => {
     const handler = (e) => {
       setVisitProjectId(e.detail?.projectId ?? null);
@@ -93,7 +93,6 @@ function App() {
     <>
       <Navbar scrollTo={scrollTo} />
 
-      {/* Page wrapper — key forces remount so the .page fade-in replays */}
       <main className="page" key={location.pathname}>
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner size={48} />}>
@@ -127,7 +126,6 @@ function App() {
         </ErrorBoundary>
       </main>
 
-      {/* Contact section on every page except /contact and /schedule */}
       {showContact && (
         <Suspense fallback={<div style={{ height: '600px' }} />}>
           <Contact />
@@ -136,30 +134,50 @@ function App() {
 
       <Footer />
 
-      {/* Toolkits modal (ROI / EMI / NRI) */}
       <ToolkitModal
         isOpen={modalOpen}
         onClose={closeModal}
         content={modalContent}
       />
 
-      {/* Visit booking modal */}
       <VisitModal
         isOpen={visitOpen}
         onClose={() => setVisitOpen(false)}
         projectId={visitProjectId}
       />
 
-      {/* Floating WhatsApp button */}
-      <a
-        href="https://wa.me/918130504183?text=Hi%20Prime%20Casa%2C%20I%27m%20interested%20in%20a%20property"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="wa-float"
-        aria-label="Chat with Prime Casa on WhatsApp"
-      >
-        <IconBrandWhatsapp size={28} />
-      </a>
+      {/* Floating social stack — WhatsApp · Instagram · Facebook */}
+      <div className="social-float-stack">
+        <a
+          href="https://wa.me/918130504183?text=Hi%20Prime%20Casa%2C%20I%27m%20interested%20in%20a%20property"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-float social-float--wa"
+          aria-label="Chat with Prime Casa on WhatsApp"
+        >
+          <IconBrandWhatsapp size={26} />
+        </a>
+
+        <a
+          href="https://www.instagram.com/theprimecasa"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-float social-float--ig"
+          aria-label="Follow Prime Casa on Instagram"
+        >
+          <IconBrandInstagram size={24} />
+        </a>
+
+        <a
+          href="https://www.facebook.com/theprimecasa"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-float social-float--fb"
+          aria-label="Follow Prime Casa on Facebook"
+        >
+          <IconBrandFacebook size={24} />
+        </a>
+      </div>
     </>
   );
 }

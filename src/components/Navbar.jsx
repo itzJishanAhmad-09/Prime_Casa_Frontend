@@ -1,11 +1,11 @@
 // src/components/Navbar.jsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { IconMenu2, IconPhone } from '@tabler/icons-react';
+import { IconPhone, IconMenu2, IconX } from '@tabler/icons-react';
 
 const NAV_LINKS = [
   { label: 'Home',       path: '/' },
-  { label: 'About Us',   path: '/about' },
+  { label: 'About',      path: '/about' },
   { label: 'Properties', path: '/properties' },
   { label: 'Services',   path: '/services' },
   { label: 'Blog',       path: '/blog' },
@@ -16,6 +16,15 @@ const Navbar = ({ scrollTo }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Switch dark → light + shrink once user scrolls past the hero
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -37,65 +46,105 @@ const Navbar = ({ scrollTo }) => {
     closeMenu();
   }, [location.pathname, closeMenu]);
 
+  const isActive = (path) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+
+  // Navbar theme: dark glass over hero, light glass after scroll
+  const themeClass = scrolled ? 'light small' : 'dark';
+
   return (
-    <nav>
-      <div className="nav-left">
-        <div
-          className="nav-logo"
-          onClick={() => handleNavClick('/')}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && handleNavClick('/')}
-          style={{ cursor: 'pointer' }}
-          aria-label="Go to homepage"
-        >
-          <img
-            src="/primecasa.webp"
-            alt="The Prime Casa"
-            style={{ height: '80px', width: 'auto' }}
-            width="200"
-            height="80"
-          />
-        </div>
-        <span className="nav-brand-text">The Prime Casa Realty Pvt Ltd</span>
-      </div>
+    <div className="navwrap">
+      <header className={`navcap ${themeClass}`}>
 
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        {NAV_LINKS.map(({ label, path }) => (
-          <button
-            key={path}
-            className="nav-link-btn"
-            onClick={() => handleNavClick(path)}
-          >
-            {label}
-          </button>
-        ))}
-        <button onClick={handleBookVisit} className="mobile-cta">
-          Book Site Visit
-        </button>
-      </div>
-
-      <div className="nav-cta-container">
-        <a
-          href="tel:+918130504183"
-          className="nav-call-btn"
-          aria-label="Call Prime Casa"
-        >
-          <IconPhone size={18} />
-        </a>
-        <button onClick={handleBookVisit} className="nav-cta">
-          Book Site Visit
-        </button>
+        {/* ---------- Logo + Wordmark ---------- */}
         <button
-          className="hamburger"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
+          type="button"
+          className="navbrand"
+          onClick={() => handleNavClick('/')}
+          aria-label="The Prime Casa — home"
         >
-          <IconMenu2 size={24} />
+          <span className="navlogo">
+            <img src="/theprimecasa.webp" alt="" width="44" height="44" />
+          </span>
+          <span className="navword serif">The Prime Casa</span>
         </button>
-      </div>
-    </nav>
+
+        {/* ---------- Center nav links ---------- */}
+        <nav className="navlinks" aria-label="Primary">
+          {NAV_LINKS.map(({ label, path }) => (
+            <button
+              key={path}
+              type="button"
+              className={`nl ${isActive(path) ? 'on' : ''}`}
+              aria-current={isActive(path) ? 'page' : 'false'}
+              onClick={() => handleNavClick(path)}
+            >
+              <span className="roll">
+                <span>{label}</span>
+                <span aria-hidden="true">{label}</span>
+              </span>
+            </button>
+          ))}
+        </nav>
+
+        {/* ---------- Right: phone + book + burger ---------- */}
+        <div className="navactions">
+          <a
+            href="tel:+918130504183"
+            className="navicon navcta"
+            aria-label="Call +91 81305 04183"
+          >
+            <IconPhone size={18} className="ic" />
+          </a>
+
+          <button
+            type="button"
+            className="navbook"
+            onClick={handleBookVisit}
+          >
+            <span className="roll">
+              <span>Book site visit</span>
+              <span aria-hidden="true">Book site visit</span>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            className="burger navicon"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen
+              ? <IconX size={20} className="ic" />
+              : <IconMenu2 size={20} className="ic" />}
+          </button>
+        </div>
+      </header>
+
+      {/* ---------- Mobile dropdown menu ---------- */}
+      {menuOpen && (
+        <div className="navmenu">
+          {NAV_LINKS.map(({ label, path }) => (
+            <button
+              key={path}
+              type="button"
+              className={`navmenu-link ${isActive(path) ? 'on' : ''}`}
+              onClick={() => handleNavClick(path)}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            type="button"
+            className="navmenu-book"
+            onClick={handleBookVisit}
+          >
+            Book site visit
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

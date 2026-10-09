@@ -66,11 +66,11 @@ const Hero = () => {
 
   return (
     <div className="hero">
-      {/* LCP poster image */}
+      {/* LCP poster image — lowercase fetchpriority avoids React warning */}
       <img
         src="/assets/videos/hero.webp"
         alt=""
-        fetchPriority="high"
+        fetchpriority="high"
         className="hero-poster"
         style={{
           position: 'absolute',
