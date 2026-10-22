@@ -51,7 +51,7 @@ const LEADERS = [
   {
     name: 'Mr. Radhey Shyam Sharma',
     role: 'Admin Head',
-    img: '/assets/images/Radhe_Shyam_Sharma.jpeg',
+    img: '/assets/images/Radhe_Shyam_Sharma.webp',
     highlight:
       'Administrative specialist with 4 years in real estate office operations, facility management and vendor coordination.',
     desc: 'Radhey Shyam Sharma is an experienced administrative professional with up to 4 years of experience in the real estate industry, specializing in office administration, facility management, staff supervision, vendor coordination, and daily operations. He holds a Master of Arts (M.A.), a Bachelor of Arts (B.A.), and a Diploma in Financial Accounting. He is committed to operational efficiency, team coordination, and maintaining a well-organized workplace.',
@@ -59,7 +59,7 @@ const LEADERS = [
   {
     name: 'Md. Jishan Ahmad',
     role: 'Marketing Manager',
-    img: '/assets/images/Jishan_Ahmad.png',
+    img: '/assets/images/Jishan_Ahmad.webp',
     highlight:
       'BCA graduate and web developer leading digital marketing, lead generation and business development at Prime Casa.',
     desc: 'Jishan Ahmad is a BCA graduate and web developer working as a Marketing Manager at Prime Casa Pvt. Ltd. He specializes in digital marketing, lead generation, and business development, combining technical expertise with strategic marketing to drive business growth.',
@@ -67,7 +67,7 @@ const LEADERS = [
   {
   name: 'Mr. Devendra Singh',
   role: 'Assistant Marketing Manager',
-  img: '/assets/images/Devendra_Singh.jpeg',
+  img: '/assets/images/Devendra_Singh.webp',
   highlight:
     'BA (Hons) graduate driving social media management, lead generation and brand development across Prime Casa’s digital presence.',
   desc: 'Devendra Singh is a BA (Hons) graduate and digital marketing professional at Prime Casa Pvt. Ltd. He specializes in social media management, lead generation, and brand development, focusing on strengthening the company’s online presence and driving business growth through effective marketing strategies.',
@@ -75,7 +75,7 @@ const LEADERS = [
   {
     name: 'Mr. Saurav Yadav',
     role: 'Assistant Sales Manager',
-    img: '/assets/images/Saurav_Yadav.jpeg',
+    img: '/assets/images/Saurav_Yadav.webp',
     highlight:
       'Real-estate consultant with 3 years across Noida’s residential and commercial markets full transaction-cycle expertise.',
     desc: 'Saurav Yadav is a Real Estate Consultant with 3 years of real estate experience, a Bachelor of Arts degree, and hands-on expertise in Noida’s commercial and residential property markets. He manages the full transaction cycle lead generation, site visits, negotiations, and deal closing—helping clients buy, sell, and invest with confidence.',
