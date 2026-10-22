@@ -73,13 +73,6 @@ const BlogDetail = () => {
   const shareUrl =
     typeof window !== 'undefined' ? window.location.href : '';
 
-  const handleCopy = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(shareUrl);
-      alert('Link copied to clipboard!');
-    }
-  };
-
   return (
     <div className="bpd-page">
       <Seo

@@ -14,7 +14,6 @@ const BlogList = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Build unique categories from data
   const categories = useMemo(() => {
     const set = new Set();
     news.forEach((item) => {
@@ -37,9 +36,7 @@ const BlogList = () => {
         description="Stay updated with the latest news, trends, and launches in Noida and Greater Noida real estate. Expert insights and policy updates."
       />
 
-      {/* ================================================== */}
-      {/* HERO                                                */}
-      {/* ================================================== */}
+      {/* HERO */}
       <section className="bp-hero banner-enter">
         <div className="bp-hero-bg banner-bg" aria-hidden="true" />
         <div className="bp-hero-scrim" aria-hidden="true" />
@@ -64,9 +61,7 @@ const BlogList = () => {
         </div>
       </section>
 
-      {/* ================================================== */}
-      {/* FILTER CHIPS                                        */}
-      {/* ================================================== */}
+      {/* FILTER CHIPS */}
       <section className="bp-filters">
         <div className="bp-filters-inner">
           <div className="bp-chips" role="group" aria-label="Filter by topic">
@@ -87,9 +82,7 @@ const BlogList = () => {
         </div>
       </section>
 
-      {/* ================================================== */}
-      {/* POSTS GRID                                          */}
-      {/* ================================================== */}
+      {/* POSTS GRID */}
       <section className="bp-posts">
         <div className="bp-posts-inner">
           {filtered.length === 0 ? (
@@ -126,7 +119,6 @@ const BlogList = () => {
                   </Link>
 
                   <div className="bp-card-body">
-                    {/* Meta row: TAG · DATE above the title */}
                     {(item.tag || item.date) && (
                       <div className="bp-card-meta">
                         {item.tag && (
@@ -171,6 +163,36 @@ const BlogList = () => {
           )}
         </div>
       </section>
+
+      {/* ================================================== */}
+      {/* LET'S TALK BANNER (without buttons)                */}
+      {/* ================================================== */}
+      <section className="quote-banner talk-banner">
+        <div className="quote-banner-inner">
+          <div className="quote-banner-card">
+            
+            {/* LEFT: Text Content */}
+            <div className="quote-banner-content talk-content">
+              <span className="talk-eyebrow">LET'S TALK</span>
+              <h2 className="talk-heading">
+                We're just a Call or<br />Message Away!
+              </h2>
+            </div>
+
+            {/* RIGHT: Image */}
+            <div className="quote-banner-media">
+              <img
+                src="https://investadvisewealth.com/img/banner.png"
+                alt="Modern House"
+                loading="lazy"
+              />
+            </div>
+
+          </div>
+        </div>
+      </section>
+      {/* ================================================== */}
+
     </>
   );
 };

@@ -9,8 +9,7 @@ import PropertyCard from './PropertyCard';
 
 const PropertiesSlider = ({
   projects,
-  eyebrow  = 'Featured Properties',
-  title    = 'Trending in Noida, hand-picked.',
+  eyebrow = 'Featured Properties',
   subtitle = 'RERA-verified projects with the highest buyer interest and market confidence right now.',
 }) => {
   // Empty state

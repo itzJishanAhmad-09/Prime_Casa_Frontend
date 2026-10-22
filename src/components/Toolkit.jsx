@@ -1,5 +1,6 @@
 // src/components/Toolkit.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /* ---------- Helpers ---------- */
 const inrCr = (cr) => {
@@ -240,14 +241,14 @@ const Toolkit = () => {
                 </div>
               </div>
 
-              <a href="/contact" className="tk-cta-dark">
+              <Link to="/contact" className="tk-cta-dark">
                 <span>Request Verified Asset Allocation Report</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                      strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         )}
@@ -366,14 +367,14 @@ const Toolkit = () => {
                 <span>Interest {100 - principalPct}%</span>
               </div>
 
-              <a href="/contact" className="tk-cta-dark">
+              <Link to="/contact" className="tk-cta-dark">
                 <span>Get Pre-Approved Loan Assistance</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                      strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         )}
@@ -428,7 +429,7 @@ const Toolkit = () => {
               </svg>
                 <span>Talk to NRI Desk</span>
               </a>
-            </div> 
+            </div>
 
             {/* Right — checklist */}
             <div className="tk-nri-side">

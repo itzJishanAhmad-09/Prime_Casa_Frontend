@@ -8,22 +8,6 @@ export const isImagePath = (str) =>
   (str.startsWith('/') || str.startsWith('./') || str.startsWith('http'));
 
 /**
- * Truncates text to a maximum number of words.
- */
-export const getShortDesc = (text, maxWords = 20) => {
-  if (!text) return '';
-  const words = text.split(' ');
-  if (words.length <= maxWords) return text;
-  return words.slice(0, maxWords).join(' ') + '...';
-};
-
-/**
- * Normalizes accented characters for consistent text comparison.
- */
-export const normalizeText = (str) =>
-  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-
-/**
  * Maps Hero search categories → internal project type filters.
  */
 export const CATEGORY_MAP = {

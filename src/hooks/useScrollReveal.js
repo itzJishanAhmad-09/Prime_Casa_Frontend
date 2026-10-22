@@ -1,4 +1,4 @@
-// src/useScrollReveal.js
+// src/hooks/useScrollReveal.js
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 

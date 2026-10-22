@@ -1,13 +1,7 @@
 // src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  IconArrowUp,
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandYoutube,
-  IconBrandLinkedin,
-} from '@tabler/icons-react';
+import { IconArrowUp } from '@tabler/icons-react';
 
 const NAV_LINKS = [
   { label: 'Home',       path: '/' },
@@ -23,13 +17,6 @@ const TOOLKIT_LINKS = [
   { label: 'ROI Calculator',  state: { scrollTo: 'toolkit' } },
   { label: 'EMI Planner',     state: { scrollTo: 'toolkit' } },
   { label: 'NRI Realty Edge', state: { scrollTo: 'toolkit' } },
-];
-
-const SOCIAL_LINKS = [
-  { label: 'Facebook',  href: 'https://www.facebook.com/theprimecasa',                            Icon: IconBrandFacebook  },
-  { label: 'Instagram', href: 'https://www.instagram.com/theprimecasa',                           Icon: IconBrandInstagram },
-  { label: 'YouTube',   href: 'https://www.youtube.com/@theprimecasa',                            Icon: IconBrandYoutube   },
-  { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/the-prime-casa-realty-pvt-ltd',   Icon: IconBrandLinkedin  },
 ];
 
 const WA_GENERAL =
@@ -78,11 +65,6 @@ const Footer = () => {
                 onClick={handleBookVisit}
               >
                 Book a site visit
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" strokeWidth="2.2"
-                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
               </button>
               <a
                 href={WA_GENERAL}
@@ -146,24 +128,7 @@ const Footer = () => {
               registered. Zero brokerage.
             </p>
 
-            <div className="ft-social">
-              <span className="ft-social-title">Follow Us:</span>
-              <div className="ft-social-icons">
-                {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ft-social-link"
-                    aria-label={label}
-                    title={label}
-                  >
-                    <Icon size={20} stroke={1.8} />
-                  </a>
-                ))}
-              </div>
-            </div>
+            {/* ❌ "Follow Us" social icons block removed */}
           </div>
 
           <div className="ft-col">

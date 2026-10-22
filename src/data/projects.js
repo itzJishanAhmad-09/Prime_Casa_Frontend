@@ -205,10 +205,12 @@ Eldeco Whispers of Wonder is strategically located with excellent connectivity t
     emoji: "/assets/images/img10.webp",
     beds: "Residential Plots and land",
     status: "New Launch",
-    amenities: "Clubhouse · Landscaped Gardens · 24x7 Security · Fountains",
-    reraId: "UPRE1RAPRL752390/09/2025",
-    description: `Corbett Eye is a premium residential plotted development situated on the scenic Ramnagar-Jim Corbett National Highway 309. Spread across 8.5 acres, this exclusive project offers a tranquil retreat amidst nature.`,
-    fullDescription: `Corbett Eye offers a perfect blend of modern amenities and natural splendor. The development boasts wide roads, landscaped gardens, and a range of luxurious facilities designed to enhance your lifestyle. From a clubhouse and beautiful fountains to 24×7 security, every aspect of Corbett Eye is crafted to offer comfort and convenience.`,
+    amenities: "· Clubhouse · Landscaped Gardens · 24x7 Security · Fountains",
+    ACT: "Act 143 Approved",
+    description: `Corbett Eye is a premium residential plotted development situated on the scenic Ramnagar-Jim Corbett National Highway 309. Spread across 8.5 acres, this exclusive project offers a tranquil retreat amidst nature. The land is fully approved under Act 143, ensuring a legally secure investment.`,
+    fullDescription: `Corbett Eye offers a perfect blend of modern amenities and natural splendor. The development boasts wide roads, landscaped gardens, and a range of luxurious facilities designed to enhance your lifestyle. From a clubhouse and beautiful fountains to 24×7 security, every aspect of Corbett Eye is crafted to offer comfort and convenience. 
+
+Importantly, the project is fully compliant with Act 143 (Section 143 of the UPZA & LR Act), providing clear land-use conversion for residential plotting, making it a completely hassle-free and secure investment for your dream farmhouse or vacation home.`,
     connectivity: [
       { icon: '🚗', label: 'National Highway 309', detail: '1 min drive' },
       { icon: '🏞️', label: 'Jim Corbett National Park', detail: '10 km · 15 min' },
@@ -241,6 +243,29 @@ The project integrates green building principles and sustainable design practice
       { icon: '🚇', label: 'Metro station (Aqua Line)', detail: '400 m · 5 min walk' },
       { icon: '📍', label: 'Delhi Border', detail: '22 km · 28 min' },
       { icon: '✈️', label: 'Jewar International Airport', detail: '28 km · 32 min' },
+    ],
+  },
+  {
+    id: 12,
+    title: "Sahu Pearl",
+    builder: "Sahu Group",
+    loc: "Gomti Nagar Extension, Lucknow",
+    type: "residential",
+    tag: "new",
+    emoji: "/assets/images/img12.webp", 
+    beds: "2–3 BHK",
+    status: "Under Construction",
+    amenities: "Swimming Pool · Gymnasium · Clubhouse · Kids Zone · 24x7 Security",
+    reraId: "UPRERAPRJ123456",
+    description: `Sahu Pearl is a premium residential development located in the rapidly growing Gomti Nagar Extension, Lucknow. Offering spacious 2 and 3 BHK apartments with modern amenities.`,
+    fullDescription: `Sahu Pearl is designed for those who seek a blend of luxury, comfort, and convenience. Located in the heart of Gomti Nagar Extension, this project offers excellent connectivity to the IT City, prominent schools, hospitals, and shopping hubs. 
+
+The project features thoughtfully designed 2 and 3 BHK apartments with maximum natural light and ventilation. Residents can enjoy world-class amenities including a clubhouse, swimming pool, and landscaped gardens, making it an ideal choice for families and investors looking to invest in Lucknow's booming real estate market.`,
+    connectivity: [
+      { icon: '🚗', label: 'Gomti Nagar Extension Main Road', detail: '1 min drive' },
+      { icon: '🏫', label: 'Amity University', detail: '5 km · 10 min' },
+      { icon: '🏥', label: 'Medanta Hospital', detail: '6 km · 12 min' },
+      { icon: '✈️', label: 'Chaudhary Charan Singh Airport', detail: '18 km · 25 min' },
     ],
   },
 ];

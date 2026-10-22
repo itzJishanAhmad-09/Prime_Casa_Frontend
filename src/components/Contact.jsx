@@ -148,7 +148,7 @@ const Contact = () => {
                     id="ct-name"
                     type="text"
                     name="name"
-                    placeholder="e.g. Vikramaditya Sharma"
+                    placeholder="e.g. Nikhil Verma"
                     value={formData.name}
                     onChange={handleChange}
                     required

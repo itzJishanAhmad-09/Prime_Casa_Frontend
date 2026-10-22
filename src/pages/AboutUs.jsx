@@ -4,46 +4,8 @@ import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 
 /* ------------------------------------------------------------------ */
-/*  Data — each leader has a short `highlight` and a full `desc`       */
+/*  Data                                                               */
 /* ------------------------------------------------------------------ */
-
-const LEADERS = [
-  {
-    name: 'Mrs. SUDHI YADAV',
-    role: 'Founder & Director',
-    img: '/assets/images/Sudhi_Yadav.webp',
-    highlight: 'MBA (2015) and real-estate leader since 2016, driving growth through strategic vision and lasting client relationships.',
-    desc: 'Sudhi Yadav is the Founder and Director of The Prime Casa Realty Pvt. Ltd. With an MBA completed in 2015 and experience in real estate since 2016, she brings expertise in business development, sales, marketing, and client relationships. With a strong strategic vision and leadership approach, she drives the company’s growth while delivering innovative and customer-focused real estate solutions.',
-  },
-  {
-    name: 'Mr. ROBIN SINGH',
-    role: 'Director',
-    img: '/assets/images/Robin_Singh.webp',
-    highlight: '14 years across hospitality, education and real estate, with professional exposure in Singapore, Malaysia, Hong Kong and India.',
-    desc: 'With 14 years of experience across Hospitality, Education, and Real Estate, including professional exposure in Singapore, Malaysia, Hong Kong, and India, I bring a global perspective to business, leadership, and client relationships. I focus on building strong relationships, creating opportunities, and delivering results.',
-  },
-  {
-    name: 'Mr. SAJAL GUPTA',
-    role: 'Senior Sales Manager',
-    img: '/assets/images/Sajal_Gupta.webp',
-    highlight: 'BA Economics, 4 years of business ownership and 3 years in real estate — pairing economic insight with market exposure.',
-    desc: 'Sajal Gupta is a B. A. Economics graduate with 4 years of business ownership experience and 3 years in real estate. He combines economic understanding with practical market exposure to deliver strategic, client-focused solutions in business and property.',
-  },
-  {
-    name: 'Mr. RONIT VARSHNEY',
-    role: 'Senior Sales Manager',
-    img: '/assets/images/Ronit_Varshney.webp',
-    highlight: 'BBA graduate with 5 years in real estate — specialising in sales, client relationships and business development.',
-    desc: 'BBA graduate with 5 years of experience in real estate, specializing in sales, client relationship management, and business development. With strong communication skills and a customer-focused approach, he is committed to delivering effective property solutions, building lasting client relationships, and driving business growth.',
-  },
-  {
-    name: 'Miss. ANJALI VASHISHTH',
-    role: 'Assistant Sales Manager',
-    img: '/assets/images/Anjali_Vashisht.webp',
-    highlight: 'BCA graduate with 2 years in real estate — focused on client relationships, property advisory and customer-centric solutions.',
-    desc: 'Anjali Vashishth is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
-  },
-];
 
 const PILLARS = [
   {
@@ -60,45 +22,6 @@ const PILLARS = [
   },
 ];
 
-const PLACEHOLDER =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23eee"/%3E%3Ctext x="100" y="100" font-family="Arial" font-size="14" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image%3C/text%3E%3C/svg%3E';
-
-/* ------------------------------------------------------------------ */
-/*  Leader card — full desc on desktop, highlight only on mobile       */
-/* ------------------------------------------------------------------ */
-
-const LeaderCard = ({ member, isFounder = false }) => (
-  <div
-    className={
-      'about-leadership-card' +
-      (isFounder ? ' about-leadership-card--founder' : '')
-    }
-  >
-    <div className="about-leadership-card-img">
-      <img
-        src={member.img || PLACEHOLDER}
-        alt={member.name}
-        loading="lazy"
-        onError={(e) => { e.target.src = PLACEHOLDER; }}
-      />
-    </div>
-    <div className="about-leadership-card-content">
-      <span className="about-leadership-card-role">{member.role}</span>
-      <h3 className="about-leadership-card-name">{member.name}</h3>
-
-      {/* Full bio — hidden on small phones */}
-      <p className="about-leadership-card-desc">{member.desc}</p>
-
-      {/* Short highlight — hidden on tablet/desktop, shown on phones */}
-      <p className="about-leadership-card-highlight">{member.highlight}</p>
-    </div>
-  </div>
-);
-
-/* ------------------------------------------------------------------ */
-/*  About page                                                         */
-/* ------------------------------------------------------------------ */
-
 const AboutUs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -108,7 +31,7 @@ const AboutUs = () => {
     <div className="about-us-page">
       <Seo
         title="About Us"
-        description="Learn about Prime Casa – our story, core values, leadership team, and commitment to excellence in Noida real estate."
+        description="Learn about Prime Casa – our story, core values, and commitment to excellence in Noida real estate."
       />
 
       {/* ================================================== */}
@@ -224,38 +147,6 @@ const AboutUs = () => {
       </section>
 
       {/* ================================================== */}
-      {/* LEADERSHIP                                          */}
-      {/* ================================================== */}
-      <section className="about-leadership">
-        <div className="container">
-          <div className="about-leadership-header" data-reveal>
-            <span className="about-leadership-label">Our Leaders</span>
-            <h2 className="about-leadership-title">Leaders Behind the Wheel</h2>
-            <p className="about-leadership-desc">
-              Leadership is the backbone of any successful organization, and
-              our leaders exemplify vision, dedication, and excellence.
-            </p>
-          </div>
-
-          <div className="about-leadership-founder-container">
-            <LeaderCard member={LEADERS[0]} isFounder />
-          </div>
-
-          <div className="about-leadership-grid">
-            {LEADERS.slice(1).map((member, idx) => (
-              <div
-                key={member.name}
-                data-reveal
-                data-reveal-delay={String((idx % 6) + 1)}
-              >
-                <LeaderCard member={member} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================== */}
       {/* WHY CHOOSE US                                       */}
       {/* ================================================== */}
       <section className="au-why">
@@ -295,12 +186,12 @@ const AboutUs = () => {
               Connect with us
             </Link>
             <Link
-              to="/properties"
+              to="/our-team"
               className="au-why-btn au-why-btn--outline"
               data-reveal
               data-reveal-delay="2"
             >
-              View properties
+              Meet our team
             </Link>
           </div>
         </div>

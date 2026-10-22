@@ -14,7 +14,7 @@ const Blog               = lazy(() => import('../components/Blog'));
 const TestimonialsSlider = lazy(() => import('../components/TestimonialsSlider'));
 const WhyUs              = lazy(() => import('../components/WhyUs'));
 
-const Homepage = ({ projects, news, testimonials, openModal, scrollTo }) => {
+const Homepage = ({ projects, news, testimonials, scrollTo }) => {
   const location = useLocation();
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Homepage = ({ projects, news, testimonials, openModal, scrollTo }) => {
         <HowItWorks />
       </Suspense>
       <Suspense fallback={<div style={{ height: '300px' }} />}>
-        <Toolkit openModal={openModal} />
+        <Toolkit />
       </Suspense>
       <Suspense fallback={<div style={{ height: '100px' }} />}>
         <Quote />
