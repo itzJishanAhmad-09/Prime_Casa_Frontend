@@ -65,13 +65,13 @@ const LEADERS = [
     desc: 'Jishan Ahmad is a BCA graduate and web developer working as a Marketing Manager at Prime Casa Pvt. Ltd. He specializes in digital marketing, lead generation, and business development, combining technical expertise with strategic marketing to drive business growth.',
   },
   {
-  name: 'Mr. Devendra Singh',
-  role: 'Assistant Marketing Manager',
-  img: '/assets/images/Devendra_Singh.webp',
-  highlight:
-    'BA (Hons) graduate driving social media management, lead generation and brand development across Prime Casa’s digital presence.',
-  desc: 'Devendra Singh is a BA (Hons) graduate and digital marketing professional at Prime Casa Pvt. Ltd. He specializes in social media management, lead generation, and brand development, focusing on strengthening the company’s online presence and driving business growth through effective marketing strategies.',
-},
+    name: 'Mr. Devendra Singh',
+    role: 'Assistant Marketing Manager',
+    img: '/assets/images/Devendra_Singh.webp',
+    highlight:
+      'BA (Hons) graduate driving social media management, lead generation and brand development across Prime Casa’s digital presence.',
+    desc: 'Devendra Singh is a BA (Hons) graduate and digital marketing professional at Prime Casa Pvt. Ltd. He specializes in social media management, lead generation, and brand development, focusing on strengthening the company’s online presence and driving business growth through effective marketing strategies.',
+  },
   {
     name: 'Mr. Saurav Yadav',
     role: 'Assistant Sales Manager',
@@ -83,10 +83,10 @@ const LEADERS = [
   {
     name: 'Miss. Pallavi Singh',
     role: 'Assistant Sales Manager',
-    img: '/assets/images/Pallavi.webp',
+    img: '/assets/images/Pallavi_Singh.webp',
     highlight:
-      'BCA graduate with 2 years in real estate client relationships, property advisory and customer-centric sales.',
-    desc: 'Pallavi is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
+      'BBA graduate with 2 years of real estate experience, specializing in property advisory, client relationships, and investment solutions.',
+    desc: 'Pallavi Singh is a BBA graduate with 2 years of experience in real estate. She combines market insight, strategic thinking, and client-focused service to deliver personalized property solutions, helping clients make informed investment decisions and achieve long-term financial growth.',
   },
 ];
 
