@@ -49,12 +49,12 @@ const LEADERS = [
     desc: 'Anjali Vashishth is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
   },
   {
-    name: 'Mr. Radhey Shyam Sharma',
-    role: 'Admin Head',
+    name: 'Mr. Radhey Sharma',
+    role: 'Administrative Head',
     img: '/assets/images/Radhe_Shyam_Sharma.webp',
     highlight:
       'Administrative specialist with 4 years in real estate office operations, facility management and vendor coordination.',
-    desc: 'Radhey Shyam Sharma is an experienced administrative professional with up to 4 years of experience in the real estate industry, specializing in office administration, facility management, staff supervision, vendor coordination, and daily operations. He holds a Master of Arts (M.A.), a Bachelor of Arts (B.A.), and a Diploma in Financial Accounting. He is committed to operational efficiency, team coordination, and maintaining a well-organized workplace.',
+    desc: 'Radhey Sharma is an experienced administrative professional with up to 4 years of experience in the real estate industry, specializing in office administration, facility management, staff supervision, vendor coordination, and daily operations. He holds a Master of Arts (M.A.), a Bachelor of Arts (B.A.), and a Diploma in Financial Accounting. He is committed to operational efficiency, team coordination, and maintaining a well-organized workplace.',
   },
   {
     name: 'Md. Jishan Ahmad',

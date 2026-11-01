@@ -18,7 +18,7 @@
   --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --t: .25s ease;
+  --t: .25s ease; 
   --card-radius: 16px;
   --container: 1320px;
 }
@@ -2841,3 +2841,34 @@ a.ft-contact-row:hover { padding-left: 8px; }
 }
 
 
+
+.career-values .career-card {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 6px 16px;
+  padding: 24px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--sand-3);
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+  align-items: start;
+}
+
+@media (max-width: 639px) {
+  .career-values .career-card-desc {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+}
+
+@media (min-width: 640px) {
+  .career-values .career-card {
+    grid-template-columns: 40px minmax(200px, 1fr) 1.7fr;
+    gap: 4px 32px;
+    align-items: center;
+    padding: 28px 0;
+  }
+}
