@@ -1,4 +1,5 @@
 // src/components/Seo.jsx
+import React from 'react'; // <-- THIS IS THE FIX
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
