@@ -41,14 +41,6 @@ const LEADERS = [
     desc: 'BBA graduate with 5 years of experience in real estate, specializing in sales, client relationship management, and business development. With strong communication skills and a customer-focused approach, he is committed to delivering effective property solutions, building lasting client relationships, and driving business growth.',
   },
   {
-    name: 'Miss. ANJALI VASHISHTH',
-    role: 'Assistant Sales Manager',
-    img: '/assets/images/Anjali_Vashisht.webp',
-    highlight:
-      'BCA graduate with 2 years in real estate focused on client relationships, property advisory and customer-centric solutions.',
-    desc: 'Anjali Vashishth is a BCA graduate with 2 years of experience in real estate. She specializes in client relationships, property advisory, and sales, with a strong focus on delivering professional and customer-centric real estate solutions.',
-  },
-  {
     name: 'Mr. Radhey Sharma',
     role: 'Administrative Head',
     img: '/assets/images/Radhe_Shyam_Sharma.webp',
