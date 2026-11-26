@@ -1,4 +1,4 @@
-﻿{
+{
     "rewrites":  [
                      {
                          "source":  "/((?!api/|assets/|.*\\.(?:js|css|webp|jpg|jpeg|png|svg|ico|mp4|avif|webm|woff|woff2|txt|xml|webmanifest)).*)",
