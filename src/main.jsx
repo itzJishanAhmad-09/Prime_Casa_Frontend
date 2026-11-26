@@ -7,16 +7,5 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <HelmetProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <ScrollToTop />
-          <App />
-        </AuthProvider>
-      </BrowserRouter>
-    </HelmetProvider>
   </React.StrictMode>
 );
